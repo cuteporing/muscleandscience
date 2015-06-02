@@ -1,5 +1,3 @@
-<?php $this->load->helper('html'); ?>
-
 <div class="content">
 
 	<div class="slideshow-wrapper">

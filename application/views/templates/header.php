@@ -5,9 +5,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="<?php echo $description;?>"/>
-	<meta name="keywords" content="<?php echo $keywords;?>">
-	<meta name="author" content="<?php echo $author;?>">
+	<meta name="description" content="<?php echo META_DESCRIPTION;?>"/>
+	<meta name="keywords" content="<?php echo META_KEYWORDS;?>">
+	<meta name="author" content="<?php echo META_AUTHOR;?>">
 	<title><?php echo $title;?></title>
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/normalize.css"/>
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/foundation.css"/>

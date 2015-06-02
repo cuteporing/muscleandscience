@@ -18,19 +18,29 @@ class Banner_model extends CI_Model {
 		$this->load->database();
 	}
 
+	/**
+	 * GET BANNER
+	 * @return (Object)
+	 * --------------------------------------------
+	 */
 	public function get_banner()
 	{
 		$query = $this->db->get('mas_banner');
 		return $query->result_array();
 	}
 
+	/**
+	 * SET BANNER
+	 * @return
+	 * --------------------------------------------
+	 */
 	public function set_banner()
 	{
 		$this->load->helper('url');
 
 		//get constant image path for banner
 		$common  = new common;
-		$imgPath = $common->get_constants('imgPath', 'BANNER');
+		$imgPath = IMG_BANNER;
 		$img     = $this->input->post('img');
 
 		//Set parameters to an array data

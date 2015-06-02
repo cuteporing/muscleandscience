@@ -26,7 +26,6 @@ class Homebox_model extends CI_Model {
 
 	public function set_homebox()
 	{
-		//@TABLE_NAME = mas_banner
 		return $this->db->insert('mas_homebox', $data);
 	}
 }

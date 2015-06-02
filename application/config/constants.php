@@ -36,6 +36,30 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+|--------------------------------------------------------------------------
+| Meta Modes
+|--------------------------------------------------------------------------
+|
+| These modes are used when meta name
+|
+*/
+
+define('META_DESCRIPTION',		'Gym/Fitness Center');
+define('META_KEYWORDS',				'gym, fitness, health, center, muscle, science');
+define('META_AUTHOR',					'KBVCodes, 2014');
+
+
+/*
+|--------------------------------------------------------------------------
+| Image Path Modes
+|--------------------------------------------------------------------------
+|
+| These modes are used to identify which path to save the images
+|
+*/
+
+define('IMG_BANNER',		'/upload/banner/');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
