@@ -9,48 +9,34 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-include_once('common.php');
-include_once('gym_class.php');
-include_once('banner.php');
-include_once('homebox.php');
-include_once('footer.php');
-include_once('public/home.php');
-
-class pages extends CI_controller
+class common extends CI_controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
+	public function load_language()
+	{
+		$this->lang->load('labels', 'english');
+		$this->lang->load('error', 'english');
+	}
+
 	/**
-	 * PAGE VIEW
-	 * @param (String) $page
+	 * CHECK DATA IF NULL
+	 * @param (Object) $data
+	 * @return (Object) $data
 	 * --------------------------------------------
 	 */
-	public function view($page = 'home')
+	static function checkData($data)
 	{
-		if( !file_exists(APPPATH.'/views/pages/'.$page.'.php') )
-		{
-			show_404();
-		}
+		(isset($data) && !empty($data))?
+		  $data = $data
+		: $data = '';
 
-		if( $page = 'home' ){
-			$home = new home;
-			$data = $home->view();
-		}
-
-		$data['title'] = ucfirst($page);
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/top_navigation', $data);
-		$this->load->view('pages/'.$page, $data);
-
-		$footer = new footer;
-		$footer->view();
+		return $data;
 	}
 }
 ?>

@@ -9,23 +9,27 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
+
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class common extends CI_controller
+include_once('common.php');
+
+class news extends CI_controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('news_model');
+	}
+
 	/**
-	 * CHECK DATA IF NULL
-	 * @param (Object) $data
-	 * @return (Object) $data
+	 * GET LATEST NEWS
+	 * @return
 	 * --------------------------------------------
 	 */
-	static function checkData($data)
+	public function get_latest()
 	{
-		(isset($data) && !empty($data))?
-		  $data = $data
-		: $data = '';
-
-		return $data;
+		$result_post = $this->news_model->get_news();
+		print_r($result_post);
 	}
 }
-?>

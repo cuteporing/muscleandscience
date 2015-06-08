@@ -1,5 +1,3 @@
-<?php $this->load->helper('url'); ?>
-<?php $this->lang->load('labels', 'english'); ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>

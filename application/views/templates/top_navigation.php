@@ -10,22 +10,22 @@
 
 		<section class="top-bar-section">
 			<ul class="right">
-				<li><a href="index.php" class="main-link">Home</a></li>
+				<li><a href="index.php" class="main-link"><?=$this->lang->line('lbl_home')?></a></li>
 				<li class="has-dropdown">
-					<a href="news.php">News</a>
+					<a href="news.php"><?=$this->lang->line('lbl_news')?></a>
 					<ul class="dropdown">
-						<li><a href="news.php?q=blog" class="main-link">Blog</a></li>
-						<li><a href="news.php?q=post" class="main-link">Single Post</a></li>
+						<li><a href="news.php?q=blog" class="main-link"><?=$this->lang->line('lbl_blog')?></a></li>
+						<li><a href="news.php?q=post" class="main-link"><?=$this->lang->line('lbl_single_post')?></a></li>
 					</ul>
 				</li>
 				<li class="has-dropdown">
-					<a href="classes.php">Classes</a>
+					<a href="classes.php"><?=$this->lang->line('lbl_classes')?></a>
 					<ul class="dropdown">
 						<?php //get_class_topbar();?>
 					</ul>
 				</li>
-				<li><a href="gallery.php" class="main-link">Gallery</a></li>
-				<li><a href="contact.php" class="main-link">Contact</a></li>
+				<li><a href="gallery.php" class="main-link"><?=$this->lang->line('lbl_gallery')?></a></li>
+				<li><a href="contact.php" class="main-link"><?=$this->lang->line('lbl_contact')?></a></li>
 			</ul>
 		</section>
 		</nav>
