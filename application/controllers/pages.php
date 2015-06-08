@@ -27,6 +27,37 @@ class pages extends CI_controller
 	}
 
 	/**
+	 * GET HEADER
+	 * @param (Object) $data
+	 * --------------------------------------------
+	 */
+	public function getHeader($data)
+	{
+		$this->load->view('templates/header', $data);
+	}
+
+	/**
+	 * DISPLAY TOP NAVIGATION
+	 * @param (Object) $data
+	 * --------------------------------------------
+	 */
+	public function displayTopNav($data)
+	{
+		$this->load->view('templates/top_navigation', $data);
+	}
+
+	/**
+	 * DISPLAY HOME PAGE
+	 * @param (String) $page
+	 * --------------------------------------------
+	 */
+	public function home($page)
+	{
+		$home = new home;
+		$data = $home->view($page);
+	}
+
+	/**
 	 * PAGE VIEW
 	 * @param (String) $page
 	 * --------------------------------------------
@@ -38,16 +69,15 @@ class pages extends CI_controller
 			show_404();
 		}
 
-		if( $page = 'home' ){
-			$home = new home;
-			$data = $home->view();
-		}
-
 		$data['title'] = ucfirst($page);
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/top_navigation', $data);
-		$this->load->view('pages/'.$page, $data);
+		$this->getHeader($data);
+		$this->displayTopNav($data);
+
+		switch ($page) {
+			case 'home': $this->home($page); break;
+			default:     $this->home($page); break;
+		}
 
 		$footer = new footer;
 		$footer->view();
