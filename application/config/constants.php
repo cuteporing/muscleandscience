@@ -61,5 +61,22 @@ define('META_AUTHOR',					'KBVCodes, 2014');
 
 define('IMG_BANNER',		'/upload/banner/');
 
+
+/*
+|--------------------------------------------------------------------------
+| Table name Modes
+|--------------------------------------------------------------------------
+|
+| These modes are used to identify DB table names
+|
+*/
+
+define('TBL_COMMENTS',			'mas_comments');
+define('TBL_POST',					'mas_post');
+define('TBL_POST_DETAILS',	'mas_post_details');
+define('TBL_POST_TAGS',			'mas_post_tags');
+define('TBL_TAGS',					'mas_tags');
+define('TBL_USERS',					'mas_users');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

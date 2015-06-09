@@ -13,9 +13,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class News_model extends CI_Model {
 
-	private $tbl_post = "mas_post";
-	private $tbl_post_details = "mas_post_details";
-
 	public function __construct()
 	{
 		$this->load->database();
@@ -66,11 +63,11 @@ class News_model extends CI_Model {
 				$params['limiter']['offset'] = 0;
 			}
 
-			$query = $this->db->get( $this->tbl_post,
+			$query = $this->db->get( TBL_POST,
 				$params['limiter']['limit'], $params['limiter']['offset']);
 		}
 		else {
-			$this->db->from( $this->tbl_post );
+			$this->db->from( TBL_POST );
 			$query = $this->db->get();
 		}
 
@@ -101,11 +98,11 @@ class News_model extends CI_Model {
 				$params['limiter']['offset'] = 0;
 			}
 
-			$query = $this->db->get( $this->tbl_post_details,
+			$query = $this->db->get( TBL_POST_DETAILS,
 				$params['limiter']['limit'], $params['limiter']['offset']);
 		}
 		else {
-			$this->db->from( $this->tbl_post_details );
+			$this->db->from( TBL_POST_DETAILS );
 			$query = $this->db->get();
 		}
 
@@ -125,10 +122,10 @@ class News_model extends CI_Model {
 	 */
 	public function get_news_tags($post_id)
 	{
-		$this->db->select('mas_tags.tag_name');
-		$this->db->from('mas_post_tags');
-		$this->db->join('mas_tags', 'mas_post_tags.tag_id = mas_tags.id');
-		$this->db->where('mas_post_tags.post_id', $post_id);
+		$this->db->select(TBL_TAGS.'.tag_name');
+		$this->db->from(TBL_POST_TAGS);
+		$this->db->join(TBL_TAGS, TBL_POST_TAGS.'.tag_id = '.TBL_TAGS.'.id');
+		$this->db->where(TBL_POST_TAGS.'.post_id', $post_id);
 		$query = $this->db->get();
 		if( $query->num_rows() > 0 ){
 			return $query->result_array();
@@ -139,6 +136,34 @@ class News_model extends CI_Model {
 	}
 
 	/**
+	 * GET NEWS AUTHOR
+	 * @param $user_id
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_news_author($user_id)
+	{
+		$this->db->select('firstname, lastname');
+		$this->db->from(TBL_USERS);
+		$this->db->where('_id', $user_id);
+
+		$query = $this->db->get();
+		if( $query->num_rows() > 0 ){
+			return $query->result_array();
+		}
+		else{
+			return null;
+		}
+	}
+
+	public function get_news_count($params)
+	{
+		$this->db->from(TBL_POST);
+		$this->get_where($params);
+		return $this->db->count_all_results();
+	}
+
+	/**
 	 * GET COMMENT COUNT PER POST
 	 * @param $post_id
 	 * @return
@@ -146,7 +171,7 @@ class News_model extends CI_Model {
 	 */
 	public function get_comment_count($post_id)
 	{
-		$this->db->from('mas_comments');
+		$this->db->from(TBL_COMMENTS);
 		$this->db->where('post_id', $post_id);
 		return $this->db->count_all_results();
 	}

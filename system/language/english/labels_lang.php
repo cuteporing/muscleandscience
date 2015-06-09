@@ -8,6 +8,7 @@ $lang['lbl_contact_info'] = 'Contact Info';
 $lang['lbl_gallery'] = 'Gallery';
 $lang['lbl_home'] = 'Home';
 $lang['lbl_opening_hours'] = 'Opening Hours';
+$lang['lbl_posted_by'] = 'Posted by ';
 $lang['lbl_single_post'] = 'Single Post';
 $lang['lbl_sign_in'] = 'Sign in';
 $lang['lbl_upcoming_classes'] = 'upcoming classes';

@@ -12,12 +12,13 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+include_once('banner.php');
 include_once('common.php');
+include_once('footer.php');
 include_once('format.php');
 include_once('gym_class.php');
-include_once('banner.php');
 include_once('homebox.php');
-include_once('footer.php');
+include_once('public/news.php');
 include_once('public/home.php');
 
 class pages extends CI_controller
@@ -59,6 +60,17 @@ class pages extends CI_controller
 	}
 
 	/**
+	 * DISPLAY NEWS PAGE
+	 * @param (String) $page
+	 * --------------------------------------------
+	 */
+	public function news($page)
+	{
+		$news = new news;
+		$data = $news->view($page);
+	}
+
+	/**
 	 * PAGE VIEW
 	 * @param (String) $page
 	 * --------------------------------------------
@@ -79,6 +91,7 @@ class pages extends CI_controller
 
 		switch ($page) {
 			case 'home': $this->home($page); break;
+			case 'news': $this->news($page); break;
 			default: $this->home($page); break;
 		}
 

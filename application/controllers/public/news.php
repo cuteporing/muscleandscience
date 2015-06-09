@@ -22,7 +22,7 @@ class news extends CI_controller
 
 	static function show_all_btn()
 	{
-		$btn = anchor('view/news/', 'Show all', array(
+		$btn = anchor('news/', 'Show all', array(
 			'class' => 'more icon-small-arrow margin-right-white',
 			'title' => 'Show all' ));
 
@@ -120,9 +120,23 @@ class news extends CI_controller
 		return $description;
 	}
 
+	/**
+	 * GET POST TAGS
+	 * @param $data
+	 * @return $tags
+	 * --------------------------------------------
+	 */
 	public function get_post_tag($data)
 	{
+		$tags = "";
+		foreach ($data as $tag_name) {
+			$tag_slug = str_replace(" ", "-", $tag_name);
 
+			$tags.= element_tag('li', 'open');
+			$tags.= anchor('news/'.$tag_slug, $tag_name, array('title'=>$tag_name));
+			$tags.= element_tag('li', 'close');
+		}
+		return $tags;
 	}
 
 	/**
@@ -131,11 +145,21 @@ class news extends CI_controller
 	 * @return $description
 	 * --------------------------------------------
 	 */
-	public function get_post_footer($data)
+	public function get_post_footer($author, $tags)
 	{
-		// $author = anchor('#', )//todo
-		// $contents = element_tag('ul', array('class'=>));
-		// $container = div($contents, array('class'=>'post-footer'));
+		$author = $this->lang->line('lbl_posted_by').
+			anchor('#', $author['firstname'].' '.$author['lastname'],
+			array('class'=>'author'));
+
+		$contents = element_tag('ul', 'open', array('class'=>'categories'));
+		$contents.= element_tag('li', 'open', array('class'=>'posted-by'));
+		$contents.= $author;
+		$contents.= element_tag('li', 'close');
+		$contents.= $this->get_post_tag($tags);
+		$contents.= element_tag('ul', 'close');
+		$container = div($contents, array('class'=>'post-footer'));
+
+		return $container;
 	}
 
 	/**
@@ -144,11 +168,18 @@ class news extends CI_controller
 	 * @return $container
 	 * --------------------------------------------
 	 */
-	public function post_content($data, $char_limit)
+	public function post_content($data, $char_limit = 0)
 	{
 		$content = $this->get_post_img($data['image'], $data['title'], $data['id']);
 		$content.= $this->get_post_title('news/',$data['title'],$data['slug']);
 		$content.= $this->get_description($data['description'], $char_limit);
+		$content.= $this->get_post_footer($data['author'], $data['tags']);
+		if($char_limit > 0){
+			$content.= anchor('news/'.$data['slug'], 'More', array(
+				'class'=>'more icon-small-arrow margin-right-white',
+				'title'=>$data['title'],
+				'id'   =>'superb'));
+		}
 		$container = div($content, array('class'=>'post-content'));
 
 		return $container;
@@ -190,12 +221,22 @@ class news extends CI_controller
 
 		if(!is_null($result_post)){
 			for($i = 0; $i < count($result_post); $i++){
-				$post_id = $result_post[$i]['id'];
+				$post_id   = $result_post[$i]['id'];
+				$author_id = $result_post[$i]['update_user_id'];
+
+				// search paramter for post description
 				$params['limiter']['limit']  = 1;
 				$params['where']    = array("post_id"  => $post_id);
 				$params['order_by'] = array("sequence" => "asc");
+
+				// get post description
 				$result_details = $this->news_model->get_news_details($params);
+				// get tags
 				$result_tags    = $this->news_model->get_news_tags($post_id);
+				// get news author
+				$result_author  = $this->news_model->get_news_author($author_id);
+
+				$result_post[$i]['author'] = $result_author[0];
 				$result_post[$i]['tags'] = $this->extract_post_tags($result_tags);
 				$result_post[$i]['description'] = $result_tags;
 				$result_post[$i]['description'] = array($result_details[0]['description']);
@@ -217,12 +258,98 @@ class news extends CI_controller
 		$container = "";
 		$result = $this->get_latest_news();
 		if(count($result) > 0 and !is_null($result)){
-			$container = '<ul class="blog clearfix fadeInDown">';
+			$class = array('class'=>'blog clearfix animated fadeIn');
+			$container = element_tag('ul', 'open', $class);
 			$container.= $this->news_list($result, 450);
 			$container.= '</ul>';
 			$container.= self::show_all_btn();
 		}
 
 		return $container;
+	}
+
+	static function cannot_find_page($total_rows, $offset)
+	{
+		$return_value = false;
+		if ( $offset > $total_rows ){
+			$return_value = true;
+		}
+		return $return_value;
+	}
+
+	public function get_all_news()
+	{
+		$page = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+
+		(!$page)? $offset = 0 : $offset = $page;
+		$params = array();
+		$total_rows = $this->news_model->get_news_count($params);
+
+		if( self::cannot_find_page($total_rows, $offset) ){
+			return show_404();
+		}
+		$params['limiter']['limit'] = 10;
+		$params['limiter']['offset'] = $offset;
+		$params['where']    = array("deleted" => 0);
+		$params['order_by'] = array("update_datetime" => "desc");
+
+		$result_post = $this->news_model->get_news($params);
+
+		if(!is_null($result_post)){
+			for($i = 0; $i < count($result_post); $i++){
+				$post_id   = $result_post[$i]['id'];
+				$author_id = $result_post[$i]['update_user_id'];
+
+				// search paramter for post description
+				$params['limiter']['limit']  = 1;
+				$params['where']    = array("post_id"  => $post_id);
+				$params['order_by'] = array("sequence" => "asc");
+
+				// get post description
+				$result_details = $this->news_model->get_news_details($params);
+				// get tags
+				$result_tags    = $this->news_model->get_news_tags($post_id);
+				// get news author
+				$result_author  = $this->news_model->get_news_author($author_id);
+
+				$result_post[$i]['author'] = $result_author[0];
+				$result_post[$i]['tags'] = $this->extract_post_tags($result_tags);
+				$result_post[$i]['description'] = $result_tags;
+				$result_post[$i]['description'] = array($result_details[0]['description']);
+				$result_post[$i]['comment_count'] = $this->news_model->get_comment_count(
+					$result_post[$i]['id']);
+			}
+		}
+
+		return $result_post;
+	}
+
+	/**
+	 * VIEW
+	 * @return $container
+	 * --------------------------------------------
+	 */
+	public function view($page)
+	{
+		$view_type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+
+		if(!$view_type || is_numeric($view_type)){
+			
+			$container = "";
+			$result = $this->get_all_news();
+			if(count($result) > 0 and !is_null($result)){
+				$class = array('class'=>'blog clearfix animated fadeIn');
+				$container = element_tag('ul', 'open', $class);
+				$container.= $this->news_list($result, 450);
+				$container.= '</ul>';
+			}
+
+			
+
+			$data['news_list'] = $container;
+
+			$this->load->view('pages/'.$page, $data);
+		}else{
+		}
 	}
 }
