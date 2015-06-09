@@ -13,6 +13,7 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include_once('common.php');
+include_once('format.php');
 include_once('gym_class.php');
 include_once('banner.php');
 include_once('homebox.php');
@@ -68,6 +69,8 @@ class pages extends CI_controller
 		{
 			show_404();
 		}
+		$common = new common;
+		$common->load_language();
 
 		$data['title'] = ucfirst($page);
 
@@ -76,7 +79,7 @@ class pages extends CI_controller
 
 		switch ($page) {
 			case 'home': $this->home($page); break;
-			default:     $this->home($page); break;
+			default: $this->home($page); break;
 		}
 
 		$footer = new footer;

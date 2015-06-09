@@ -11,32 +11,25 @@
  ********************************************************************************/
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class common extends CI_controller
+class format extends CI_controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function load_language()
-	{
-		$this->lang->load('labels', 'english');
-		// $this->lang->load('error', 'english');
-	}
-
 	/**
-	 * CHECK DATA IF NULL
-	 * @param (Object) $data
-	 * @return (Object) $data
+	 * FORMAT DATE
+	 * @param String, $datetime
+	 * @param String, $format
+	 * @return String, $formatted
 	 * --------------------------------------------
 	 */
-	static function checkData($data)
+	static function format_date($datetime, $format='Y-m-d')
 	{
-		(isset($data) && !empty($data))?
-		  $data = $data
-		: $data = '';
-
-		return $data;
+		$date = new DateTime($datetime);
+		$formatted =  $date->format($format);
+		return $formatted;
 	}
 }
 ?>

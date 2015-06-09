@@ -52,7 +52,7 @@
 
 		<div class="page-layout clearfix">
 			<div id="latest-news" class="page-left clearfix">
-				<div class="preloader" style="position: relative; margin-top: 6rem;"></div>
+				<div class="preloader" style="position: absolute; margin-top: 6rem;"></div>
 				<?=$latest_news ?>
 			</div>
 			<div class="page-right clearfix">

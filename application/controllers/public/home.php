@@ -64,11 +64,11 @@ class home extends pages
 		$homebox   = new homebox;
 		$gym_class = new gym_class;
 		$news      = new news;
-		$data['banner']  = $banner->get_banner();
+		$data['login'] = self::create_login_form();
+		$data['banner'] = $banner->get_banner();
 		$data['homebox'] = $homebox->display_homebox_banner();
 		$data['gym_class'] = $gym_class->display_gym_class_thumbnail();
-		$data['login'] = self::create_login_form();
-		$data['latest_news'] = $news->get_latest_news();
+		$data['latest_news'] = $news->view_latest_news();
 
 		$this->load->view('pages/'.$page, $data);
 	}

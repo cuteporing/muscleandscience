@@ -21,12 +21,28 @@ class News_model extends CI_Model {
 		$this->load->database();
 	}
 
+	/**
+	 * GET WHERE STATEMENT
+	 * @param $params
+	 */
 	public function get_where($params)
 	{
-		// where
 		if( isset($params['where']) && count($params['where'] ) > 0 ) {
 			foreach ($params['where'] as $field => $value) {
 				$this->db->where( $field, $value );
+			}
+		}
+	}
+
+	/**
+	 * GET ORDER BY STATEMENT
+	 * @param $params
+	 */
+	public function get_orderby($params)
+	{
+		if( isset($params['order_by']) && count($params['order_by']) > 0 ) {
+			foreach ($params['order_by'] as $field => $value) {
+				$this->db->order_by( $field, $value );
 			}
 		}
 	}
@@ -41,14 +57,8 @@ class News_model extends CI_Model {
 	 */
 	public function get_news($params)
 	{
-		
-
-		// order by
-		if( isset($params['order_by']) && count($params['order_by']) > 0 ) {
-			foreach ($params['order_by'] as $field => $value) {
-				$this->db->order_by( $field, $value );
-			}
-		}
+		$this->get_where($params);
+		$this->get_orderby($params);
 
 		// limit | offset
 		if( isset($params['limiter']) && count($params['limiter']) > 0 ) {
@@ -82,19 +92,8 @@ class News_model extends CI_Model {
 	 */
 	public function get_news_details($params)
 	{
-		// where
-		if( isset($params['where']) && count($params['where'] ) > 0 ) {
-			foreach ($params['where'] as $field => $value) {
-				$this->db->where( $field, $value );
-			}
-		}
-
-		// order by
-		if( isset($params['order_by']) && count($params['order_by']) > 0 ) {
-			foreach ($params['order_by'] as $field => $value) {
-				$this->db->order_by( $field, $value );
-			}
-		}
+		$this->get_where($params);
+		$this->get_orderby($params);
 
 		// limit | offset
 		if( isset($params['limiter']) && count($params['limiter']) > 0 ) {
@@ -118,5 +117,11 @@ class News_model extends CI_Model {
 		}
 	}
 
+	public function get_comment_count($post_id)
+	{
+		$this->db->from('mas_comments');
+		$this->db->where('post_id', $post_id);
+		return $this->db->count_all_results();
+	}
 }
 ?>
