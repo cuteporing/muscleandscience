@@ -78,7 +78,7 @@ class News_model extends CI_Model {
 			return $query->result_array();
 		}
 		else{
-			return false;
+			return null;
 		}
 	}
 
@@ -113,10 +113,37 @@ class News_model extends CI_Model {
 			return $query->result_array();
 		}
 		else{
-			return false;
+			return null;
 		}
 	}
 
+	/**
+	 * GET NEWS TAGS
+	 * @param $post_id
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_news_tags($post_id)
+	{
+		$this->db->select('mas_tags.tag_name');
+		$this->db->from('mas_post_tags');
+		$this->db->join('mas_tags', 'mas_post_tags.tag_id = mas_tags.id');
+		$this->db->where('mas_post_tags.post_id', $post_id);
+		$query = $this->db->get();
+		if( $query->num_rows() > 0 ){
+			return $query->result_array();
+		}
+		else{
+			return null;
+		}
+	}
+
+	/**
+	 * GET COMMENT COUNT PER POST
+	 * @param $post_id
+	 * @return
+	 * --------------------------------------------
+	 */
 	public function get_comment_count($post_id)
 	{
 		$this->db->from('mas_comments');
