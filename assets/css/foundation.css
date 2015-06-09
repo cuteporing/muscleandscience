@@ -3074,7 +3074,7 @@ meta.foundation-mq-topbar {
 .no-js .tabs-content > .content {
   display: block;
   float: none; }
-
+/*
 ul.pagination {
   display: block;
   min-height: 1.5rem;
@@ -3113,7 +3113,7 @@ ul.pagination {
   ul.pagination li {
     float: left;
     display: block; }
-
+*/
 /* Pagination centred wrapper */
 .pagination-centered {
   text-align: center; }

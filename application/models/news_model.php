@@ -120,12 +120,14 @@ class News_model extends CI_Model {
 	 * @return
 	 * --------------------------------------------
 	 */
-	public function get_news_tags($post_id)
+	public function get_news_tags($post_id = null)
 	{
 		$this->db->select(TBL_TAGS.'.tag_name');
 		$this->db->from(TBL_POST_TAGS);
 		$this->db->join(TBL_TAGS, TBL_POST_TAGS.'.tag_id = '.TBL_TAGS.'.id');
-		$this->db->where(TBL_POST_TAGS.'.post_id', $post_id);
+		if(!is_null($post_id)){
+			$this->db->where(TBL_POST_TAGS.'.post_id', $post_id);
+		}
 		$query = $this->db->get();
 		if( $query->num_rows() > 0 ){
 			return $query->result_array();

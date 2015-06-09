@@ -14,10 +14,17 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class news extends CI_controller
 {
+	private $total_rows = 0;
+	private $blog_limit = 1;
+	private $blog_desc_limit = 1;
+	private $post_limit = 1;
+	private $params     = array();
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('news_model');
+		$this->load->library('pagination');
 	}
 
 	static function show_all_btn()
@@ -225,7 +232,7 @@ class news extends CI_controller
 				$author_id = $result_post[$i]['update_user_id'];
 
 				// search paramter for post description
-				$params['limiter']['limit']  = 1;
+				$params['limiter']['limit']  = $this->blog_desc_limit;
 				$params['where']    = array("post_id"  => $post_id);
 				$params['order_by'] = array("sequence" => "asc");
 
@@ -277,23 +284,40 @@ class news extends CI_controller
 		return $return_value;
 	}
 
-	public function get_all_news()
+	public function get_params()
 	{
-		$page = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$page = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
 
 		(!$page)? $offset = 0 : $offset = $page;
-		$params = array();
-		$total_rows = $this->news_model->get_news_count($params);
 
-		if( self::cannot_find_page($total_rows, $offset) ){
+		if( self::cannot_find_page($this->total_rows, $offset) ){
 			return show_404();
 		}
-		$params['limiter']['limit'] = 10;
-		$params['limiter']['offset'] = $offset;
-		$params['where']    = array("deleted" => 0);
-		$params['order_by'] = array("update_datetime" => "desc");
 
-		$result_post = $this->news_model->get_news($params);
+		$this->params = array();
+		
+
+		if($type == "blog"){
+			$this->params['limiter']['limit'] = $this->blog_limit;
+			$this->params['limiter']['offset'] = $offset;
+			$this->params['where']    = array("deleted" => 0);
+			$this->params['order_by'] = array("update_datetime" => "desc");
+		}
+
+		return $this->params;
+	}
+
+	public function get_all_news()
+	{
+		$type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$page = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
+		// get total rows
+		$this->total_rows = $this->news_model->get_news_count($this->params);
+		// get parameters
+		$this->get_params();
+
+		$result_post = $this->news_model->get_news($this->params);
 
 		if(!is_null($result_post)){
 			for($i = 0; $i < count($result_post); $i++){
@@ -301,12 +325,14 @@ class news extends CI_controller
 				$author_id = $result_post[$i]['update_user_id'];
 
 				// search paramter for post description
-				$params['limiter']['limit']  = 1;
-				$params['where']    = array("post_id"  => $post_id);
-				$params['order_by'] = array("sequence" => "asc");
+				if($type == "blog"){
+					$params['limiter']['limit']  = $this->blog_desc_limit;
+				}
+				$this->params['where']    = array("post_id"  => $post_id);
+				$this->params['order_by'] = array("sequence" => "asc");
 
 				// get post description
-				$result_details = $this->news_model->get_news_details($params);
+				$result_details = $this->news_model->get_news_details($this->params);
 				// get tags
 				$result_tags    = $this->news_model->get_news_tags($post_id);
 				// get news author
@@ -333,7 +359,7 @@ class news extends CI_controller
 	{
 		$view_type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 
-		if(!$view_type || is_numeric($view_type)){
+		if(!$view_type || $view_type == "blog"){
 			
 			$container = "";
 			$result = $this->get_all_news();
@@ -344,12 +370,34 @@ class news extends CI_controller
 				$container.= '</ul>';
 			}
 
-			
-
-			$data['news_list'] = $container;
-
-			$this->load->view('pages/'.$page, $data);
 		}else{
+
 		}
+
+		$config['base_url'] = base_url().'news/blog/';
+		$config['uri_segment'] = 3;
+		$config['total_rows'] = $this->total_rows;
+		$config['per_page'] = 1;
+		$config['full_tag_open'] = '<ul class="pagination clearfix">';
+		$config['full_tag_close'] = '</ul>';
+		$config['cur_tag_open'] = '<li class="selected"><a>';
+		$config['cur_tag_close'] = '</a><li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '<li>';
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['prev_link'] = 'previous';
+		$config['next_link'] = 'next';
+		$config['prev_tag_open']  = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open']  = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+
+		$data['news_list'] = $container;
+		$data['tag_list']  = $this->news_model->get_news_tags();
+		$data['pagination'] = $this->pagination->create_links();
+
+		$this->load->view('pages/'.$page, $data);
 	}
 }

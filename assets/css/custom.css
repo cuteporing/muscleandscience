@@ -361,7 +361,7 @@ body {
 	margin-left: 2px; }
 	.more:hover,
 	.categories li a:hover,
-	.pagination li a:hover,
+	.pagination li a:hover:not(.disabled),
 	.pagination li.selected a,
 	.ui-tabs-nav li a:hover,
 	.ui-tabs-nav li.ui-tabs-selected a,

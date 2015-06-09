@@ -14,8 +14,8 @@
 				<li class="has-dropdown">
 					<a href="news.php"><?=$this->lang->line('lbl_news')?></a>
 					<ul class="dropdown">
-						<li><a href="news.php?q=blog" class="main-link"><?=$this->lang->line('lbl_blog')?></a></li>
-						<li><a href="news.php?q=post" class="main-link"><?=$this->lang->line('lbl_single_post')?></a></li>
+						<li><a href="<?=base_url()?>news/blog/" class="main-link"><?=$this->lang->line('lbl_blog')?></a></li>
+						<li><a href="<?=base_url()?>news/post/" class="main-link"><?=$this->lang->line('lbl_single_post')?></a></li>
 					</ul>
 				</li>
 				<li class="has-dropdown">
