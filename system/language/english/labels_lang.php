@@ -12,6 +12,8 @@ $lang['lbl_posted_by'] = 'Posted by ';
 $lang['lbl_single_post'] = 'Single Post';
 $lang['lbl_sign_in'] = 'Sign in';
 $lang['lbl_upcoming_classes'] = 'upcoming classes';
+$lang['lbl_we_delivers'] = "we delivers enough to blog about";
+$lang['lbl_what_new'] = "WHAT'S NEW";
 $lang['lbl_what_next'] = "What's Next";
 
 /* End of file labels.php */

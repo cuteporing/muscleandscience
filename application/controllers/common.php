@@ -25,6 +25,27 @@ class common extends CI_controller
 	}
 
 	/**
+	 * GET BREADCRUMBS
+	 * @param (String) $page
+	 * @return $container
+	 * --------------------------------------------
+	 */
+	public function get_breadcrumbs($page)
+	{
+		$class = array('class'=>'breadcrumbs clearfix bread-crumb');
+		$container = element_tag('ul', 'open', $class);
+		$container.= element_tag('li', 'open', array('class'=>'no-arrow'));
+		$container.= anchor(base_url().'home/', $this->lang->line('lbl_home'));
+		$container.= element_tag('li', 'close');
+		$container.= element_tag('li', 'open', array('class'=>'current'));
+		$container.= anchor(base_url().$page.'/', $page);
+		$container.= element_tag('li', 'close');
+		$container.= element_tag('ul', 'close');
+
+		return $container;
+	}
+
+	/**
 	 * CHECK DATA IF NULL
 	 * @param (Object) $data
 	 * @return (Object) $data

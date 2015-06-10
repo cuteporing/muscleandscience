@@ -12,14 +12,15 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-include_once('banner.php');
 include_once('common.php');
-include_once('footer.php');
 include_once('format.php');
-include_once('gym_class.php');
 include_once('homebox.php');
-include_once('public/news.php');
+include_once('public/banner.php');
+include_once('public/company.php');
+include_once('public/footer.php');
+include_once('public/gym_class.php');
 include_once('public/home.php');
+include_once('public/news.php');
 
 class pages extends CI_controller
 {

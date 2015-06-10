@@ -12,8 +12,6 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-include_once('common.php');
-
 class banner extends CI_controller
 {
 
