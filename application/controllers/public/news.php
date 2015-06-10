@@ -14,12 +14,13 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class news extends CI_controller
 {
-	private $total_rows = 0;
-	private $blog_limit = 10;
+	private $total_rows      = 0;
+	private $blog_limit      = 10;
+	private $comments_limit  = 10;
+	private $post_limit      = 1;
 	private $blog_desc_limit = 1;
-	private $post_limit = 1;
-	private $per_page   = 0;
-	private $params     = array();
+	private $per_page        = 0;
+	private $params          = array();
 
 	public function __construct()
 	{
@@ -224,7 +225,7 @@ class news extends CI_controller
 	 */
 	public function get_latest_news()
 	{
-		$this->get_params();
+		$this->get_params('latest');
 
 		$result_post = $this->news_model->get_news($this->params);
 
@@ -298,12 +299,19 @@ class news extends CI_controller
 	 * @param $is_latest
 	 * --------------------------------------------
 	 */
-	public function get_params($is_latest = false)
+	public function get_params($other = "", $other_offset = 0)
 	{
 		$type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 		$page = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
 
 		(!$page)? $offset = 0 : $offset = $page;
+
+		if($other == "comments"){
+			(!$other_offset)? $offset = 0 : $offset = $other_offset;
+		}
+		else{
+			(!$page)? $offset = 0 : $offset = $page;
+		}
 
 		if( self::cannot_find_page($this->total_rows, $offset) ){
 			return show_404();
@@ -311,10 +319,14 @@ class news extends CI_controller
 
 		$this->params = array();
 
-		if($is_latest){
+		if($other == "latest"){
 			$this->params['limiter']['limit'] = 2;
 			$this->params['where']    = array("deleted" => 0);
 			$this->params['order_by'] = array("update_datetime" => "desc");
+		}
+		elseif($other == "comments"){
+			$this->params['limiter']['limit'] = $this->comments_limit;
+			$this->params['order_by'] = array(TBL_COMMENTS.".update_datetime" => "desc");
 		}
 		elseif(!$type || $type == "blog"){
 			$this->params['limiter']['limit'] = $this->blog_limit;
@@ -415,6 +427,64 @@ class news extends CI_controller
 	}
 
 	/**
+	 * GET COMMENT AUTHOR'S AVATAR
+	 * @param $img_path
+	 * @return $container
+	 * --------------------------------------------
+	 */
+	public function get_comment_avatar($img_path)
+	{
+		$style = ' no-repeat; background-size: cover;';
+		$style.= ' background-position: center center;';
+		$container = div('&nbsp;', array(
+			'class'=>'comment-author-avatar',
+			'style'=>'background: url('.$img_path.' '.$style));
+
+		return $container;
+	}
+
+	public function get_comment_details($data)
+	{
+		$author = ucfirst($data['firstname'].' '.$data['lastname']);
+		$contents = anchor('#', $author, array('class'=>'author'));
+		$container = div($contents, array('class'=>'comment-details'));
+
+		return $container;
+	}
+
+	/**
+	 * GET COMMENTS
+	 * @param $post_id
+	 * @param $offset
+	 * @return $result
+	 * --------------------------------------------
+	 */
+	public function get_comments($post_id = null, $offset = null)
+	{
+		if(!is_null($post_id)){
+			$this->get_params();
+			$this->params['limiter']['offset'] = $offset;
+			$this->params['where'] = array(
+				TBL_COMMENTS.".deleted" => 0,
+				TBL_COMMENTS.".post_id" =>$post_id);
+
+			$result = $this->news_model->get_comments($this->params);
+
+			if(!is_null($result)){
+				$class = array('class'=>'comment clearfix');
+
+				foreach ($result as $row) {
+					$list = $element_tag('li', 'open', $class);
+					$list.= $this->get_comment_avatar($row['photo_thumb']);
+				}
+				$result = $list;
+			}
+
+			return $result;
+		}
+	}
+
+	/**
 	 * VIEW NEWS
 	 * @param $page
 	 * @return $container
@@ -426,43 +496,47 @@ class news extends CI_controller
 
 		$container = "";
 		$result = $this->get_all_news();
+		$class  = array('class'=>'blog clearfix animated fadeIn');
 
+		
 		// SEARCH BY BLOG
 		if(!$view_type || $view_type == "blog"){
 			if(count($result) > 0 and !is_null($result)){
-				$class = array('class'=>'blog clearfix animated fadeIn');
 				$container = element_tag('ul', 'open', $class);
 				$container.= $this->news_list($result, 450);
 				$container.= element_tag('ul', 'close');
 			}
-			$this->per_page = $this->blog_limit;
-			$data['pagination'] = $this->get_pagination($view_type);
-		}
-		// SEARCH BY SINGLE POST
-		elseif($view_type == "post"){
-			if(count($result) > 0 and !is_null($result)){
-				$class = array('class'=>'blog clearfix animated fadeIn');
+
+				$this->per_page = $this->blog_limit;
+				$data['pagination'] = $this->get_pagination($view_type);
+			}
+			// SEARCH BY SINGLE POST
+			elseif($view_type == "post"){
+				if(count($result) > 0 and !is_null($result)){
+				$container = element_tag('ul', 'open', $class);
+				$container.= $this->news_list($result, 450);
+				$container.= element_tag('ul', 'close');
+			}
+
+				$this->per_page = $this->post_limit;
+				$data['pagination'] = $this->get_pagination($view_type);
+			}
+			// SEARCH BY TITLE
+			elseif($view_type == "title"){
+				if(count($result) > 0 and !is_null($result)){
 				$container = element_tag('ul', 'open', $class);
 				$container.= $this->news_list($result);
 				$container.= element_tag('ul', 'close');
+				$container.= $this->get_comments($result[0]['id'], 0);
 			}
+
 			$this->per_page = $this->post_limit;
-			$data['pagination'] = $this->get_pagination($view_type);
-		}
-		// SEARCH BY TITLE
-		elseif($view_type == "title"){
-			if(count($result) > 0 and !is_null($result)){
-				$class = array('class'=>'blog clearfix animated fadeIn');
-				$container = element_tag('ul', 'open', $class);
-				$container.= $this->news_list($result);
-				$container.= element_tag('ul', 'close');
-			}
-			$this->per_page = $this->post_limit;
+			
 		}
 		$common = new common;
 		$data['breadcrumbs'] = $common->get_breadcrumbs($page);
-		$data['news_list'] = $container;
-		$data['tag_list']  = $this->news_model->get_news_tags();
+		$data['news_list']   = $container;
+		$data['tag_list']    = $this->news_model->get_news_tags();
 
 		$this->load->view('pages/'.$page, $data);
 	}

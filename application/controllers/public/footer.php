@@ -76,7 +76,7 @@ class footer extends CI_controller
 		$data['footer']['opening'] = $this->display_company_opening_hrs();
 		$data['footer']['copyright'] = footer::copyright();
 
-		$this->load->view('templates/footer',$data);
+		$this->load->view('pages/templates/footer',$data);
 	}
 }
 ?>

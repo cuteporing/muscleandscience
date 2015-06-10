@@ -72,6 +72,8 @@ define('IMG_BANNER',		'/upload/banner/');
 */
 
 define('TBL_COMMENTS',			'mas_comments');
+define('TBL_GALLERY',				'mas_gallery');
+define('TBL_GALLERY_PHOTOS','mas_gallery_photos');
 define('TBL_POST',					'mas_post');
 define('TBL_POST_DETAILS',	'mas_post_details');
 define('TBL_POST_TAGS',			'mas_post_tags');

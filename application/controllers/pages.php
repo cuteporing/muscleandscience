@@ -36,7 +36,7 @@ class pages extends CI_controller
 	 */
 	public function getHeader($data)
 	{
-		$this->load->view('templates/header', $data);
+		$this->load->view('pages/templates/header', $data);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class pages extends CI_controller
 	 */
 	public function displayTopNav($data)
 	{
-		$this->load->view('templates/top_navigation', $data);
+		$this->load->view('pages/templates/top_navigation', $data);
 	}
 
 	/**

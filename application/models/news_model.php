@@ -177,5 +177,39 @@ class News_model extends CI_Model {
 		$this->db->where('post_id', $post_id);
 		return $this->db->count_all_results();
 	}
+
+	/**
+	 * GET COMMENTS
+	 * @param $post_id
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_comments($params)
+	{
+		$this->get_where($params);
+		$this->get_orderby($params);
+
+		$sql = TBL_COMMENTS.".id, ";
+		$sql.= TBL_COMMENTS.".post_id, ";
+		$sql.= TBL_COMMENTS.".comment, ";
+		$sql.= TBL_COMMENTS.".update_user_id, ";
+		$sql.= TBL_COMMENTS.".update_datetime, ";
+		$sql.= TBL_USERS.".firstname, ";
+		$sql.= TBL_USERS.".lastname, ";
+		$sql.= TBL_GALLERY_PHOTOS.".photo_thumb ";
+
+		$this->db->select($sql);
+		$this->db->from(TBL_COMMENTS);
+		$this->db->join(TBL_USERS, TBL_COMMENTS.".id = ".TBL_USERS."._id");
+		$this->db->join(TBL_GALLERY_PHOTOS, TBL_GALLERY_PHOTOS.".id = ".TBL_USERS.".img");
+
+		$query = $this->db->get();
+		if( $query->num_rows() > 0 ){
+			return $query->result_array();
+		}
+		else{
+			return null;
+		}
+	}
 }
 ?>
