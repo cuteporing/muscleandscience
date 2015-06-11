@@ -12,7 +12,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class news extends CI_controller
+class news extends pages
 {
 	private $total_rows      = 0;
 	private $blog_limit      = 10;
@@ -217,6 +217,112 @@ class news extends CI_controller
 
 		return $list;
 	}
+
+	/**
+	 * GET COMMENT AUTHOR'S AVATAR
+	 * @param $img_path
+	 * @return $container
+	 * --------------------------------------------
+	 */
+	public function get_comment_avatar($img_path)
+	{
+		$style = ' no-repeat; background-size: cover;';
+		$style.= ' background-position: center center;';
+		$container = div('&nbsp;', array(
+			'class'=>'comment-author-avatar',
+			'style'=>'background: url('.$img_path.' '.$style));
+
+		return $container;
+	}
+
+	/**
+	 * GET COMMENT DETAILS
+	 * @param $data
+	 * @return $container
+	 * --------------------------------------------
+	 */
+	public function get_comment_details($data)
+	{
+		$author = ucfirst($data['firstname'].' '.$data['lastname']);
+		$date   = format::format_date($data['update_datetime'], 'd M Y, g.i a');
+		$contents = $this->lang->line('lbl_posted_by');
+		$contents.= anchor('#', $author, array('class'=>'author'));
+		$contents.= 'on '.$date;
+		$contents = div($contents, array('class'=>'posted-by'));
+
+		$contents.= p($data['comment']);
+		$contents.= anchor('#comment-form', $this->lang->line('lbl_reply'),
+			array('class'=>'icon-small-arrow right-white reply-button',
+						'onclick'=>'scrollPage($(this));'));
+
+		$container = div($contents, array('class'=>'comment-details'));
+
+		return $container;
+	}
+
+	/**
+	 * GET COMMENTS
+	 * @param $post_id
+	 * @param $offset
+	 * @return $result
+	 * --------------------------------------------
+	 */
+	public function get_comments($post_id = null, $offset = 0)
+	{
+		if(!is_null($post_id)){
+			$this->get_params();
+			$this->params['limiter']['offset'] = $offset;
+			$this->params['where'] = array(
+				TBL_COMMENTS.".deleted" => 0,
+				TBL_COMMENTS.".post_id" =>$post_id);
+
+			$result = $this->news_model->get_comments($this->params);
+
+			if(!is_null($result)){
+				$class = array('class'=>'comment clearfix');
+
+				foreach ($result as $row) {
+					$list = element_tag('li', 'open', $class);
+					$list.= $this->get_comment_avatar($row['photo_thumb']);
+					$list.= $this->get_comment_details($row);
+					$list.= element_tag('li', 'close');
+
+				}
+				$result = $list;
+			}
+
+			return $result;
+		}
+	}
+
+	/**
+	 * VIEW COMMENTS
+	 * @param $post_id
+	 * @return $offset
+	 * --------------------------------------------
+	 */
+	public function view_comments($post_id, $offset = 0, $comments_count = 0)
+	{
+		$label = ($comment_count > 1)?
+							$this->lang->line('lbl_comments')
+							: $this->lang->line('lbl_comment');
+
+		$comment_box = $comments_count.' '.span($label,
+			array('class'=>'second-row small'));
+		$comment_box = div($comment_box,
+			array('class' => 'first-row'));
+		$comment_box = div($comment_box, array('class'=>'comment-box'));
+
+		$comment_list = element_tag('ul', 'open',
+			array('class'=>'fadeInUp column-no-margin'));
+		$comment_list.= $this->get_comments($post_id, $offset);
+		$comment_list.= element_tag('ul', 'close');
+		$comment_list = div($comment_list, array('id'=>'comments-list'));
+		$container = $comment_box.$comment_list;
+
+		return $container;
+	}
+
 
 	/**
 	 * GET LATEST NEWS
@@ -427,64 +533,6 @@ class news extends CI_controller
 	}
 
 	/**
-	 * GET COMMENT AUTHOR'S AVATAR
-	 * @param $img_path
-	 * @return $container
-	 * --------------------------------------------
-	 */
-	public function get_comment_avatar($img_path)
-	{
-		$style = ' no-repeat; background-size: cover;';
-		$style.= ' background-position: center center;';
-		$container = div('&nbsp;', array(
-			'class'=>'comment-author-avatar',
-			'style'=>'background: url('.$img_path.' '.$style));
-
-		return $container;
-	}
-
-	public function get_comment_details($data)
-	{
-		$author = ucfirst($data['firstname'].' '.$data['lastname']);
-		$contents = anchor('#', $author, array('class'=>'author'));
-		$container = div($contents, array('class'=>'comment-details'));
-
-		return $container;
-	}
-
-	/**
-	 * GET COMMENTS
-	 * @param $post_id
-	 * @param $offset
-	 * @return $result
-	 * --------------------------------------------
-	 */
-	public function get_comments($post_id = null, $offset = null)
-	{
-		if(!is_null($post_id)){
-			$this->get_params();
-			$this->params['limiter']['offset'] = $offset;
-			$this->params['where'] = array(
-				TBL_COMMENTS.".deleted" => 0,
-				TBL_COMMENTS.".post_id" =>$post_id);
-
-			$result = $this->news_model->get_comments($this->params);
-
-			if(!is_null($result)){
-				$class = array('class'=>'comment clearfix');
-
-				foreach ($result as $row) {
-					$list = $element_tag('li', 'open', $class);
-					$list.= $this->get_comment_avatar($row['photo_thumb']);
-				}
-				$result = $list;
-			}
-
-			return $result;
-		}
-	}
-
-	/**
 	 * VIEW NEWS
 	 * @param $page
 	 * @return $container
@@ -507,31 +555,30 @@ class news extends CI_controller
 				$container.= element_tag('ul', 'close');
 			}
 
-				$this->per_page = $this->blog_limit;
-				$data['pagination'] = $this->get_pagination($view_type);
-			}
-			// SEARCH BY SINGLE POST
-			elseif($view_type == "post"){
-				if(count($result) > 0 and !is_null($result)){
+			$this->per_page = $this->blog_limit;
+			$data['pagination'] = $this->get_pagination($view_type);
+		}
+		// SEARCH BY SINGLE POST
+		elseif($view_type == "post"){
+			if(count($result) > 0 and !is_null($result)){
 				$container = element_tag('ul', 'open', $class);
 				$container.= $this->news_list($result, 450);
 				$container.= element_tag('ul', 'close');
 			}
 
-				$this->per_page = $this->post_limit;
-				$data['pagination'] = $this->get_pagination($view_type);
-			}
-			// SEARCH BY TITLE
-			elseif($view_type == "title"){
-				if(count($result) > 0 and !is_null($result)){
+			$this->per_page = $this->post_limit;
+			$data['pagination'] = $this->get_pagination($view_type);
+		}
+		// SEARCH BY TITLE
+		elseif($view_type == "title"){
+			if(count($result) > 0 and !is_null($result)){
 				$container = element_tag('ul', 'open', $class);
 				$container.= $this->news_list($result);
 				$container.= element_tag('ul', 'close');
-				$container.= $this->get_comments($result[0]['id'], 0);
+				$data['comments'] =  $this->view_comments($result[0]['id'], 0,
+					$result[0]['comment_count']);
 			}
-
 			$this->per_page = $this->post_limit;
-			
 		}
 		$common = new common;
 		$data['breadcrumbs'] = $common->get_breadcrumbs($page);

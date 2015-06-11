@@ -460,6 +460,32 @@ if ( ! function_exists('div'))
 // ------------------------------------------------------------------------
 
 /**
+ * Generates p element
+ *
+ * @access	public
+ * @param	string, array
+ * @return	string
+ */
+if ( ! function_exists('p'))
+{
+	function p($text, $param = array())
+	{
+		$p	= '<p ';
+
+		foreach($param as $attr => $value)
+		{
+			$p .= $attr.'="'.$value.'" ';
+		}
+
+		$p	.= '>'.$text;
+		$p	.= '</p>';
+		return $p;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Generates span element
  *
  * @access	public
