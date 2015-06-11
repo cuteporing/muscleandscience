@@ -1149,10 +1149,10 @@ div.value {
 		padding-top: 0; }
 	.footer-contact-info-left {
 		float: left;
-		width: 150px; }
+		width: 50%; }
 	.footer-contact-info-right {
 		float: right;
-		width: 150px; }
+		width: 50%; }
 
 .footer-social-icons {
 	list-style-type: none;
