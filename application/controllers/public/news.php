@@ -286,7 +286,6 @@ class news extends pages
 					$list.= $this->get_comment_avatar($row['photo_thumb']);
 					$list.= $this->get_comment_details($row);
 					$list.= element_tag('li', 'close');
-
 				}
 				$result = $list;
 			}
@@ -301,24 +300,35 @@ class news extends pages
 	 * @return $offset
 	 * --------------------------------------------
 	 */
-	public function view_comments($post_id, $offset = 0, $comments_count = 0)
+	public function view_comments($post_id, $offset = 0, $comment_count = 0)
 	{
-		$label = ($comment_count > 1)?
-							$this->lang->line('lbl_comments')
+		$label = ($comment_count > 1)? $this->lang->line('lbl_comments')
 							: $this->lang->line('lbl_comment');
 
-		$comment_box = $comments_count.' '.span($label,
-			array('class'=>'second-row small'));
-		$comment_box = div($comment_box,
-			array('class' => 'first-row'));
-		$comment_box = div($comment_box, array('class'=>'comment-box'));
+		if($comment_count > 0) {
+			$comment_box = $comment_count.' '.span($label,
+				array('class'=>'second-row small'));
+			$comment_box = div($comment_box,
+				array('class' => 'first-row'));
+			$comment_box = div($comment_box, array('class'=>'comment-box'));
 
-		$comment_list = element_tag('ul', 'open',
-			array('class'=>'fadeInUp column-no-margin'));
-		$comment_list.= $this->get_comments($post_id, $offset);
-		$comment_list.= element_tag('ul', 'close');
-		$comment_list = div($comment_list, array('id'=>'comments-list'));
-		$container = $comment_box.$comment_list;
+			$comment_list = element_tag('ul', 'open',
+				array('class'=>'fadeInUp column-no-margin'));
+			$comment_list.= $this->get_comments($post_id, $offset);
+			$comment_list.= element_tag('ul', 'close');
+			$comment_list = div($comment_list, array('id'=>'comments-list'));
+			$container = $comment_box.$comment_list;
+		}
+		else {
+			$comment_list = element_tag('ul', 'open', array('class'=>'fadeInUp'));
+			$comment_list.= element_tag('li', 'open', array('class'=>'comment clearfix'));
+			$comment_list.= anchor('#comment-form', $this->lang->line('lbl_reply'),
+				array('onclick'=>'onclick="scrollPage($(this));',
+							'class'=>'icon-small-arrow right-white reply-button'));
+			$comment_list.= element_tag('li', 'close');
+
+			$container = div($comment_list, array('id'=>'comments-list'));
+		}
 
 		return $container;
 	}
