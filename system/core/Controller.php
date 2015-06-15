@@ -36,6 +36,11 @@ class CI_Controller {
 	 */
 	public function __construct()
 	{
+		// Set default timezone set
+		// You can change the default timezone in constants.php
+		// default timezone : (asia/manila)
+		date_default_timezone_set(CONFIG_TIMEZONE);
+
 		self::$instance =& $this;
 
 		// Assign all the class objects that were instantiated by the

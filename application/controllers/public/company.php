@@ -82,7 +82,6 @@ class company extends CI_controller
 	 */
 	public function display_company_opening_hrs()
 	{
-		date_default_timezone_set('asia/manila');
 		$result       = $this->get_company_info();
 		$opening      = json_decode($result[0]['opening_hours']);
 		$opening_type = $result[0]['opening_day_type'];

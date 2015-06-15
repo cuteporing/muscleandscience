@@ -145,11 +145,12 @@ class news extends pages
 	public function get_post_tag($data)
 	{
 		$tags = "";
+		$class = array('data-tooltip'=>'','title'=>'');
 		foreach ($data as $tag_name) {
 			$tag_slug = str_replace(" ", "-", $tag_name);
-
+			$class['title'] = $tag_name;
 			$tags.= element_tag('li', 'open');
-			$tags.= anchor(base_url().'news/tag/'.$tag_slug, $tag_name, array('title'=>$tag_name));
+			$tags.= anchor(base_url().'news/tag/'.$tag_slug, $tag_name, $class);
 			$tags.= element_tag('li', 'close');
 		}
 		return $tags;
@@ -159,7 +160,7 @@ class news extends pages
 	 * GET POST FOOTER
 	 * @param $author
 	 * @param $tags
-	 * @return $description
+	 * @return $container
 	 * --------------------------------------------
 	 */
 	public function get_post_footer($author, $tags)
@@ -235,7 +236,7 @@ class news extends pages
 		$style.= ' background-position: center center;';
 		$container = div('&nbsp;', array(
 			'class'=>'comment-author-avatar',
-			'style'=>'background: url('.$img_path.' '.$style));
+			'style'=>'background: url('.$img_path.') '.$style));
 
 		return $container;
 	}
@@ -252,7 +253,7 @@ class news extends pages
 		$date   = format::format_date($data['update_datetime'], 'd M Y, g.i a');
 		$contents = $this->lang->line('lbl_posted_by');
 		$contents.= anchor('#', $author, array('class'=>'author'));
-		$contents.= 'on '.$date;
+		$contents.= ' on '.$date;
 		$contents = div($contents, array('class'=>'posted-by'));
 
 		$contents.= p($data['comment']);
@@ -434,6 +435,13 @@ class news extends pages
 			$this->params['where']    = array("deleted" => 0);
 			$this->params['order_by'] = array("update_datetime" => "desc");
 		}
+		elseif($type == "tag"){
+			$slug = str_replace('-', ' ', $page);
+			$this->params['limiter']['limit'] = $this->blog_limit;
+			$this->params['limiter']['offset'] = $offset;
+			$this->params['where']    = array("deleted" => 0, "slug"=>$slug);
+			$this->params['order_by'] = array("update_datetime" => "desc");
+		}
 		elseif($type == "title"){
 			$this->params['limiter']['limit'] = $this->post_limit;
 			$this->params['limiter']['offset'] = $offset;
@@ -552,11 +560,11 @@ class news extends pages
 	/**
 	 * VIEW NEWS
 	 * @param $page
-	 * @return $container
 	 * --------------------------------------------
 	 */
 	public function view($page)
 	{
+		$common = new common;
 		$view   = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 		$class  = array('class'=>'blog clearfix animated fadeIn');
 		$result = $this->get_all_news();
@@ -580,14 +588,22 @@ class news extends pages
 			$this->per_page = $this->post_limit;
 			$data['pagination'] = $this->get_pagination($view);
 		}
+		// SEARCH BY TAGS
+		elseif($view == "tag"){
+			$character_limit = 450;
+			$this->per_page = $this->blog_limit;
+			$data['pagination'] = $this->get_pagination($view);
+		}
 		// SEARCH BY TITLE
 		elseif($view == "title"){
 			$character_limit = 0;
 			$this->per_page = $this->post_limit;
 			if(!is_null($result)){
-				$data['comments'] =  $this->view_comments($result[0]['id'], 0,
+				$data['comments'] = $this->view_comments($result[0]['id'], 0,
 					$result[0]['comment_count']);
 			}
+			// GET COMMENT FORM
+			$data['comment_form'] = $common->get_form($this->form_path,'comment');
 		}
 
 		if(!is_null($result)){
@@ -596,7 +612,6 @@ class news extends pages
 			$container.= element_tag('ul', 'close');
 		}
 
-		$common = new common;
 		$data['breadcrumbs'] = $common->get_breadcrumbs($page);
 		$data['news_list']   = $container;
 		$data['tag_list']    = $this->news_model->get_news_tags();

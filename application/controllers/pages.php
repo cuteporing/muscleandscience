@@ -24,6 +24,8 @@ include_once('public/news.php');
 
 class pages extends CI_controller
 {
+	public $form_path = 'pages/forms/';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -31,7 +33,7 @@ class pages extends CI_controller
 
 	/**
 	 * GET HEADER
-	 * @param (Object) $data
+	 * @param $data
 	 * --------------------------------------------
 	 */
 	public function getHeader($data)
@@ -41,7 +43,7 @@ class pages extends CI_controller
 
 	/**
 	 * DISPLAY TOP NAVIGATION
-	 * @param (Object) $data
+	 * @param $data
 	 * --------------------------------------------
 	 */
 	public function displayTopNav($data)
@@ -51,7 +53,7 @@ class pages extends CI_controller
 
 	/**
 	 * DISPLAY HOME PAGE
-	 * @param (String) $page
+	 * @param $page
 	 * --------------------------------------------
 	 */
 	public function home($page)
@@ -62,7 +64,7 @@ class pages extends CI_controller
 
 	/**
 	 * DISPLAY NEWS PAGE
-	 * @param (String) $page
+	 * @param $page
 	 * --------------------------------------------
 	 */
 	public function news($page)
@@ -73,7 +75,7 @@ class pages extends CI_controller
 
 	/**
 	 * PAGE VIEW
-	 * @param (String) $page
+	 * @param $page
 	 * --------------------------------------------
 	 */
 	public function view($page = 'home')

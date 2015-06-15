@@ -461,6 +461,8 @@ body {
 
 /* -------------------------- */
 /* PAGE                       */
+.content {
+	padding-bottom: 1rem; }
 .column-container {
 	margin-top: 0px; }
 .column-container p {
@@ -1318,6 +1320,129 @@ div.value {
 .checkStatus input[type=checkbox]:checked + label {
 	left: 47px;
 	background: #91b034; }
+
+/* -------------------------- */
+/* FORMS                      */
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance:none; }
+.comment-form-container {
+	clear: both;
+	margin-left: 110px;
+	margin-top: 25px; }
+.comment-form,
+.contact-form {
+	float: left;
+	width: 100%;
+	margin-top: 30px; }
+.contact-form .block {
+	margin-top: 10px; }
+.comment-form fieldset,
+.contact-form fieldset {
+	border: none;
+	margin: 0;
+	padding: 0; }
+	.comment-form .left,
+	.comment-form .right,
+	.contact-form .left,
+	.contact-form .right {
+		float: left;
+		width: 265px; }
+	.contact-form .left,
+	.contact-form .right {
+		width: 221px; }
+		.contact-form input[type='text'][disabled],
+		.contact-form input[type='email'][disabled]{
+			background-color: #A5C73E;
+			border-color: #BCF906;
+			color: #131313!important; }
+		.comment-form .text-input:first-child,
+		.contact-form .block:first-child {
+			margin-top: 0; }
+		.comment-form input,
+		.comment-form textarea,
+		.contact-form input,
+		.contact-form textarea {
+			border: 1px solid #515151;
+			background: transparent;
+			padding: 9px;
+			color: #fff;
+			margin: 10px 0 0 0;
+			font-size: 13px; }
+		input[type='text'].hint,
+		textarea.hint {
+			color: #C5C5C5 !important; }
+		.comment-form textarea,
+		.contact-form textarea {
+			height: 131px; }
+		.comment-form textarea {
+			margin: 0;
+			width: 100%; }
+		.contact-form textarea {
+			width: 221px; }
+		.comment-form input[type='submit'],
+		.contact-form input[type='submit'] {
+			float: right;
+			width: 70px;
+			border: 1px solid #515151;
+			height: 36px;
+			margin-top: 10px;
+			cursor: pointer;
+			background-position: right center;
+			background-repeat: no-repeat; }
+		.comment-form input:focus,
+		.comment-form textarea:focus,
+		.contact-form .block,
+		.contact-form input:focus,
+		.contact-form textarea:focus,
+		.contact-form input[type='submit']:hover,
+		.contact-form input[type='submit']:focus {
+			background: none;
+			border-color: #A5C73E;
+			box-shadow: none; }
+
+.contact-details {
+	clear: both;
+	float: left; }
+	.contact-details-about {
+		width: 240px;
+		height: 240px;
+		background: #FFF;
+		padding: 20px;
+		color: #000;
+		line-height: 150%; }
+	.contact-details-about,
+	.contact-details-map {
+		float: left; }
+	.header-left a,
+	.logo-left,
+	.logo-right {
+		font-size: 24px; }
+	.logo-left {
+		color: #A5C73E; }
+	.logo-left,
+	.logo-right {
+		float: left;
+		padding-top: 7px; }
+
+	.contact-data li {
+		background-position: 0 3px;
+		background-repeat: no-repeat;
+		padding-left: 30px; 
+		font-size: 14px; }
+		.contact-data .phone {
+			background-image: url('../img/icons/icon_contact_phone.png'); }
+		.contact-data .fax {
+			background-image: url('../img/icons/icon_contact_fax.png'); }
+		.contact-data .email {
+			background-image: url('../img/icons/icon_contact_mail.png'); }
+
+.contact-details-map {
+	width: 240px;
+	height: 240px; }
+	.contact-details-about,
+	.contact-details-map {
+		float: left; }
 
 
 /* -------------------------- */

@@ -21,12 +21,11 @@ class common extends CI_controller
 	public function load_language()
 	{
 		$this->lang->load('labels', 'english');
-		// $this->lang->load('error', 'english');
 	}
 
 	/**
 	 * GET BREADCRUMBS
-	 * @param (String) $page
+	 * @param $page
 	 * @return $container
 	 * --------------------------------------------
 	 */
@@ -46,9 +45,29 @@ class common extends CI_controller
 	}
 
 	/**
+	 * GET FORM
+	 * @param $form_path
+	 * @param $form
+	 * @param $data
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_form($form_path, $form, $data = null)
+	{
+		$form = $form.'_form';
+
+		if(is_null($data)){
+			return $this->load->view($form_path.$form, '', true);
+		}
+		else {
+			return $this->load->view($form_path.$form, $data, true);
+		}
+	}
+
+	/**
 	 * CHECK DATA IF NULL
-	 * @param (Object) $data
-	 * @return (Object) $data
+	 * @param $data
+	 * @return $data
 	 * --------------------------------------------
 	 */
 	static function checkData($data)

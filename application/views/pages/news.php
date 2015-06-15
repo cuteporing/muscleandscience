@@ -12,6 +12,7 @@
 				<?php if(isset($news_list)): ?><?=$news_list ?><?php endif ?>
 				<?php if(isset($comments)): ?><?=$comments ?><?php endif ?>
 				<?php if(isset($pagination)): ?><?=$pagination?><?php endif ?>
+				<?php if(isset($comment_form)): ?><?=$comment_form?><?php endif ?>
 			</div>
 			<div class="page-right">
 				<h3 class="box-header margin">Categories</h3>
@@ -19,7 +20,7 @@
 					<ul class="categories">
 						<?php if(isset($tag_list)): ?>
 							<?php foreach ($tag_list as $tags): ?>
-								<li><?=anchor(base_url().'news/tag/'.str_replace(" ", "-", $tags['tag_name']), $tags['tag_name'], array('title'=>$tags['tag_name'])) ?></li>
+								<li><?=anchor(base_url().'news/tag/'.str_replace(" ", "-", $tags['tag_name']), $tags['tag_name'], array('data-tooltip'=>'','title'=>$tags['tag_name'])) ?></li>
 							<?php endforeach ?>
 						<?php endif ?>
 					</ul>

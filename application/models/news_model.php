@@ -21,6 +21,7 @@ class News_model extends CI_Model {
 	/**
 	 * GET WHERE STATEMENT
 	 * @param $params
+	 * --------------------------------------------
 	 */
 	public function get_where($params)
 	{
@@ -34,6 +35,7 @@ class News_model extends CI_Model {
 	/**
 	 * GET ORDER BY STATEMENT
 	 * @param $params
+	 * --------------------------------------------
 	 */
 	public function get_orderby($params)
 	{
