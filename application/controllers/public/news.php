@@ -439,7 +439,7 @@ class news extends pages
 			$slug = str_replace('-', ' ', $page);
 			$this->params['limiter']['limit'] = $this->blog_limit;
 			$this->params['limiter']['offset'] = $offset;
-			$this->params['where']    = array("deleted" => 0, "slug"=>$slug);
+			$this->params['where']    = array(TBL_TAGS.".tag_name" => $slug, TBL_POST.".deleted"=>0);
 			$this->params['order_by'] = array("update_datetime" => "desc");
 		}
 		elseif($type == "title"){
@@ -517,14 +517,19 @@ class news extends pages
 	 */
 	public function get_all_news()
 	{
-		$type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$view = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 		$page = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
 		// get total rows
 		$this->total_rows = $this->news_model->get_news_count($this->params);
 		// get parameters
 		$this->get_params();
 		// get news
-		$result_post = $this->news_model->get_news($this->params);
+		if($view == "tag"){
+			$result_post = $this->news_model->get_news_by_tag($this->params);
+		}
+		else {
+			$result_post = $this->news_model->get_news($this->params);
+		}
 
 		if(!is_null($result_post)){
 			for($i = 0; $i < count($result_post); $i++){
@@ -567,36 +572,35 @@ class news extends pages
 		$common = new common;
 		$view   = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 		$class  = array('class'=>'blog clearfix animated fadeIn');
-		$result = $this->get_all_news();
 		$character_limit = 0;
 		$container = "";
 
 		// SEARCH BY BLOG
 		if(!$view || $view == "blog"){
 			$character_limit = 450;
+			$result = $this->get_all_news();
 			$this->per_page = $this->blog_limit;
 			$data['pagination'] = $this->get_pagination($view);
 		}
 		// SEARCH BY SINGLE POST
 		elseif($view == "post"){
 			$character_limit = 800;
-			if(count($result) > 0 and !is_null($result)){
-				$container = element_tag('ul', 'open', $class);
-				$container.= $this->news_list($result, 800);
-				$container.= element_tag('ul', 'close');
-			}
+			$result = $this->get_all_news();
 			$this->per_page = $this->post_limit;
 			$data['pagination'] = $this->get_pagination($view);
 		}
 		// SEARCH BY TAGS
 		elseif($view == "tag"){
 			$character_limit = 450;
+			$get_post_id = $this
+			$result = $this->get_all_news();
 			$this->per_page = $this->blog_limit;
 			$data['pagination'] = $this->get_pagination($view);
 		}
 		// SEARCH BY TITLE
 		elseif($view == "title"){
 			$character_limit = 0;
+			$result = $this->get_all_news();
 			$this->per_page = $this->post_limit;
 			if(!is_null($result)){
 				$data['comments'] = $this->view_comments($result[0]['id'], 0,

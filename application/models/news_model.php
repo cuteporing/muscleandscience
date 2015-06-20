@@ -160,6 +160,12 @@ class News_model extends CI_Model {
 		}
 	}
 
+	/**
+	 * GET NEWS COUNT
+	 * @param $params
+	 * @return
+	 * --------------------------------------------
+	 */
 	public function get_news_count($params)
 	{
 		$this->db->from(TBL_POST);
@@ -204,6 +210,33 @@ class News_model extends CI_Model {
 		$this->db->from(TBL_COMMENTS);
 		$this->db->join(TBL_USERS, TBL_COMMENTS.".id = ".TBL_USERS."._id");
 		$this->db->join(TBL_GALLERY_PHOTOS, TBL_GALLERY_PHOTOS.".id = ".TBL_USERS.".img");
+
+		$query = $this->db->get();
+		if( $query->num_rows() > 0 ){
+			return $query->result_array();
+		}
+		else{
+			return null;
+		}
+	}
+
+	/**
+	 * GET NEWS BY TAG
+	 * @param $params
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_news_by_tag($params)
+	{
+		$sql = TBL_POST.".* ";
+
+		$this->get_where($params);
+		$this->get_orderby($params);
+
+		$this->db->select($sql);
+		$this->db->from(TBL_TAGS);
+		$this->db->join(TBL_POST_TAGS, TBL_TAGS.".id = ".TBL_POST_TAGS.".tag_id");
+		$this->db->join(TBL_POST, TBL_TAGS.".post_id = ".TBL_POST.".id");
 
 		$query = $this->db->get();
 		if( $query->num_rows() > 0 ){
