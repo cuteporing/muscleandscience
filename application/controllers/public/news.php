@@ -517,14 +517,14 @@ class news extends pages
 	 */
 	public function get_all_news()
 	{
-		$view = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$type = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
 		$page = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
 		// get total rows
 		$this->total_rows = $this->news_model->get_news_count($this->params);
 		// get parameters
 		$this->get_params();
 		// get news
-		if($view == "tag"){
+		if($type == "tag"){
 			$result_post = $this->news_model->get_news_by_tag($this->params);
 		}
 		else {
@@ -592,7 +592,6 @@ class news extends pages
 		// SEARCH BY TAGS
 		elseif($view == "tag"){
 			$character_limit = 450;
-			$get_post_id = $this
 			$result = $this->get_all_news();
 			$this->per_page = $this->blog_limit;
 			$data['pagination'] = $this->get_pagination($view);

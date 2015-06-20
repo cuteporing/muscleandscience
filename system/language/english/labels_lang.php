@@ -9,6 +9,7 @@ $lang['lbl_contact'] = 'Contact';
 $lang['lbl_contact_info'] = 'Contact Info';
 $lang['lbl_gallery'] = 'Gallery';
 $lang['lbl_home'] = 'Home';
+$lang['lbl_leave_a_reply'] = 'Leave a reply';
 $lang['lbl_opening_hours'] = 'Opening Hours';
 $lang['lbl_posted_by'] = 'Posted by ';
 $lang['lbl_reply'] = 'Reply';

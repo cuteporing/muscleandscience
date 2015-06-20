@@ -236,7 +236,7 @@ class News_model extends CI_Model {
 		$this->db->select($sql);
 		$this->db->from(TBL_TAGS);
 		$this->db->join(TBL_POST_TAGS, TBL_TAGS.".id = ".TBL_POST_TAGS.".tag_id");
-		$this->db->join(TBL_POST, TBL_TAGS.".post_id = ".TBL_POST.".id");
+		$this->db->join(TBL_POST, TBL_POST.".id = ".TBL_TAGS.".id");
 
 		$query = $this->db->get();
 		if( $query->num_rows() > 0 ){
