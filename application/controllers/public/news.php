@@ -571,6 +571,7 @@ class news extends pages
 	{
 		$common = new common;
 		$view   = str_replace('/', '', $this->uri->slash_segment(2, 'leading'));
+		$value  = str_replace('/', '', $this->uri->slash_segment(3, 'leading'));
 		$class  = array('class'=>'blog clearfix animated fadeIn');
 		$character_limit = 0;
 		$container = "";
@@ -581,6 +582,7 @@ class news extends pages
 			$result = $this->get_all_news();
 			$this->per_page = $this->blog_limit;
 			$data['pagination'] = $this->get_pagination($view);
+			$data['view'] = "blog";
 		}
 		// SEARCH BY SINGLE POST
 		elseif($view == "post"){
@@ -588,6 +590,7 @@ class news extends pages
 			$result = $this->get_all_news();
 			$this->per_page = $this->post_limit;
 			$data['pagination'] = $this->get_pagination($view);
+			$data['view'] = "post";
 		}
 		// SEARCH BY TAGS
 		elseif($view == "tag"){
@@ -595,6 +598,8 @@ class news extends pages
 			$result = $this->get_all_news();
 			$this->per_page = $this->blog_limit;
 			$data['pagination'] = $this->get_pagination($view);
+			$data['view']         = "tag";
+			$data['search_value'] = str_replace('-', ' ', $value);
 		}
 		// SEARCH BY TITLE
 		elseif($view == "title"){
@@ -605,6 +610,7 @@ class news extends pages
 				$data['comments'] = $this->view_comments($result[0]['id'], 0,
 					$result[0]['comment_count']);
 			}
+			$data['view'] = "title";
 			// GET COMMENT FORM
 			$data['comment_form'] = $common->get_form($this->form_path,'comment');
 		}

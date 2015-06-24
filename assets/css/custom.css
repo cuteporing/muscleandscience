@@ -361,6 +361,7 @@ body {
 	margin-left: 2px; }
 	.more:hover,
 	.categories li a:hover,
+	.categories li.selected a,
 	.pagination li a:hover:not(.disabled),
 	.pagination li.selected a,
 	.ui-tabs-nav li a:hover,
@@ -369,8 +370,8 @@ body {
 	.tabs-navigation li a.selected,
 	.scrolling-list-control-left:hover,
 	.scrolling-list-control-right:hover {
-		color: white;
-		border-color: #91b034; }
+		color: white !important;
+		border-color: #91b034 !important; }
 
 .pagination.light li a {
 	border-color: transparent; }
