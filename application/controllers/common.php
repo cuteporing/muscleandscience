@@ -34,12 +34,12 @@ class common extends CI_controller
 		$class = array('class'=>'breadcrumbs clearfix bread-crumb');
 		$container = element_tag('ul', 'open', $class);
 		$container.= element_tag('li', 'open', array('class'=>'no-arrow'));
-		$container.= anchor(base_url().'home/', $this->lang->line('lbl_home'));
-		$container.= element_tag('li', 'close');
+		$container.= anchor(base_url().'home/', $this->lang->line('LBL_00009'));
+		$container.= element_tag('li');
 		$container.= element_tag('li', 'open', array('class'=>'current'));
-		$container.= anchor(base_url().$page.'/', $page);
-		$container.= element_tag('li', 'close');
-		$container.= element_tag('ul', 'close');
+		$container.= anchor(base_url().$page.'/', str_replace('_', ' ', $page));
+		$container.= element_tag('li');
+		$container.= element_tag('ul');
 
 		return $container;
 	}

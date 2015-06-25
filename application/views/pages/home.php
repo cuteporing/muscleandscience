@@ -12,8 +12,8 @@
 			<li id="upcoming" class="home-box white">
 				<div class="clearfix">
 				<div class="header-left">
-				<h2><?=$this->lang->line('lbl_what_next')?></h2>
-				<h3><?=$this->lang->line('lbl_upcoming_classes')?></h3>
+				<h2><?=$this->lang->line('LBL_00018')?></h2>
+				<h3><?=$this->lang->line('LBL_00015')?></h3>
 				</div>
 				<div class="header-right">
 				<a href="" class="prev icon-small-arrow left-black" ></a>

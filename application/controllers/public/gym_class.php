@@ -12,9 +12,10 @@
 
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class gym_class extends CI_controller
+class gym_class extends pages
 {
 	private $gym_class_list;
+	private $params = array();
 
 	public function __construct()
 	{
@@ -81,19 +82,18 @@ class gym_class extends CI_controller
 	{
 		$result = $this->gym_class_model->get_gym_class_thumb();
 
-		$list = '';
 		//Clear the gym class list
 		$this->gym_class_list = '';
-
+		$dl_class  = array('class'=>'accordion accordion-gym-fitness','data-accordion'=>'' );
 		$btn_class = array( 'class' => 'more icon-small-arrow margin-right-white' );
-		$list     .= element_tag('dl', 'open', array('class'=>'accordion accordion-gym-fitness', 'data-accordion'=>'' ));
+
+		$list = element_tag('dl', 'open', $dl_class);
 
 		foreach( $result as $item )
 		{
-
 			//button detail link for the each class.
 			$footer  = '';
-			$footer .= anchor('classes/'.$item['slug'], 'details', $btn_class);
+			$footer .= anchor('gym_class/'.$item['slug'], 'details', $btn_class);
 			$footer .= anchor('#', 'Timetable', $btn_class);
 
 			//contents of the gym classes displayed in the accordion
@@ -105,12 +105,55 @@ class gym_class extends CI_controller
 			$list .= element_tag('dd', 'open', array( 'class'=>'accordion-navigation' ));
 			$list .= $this->get_accord_head($item['slug'], $item['title'], $item['subtitle']);
 			$list .= div($about, array( 'class' => 'content item-content clearfix', 'id' => $item['slug'] ));
-			$list .= element_tag('dd', 'close');
+			$list .= element_tag('dd');
 		}
 
 		$this->gym_class_list = $list.'</dl>';
 
 		return $this->gym_class_list;
+	}
+
+	public function get_params()
+	{
+
+	}
+
+	/**
+	 * GET ALL GYM CLASS
+	 * @return List <dd>
+	 * --------------------------------------------
+	 */
+	public function get_all_class()
+	{
+		$this->get_params();
+
+		$result = $this->gym_class_model->get_class($this->params);
+
+		if(!is_null($result)){
+			for($i = 0; $i < count($result); $i++){
+				$id = $result[$i]['id'];
+
+				$this->params['where'] = array(TBL_CLASS_TRAINER.".class_id" => $id);
+				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer(
+					$this->params);
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * VIEW GYM CLASS
+	 * @param $page
+	 * --------------------------------------------
+	 */
+	public function view($page)
+	{
+		$common = new common;
+		$class_path = 'pages/templates/class_accordion_list';
+		$data['class_result']= $this->get_all_class();
+		$data['class_list']  = $this->load->view($class_path, $data, true);
+		$data['breadcrumbs'] = $common->get_breadcrumbs($page);
+		$this->load->view('pages/'.$page, $data);
 	}
 }
 ?>

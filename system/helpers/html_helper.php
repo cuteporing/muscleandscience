@@ -520,7 +520,7 @@ if ( ! function_exists('span'))
  */
 if ( ! function_exists('element_tag'))
 {
-	function element_tag($element, $type = 'open', $param = array())
+	function element_tag($element, $type = 'close', $param = array())
 	{
 		if($type == 'open')
 		{

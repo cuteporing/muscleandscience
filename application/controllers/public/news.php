@@ -151,7 +151,7 @@ class news extends pages
 			$class['title'] = $tag_name;
 			$tags.= element_tag('li', 'open');
 			$tags.= anchor(base_url().'news/tag/'.$tag_slug, $tag_name, $class);
-			$tags.= element_tag('li', 'close');
+			$tags.= element_tag('li');
 		}
 		return $tags;
 	}
@@ -165,16 +165,16 @@ class news extends pages
 	 */
 	public function get_post_footer($author, $tags)
 	{
-		$author = $this->lang->line('lbl_posted_by').
+		$author = $this->lang->line('LBL_00012').
 			anchor('#', $author['firstname'].' '.$author['lastname'],
 			array('class'=>'author'));
 
 		$contents = element_tag('ul', 'open', array('class'=>'categories'));
 		$contents.= element_tag('li', 'open', array('class'=>'posted-by'));
 		$contents.= $author;
-		$contents.= element_tag('li', 'close');
+		$contents.= element_tag('li');
 		$contents.= $this->get_post_tag($tags);
-		$contents.= element_tag('ul', 'close');
+		$contents.= element_tag('ul');
 		$container = div($contents, array('class'=>'post-footer'));
 
 		return $container;
@@ -218,7 +218,7 @@ class news extends pages
 			$list.= element_tag('li', 'open', array('class'=>'post'));
 			$list.= $this->comment_box($row);
 			$list.= $this->post_content($row, $char_limit);
-			$list.= element_tag('li', 'close');
+			$list.= element_tag('li');
 		}
 
 		return $list;
@@ -251,13 +251,13 @@ class news extends pages
 	{
 		$author = ucfirst($data['firstname'].' '.$data['lastname']);
 		$date   = format::format_date($data['update_datetime'], 'd M Y, g.i a');
-		$contents = $this->lang->line('lbl_posted_by');
+		$contents = $this->lang->line('LBL_00012');
 		$contents.= anchor('#', $author, array('class'=>'author'));
 		$contents.= ' on '.$date;
 		$contents = div($contents, array('class'=>'posted-by'));
 
 		$contents.= p($data['comment']);
-		$contents.= anchor('#comment-form', $this->lang->line('lbl_reply'),
+		$contents.= anchor('#comment-form', $this->lang->line('LBL_00013'),
 			array('class'=>'icon-small-arrow right-white reply-button',
 						'onclick'=>'scrollPage($(this));'));
 
@@ -291,7 +291,7 @@ class news extends pages
 					$list = element_tag('li', 'open', $class);
 					$list.= $this->get_comment_avatar($row['photo_thumb']);
 					$list.= $this->get_comment_details($row);
-					$list.= element_tag('li', 'close');
+					$list.= element_tag('li');
 				}
 				$result = $list;
 			}
@@ -310,8 +310,8 @@ class news extends pages
 	 */
 	public function view_comments($post_id, $offset = 0, $comment_count = 0)
 	{
-		$label = ($comment_count > 1)? $this->lang->line('lbl_comments')
-							: $this->lang->line('lbl_comment');
+		$label = ($comment_count > 1)? $this->lang->line('LBL_00005')
+							: $this->lang->line('LBL_00004');
 
 		if($comment_count > 0) {
 			$comment_box = $comment_count.' '.span($label,
@@ -323,17 +323,17 @@ class news extends pages
 			$comment_list = element_tag('ul', 'open',
 				array('class'=>'fadeInUp column-no-margin'));
 			$comment_list.= $this->get_comments($post_id, $offset);
-			$comment_list.= element_tag('ul', 'close');
+			$comment_list.= element_tag('ul');
 			$comment_list = div($comment_list, array('id'=>'comments-list'));
 			$container = $comment_box.$comment_list;
 		}
 		else {
 			$comment_list = element_tag('ul', 'open', array('class'=>'fadeInUp'));
 			$comment_list.= element_tag('li', 'open', array('class'=>'comment clearfix'));
-			$comment_list.= anchor('#comment-form', $this->lang->line('lbl_reply'),
+			$comment_list.= anchor('#comment-form', $this->lang->line('LBL_00013'),
 				array('onclick'=>'onclick="scrollPage($(this));',
 							'class'=>'icon-small-arrow right-white reply-button'));
-			$comment_list.= element_tag('li', 'close');
+			$comment_list.= element_tag('li');
 
 			$container = div($comment_list, array('id'=>'comments-list'));
 		}
@@ -503,7 +503,7 @@ class news extends pages
 			$class = array('class'=>'blog clearfix animated fadeIn');
 			$container = element_tag('ul', 'open', $class);
 			$container.= $this->news_list($result, 450);
-			$container.= element_tag('ul', 'close');
+			$container.= element_tag('ul');
 			$container.= self::show_all_btn();
 		}
 
@@ -618,7 +618,7 @@ class news extends pages
 		if(!is_null($result)){
 			$container = element_tag('ul', 'open', $class);
 			$container.= $this->news_list($result, $character_limit);
-			$container.= element_tag('ul', 'close');
+			$container.= element_tag('ul');
 		}
 
 		$data['breadcrumbs'] = $common->get_breadcrumbs($page);

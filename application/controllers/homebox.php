@@ -138,7 +138,7 @@ class homebox extends CI_controller
 
 		$homebox  = element_tag('li', 'open', $attribute);
 		$homebox .= $contents;
-		$homebox .= element_tag('li', 'close');
+		$homebox .= element_tag('li');
 
 		return $homebox;
 	}

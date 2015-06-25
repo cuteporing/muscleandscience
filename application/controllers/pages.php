@@ -74,6 +74,17 @@ class pages extends CI_controller
 	}
 
 	/**
+	 * DISPLAY GYM CLASS PAGE
+	 * @param $page
+	 * --------------------------------------------
+	 */
+	public function gym_class($page)
+	{
+		$gym_class = new gym_class;
+		$data = $gym_class->view($page);
+	}
+
+	/**
 	 * PAGE VIEW
 	 * @param $page
 	 * --------------------------------------------
@@ -93,8 +104,9 @@ class pages extends CI_controller
 		$this->displayTopNav($data);
 
 		switch ($page) {
-			case 'home': $this->home($page); break;
-			case 'news': $this->news($page); break;
+			case 'home'     : $this->home($page);      break;
+			case 'news'     : $this->news($page);      break;
+			case 'gym_class': $this->gym_class($page); break;
 			default: $this->home($page); break;
 		}
 

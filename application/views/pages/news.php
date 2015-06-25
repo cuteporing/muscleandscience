@@ -3,8 +3,8 @@
 		<div class="page-layout">
 			<div class="page-header clearfix">
 				<div class="page-header-left">
-					<h1><?=$this->lang->line('lbl_what_new')?></h1>
-					<h4><?=$this->lang->line('lbl_we_delivers')?></h4>
+					<h1><?=$this->lang->line('LBL_00017')?></h1>
+					<h4><?=$this->lang->line('LBL_00016')?></h4>
 				</div>
 			</div>
 			<?php if(isset($breadcrumbs)): ?><?=$breadcrumbs ?><?php endif ?>
@@ -15,15 +15,11 @@
 				<?php if(isset($comment_form)): ?><?=$comment_form?><?php endif ?>
 			</div>
 			<div class="page-right">
-				<h3 class="box-header margin">Categories</h3>
+				<h3 class="box-header margin"><?=$this->lang->line('LBL_00021')?></h3>
 				<div class="sidebar-box first">
 					<ul class="categories">
 						<?php if(isset($tag_list)): ?>
 							<?php foreach ($tag_list as $tags): ?>
-
-								
-
-
 								<li <?php if($view == "tag" && $search_value == $tags['tag_name']): ?>class="selected"<?php endif; ?> >
 									<?=anchor(base_url().'news/tag/'.str_replace(" ", "-", $tags['tag_name']), $tags['tag_name'], array('data-tooltip'=>'','title'=>$tags['tag_name'])) ?>
 								</li>

@@ -48,9 +48,7 @@ class News_model extends CI_Model {
 
 	/**
 	 * GET NEWS
-	 * @param $where
-	 * @param $limiter
-	 * @param $orderBy
+	 * @param $params
 	 * @return
 	 * --------------------------------------------
 	 */

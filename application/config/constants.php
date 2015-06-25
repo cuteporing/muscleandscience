@@ -82,6 +82,8 @@ define('IMG_BANNER',		'/upload/banner/');
 |
 */
 
+define('TBL_CLASS',					'mas_class');
+define('TBL_CLASS_TRAINER',	'mas_class_trainer');
 define('TBL_COMMENTS',			'mas_comments');
 define('TBL_GALLERY',				'mas_gallery');
 define('TBL_GALLERY_PHOTOS','mas_gallery_photos');
@@ -89,6 +91,7 @@ define('TBL_POST',					'mas_post');
 define('TBL_POST_DETAILS',	'mas_post_details');
 define('TBL_POST_TAGS',			'mas_post_tags');
 define('TBL_TAGS',					'mas_tags');
+define('TBL_TRAINER',				'mas_trainer');
 define('TBL_USERS',					'mas_users');
 
 /* End of file constants.php */

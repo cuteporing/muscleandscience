@@ -10,22 +10,22 @@
 
 		<section class="top-bar-section">
 			<ul class="right">
-				<li><a href="<?=base_url()?>" class="main-link"><?=$this->lang->line('lbl_home')?></a></li>
+				<li><a href="<?=base_url()?>" class="main-link"><?=$this->lang->line('LBL_00009')?></a></li>
 				<li class="has-dropdown">
-					<a href="<?=base_url()?>news/blog/"><?=$this->lang->line('lbl_news')?></a>
+					<a href="<?=base_url()?>news/blog/"><?=$this->lang->line('LBL_00001')?></a>
 					<ul class="dropdown">
-						<li><a href="<?=base_url()?>news/blog/" class="main-link"><?=$this->lang->line('lbl_blog')?></a></li>
-						<li><a href="<?=base_url()?>news/post/" class="main-link"><?=$this->lang->line('lbl_single_post')?></a></li>
+						<li><a href="<?=base_url()?>news/blog/" class="main-link"><?=$this->lang->line('LBL_00003')?></a></li>
+						<li><a href="<?=base_url()?>news/post/" class="main-link"><?=$this->lang->line('LBL_00014')?></a></li>
 					</ul>
 				</li>
 				<li class="has-dropdown">
-					<a href="classes.php"><?=$this->lang->line('lbl_classes')?></a>
+					<a href="<?=base_url()?>gym_class/"><?=$this->lang->line('LBL_00002')?></a>
 					<ul class="dropdown">
 						<?php //get_class_topbar();?>
 					</ul>
 				</li>
-				<li><a href="gallery.php" class="main-link"><?=$this->lang->line('lbl_gallery')?></a></li>
-				<li><a href="contact.php" class="main-link"><?=$this->lang->line('lbl_contact')?></a></li>
+				<li><a href="gallery.php" class="main-link"><?=$this->lang->line('LBL_00008')?></a></li>
+				<li><a href="contact.php" class="main-link"><?=$this->lang->line('LBL_00006')?></a></li>
 			</ul>
 		</section>
 		</nav>

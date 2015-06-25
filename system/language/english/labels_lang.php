@@ -1,24 +1,29 @@
 <?php
 
-$lang['lbl_news'] = 'News';
-$lang['lbl_blog'] = 'Blog';
-$lang['lbl_classes'] = 'Classes';
-$lang['lbl_comment'] = 'Comment';
-$lang['lbl_comments'] = 'Comments';
-$lang['lbl_contact'] = 'Contact';
-$lang['lbl_contact_info'] = 'Contact Info';
-$lang['lbl_gallery'] = 'Gallery';
-$lang['lbl_home'] = 'Home';
-$lang['lbl_leave_a_reply'] = 'Leave a reply';
-$lang['lbl_opening_hours'] = 'Opening Hours';
-$lang['lbl_posted_by'] = 'Posted by ';
-$lang['lbl_reply'] = 'Reply';
-$lang['lbl_single_post'] = 'Single Post';
-$lang['lbl_sign_in'] = 'Sign in';
-$lang['lbl_upcoming_classes'] = 'upcoming classes';
-$lang['lbl_we_delivers'] = "we delivers enough to blog about";
-$lang['lbl_what_new'] = "WHAT'S NEW";
-$lang['lbl_what_next'] = "What's Next";
+$lang['LBL_00001'] = "News";
+$lang['LBL_00002'] = "Classes";
+$lang['LBL_00003'] = "Blog";
+$lang['LBL_00004'] = "Comment";
+$lang['LBL_00005'] = "Comments";
+$lang['LBL_00006'] = "Contact";
+$lang['LBL_00007'] = "Contact Info";
+$lang['LBL_00008'] = "Gallery";
+$lang['LBL_00009'] = "Home";
+$lang['LBL_00010'] = "Leave a reply";
+$lang['LBL_00011'] = "Opening Hours";
+$lang['LBL_00012'] = "Posted by ";
+$lang['LBL_00013'] = "Reply";
+$lang['LBL_00014'] = "Single Post";
+$lang['LBL_00015'] = "upcoming classes";
+$lang['LBL_00016'] = "we delivers enough to blog about";
+$lang['LBL_00017'] = "WHAT'S NEW";
+$lang['LBL_00018'] = "What's Next";
+$lang['LBL_00019'] = "CLASSES";
+$lang['LBL_00020'] = "our training classes";
+$lang['LBL_00021'] = "Categories";
+$lang['LBL_00022'] = "About";
+$lang['LBL_00023'] = "Trainers";
+$lang['LBL_00024'] = "Timetable";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */
