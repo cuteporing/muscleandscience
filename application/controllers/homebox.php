@@ -13,30 +13,10 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class homebox extends CI_controller {
-	private $banner_title;
-	private $banner_subtitle;
-	private $banner_content;
-	private $box;
-	private $contents;
-	private $description;
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'homebox_model' );
-	}
-	public function get_homebox() {
-		return $this->homebox_model->get_homebox ();
-	}
-
-	/**
-	 * CLEAR OBJECT
-	 * --------------------------------------------
-	 */
-	public function clear_object() {
-		$this->banner_title = '';
-		$this->banner_subtitle = '';
-		$this->banner_content = '';
-		$this->contents = '';
-		$this->description = '';
 	}
 
 	/**
@@ -49,12 +29,12 @@ class homebox extends CI_controller {
 	 */
 	public function homebox_title($title, $link = '') {
 		($title == "") ?
-		  $this->banner_title .= heading ( anchor ( '#', 'Untitled homebox' ), '2' )
-		: $this->banner_title .= heading ( anchor ( $link, $title, array (
+		  $homebox_title = heading ( anchor ( '#', 'Untitled homebox' ), '2' )
+		: $homebox_title = heading ( anchor ( $link, $title, array (
 				'title' => $title
 		) ), '2' );
 
-		return $this->banner_title;
+		return $homebox_title;
 	}
 
 	/**
@@ -66,10 +46,10 @@ class homebox extends CI_controller {
 	 */
 	public function homebox_subtitle($subtitle) {
 		($subtitle == "") ?
-		  $this->banner_subtitle .= heading ( anchor ( '#', 'no subtitle' ), '3' )
-		: $this->banner_subtitle .= heading ( $subtitle, '3' );
+		  $homebox_subtitle = heading ( anchor ( '#', 'no subtitle' ), '3' )
+		: $homebox_subtitle = heading ( $subtitle, '3' );
 
-		return $this->banner_subtitle;
+		return $homebox_subtitle;
 	}
 
 	/**
@@ -81,12 +61,12 @@ class homebox extends CI_controller {
 	 */
 	public function homebox_about($about) {
 		($about == "") ?
-		  $this->description .= heading ( anchor ( '#', 'no description available!' ), '2' )
-		: $this->description .= div ( character_limiter ( $about, 100 ), array (
+		  $description = heading ( anchor ( '#', 'no description available!' ), '2' )
+		: $description = div ( character_limiter ( $about, 100 ), array (
 				'class' => 'text'
 		) );
 
-		return $this->description;
+		return $description;
 	}
 
 	/**
@@ -103,28 +83,20 @@ class homebox extends CI_controller {
 				'class' => 'banner-icon ' . $icon
 		);
 
-		$this->contents .= '<div class="news clearfix">';
-		$this->contents .= span ( '', $span_class );
-		$this->contents .= $this->homebox_about ( $about ) . '</div>';
+		$contents = '<div class="news clearfix">';
+		$contents .= span ( '', $span_class );
+		$contents .= $this->homebox_about ( $about ) . '</div>';
 
-		return $this->contents;
+		return $contents;
 	}
 
-	public function homebox_list($box_color, $icon, $data) {
-		$list =  element_tag('ul', 'open', array(
-				'class'=>'margin-top item-list '.$box_color));
+	public function homebox_list($box_color, $icon, $list) {
+		$data['box_color'] = $box_color;
+		$data['icon'] = $icon;
+		$data['list'] = $list;
 
-		foreach ($data as $row) {
-			$list .= element_tag('li', 'open', array('class'=>$icon));
-			$list .= $row['note'];
-
-			$list .=  element_tag('li');
-			if( isset($row['price']) ) {
-
-			}
-		}
-
-		$list .=  element_tag('ul');
+		$temp_path = 'pages/templates/homebox_list';
+		$list = $this->load->view ( $temp_path, $data, true );
 
 		return $list;
 	}
@@ -134,6 +106,7 @@ class homebox extends CI_controller {
 	 *
 	 * @param (String) $type
 	 * @param (String) $contents
+	 * @param (Boolean) $is_block
 	 * @return (String) $homebox
 	 * --------------------------------------------
 	 */
@@ -174,8 +147,8 @@ class homebox extends CI_controller {
 	 * --------------------------------------------
 	 */
 	public function display_homebox_banner() {
-		$result = $this->get_homebox ();
-
+		$result = $this->homebox_model->get_homebox ();
+		$box = '';
 		foreach ( $result as $item ) {
 			$attributes = array (
 					'title' => $item ['title'],
@@ -183,17 +156,16 @@ class homebox extends CI_controller {
 					'class' => 'more black icon-small-arrow margin-right-white'
 			);
 
-			$contents = $this->homebox_title ( $item ['title'], $item ['link'] );
+			$contents = '';
+			$contents .= $this->homebox_title ( $item ['title'], $item ['link'] );
 			$contents .= $this->homebox_subtitle ( $item ['subtitle'] );
 			$contents .= $this->homebox_content ( $item ['icon'], $item ['about'], $item ['link'] );
 			$contents .= anchor ( $item ['link'], 'More', $attributes );
 
-			$this->box .= $this->create_homebox ( $item ['type'], $contents );
-			$this->clear_object ();
-			$contents = '';
+			$box .= $this->create_homebox ( $item ['type'], $contents );
 		}
 
-		return $this->box;
+		return $box;
 	}
 }
 ?>
