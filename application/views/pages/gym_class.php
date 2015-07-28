@@ -8,10 +8,12 @@
 				</div>
 			</div>
 			<?php if(isset($breadcrumbs)): ?><?=$breadcrumbs ?><?php endif ?>
-			<div class="page-left">
+			<div class="page-left page-margin-top">
 				<?php if(isset($class_list)): ?><?=$class_list ?><?php endif ?>
 			</div>
-			<div class="page-right"></div>
+			<div class="page-right page-margin-top">
+				<?php if(isset($homebox)): ?><?=$homebox ?><?php endif ?>
+			</div>
 		</div>
 	</div>
 </div>

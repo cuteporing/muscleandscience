@@ -11,6 +11,7 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class gym_class extends pages {
 	private $gym_class_list;
 	private $params = array ();
@@ -25,7 +26,8 @@ class gym_class extends pages {
 	 * @param String, $accord_id
 	 * @param String, $title
 	 * @param String, $subtitle
-	 * @return String --------------------------------------------
+	 * @return String
+	 * --------------------------------------------
 	 */
 	public function get_accord_head($accord_id, $title = '', $subtitle = '') {
 		$accord_heading = heading ( $title, '3' ) . heading ( $subtitle, '5' );
@@ -38,7 +40,8 @@ class gym_class extends pages {
 	 *
 	 * @param String, $title
 	 * @param String, $src
-	 * @return String --------------------------------------------
+	 * @return String
+	 * --------------------------------------------
 	 */
 	public function get_thumb_img($title, $src) {
 		$img = img ( array (
@@ -57,7 +60,8 @@ class gym_class extends pages {
 	 *
 	 * @param String, $type
 	 * @param String, $text
-	 * @return String --------------------------------------------
+	 * @return String
+	 * --------------------------------------------
 	 */
 	public function get_about($limit = FALSE, $text = '') {
 		if ($limit = 'compact') {
@@ -75,7 +79,7 @@ class gym_class extends pages {
 	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
 	 *
 	 * @return List <dd>
-	 *         --------------------------------------------
+	 * --------------------------------------------
 	 */
 	public function display_gym_class_thumbnail() {
 		$result = $this->gym_class_model->get_gym_class_thumb ();
@@ -128,7 +132,7 @@ class gym_class extends pages {
 	 * GET ALL GYM CLASS
 	 *
 	 * @return List <dd>
-	 *         --------------------------------------------
+	 * --------------------------------------------
 	 */
 	public function get_all_class() {
 		$this->get_params ();
@@ -137,12 +141,12 @@ class gym_class extends pages {
 
 		if (! is_null ( $result )) {
 			for($i = 0; $i < count ( $result ); $i ++) {
-				$id = $result [$i] ['id'];
+				$id = $result[$i]['id'];
 
 				$this->params ['where'] = array (
 						TBL_CLASS_TRAINER . ".class_id" => $id
 				);
-				$result [$i] ['trainer'] = $this->gym_class_model->get_class_trainer ( $this->params );
+				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $this->params );
 			}
 		}
 		return $result;
@@ -151,13 +155,16 @@ class gym_class extends pages {
 	/**
 	 * VIEW GYM CLASS
 	 *
-	 * @param $page --------------------------------------------
+	 * @param $page
+	 * --------------------------------------------
 	 */
 	public function view($page) {
 		$common = new common ();
 		$class_path = 'pages/templates/class_accordion_list';
+		$homebox_path = 'pages/templates/class_homebox';
 		$data ['class_result'] = $this->get_all_class ();
 		$data ['class_list'] = $this->load->view ( $class_path, $data, true );
+// 		$data ['homebox'] =
 		$data ['breadcrumbs'] = $common->get_breadcrumbs ( $page );
 		$this->load->view ( 'pages/' . $page, $data );
 	}

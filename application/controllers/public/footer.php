@@ -11,64 +11,70 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class footer extends CI_controller {
 	/**
 	 * COMPANY INFO FOOTER DISPLAY
-	 * 
-	 * @return --------------------------------------------
+	 *
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function display_company_info() {
 		$company = new company ();
 		return $company->display_company_info ();
 	}
-	
+
 	/**
 	 * COMPANY SOCIAL NETWORK FOOTER DISPLAY
-	 * 
-	 * @return --------------------------------------------
+	 *
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function display_company_social() {
 		$company = new company ();
 		return $company->display_company_social ();
 	}
-	
+
 	/**
 	 * COMPANY OPENING HOURS FOOTER DISPLAY
-	 * 
-	 * @return --------------------------------------------
+	 *
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function display_company_opening_hrs() {
 		$company = new company ();
 		return $company->display_company_opening_hrs ();
 	}
-	
+
 	/**
 	 * DISPLAYS PROJECT COPYRIGHT
-	 * 
-	 * @return --------------------------------------------
+	 *
+	 * @return
+	 * --------------------------------------------
 	 */
 	static function copyright() {
 		$copyright = '© 2014-2015 - Muscle and Science. ';
 		$link = anchor ( 'www.gmail.com', 'DigiArtKBV.com', array (
 				'target' => '_blank',
-				'title' => 'DigiArtKBV.com' 
+				'title' => 'DigiArtKBV.com'
 		) );
 		return div ( $copyright . $link, array (
-				'class' => 'copyright-area' 
+				'class' => 'copyright-area'
 		) );
 	}
-	
+
 	/**
 	 * FOOTER DISPLAY
-	 * 
-	 * @return --------------------------------------------
+	 *
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function view() {
 		$data ['footer'] ['info'] = $this->display_company_info ();
 		$data ['footer'] ['social'] = $this->display_company_social ();
 		$data ['footer'] ['opening'] = $this->display_company_opening_hrs ();
 		$data ['footer'] ['copyright'] = footer::copyright ();
-		
+
 		$this->load->view ( 'pages/templates/footer', $data );
 	}
 }
