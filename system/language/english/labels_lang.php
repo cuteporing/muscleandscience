@@ -23,6 +23,7 @@ $lang ['LBL_00021'] = "Categories";
 $lang ['LBL_00022'] = "About";
 $lang ['LBL_00023'] = "Trainers";
 $lang ['LBL_00024'] = "Timetable";
+$lang ['LBL_00025'] = "Contact us";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

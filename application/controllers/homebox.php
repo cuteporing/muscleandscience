@@ -27,7 +27,7 @@ class homebox extends CI_controller {
 	 * @return (String)
 	 * --------------------------------------------
 	 */
-	public function homebox_title($title, $link = '') {
+	private function homebox_title($title, $link = '') {
 		($title == "") ?
 		  $homebox_title = heading ( anchor ( '#', 'Untitled homebox' ), '2' )
 		: $homebox_title = heading ( anchor ( $link, $title, array (
@@ -44,7 +44,7 @@ class homebox extends CI_controller {
 	 * @return (String)
 	 * --------------------------------------------
 	 */
-	public function homebox_subtitle($subtitle) {
+	private function homebox_subtitle($subtitle) {
 		($subtitle == "") ?
 		  $homebox_subtitle = heading ( anchor ( '#', 'no subtitle' ), '3' )
 		: $homebox_subtitle = heading ( $subtitle, '3' );
@@ -59,7 +59,7 @@ class homebox extends CI_controller {
 	 * @return (String)
 	 * --------------------------------------------
 	 */
-	public function homebox_about($about) {
+	private function homebox_about($about) {
 		($about == "") ?
 		  $description = heading ( anchor ( '#', 'no description available!' ), '2' )
 		: $description = div ( character_limiter ( $about, 100 ), array (
@@ -78,7 +78,7 @@ class homebox extends CI_controller {
 	 * @return (String)
 	 * --------------------------------------------
 	 */
-	public function homebox_content($icon, $about, $link) {
+	private function homebox_content($icon, $about, $link) {
 		$span_class = array (
 				'class' => 'banner-icon ' . $icon
 		);
@@ -90,7 +90,16 @@ class homebox extends CI_controller {
 		return $contents;
 	}
 
-	public function homebox_list($box_color, $icon, $list) {
+	/**
+	 * CREATES LIST INSIDE THE HOMEBOX
+	 *
+	 * @param (String) $box_color
+	 * @param (String) $icon
+	 * @param (String) $list
+	 * @return
+	 * --------------------------------------------
+	 */
+	private function homebox_list($box_color, $icon, $list) {
 		$data['box_color'] = $box_color;
 		$data['icon'] = $icon;
 		$data['list'] = $list;
@@ -99,6 +108,18 @@ class homebox extends CI_controller {
 		$list = $this->load->view ( $temp_path, $data, true );
 
 		return $list;
+	}
+
+	/**
+	 * CREATES BUTTON FOR HOMEBOX
+	 *
+	 * @param (String) $type
+	 * @return
+	 * --------------------------------------------
+	 */
+	private function homebox_button($type) {
+		return anchor(base_url().'/home',
+				$this->lang->line('LBL_00025'), array('class'=>$type));
 	}
 
 	/**
@@ -112,11 +133,31 @@ class homebox extends CI_controller {
 	 */
 	public function create_homebox($type = 'G', $contents = '', $is_block = false) {
 		switch ($type) {
-			case 'G' : $box_color = 'green';       $list_icon = "icon-card-white"; break;
-			case 'LG': $box_color = 'light-green'; $list_icon = "icon-card-white"; break;
-			case 'W' : $box_color = 'white';       $list_icon = "icon-card-white"; break;
-			case 'D' : $box_color = 'dark';        $list_icon = "icon-card-green"; break;
-			default  : $box_color = 'green'; $list_icon = "icon-card-white"; break;
+			case 'G' :
+				$box_color = "green";
+				$list_icon = "icon-card-white";
+				$button    = "more black icon-small-arrow margin-right-white";
+				break;
+			case 'LG':
+				$box_color = "light-green";
+				$list_icon = "icon-card-white";
+				$button    = "more black icon-small-arrow margin-right-white";
+				break;
+			case 'W' :
+				$box_color = 'white';
+				$list_icon = "icon-card-white";
+				$button    = "more black icon-small-arrow margin-right-white";
+				break;
+			case 'D' :
+				$box_color = 'dark';
+				$list_icon = "icon-card-green";
+				$button = "more black icon-small-arrow margin-right-white";
+				break;
+			default  :
+				$box_color = 'green';
+				$list_icon = "icon-card-white";
+				$button = "more black icon-small-arrow margin-right-white";
+				break;
 		}
 
 		($is_block === true) ? $box_color = $box_color . ' block' : $box_color;
@@ -131,6 +172,7 @@ class homebox extends CI_controller {
 			$homebox .= $this->homebox_title( $contents['title'] );
 			$homebox .= $this->homebox_subtitle ( $contents ['subtitle'] );
 			$homebox .= $this->homebox_list ( $box_color, $list_icon, $contents['list'] );
+			$homebox .= $this->homebox_button ( $button );
 		}else{
 			$homebox .= $contents;
 		}
