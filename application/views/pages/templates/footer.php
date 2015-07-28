@@ -12,7 +12,7 @@
 			</div>
 			<div class="footer-box"></div>
 		</div>
-		<?=$footer['copyright'] ?>
+		<?=$footer['copyright']?>
 	</div>
 </div>
 

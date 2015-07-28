@@ -90,6 +90,7 @@ class common extends CI_controller
 		return heading($title, '3', 'class="box-header"');
 	}
 
+
 	/**
 	 * CHECK DATA IF NULL
 	 * @param $data

@@ -1,6 +1,6 @@
 <?php
 /*********************************************************************************
-** The contents of this file are subject to the MAS (Muscle and Science)
+ ** The contents of this file are subject to the MAS (Muscle and Science)
  * Public License Version 1.0
  * ("License"); You may not use this file except in compliance with the License
  * The Original Code is: MAS (Muscle and Science)
@@ -9,45 +9,37 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+if (! defined ( 'BASEPATH' ))
+	exit ( 'No direct script access allowed' );
 class Company_model extends CI_Model {
-
-	public function __construct()
-	{
-		$this->load->database();
+	public function __construct() {
+		$this->load->database ();
 	}
-
+	
 	/**
 	 * GET DATA
-	 * @return Array
-	 * --------------------------------------------
+	 * 
+	 * @return Array --------------------------------------------
 	 */
-	public function get_company_info()
-	{
-		$query = $this->db->get('mas_company_info');
-		return $query->result_array();
+	public function get_company_info() {
+		$query = $this->db->get ( 'mas_company_info' );
+		return $query->result_array ();
 	}
-
-	public function get_company_social()
-	{
-		$query = $this->db->get('mas_company_social');
-		return $query->result_array();
+	public function get_company_social() {
+		$query = $this->db->get ( 'mas_company_social' );
+		return $query->result_array ();
 	}
-
+	
 	/**
 	 * SET DATA
-	 * @return Array
-	 * --------------------------------------------
+	 * 
+	 * @return Array --------------------------------------------
 	 */
-	public function set_company_info()
-	{
-		return $this->db->insert('mas_company_info', $data);
+	public function set_company_info() {
+		return $this->db->insert ( 'mas_company_info', $data );
 	}
-
-	public function set_company_social()
-	{
-		return $this->db->insert('mas_company_social', $data);
+	public function set_company_social() {
+		return $this->db->insert ( 'mas_company_social', $data );
 	}
 }
 ?>

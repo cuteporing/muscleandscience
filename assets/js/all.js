@@ -56,27 +56,36 @@ $(document).ready(function() {
 
 	//Accordion Smooth effect
 	//----------------------------------------
-	$(".accordion").on(
-		"click", "dd:not(.active)",
+	$(".accordion").on("click", "dd:not(.active)",
 		Foundation.utils.debounce(function (e) {
 			$(this).parent().find("dd.active").removeClass('active').find(".content").slideToggle("fast");
 			$(this).addClass('active').find(".content").slideToggle("fast");
 	}, 300, true));
+
+	//Accordion click function for Gym Classes
+	//----------------------------------------
+	$('.ui-state-default').click(function() {
+		var id     = $(this).find("a").attr("href");
+		var target = id;
+		$(this).addClass('ui-tabs-selected').siblings().removeClass('ui-tabs-selected');
+		$(id).removeClass("ui-tabs-hide").siblings('div').addClass("ui-tabs-hide");
+		scrollPage($(target));
+	});
 
 	// $('.open-navi, .close-navi').on('click',
 	// 	Foundation.utils.debounce(function (e){
 	// 	showSideNavigation();
 	// }, 300, true));
 
-	// //Accordion click function for Gym Classes
-	// //----------------------------------------
-	// $('.ui-state-default').click(function() {
-	// 	var id     = $(this).find("a").attr("href");
-	// 	var target = id;
-	// 	$(this).addClass('ui-tabs-selected').siblings().removeClass('ui-tabs-selected');
-	// 	$(id).removeClass("ui-tabs-hide").siblings('div').addClass("ui-tabs-hide");
-	// 	scrollPage($(target));
-	// });
+	/* ---------------------------------------------------
+	 * FUNCTION FOR SMOOTH SCROLLING
+	 * -------------------------------------------------*/
+	function scrollPage(x){	
+		if(x.length > 0){
+			$('html, body').stop().animate({ scrollTop: x.offset().top - 15 }, 500);	
+		}
+		
+	}
 });
 
 
@@ -112,13 +121,7 @@ $("#banner").on("after-slide-change.fndtn.orbit", function(event, orbit) {
 });
 
 
-//function for smooth scrolling
-function scrollPage(x){	
-	if(x.length > 0){
-		$('html, body').stop().animate({ scrollTop: x.offset().top - 15 }, 500);	
-	}
-	
-}
+
 function backTop(){
   jQuery('html, body').animate({scrollTop: 0}, 500);
   return false; 

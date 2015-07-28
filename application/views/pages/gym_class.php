@@ -11,8 +11,7 @@
 			<div class="page-left">
 				<?php if(isset($class_list)): ?><?=$class_list ?><?php endif ?>
 			</div>
-			<div class="page-right">
-			</div>
+			<div class="page-right"></div>
 		</div>
 	</div>
 </div>

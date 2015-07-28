@@ -1,6 +1,6 @@
 <?php
 /*********************************************************************************
-** The contents of this file are subject to the MAS (Muscle and Science)
+ ** The contents of this file are subject to the MAS (Muscle and Science)
  * Public License Version 1.0
  * ("License"); You may not use this file except in compliance with the License
  * The Original Code is: MAS (Muscle and Science)
@@ -9,24 +9,18 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+if (! defined ( 'BASEPATH' ))
+	exit ( 'No direct script access allowed' );
 class Homebox_model extends CI_Model {
-
-	public function __construct()
-	{
-		$this->load->database();
+	public function __construct() {
+		$this->load->database ();
 	}
-
-	public function get_homebox()
-	{
-		$query = $this->db->get('mas_homebox');
-		return $query->result_array();
+	public function get_homebox() {
+		$query = $this->db->get ( 'mas_homebox' );
+		return $query->result_array ();
 	}
-
-	public function set_homebox()
-	{
-		return $this->db->insert('mas_homebox', $data);
+	public function set_homebox() {
+		return $this->db->insert ( 'mas_homebox', $data );
 	}
 }
 ?>
