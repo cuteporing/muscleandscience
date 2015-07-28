@@ -47,8 +47,10 @@ class homebox extends CI_controller {
 	 * @return (String)
 	 * --------------------------------------------
 	 */
-	public function homebox_title($title, $link) {
-		($title == "") ? $this->banner_title .= heading ( anchor ( '#', 'Untitled homebox' ), '2' ) : $this->banner_title .= heading ( anchor ( $link, $title, array (
+	public function homebox_title($title, $link = '') {
+		($title == "") ?
+		  $this->banner_title .= heading ( anchor ( '#', 'Untitled homebox' ), '2' )
+		: $this->banner_title .= heading ( anchor ( $link, $title, array (
 				'title' => $title
 		) ), '2' );
 
@@ -63,7 +65,9 @@ class homebox extends CI_controller {
 	 * --------------------------------------------
 	 */
 	public function homebox_subtitle($subtitle) {
-		($subtitle == "") ? $this->banner_subtitle .= heading ( anchor ( '#', 'no subtitle' ), '3' ) : $this->banner_subtitle .= heading ( $subtitle, '3' );
+		($subtitle == "") ?
+		  $this->banner_subtitle .= heading ( anchor ( '#', 'no subtitle' ), '3' )
+		: $this->banner_subtitle .= heading ( $subtitle, '3' );
 
 		return $this->banner_subtitle;
 	}
@@ -76,7 +80,9 @@ class homebox extends CI_controller {
 	 * --------------------------------------------
 	 */
 	public function homebox_about($about) {
-		($about == "") ? $this->description .= heading ( anchor ( '#', 'no description available!' ), '2' ) : $this->description .= div ( character_limiter ( $about, 100 ), array (
+		($about == "") ?
+		  $this->description .= heading ( anchor ( '#', 'no description available!' ), '2' )
+		: $this->description .= div ( character_limiter ( $about, 100 ), array (
 				'class' => 'text'
 		) );
 
@@ -104,6 +110,25 @@ class homebox extends CI_controller {
 		return $this->contents;
 	}
 
+	public function homebox_list($box_color, $icon, $data) {
+		$list =  element_tag('ul', 'open', array(
+				'class'=>'margin-top item-list '.$box_color));
+
+		foreach ($data as $row) {
+			$list .= element_tag('li', 'open', array('class'=>$icon));
+			$list .= $row['note'];
+
+			$list .=  element_tag('li');
+			if( isset($row['price']) ) {
+
+			}
+		}
+
+		$list .=  element_tag('ul');
+
+		return $list;
+	}
+
 	/**
 	 * CREATES A HOMEBOX PANEL
 	 *
@@ -112,12 +137,13 @@ class homebox extends CI_controller {
 	 * @return (String) $homebox
 	 * --------------------------------------------
 	 */
-	static function create_homebox($type = 'G', $contents = '', $is_block = false) {
+	public function create_homebox($type = 'G', $contents = '', $is_block = false) {
 		switch ($type) {
-			case 'G' : $box_color = 'green'; break;
-			case 'LG': $box_color = 'light-green'; break;
-			case 'W' : $box_color = 'white'; break;
-			default  : $box_color = 'green'; break;
+			case 'G' : $box_color = 'green';       $list_icon = "icon-card-white"; break;
+			case 'LG': $box_color = 'light-green'; $list_icon = "icon-card-white"; break;
+			case 'W' : $box_color = 'white';       $list_icon = "icon-card-white"; break;
+			case 'D' : $box_color = 'dark';        $list_icon = "icon-card-green"; break;
+			default  : $box_color = 'green'; $list_icon = "icon-card-white"; break;
 		}
 
 		($is_block === true) ? $box_color = $box_color . ' block' : $box_color;
@@ -127,7 +153,15 @@ class homebox extends CI_controller {
 		);
 
 		$homebox = element_tag ( 'li', 'open', $attribute );
-		$homebox .= $contents;
+
+		if( is_array( $contents ) ) {
+			$homebox .= $this->homebox_title( $contents['title'] );
+			$homebox .= $this->homebox_subtitle ( $contents ['subtitle'] );
+			$homebox .= $this->homebox_list ( $box_color, $list_icon, $contents['list'] );
+		}else{
+			$homebox .= $contents;
+		}
+
 		$homebox .= element_tag ( 'li' );
 
 		return $homebox;
@@ -154,26 +188,10 @@ class homebox extends CI_controller {
 			$contents .= $this->homebox_content ( $item ['icon'], $item ['about'], $item ['link'] );
 			$contents .= anchor ( $item ['link'], 'More', $attributes );
 
-			$this->box .= self::create_homebox ( $item ['type'], $contents );
+			$this->box .= $this->create_homebox ( $item ['type'], $contents );
 			$this->clear_object ();
 			$contents = '';
 		}
-
-		return $this->box;
-	}
-
-	/**
-	 * CREATE AND DISPLAY HOMEBOX
-	 *
-	 * @param (String) $type
-	 * @param (String) $contents
-	 * @return (String)
-	 * --------------------------------------------
-	 */
-	public function display_homebox($type, $contents) {
-		$this->box .= self::create_homebox ( $type, $contents );
-		$this->clear_object ();
-		$contents = '';
 
 		return $this->box;
 	}

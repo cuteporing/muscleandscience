@@ -18,6 +18,7 @@ class gym_class extends pages {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gym_class_model' );
+		$this->load->model ( 'package_model' );
 	}
 
 	/**
@@ -153,6 +154,28 @@ class gym_class extends pages {
 	}
 
 	/**
+	 * GET HOMEBOX FOR PACKAGGE
+	 *
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_package_homebox() {
+		$homebox = new homebox ();
+		$result = $this->package_model->get_package ();
+
+		$data['title']    = "Gym Packages";
+		$data['subtitle'] = "membership promos";
+		$data['list']     = $result;
+		return $homebox->create_homebox( 'G', $data, true );
+	}
+
+	public function get_homebox() {
+		$homebox = $this->get_package_homebox();
+
+		return $homebox;
+	}
+
+	/**
 	 * VIEW GYM CLASS
 	 *
 	 * @param $page
@@ -164,7 +187,7 @@ class gym_class extends pages {
 		$homebox_path = 'pages/templates/class_homebox';
 		$data ['class_result'] = $this->get_all_class ();
 		$data ['class_list'] = $this->load->view ( $class_path, $data, true );
-// 		$data ['homebox'] =
+		$data ['homebox'] = $this->get_homebox();
 		$data ['breadcrumbs'] = $common->get_breadcrumbs ( $page );
 		$this->load->view ( 'pages/' . $page, $data );
 	}

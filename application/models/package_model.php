@@ -72,7 +72,7 @@ class Package_model extends CI_Model {
 	 * @return
 	 * --------------------------------------------
 	 */
-	public function get_gym_class_thumb() {
+	public function get_package() {
 		$query = $this->db->get ( TBL_PACKAGE );
 
 		return $query->result_array();
