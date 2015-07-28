@@ -1039,7 +1039,7 @@ div.value {
 		font-size: 13px; }
 	.accordion-gym-fitness .accordion-navigation > a,
 	.accordion dd > a {
-		background: transparent;
+		/*background: transparent;*/
 		padding-left: 0rem;
 		padding-right: 0rem; }
 	.accordion-gym-fitness dd:first-child,
@@ -1064,7 +1064,8 @@ div.value {
 	.item-footer .more a {
 		display: inline; }
 	.accordion-gym-fitness .accordion-navigation > a:hover,
-	.accordion-acc-nav dd > a:hover {
+	.accordion-acc-nav dd > a:hover,
+	.accordion dd > a:hover {
 		background: none;
 		border-bottom: 1px solid #91b034;
 		background: url('../img/icons/icon_accordion_arrow_down.png') no-repeat right center; }
@@ -1074,7 +1075,8 @@ div.value {
 		color: #FFFFFF; }
 	.accordion-gym-fitness .accordion-navigation.active > a,
 	.accordion-acc-nav dd.active > a,
-	.accordion-acc-nav dd > a.active {
+	.accordion-acc-nav dd > a.active,
+	.accordion dd.active > a {
 		color:#829e2d;
 		border-bottom: 2px solid #91b034;
 		background: url('../img/icons/icon_accordion_arrow_up.png') no-repeat right center; }

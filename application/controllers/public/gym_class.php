@@ -115,7 +115,6 @@ class gym_class extends pages
 
 	public function get_params()
 	{
-
 	}
 
 	/**

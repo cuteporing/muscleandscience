@@ -12,10 +12,39 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Gym_Class_model extends CI_Model {
+	public $gym_class;
 
 	public function __construct()
 	{
 		$this->load->database();
+		$this->gym_class = new StdClass;
+		$this->gym_class->title    = "title";
+		$this->gym_class->subtitle = "subtitle";
+		$this->gym_class->about    = "about";
+		$this->gym_class->features = "features";
+		$this->gym_class->img      = null;
+		$this->gym_class->img_thumb= null;
+		$this->gym_class->slug     = null;
+	}
+
+	/**
+	 * SET TITLE
+	 * @param $param
+	 * --------------------------------------------
+	 */
+	public function set_title($param)
+	{
+		$this->gym_class->title = $param;
+	}
+
+	/**
+	 * SET SUBTITLE
+	 * @param $param
+	 * --------------------------------------------
+	 */
+	public function set_subtitle($param)
+	{
+		$this->gym_class->subtitle = $param;
 	}
 
 	/**
@@ -100,7 +129,10 @@ class Gym_Class_model extends CI_Model {
 	 */
 	public function get_class_trainer($params)
 	{
-		$sql = TBL_TRAINER.".* ";
+
+		$sql = TBL_TRAINER.".*, ";
+		$sql.= "CONCAT(".TBL_TRAINER.".firstname, ";
+		$sql.= "Char(32), ".TBL_TRAINER.".lastname ) AS name ";
 
 		$this->get_where($params);
 		$this->get_orderby($params);
@@ -117,5 +149,6 @@ class Gym_Class_model extends CI_Model {
 			return null;
 		}
 	}
+
 }
 ?>

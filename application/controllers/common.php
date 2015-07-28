@@ -65,6 +65,32 @@ class common extends CI_controller
 	}
 
 	/**
+	 * CREATES LIST
+	 * @param $title
+	 * @param $value
+	 * @return
+	 * --------------------------------------------
+	 */
+	public function get_list($title, $value)
+	{
+		$data['title'] = $title;
+		$data['list']  = json_decode($value);
+
+		return $this->load->view('pages/templates/list', $data, true);
+	}
+
+	/**
+	 * CREATES BOX HEADER
+	 * @param $title
+	 * @return $heading
+	 * --------------------------------------------
+	 */
+	static function box_header($title)
+	{
+		return heading($title, '3', 'class="box-header"');
+	}
+
+	/**
 	 * CHECK DATA IF NULL
 	 * @param $data
 	 * @return $data
