@@ -1,0 +1,94 @@
+/* -------------------------- */
+/* IMAGE SPRITES              */
+.social-icon.facebook {
+	background: url(../img/social/social_icon_facebook.png);
+}
+
+.social-icon.twitter {
+	background: url(../img/social/social_icon_twitter.png);
+}
+
+.social-icon.google {
+	background: url(../img/social/social_icon_googleplus.png);
+}
+
+.social-icon.skype {
+	background: url(../img/social/social_icon_skype.png);
+}
+
+.social-icon.facebook:hover,
+.social-icon.twitter:hover,
+.social-icon.google:hover,
+.social-icon.skype:hover {
+	background-position: 0 -30px;
+}
+
+.more.icon-small-arrow {
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+.icon-small-arrow {
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.icon-small-arrow.left-black {
+	background-image: url(../img/icons/icon_arrow_left_black.png);
+}
+
+.icon-small-arrow.right-black {
+	background-image: url(../img/icons/icon_arrow_right_black.png);
+}
+
+.icon-small-arrow.left-white {
+	background-image: url(../img/icons/icon_arrow_left_white.png);
+}
+
+.icon-small-arrow.right-white {
+	background-image: url(../img/icons/icon_arrow_right_white.png);
+}
+
+.icon-small-arrow.margin-right-black {
+	background-image: url(../img/icons/icon_arrow_margin_right_black.png);
+}
+
+.icon-small-arrow.margin-right-white {
+	background-image: url(../img/icons/icon_arrow_margin_right_white.png);
+}
+
+.icon-small-arrow.top-white {
+	background-image: url(../img/icons/icon_arrow_top_white.png);
+}
+
+.icon-clock-green {
+	background-image: url(../img/icons/icon_clock_green.png);
+}
+
+.icon-clock-black {
+	background-image: url(../img/icons/icon_clock_black.png);
+}
+
+.icon-card-green {
+	background-image: url(../img/icons/icon_card_green.png);
+}
+
+.icon-card-white {
+	background-image: url(../img/icons/icon_card_white.png);
+}
+
+.banner-icon.note {
+	background-image: url(../img/icons/banner_icon_note.png);
+}
+
+.banner-icon.calendar {
+	background-image: url(../img/icons/banner_icon_calendar.png);
+}
+
+.banner-icon.phone {
+	background-image: url(../img/icons/banner_icon_phone.png);
+}
+
+.banner-icon.hand {
+	background-image: url(../img/icons/banner_icon_hand.png);
+}

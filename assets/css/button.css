@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* BUTTONS                    */
+.more {
+	background-repeat: no-repeat;
+	background-position: center right;
+	margin-right: 2px;
+	padding: 5px 24px 6px 9px;
+	float: right;
+	color: #fff;
+	font-size: 13px;
+	line-height: normal;
+}
+
+.more.black,
+.more.light:hover {
+	background-color: #000;
+	border: 1px solid #000;
+}
+
+.more.light,
+.more.black:hover {
+	background-color: #FFF;
+	border-color: rgb(238, 238, 238);
+}
+
+.more.black:hover {
+	background-image: url(../img/icons/icon_arrow_margin_right_black.png);
+	color: #000 !important;
+}
+
+.more.light:hover {
+	background-image: url(../img/icons/icon_arrow_margin_right_white.png);
+	color: #FFF !important;
+}
+
+.more,
+.categories li a,
+.pagination li a,
+.tabs-navigation li a,
+.scrolling-list-control-left,
+.scrolling-list-control-right {
+	border: 1px solid #515151;
+}
+
+.scrolling-list-control-left,
+.scrolling-list-control-right {
+	float: left;
+	width: 28px;
+	height: 28px;
+}
+
+.scrolling-list-control-right {
+	margin-left: 2px;
+}
+
+.refined-search a {
+	float: right;
+	top: -12.2rem;
+	right: 3rem;
+}
+
+.btn-block {
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.btn-block i {
+	margin-left: 2rem;
+	margin-right: 1rem;
+	font-size: 20px;
+	line-height: 1;
+}

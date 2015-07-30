@@ -1,0 +1,74 @@
+/* -------------------------- */
+/* MODAL                      */
+.reveal-modal.black h1,
+.reveal-modal.black h2,
+.reveal-modal.black h3,
+.reveal-modal.black h4,
+.reveal-modal.black h5 {
+	color: #222;
+}
+
+.reveal-modal.black {
+	color: rgb(123, 123, 123);
+}
+
+.reveal-modal.black .close-reveal-modal.small {
+	font-size: 1rem;
+}
+
+.checkStatus input[type=checkbox] {
+	visibility: hidden;
+}
+
+.checkStatus {
+	width: 99px;
+	height: 37px;
+	background: #333;
+	margin: -10px 0px 10px;
+	border-radius: 50px;
+	position: relative;
+}
+
+.checkStatus:before {
+	content: 'YES';
+	position: absolute;
+	top: 12px;
+	left: 13px;
+	height: 2px;
+	color: #91b034;
+	font-size: 13px;
+}
+
+.checkStatus:after {
+	content: 'NO';
+	position: absolute;
+	top: 12px;
+	left: 62px;
+	height: 2px;
+	color: #777;
+	font-size: 13px;
+}
+
+.checkStatus label {
+	display: block;
+	width: 42px;
+	height: 20px;
+	border-radius: 50px;
+	margin-left: 0rem !important;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 10px;
+	background: #ddd;
+}
+
+.checkStatus input[type=checkbox]:checked+label {
+	left: 47px;
+	background: #91b034;
+}

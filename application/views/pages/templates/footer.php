@@ -1,18 +1,16 @@
 <div class="footer-container">
 	<div class="footer">
 		<div class="footer-box-container clearfix">
-			<div class="footer-box">
-				<h3 class="box-header"><?=$this->lang->line('LBL_00007')?></h3>
-				<?=$footer['info'] ?>
-				<ul class="footer-social-icons"><?=$footer['social'] ?></ul>
-			</div>
-			<div class="footer-box">
-				<h3 class="box-header"><?=$this->lang->line('LBL_00011')?></h3>
-				<ul class="list-items gray opening-hours"><?=$footer['opening'] ?></ul>
-			</div>
+			<?=$footer['info'] ?>
+			<?=$footer['opening'] ?>
 			<div class="footer-box"></div>
 		</div>
-		<?=$footer['copyright']?>
+		<div class="copyright-area">
+			<?=COPYRIGHT ?>
+			<a href="<?=AUTHOR_EMAIL ?>" title="<?=AUTHOR_DISPLAY ?>" target="_blank">
+				<?=AUTHOR_DISPLAY ?>
+			</a>
+		</div>
 	</div>
 </div>
 

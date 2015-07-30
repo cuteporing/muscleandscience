@@ -1,0 +1,278 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* NEWS                       */
+.show-all {
+	border-top: 1px solid #515151;
+	margin-top: 30px;
+	margin-right: 15px;
+}
+
+.show-all .more {
+	margin-top: -1px;
+	margin-right: -1px;
+}
+
+.blog-logo {
+	font-size: 9rem;
+	color: #3F3F3F;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+
+.blog-logo:hover {
+	color: #91b034;
+}
+
+.blog {
+	margin-left: 0px;
+	margin-bottom: 0;
+	clear: both;
+}
+
+.post {
+	float: left;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.post-content {
+	font-size: 13px;
+	float: left;
+	width: 520px;
+}
+
+.post-content .controls.single,
+.comment-details .controls.single {
+	right: 14px;
+	margin-top: 0;
+}
+
+.post-content a.post-image {
+	display: block;
+	margin-bottom: 27px;
+}
+
+.post-content a.post-image img {
+	display: block;
+	width: 500px;
+	height: auto;
+	background: url(../img/preloader.gif) no-repeat center center;
+}
+
+.post-content h2 {
+	margin-bottom: 24px;
+	font-size: 24px;
+}
+
+.post-content h2 a {
+	color: #FFF;
+}
+
+.post-content h2 a:hover {
+	text-decoration: underline;
+}
+
+.post-content .text,
+.post-content .text > p,
+.post-content .text > div > p {
+	line-height: 150%;
+	font-size: 12px;
+	color: #c5c5c5;
+}
+
+.post-content.small {
+	width: 100%;
+	float: left;
+}
+
+.post-content.small a.post-image img {
+	width: 100%;
+}
+
+.comment-box {
+	float: left;
+	width: 80px;
+	color: white;
+	margin-right: 30px;
+	text-align: center;
+}
+
+.comment-box .first-row {
+	background-color: #829e2d;
+	padding: 22px 0 21px;
+	font-size: 22px;
+	text-align: center;
+	line-height: 1;
+}
+
+.comment-box .second-row {
+	display: block;
+	text-transform: uppercase;
+	margin-top: 4px;
+	font-size: 12px;
+}
+
+.comment-box .second-row.small {
+	text-transform: capitalize;
+	font-size: 11px;
+}
+
+.comment-box .comments-number {
+	display: block;
+	text-align: center;
+	font-size: 11px;
+	border-bottom: 1px solid #515151;
+	padding: 8px 0 9px;
+	color: #fff;
+}
+
+.comment-box .comments-number:hover {
+	border-bottom-color: #829e2d;
+}
+
+#comments-list {
+	float: left;
+	margin-bottom: 2rem;
+}
+
+#comments-list ul {
+	list-style-type: none;
+}
+
+#comments-list li.comment {
+	width: 500px;
+	margin-top: 35px;
+}
+
+#comments-list li.comment:first-child {
+	margin-top: 0;
+}
+
+#comments-list .comment-author-avatar {
+	float: left;
+	width: 78px;
+	height: 78px;
+	margin-right: 20px;
+	border: 1px solid #515151;
+}
+
+#comments-list .comment-details {
+	float: left;
+	width: 400px;
+}
+
+#comments-list.small .comment-details {
+	width: 360px;
+}
+
+#comments-list .comment-details .posted-by {
+	background: url('../img/icons/icon_post_author.png') no-repeat left
+		center;
+	font-size: 11px;
+	color: #999;
+	padding-left: 15px;
+	line-height: 140%;
+}
+
+#comments-list .comment-details .posted-by a {
+	color: #fff;
+}
+
+#comments-list.small .comment-details .posted-by a,
+#comments-list.light .comment-details .posted-by a {
+	color: #292929;
+}
+
+#comments-list .comment-details p {
+	color: #C5C5C5;
+	font-size: 12px;
+	line-height: 150%;
+	padding: 20px 0;
+	margin-bottom: 0;
+}
+
+#comments-list.small .comment-details p,
+#comments-list.light .comment-details p {
+	color: #8D8D8D;
+}
+
+#comments-list .reply-button {
+	float: left;
+	clear: both;
+	padding-right: 18px;
+	background-position: center right 5px;
+	color: #fff;
+	font-size: 13px;
+}
+
+#comments-list .pagination {
+	margin-top: 20px;
+}
+
+.comment-box.small {
+	width: 100%;
+}
+
+.comment-box.small .first-row,
+.comment-box.small .comments-number {
+	width: 94px;
+}
+
+.comment-box.small .first-row {
+	float: left;
+	padding: 8px 10px;
+	margin-bottom: 1rem;
+	font-size: 11px;
+}
+
+.comment-box.small .comments-number {
+	float: right;
+	padding: 9px 0 6px;
+}
+
+.comment-box.small .second-row {
+	display: inline;
+	margin-top: 0;
+	margin-left: 2px;
+	font-size: 11px;
+}
+
+.blog.small li:first-child,
+.blog.light li:first-child {
+	margin-top: 0;
+}
+
+.comment-box.small .comments-number,
+.comment-box.light .comments-number {
+	color: #515151;
+}
+
+.post-content.small {
+	width: 100%;
+	float: left;
+}
+
+.post-content.small h2 a,
+.post-content.light h2 a {
+	color: #515151;
+}
+
+.post-content.small a.post-image img {
+	width: 100%;
+}
+
+.post-content.small .text,
+.post-content.light .text,
+.post-content.light .text > p,
+.post-content.light .text > div > p {
+	color: #4B4B4B;
+}
+
+.post-tag-edit, .post-tag-edit input {
+	margin: 0 !important;
+	height: 20px !important;
+	width: 130px !important;
+	outline: 0;
+	border-color: transparent;
+}

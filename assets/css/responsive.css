@@ -1,18 +1,21 @@
 @media only screen and (min-width: 40.063em) {
-	.top-bar-section li:not (.has-form ) a:not (.button ) {
-		color: #8b8b8b;
-		text-transform: uppercase;
-		padding: 0 15px;
-		line-height: 45px;
-		border-bottom: 4px solid #333333;
-	}
+	.top-bar-section li:not (.has-form ) a:not (.button ),
 	.top-bar-section li:not (.has-form ) a:not (.button ).active,
 	.top-bar-section li.active:not (.has-form ) a:not (.button ) {
 		padding: 0 15px;
 		line-height: 45px;
+		border-bottom: 4px solid;
+	}
+	.top-bar-section li:not (.has-form ) a:not (.button ) {
+		color: #8b8b8b;
+		text-transform: uppercase;
+		border-color: #333333;
+	}
+	.top-bar-section li:not (.has-form ) a:not (.button ).active,
+	.top-bar-section li.active:not (.has-form ) a:not (.button ) {
 		color: white;
 		background: black;
-		border-bottom: 4px solid #829e2d;
+		border-color: #829e2d;
 	}
 	.top-bar-section li:not (.has-form ) a:not (.button ):hover {
 		background: #000000;
@@ -196,8 +199,6 @@
 	.item-content a.thumb-image {
 		margin-right: 0px;
 	}
-	/*.item-content .text {
-			width: 140px; }*/
 	.post-content,
 	.post-content a.post-image img {
 		width: 377px;
@@ -214,7 +215,9 @@
 	.homebox-top {
 		margin-top: -50px;
 	}
-	.home-box {
+	.home-box,
+	.page-left,
+	.page-right {
 		width: 100%;
 	}
 	.home-box .news .text {
@@ -239,7 +242,6 @@
 	}
 	.page-left,
 	.page-right {
-		width: 100%;
 		float: none;
 	}
 	.page-left {
@@ -295,9 +297,6 @@
 	.contact-form .right {
 		width: 181px;
 	}
-	.footer {
-		width: 480px;
-	}
 }
 
 @media only screen and (max-width: 480px) {
@@ -307,8 +306,15 @@
 	.homebox-top {
 		margin-top: -30px;
 	}
+	.footer,
+	.comment-box,
 	.page-layout,
-	.home-box-container {
+	.ui-tabs-panel,
+	.home-box-container,
+	#comments-list li.comment,
+	#comments-list .comment-details,
+	.comment-box, .post-content,
+	.post-content a.post-image img {
 		width: 300px;
 	}
 	.home-box .news .text {
@@ -336,9 +342,6 @@
 		border-bottom: 2px solid #91b034;
 		transition: border-bottom 0.2s ease;
 	}
-	.comment-box {
-		width: 300px;
-	}
 	.comment-box .first-row,
 	.comment-box .comments-number {
 		width: 94px;
@@ -362,14 +365,6 @@
 	#comments-list .comment-author-avatar {
 		display: none;
 	}
-	#comments-list li.comment,
-	#comments-list .comment-details {
-		width: 300px;
-	}
-	.comment-box, .post-content,
-	.post-content a.post-image img {
-		width: 300px;
-	}
 	.comment-form-container {
 		margin-left: 0px;
 	}
@@ -379,17 +374,11 @@
 	.contact-form .right {
 		width: 145px;
 	}
-	.footer {
-		width: 300px;
-	}
 	.footer-contact-info-left {
 		width: 155px;
 	}
 	.footer-contact-info-right {
 		width: 125px;
-	}
-	.ui-tabs-panel {
-		width: 300px;
 	}
 	.ui-tabs-nav {
 		display: inline-flex;
@@ -416,8 +405,7 @@
 	}
 	.box-panel.dark label,
 	.box-panel.green label,
-	.box-panel.light-green label
-		{
+	.box-panel.light-green label {
 		color: white;
 	}
 	.box-panel label {

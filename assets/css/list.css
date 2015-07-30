@@ -1,0 +1,295 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* LIST                       */
+.post-footer {
+	margin-top: 25px;
+}
+
+.opening-hours {
+	clear: both;
+	padding-top: 8px;
+	margin-top: 30px;
+}
+
+.item-list.margin-top {
+	margin-top: 8px;
+}
+
+.list-items li,
+.item-list li {
+	padding: 10px 0 10px 25px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid;
+}
+
+.list-items li {
+	margin-right: 38px;
+	border-color: #eee;
+}
+
+.item-list li {
+	float: left;
+	width: 100%;
+	font-size: 13px;
+	color: #000;
+	border-color: rgba(196, 228, 92, 1);
+}
+
+.list-items.gray li,
+.item-list.gray li,
+.item-list.dark li {
+	border-color: #515151;
+}
+
+.item-list.green li {
+	border-color: #94B828;
+}
+
+.item-list.light-green li {
+	border-color: #C4E45C;
+}
+
+.items-list.dark li {
+	border-color: rgb(53, 53, 53);
+}
+
+.opening-hours li {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.item-list.green a,
+.item-list.green span,
+.item-list.green .value
+.item-list.light-green a,
+.item-list.light-green span,
+.item-list.light-green .value
+.items-list.upcoming-classes li a,
+.items-list.upcoming-classes span,
+.items-list.upcoming-classes .value {
+	color: #000;
+}
+
+.item-list.gray a,
+.item-list.gray span,
+.item-list.gray .value,
+.item-list.dark a,
+.item-list.dark span,
+.item-list.dark .value {
+	color: #C5C5C5;
+}
+
+div.value {
+	text-align: right;
+	float: right;
+}
+
+.item-content a.thumb-image {
+	float: left;
+	margin-right: 20px;
+}
+
+.item-content .text {
+	float: right;
+	width: 233px;
+}
+
+.item-footer {
+	margin-top: 20px;
+	line-height: 1;
+}
+
+
+.list,
+.post,
+.isotope,
+.nav-pills,
+.item-list,
+.items-list,
+.list-items,
+.categories,
+.ui-tabs-nav,
+.pricing-plan,
+.contact-data,
+.opening-hours,
+.gallery-isotope,
+.tabs-navigation {
+	list-style: none outside none;
+	margin-left: 0;
+}
+
+.categories li.posted-by {
+	background: url(../img/icons/icon_post_author.png) no-repeat 10px center;
+	padding: 8px 9px 8px 25px;
+	border: 1px solid #515151;
+}
+
+.categories li {
+	float: left;
+	font-size: 11px;
+	color: #999;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	line-height: 1;
+	width: auto;
+}
+
+.categories li a {
+	display: block;
+	float: none;
+	color: #999;
+	font-size: 11px;
+	padding: 8px 9px;
+}
+
+.categories.light li a {
+	color: #222222;
+}
+
+.categories li.posted-by .author {
+	display: inline;
+	color: #FFF;
+	border: none;
+	padding: 0;
+}
+
+.categories.light li.posted-by .author {
+	color: #222222;
+}
+
+.categories li.posted-by .author:hover {
+	text-decoration: underline;
+}
+
+.ui-tabs-nav {
+	float: left;
+	width: 80px;
+}
+
+.ui-tabs-nav li {
+	margin-bottom: 2px;
+}
+
+.ui-tabs-nav li a {
+	display: block;
+	font-size: 13px;
+	width: 78px;
+	text-align: center;
+	padding: 5px 0px;
+	color: rgb(153, 153, 153);
+	border: 1px solid #515151;
+}
+
+.ui-tabs-panel {
+	float: right;
+	width: 500px;
+}
+
+.ui-tabs-panel h2 {
+	font-size: 24px;
+	color: #FFF;
+	margin-top: 15px;
+}
+
+.ui-tabs-panel p {
+	padding: 24px 0px 25px;
+	font-size: 13px;
+	line-height: 150%;
+	margin: 0px;
+}
+
+.sentence {
+	margin-top: 15px;
+	padding: 0;
+	color: #829E2D;
+	font-size: 16px;
+	font-style: italic;
+	font-family: 'Droid Serif';
+}
+
+#progressbox,
+.ui-tabs-hide {
+	display: none;
+}
+
+.list {
+	clear: both;
+	padding: 25px 0px;
+	font-size: 100%;
+}
+
+.list li {
+	padding-left: 18px;
+	background-position: left center;
+	font-size: 13px;
+}
+
+.training-classes .list.trainers li {
+	margin-top: 20px;
+}
+
+.list.top-marker li {
+	background-position: left 8px;
+}
+
+.training-classes .list.trainers li:first-child {
+	margin-top: 0px;
+}
+
+.list.feature {
+	padding: 15px 0px;
+}
+
+.items-list li {
+	width: 100%;
+	float: left;
+	padding: 12px 0 12px 25px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #eee;
+	font-size: 12px;
+}
+
+.items-list a, .items-list span {
+	float: left;
+}
+
+.more:hover,
+.categories li a:hover,
+.ui-tabs-nav li:hover a,
+.ui-tabs-nav li.ui-tabs-selected a,
+.categories li.selected a,
+.pagination li.selected a,
+.pagination li a:hover:not(.disabled),
+.tabs-navigation li a:hover,
+.tabs-navigation li a.selected,
+.scrolling-list-control-left:hover,
+.scrolling-list-control-right:hover {
+	color: white !important;
+	border-color: #91b034 !important;
+}
+
+.pagination.light li a:hover {
+	border-color: #91b034;
+	color: #999;
+}
+
+.pagination.light li.selected a {
+	border-color: #91b034;
+	background: #91b034;
+}
+
+.pagination.light li a.disabled {
+	color: #DFDFDF;
+}
+
+.pagination.light li a,
+.pagination.light li:hover a.disabled {
+	border-color: transparent;
+}
+
+.pagination.light li.selected:hover a {
+	color: white;
+}

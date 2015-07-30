@@ -13,54 +13,58 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class footer extends CI_controller {
-	/**
-	 * COMPANY INFO FOOTER DISPLAY
-	 *
-	 * @return
-	 * --------------------------------------------
-	 */
-	public function display_company_info() {
-		$company = new company ();
-		return $company->display_company_info ();
+	private $company_info;
+
+	public function __construct() {
+		parent::__construct ();
+		$this->load->model ( 'company_model' );
+
+		$this->company_info = $this->company_model->get_company_info ();
 	}
 
-	/**
-	 * COMPANY SOCIAL NETWORK FOOTER DISPLAY
-	 *
-	 * @return
-	 * --------------------------------------------
-	 */
-	public function display_company_social() {
-		$company = new company ();
-		return $company->display_company_social ();
-	}
 
 	/**
-	 * COMPANY OPENING HOURS FOOTER DISPLAY
+	 * GET THE DISPLAYED OPENING HRS. DEPENDING ON
+	 * THE TYPE OF DISPLAY
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return (Array)
 	 */
-	public function display_company_opening_hrs() {
-		$company = new company ();
-		return $company->display_company_opening_hrs ();
-	}
+	public function get_company_operation() {
+		$operation = json_decode (  $this->company_info[0]['opening_hours'] );
+		$type      = $this->company_info[0]['opening_day_type'];
+		$days      = array ();
 
-	/**
-	 * DISPLAYS PROJECT COPYRIGHT
-	 *
-	 * @return
-	 * --------------------------------------------
-	 */
-	static function copyright() {
-		$copyright = '© 2014-2015 - Muscle and Science. ';
-		$link = anchor ( 'www.gmail.com', 'DigiArtKBV.com', array (
-				'target' => '_blank',
-				'title' => 'DigiArtKBV.com'
-		) );
-		return div ( $copyright . $link, array (
-				'class' => 'copyright-area'
-		) );
+		foreach ( $operation as $row ) {
+			if ( $row->opening != "00:00" ) {
+				if ( !empty ( $days ) ) {
+					$key  = key ( $days );
+					$last = current ( array_slice ( $days, - 1 ) );
+
+					if(  $row->opening == $last['opening'] && $row->closing == $last['closing'] ) {
+						$days[$key]['day'] = $last_day.' - '.$row->day;
+					}else {
+						$last_day = $row->day;
+						array_push ( $days, array (
+							'day' => $row->day,
+							'opening' => $row->opening,
+							'closing' => $row->closing
+						) );
+					}
+
+				}else{
+					$last_day = $row->day;
+
+					array_push ( $days, array (
+						'day' => $row->day,
+						'opening' => $row->opening,
+						'closing' => $row->closing
+					) );
+				}
+			}
+		}
+
+		return $days;
 	}
 
 	/**
@@ -70,10 +74,14 @@ class footer extends CI_controller {
 	 * --------------------------------------------
 	 */
 	public function view() {
-		$data ['footer'] ['info'] = $this->display_company_info ();
-		$data ['footer'] ['social'] = $this->display_company_social ();
-		$data ['footer'] ['opening'] = $this->display_company_opening_hrs ();
-		$data ['footer'] ['copyright'] = footer::copyright ();
+		$data['result_info']      = $this->company_info;
+		$data['result_social']    = $this->company_model->get_company_social ();
+		$data['result_operation'] = $this->get_company_operation ();
+
+		$data ['footer'] ['info'] = $this->load->view (
+				TPL_FOOTER_COMPANY_INFO, $data, true );
+		$data ['footer'] ['opening'] = $this->load->view (
+				TPL_FOOTER_COMPANY_OPERATION, $data, true );
 
 		$this->load->view ( 'pages/templates/footer', $data );
 	}

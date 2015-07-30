@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="<?php echo META_DESCRIPTION;?>" />
-		<meta name="keywords" content="<?php echo META_KEYWORDS;?>">
-		<meta name="author" content="<?php echo META_AUTHOR;?>">
-		<title><?php echo $title;?></title>
+		<meta name="description" content="<?=META_DESCRIPTION ?>" />
+		<meta name="keywords" content="<?=META_KEYWORDS ?>">
+		<meta name="author" content="<?=META_AUTHOR ?>">
+		<title><?=$title ?></title>
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/normalize.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/foundation.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/topbar.css" />

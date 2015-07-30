@@ -15,7 +15,6 @@ if (! defined ( 'BASEPATH' ))
 include_once ('common.php');
 include_once ('format.php');
 include_once ('homebox.php');
-include_once ('public/company.php');
 include_once ('public/footer.php');
 include_once ('public/gym_class.php');
 include_once ('public/home.php');
