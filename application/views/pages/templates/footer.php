@@ -3,7 +3,7 @@
 		<div class="footer-box-container clearfix">
 			<div class="footer-box">
 				<h3 class="box-header"><?=$this->lang->line('LBL_00007')?></h3>
-				<ul class="footer-contact-info-container clearfix"><?=$footer['info'] ?></ul>
+				<?=$footer['info'] ?>
 				<ul class="footer-social-icons"><?=$footer['social'] ?></ul>
 			</div>
 			<div class="footer-box">

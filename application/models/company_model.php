@@ -11,35 +11,50 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class Company_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 	}
 
 	/**
-	 * GET DATA
+	 * GET COMPANY INFORMATION
 	 *
-	 * @return Array
-	 * --------------------------------------------
+	 *  --------------------------------------------
+	 *  @return (Array)
 	 */
 	public function get_company_info() {
 		$query = $this->db->get ( 'mas_company_info' );
 		return $query->result_array ();
 	}
+
+	/**
+	 * GET COMPANY SOCIAL MEDIA
+	 *
+	 *  --------------------------------------------
+	 *  @return (Array)
+	 */
 	public function get_company_social() {
 		$query = $this->db->get ( 'mas_company_social' );
 		return $query->result_array ();
 	}
 
 	/**
-	 * SET DATA
+	 * SET COMPANY INFORMATION
 	 *
-	 * @return Array
-	 * --------------------------------------------
+	 *  --------------------------------------------
+	 *  @return (Array)
 	 */
 	public function set_company_info() {
 		return $this->db->insert ( 'mas_company_info', $data );
 	}
+
+	/**
+	 * SET COMPANY INFORMATION
+	 *
+	 *  --------------------------------------------
+	 *  @return (Array)
+	 */
 	public function set_company_social() {
 		return $this->db->insert ( 'mas_company_social', $data );
 	}

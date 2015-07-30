@@ -12,9 +12,9 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 class company extends CI_controller {
-	private $company_info_list;
 	private $company_opening_hrs;
 	private $company_social_list;
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'company_model' );
@@ -23,57 +23,23 @@ class company extends CI_controller {
 	/**
 	 * GET COMPANY INFO
 	 *
-	 * @return (Array)
 	 * --------------------------------------------
+	 * @return (Array)
 	 */
 	public function get_company_info() {
 		return $this->company_model->get_company_info ();
 	}
 
 	/**
-	 * DISPLAYS THE COMPANY INFO LISTS
+	 * GET COMPANY INFO
 	 *
-	 * @return List <li>
 	 * --------------------------------------------
+	 * @return (View)
 	 */
 	public function display_company_info($list = '') {
-		$result = $this->get_company_info ();
+		$data['result'] = $this->get_company_info ();
 
-		// Clear the company's info details before
-		// adding the latest details
-		$this->company_info_list = '';
-
-		$row_start = '<li class="footer-contact-info-row">';
-		$col_left = array (
-				'class' => 'footer-contact-info-left'
-		);
-		$col_right = array (
-				'class' => 'footer-contact-info-right'
-		);
-		$row_end = '</li>';
-
-		foreach ( $result as $item ) {
-			$phone = json_decode ( $item ['phone'] );
-			$email = anchor ( $item ['email'], $item ['email'], array (
-					'title' => 'Send Email'
-			) );
-
-			// Displays the list of contact information
-			$list .= $row_start;
-			$list .= div ( common::checkData ( $item ['street_address_1'] ), $col_left );
-			$list .= div ( common::checkData ( $phone [0] ), $col_right ) . $row_end . $row_start;
-			$list .= div ( common::checkData ( $item ['street_address_2'] ), $col_left );
-			$list .= div ( common::checkData ( $phone [1] ), $col_right ) . $row_end . $row_start;
-			$list .= div ( common::checkData ( $item ['city'] ), $col_left );
-			$list .= div ( '', $col_right );
-			$list .= $row_end . $row_start;
-			$list .= div ( $email );
-			$list .= $row_end;
-		}
-
-		$this->company_info_list = $list;
-
-		return $this->company_info_list;
+		return $this->load->view ( TPL_FOOTER_COMPANY_INFO, $data, true );
 	}
 
 	/**
@@ -119,10 +85,10 @@ class company extends CI_controller {
 	 * DEPENDING ON
 	 * THE TYPE OF DISPLAY
 	 *
+	 * --------------------------------------------
 	 * @param (String) $type -- [MF, E]
 	 * @param (Array) $opening
 	 * @return (Array)
-	 * --------------------------------------------
 	 */
 	public function get_company_operation($type, $opening) {
 		$days = array ();
@@ -171,8 +137,8 @@ class company extends CI_controller {
 	/**
 	 * GET COMPANY SOCIAL MEDIA NETWORKS
 	 *
-	 * @return (Array)
 	 * --------------------------------------------
+	 * @return (Array)
 	 */
 	public function get_company_social() {
 		return $this->company_model->get_company_social ();
@@ -181,10 +147,10 @@ class company extends CI_controller {
 	/**
 	 * GET ATTRIBUTES FOR THE SOCIAL ICON
 	 *
+	 * --------------------------------------------
 	 * @param (String) $title
 	 * @param (String) $icon
 	 * @return (Array)
-	 * --------------------------------------------
 	 */
 	public function get_company_social_attrib($title, $icon) {
 		return array (
@@ -198,8 +164,8 @@ class company extends CI_controller {
 	/**
 	 * DISPLAYS THE FOOTER LISTS FOR SOCIAL SITE
 	 *
-	 * @return List <li>
 	 * --------------------------------------------
+	 * @return List <li>
 	 */
 	public function display_company_social() {
 		$result = $this->get_company_social ();

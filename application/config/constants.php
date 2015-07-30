@@ -96,5 +96,16 @@ define ( 'TBL_TAGS', 'mas_tags' );
 define ( 'TBL_TRAINER', 'mas_trainer' );
 define ( 'TBL_USERS', 'mas_users' );
 
+/*
+ * |--------------------------------------------------------------------------
+ * | Template Modes
+ * |--------------------------------------------------------------------------
+ * |
+ * | These modes are used to store template path
+ * |
+ */
+
+define ( 'TPL_FOOTER_COMPANY_INFO', 'pages/templates/footer_company_info' );
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
