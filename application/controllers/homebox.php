@@ -22,10 +22,10 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES THE TITLE HEADER FOR HOMEBOX <h2>
 	 *
+	 * --------------------------------------------
 	 * @param (String) $title
 	 * @param (String) $link
-	 * @return (String)
-	 * --------------------------------------------
+	 * @return (String) $homebox_title
 	 */
 	private function homebox_title($title, $link = '') {
 		($title == "") ?
@@ -40,9 +40,9 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES THE SUBTITLE HEADER FOR HOMEBOX <h3>
 	 *
-	 * @param (String) $subtitle
-	 * @return (String)
 	 * --------------------------------------------
+	 * @param (String) $subtitle
+	 * @return (String) $homebox_subtitle
 	 */
 	private function homebox_subtitle($subtitle) {
 		($subtitle == "") ?
@@ -55,9 +55,9 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES THE DESCRIPTION FOR HOMEBOX
 	 *
-	 * @param (String) $about
-	 * @return (String)
 	 * --------------------------------------------
+	 * @param (String) $about
+	 * @return (String) $description
 	 */
 	private function homebox_about($about) {
 		($about == "") ?
@@ -72,11 +72,11 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES THE CONTENT FOR THE HOME BOX
 	 *
+	 * --------------------------------------------
 	 * @param (String) $icon
 	 * @param (String) $about
 	 * @param (String) $link
-	 * @return (String)
-	 * --------------------------------------------
+	 * @return (String) $contents
 	 */
 	private function homebox_content($icon, $about, $link) {
 		$span_class = array (
@@ -93,11 +93,11 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES LIST INSIDE THE HOMEBOX
 	 *
+	 * --------------------------------------------
 	 * @param (String) $box_color
 	 * @param (String) $icon
 	 * @param (String) $list
-	 * @return
-	 * --------------------------------------------
+	 * @return (View) $list
 	 */
 	private function homebox_list($box_color, $icon, $list) {
 		$data['box_color'] = $box_color;
@@ -113,9 +113,9 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES BUTTON FOR HOMEBOX
 	 *
+	 * --------------------------------------------
 	 * @param (String) $type
 	 * @return
-	 * --------------------------------------------
 	 */
 	private function homebox_button($type) {
 		return anchor(base_url().'/home',
@@ -125,11 +125,11 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES A HOMEBOX PANEL
 	 *
+	 * --------------------------------------------
 	 * @param (String) $type
 	 * @param (String) $contents
 	 * @param (Boolean) $is_block
 	 * @return (String) $homebox
-	 * --------------------------------------------
 	 */
 	public function create_homebox($type = 'G', $contents = '', $is_block = false) {
 		switch ($type) {
@@ -185,8 +185,8 @@ class homebox extends CI_controller {
 	/**
 	 * CREATES THE DISPLAY FOR HOME BOX BANNER
 	 *
-	 * @return (String)
 	 * --------------------------------------------
+	 * @return (String)
 	 */
 	public function display_homebox_banner() {
 		$result = $this->homebox_model->get_homebox ();

@@ -25,9 +25,10 @@ class common extends CI_controller
 
 	/**
 	 * GET BREADCRUMBS
-	 * @param $page
-	 * @return $container
+	 *
 	 * --------------------------------------------
+	 * @param (String) $page
+	 * @return $container
 	 */
 	public function get_breadcrumbs($page)
 	{
@@ -46,11 +47,12 @@ class common extends CI_controller
 
 	/**
 	 * GET FORM
-	 * @param $form_path
-	 * @param $form
-	 * @param $data
-	 * @return
+	 *
 	 * --------------------------------------------
+	 * @param (String) $form_path
+	 * @param (Form) $form
+	 * @param (Object) $data
+	 * @return (View)
 	 */
 	public function get_form($form_path, $form, $data = null)
 	{
@@ -66,10 +68,11 @@ class common extends CI_controller
 
 	/**
 	 * CREATES LIST
-	 * @param $title
-	 * @param $value
-	 * @return
+	 *
 	 * --------------------------------------------
+	 * @param (String) $title
+	 * @param (Json) $value
+	 * @return (View)
 	 */
 	public function get_list($title, $value)
 	{
@@ -81,9 +84,10 @@ class common extends CI_controller
 
 	/**
 	 * CREATES BOX HEADER
-	 * @param $title
-	 * @return $heading
+	 *
 	 * --------------------------------------------
+	 * @param (String) $title
+	 * @return $heading
 	 */
 	static function box_header($title)
 	{
@@ -93,9 +97,10 @@ class common extends CI_controller
 
 	/**
 	 * CHECK DATA IF NULL
-	 * @param $data
-	 * @return $data
+	 *
 	 * --------------------------------------------
+	 * @param (Object) $data
+	 * @return (Object) $data
 	 */
 	static function checkData($data)
 	{

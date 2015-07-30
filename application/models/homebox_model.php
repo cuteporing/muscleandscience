@@ -11,14 +11,29 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class Homebox_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 	}
+
+	/**
+	 * GET HOMEBOX
+	 *
+	 * @param $params
+	 * --------------------------------------------
+	 */
 	public function get_homebox() {
 		$query = $this->db->get ( 'mas_homebox' );
 		return $query->result_array ();
 	}
+
+	/**
+	 * SET HOMEBOX
+	 *
+	 * @param $params
+	 * --------------------------------------------
+	 */
 	public function set_homebox() {
 		return $this->db->insert ( 'mas_homebox', $data );
 	}

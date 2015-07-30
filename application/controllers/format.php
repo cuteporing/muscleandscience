@@ -15,14 +15,14 @@ class format extends CI_controller {
 	public function __construct() {
 		parent::__construct ();
 	}
-	
+
 	/**
 	 * FORMAT DATE
-	 * 
-	 * @param String, $datetime        	
-	 * @param String, $format        	
-	 * @return String, $formatted
-	 *         --------------------------------------------
+	 *
+	 * --------------------------------------------
+	 * @param (String) $datetime
+	 * @param (String) $format
+	 * @return (String) $formatted
 	 */
 	static function format_date($datetime, $format = 'Y-m-d') {
 		$date = new DateTime ( $datetime );

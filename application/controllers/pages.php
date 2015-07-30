@@ -15,7 +15,6 @@ if (! defined ( 'BASEPATH' ))
 include_once ('common.php');
 include_once ('format.php');
 include_once ('homebox.php');
-include_once ('public/banner.php');
 include_once ('public/company.php');
 include_once ('public/footer.php');
 include_once ('public/gym_class.php');
@@ -31,7 +30,9 @@ class pages extends CI_controller {
 	/**
 	 * GET HEADER
 	 *
-	 * @param $data --------------------------------------------
+	 * --------------------------------------------
+	 * @param (Object) $data
+	 * @return (View)
 	 */
 	public function getHeader($data) {
 		$data ['title'] = ucfirst(str_replace('_', ' ', $data ['title']));
@@ -41,7 +42,9 @@ class pages extends CI_controller {
 	/**
 	 * DISPLAY TOP NAVIGATION
 	 *
-	 * @param $data --------------------------------------------
+	 * --------------------------------------------
+	 * @param (Object) $data
+	 * @return (View)
 	 */
 	public function displayTopNav($data) {
 		$this->load->view ( 'pages/templates/top_navigation', $data );
@@ -50,7 +53,9 @@ class pages extends CI_controller {
 	/**
 	 * DISPLAY HOME PAGE
 	 *
-	 * @param $page --------------------------------------------
+	 * --------------------------------------------
+	 * @param (String) $page
+	 * @return (View)
 	 */
 	public function home($page) {
 		$home = new home ();
@@ -60,7 +65,9 @@ class pages extends CI_controller {
 	/**
 	 * DISPLAY NEWS PAGE
 	 *
-	 * @param $page --------------------------------------------
+	 * --------------------------------------------
+	 * @param (String) $page
+	 * @return (View)
 	 */
 	public function news($page) {
 		$news = new news ();
@@ -70,7 +77,9 @@ class pages extends CI_controller {
 	/**
 	 * DISPLAY GYM CLASS PAGE
 	 *
-	 * @param $page --------------------------------------------
+	 * --------------------------------------------
+	 * @param (String) $page
+	 * @return (View)
 	 */
 	public function gym_class($page) {
 		$gym_class = new gym_class ();
@@ -80,7 +89,8 @@ class pages extends CI_controller {
 	/**
 	 * PAGE VIEW
 	 *
-	 * @param $page --------------------------------------------
+	 * --------------------------------------------
+	 * @param (String) $page
 	 */
 	public function view($page = 'home') {
 		if (! file_exists ( APPPATH . '/views/pages/' . $page . '.php' )) {

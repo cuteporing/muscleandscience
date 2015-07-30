@@ -21,8 +21,11 @@
 								class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
 								<a href="#<?=$about_id?>"><?=$this->lang->line('LBL_00022')?></a>
 							</li>
+							<?php if(isset($class['trainer'])): ?>
 							<li class="ui-state-default ui-corner-top"><a
-								href="#<?=$trainer_id?>"><?=$this->lang->line('LBL_00023')?></a></li>
+								href="#<?=$trainer_id?>"><?=$this->lang->line('LBL_00023')?></a>
+							</li>
+							<?php endif; ?>
 							<li class="ui-state-default ui-corner-top"><a href="#Timetable"><?=$this->lang->line('LBL_00024')?></a>
 							</li>
 						</ul>
@@ -44,7 +47,7 @@
 										<!-- TRAINER'S LIST -->
 											<?php foreach ($class['trainer'] as $trainer): ?>
 											<li class="icon-small-arrow right-white">
-												<?=$trainer['firstname'].' '.$trainer['lastname']?>
+												<?=$trainer['name'] ?>
 												<?php if(! is_null($trainer['experience'])): ?>
 													<span class="time-desc"><?=$trainer['experience'] ?> years experience</span>
 												<?php endif; ?>

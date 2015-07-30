@@ -19,26 +19,6 @@ class Gym_Class_model extends CI_Model {
 	}
 
 	/**
-	 * SET TITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
-	 */
-	public function set_title($param) {
-		$this->gym_class->title = $param;
-	}
-
-	/**
-	 * SET SUBTITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
-	 */
-	public function set_subtitle($param) {
-		$this->gym_class->subtitle = $param;
-	}
-
-	/**
 	 * GET WHERE STATEMENT
 	 *
 	 * @param $params
@@ -83,7 +63,8 @@ class Gym_Class_model extends CI_Model {
 	 * GET GYM CLASS
 	 *
 	 * @param $params
-	 * @return --------------------------------------------
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function get_class($params) {
 		$this->get_where ( $params );
@@ -111,9 +92,9 @@ class Gym_Class_model extends CI_Model {
 	/**
 	 * GET GYM CLASS TRAINER
 	 *
-	 * @param
-	 *        	$params
-	 * @return --------------------------------------------
+	 * @param $params
+	 * @return
+	 * --------------------------------------------
 	 */
 	public function get_class_trainer($params) {
 		$sql = TBL_TRAINER . ".*, ";

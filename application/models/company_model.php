@@ -15,11 +15,12 @@ class Company_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 	}
-	
+
 	/**
 	 * GET DATA
-	 * 
-	 * @return Array --------------------------------------------
+	 *
+	 * @return Array
+	 * --------------------------------------------
 	 */
 	public function get_company_info() {
 		$query = $this->db->get ( 'mas_company_info' );
@@ -29,11 +30,12 @@ class Company_model extends CI_Model {
 		$query = $this->db->get ( 'mas_company_social' );
 		return $query->result_array ();
 	}
-	
+
 	/**
 	 * SET DATA
-	 * 
-	 * @return Array --------------------------------------------
+	 *
+	 * @return Array
+	 * --------------------------------------------
 	 */
 	public function set_company_info() {
 		return $this->db->insert ( 'mas_company_info', $data );

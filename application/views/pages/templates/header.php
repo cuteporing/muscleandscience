@@ -9,6 +9,24 @@
 		<title><?php echo $title;?></title>
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/normalize.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/foundation.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/topbar.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/breadcrumbs.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/homebox.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/boxpanel.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/button.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/texteditor.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/page.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/list.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/tabs.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/news.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/pagination.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/accordion-small.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/footer.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/dialogbox.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/table.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/modal.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/forms.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/sprites.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/custom.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/responsive.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/animate.css" />
