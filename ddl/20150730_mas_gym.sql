@@ -464,14 +464,21 @@ DROP TABLE IF EXISTS `mas_package`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mas_package` (
-  `package_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `session` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `package_type` varchar(10) NOT NULL,
+  `package` varchar(255) NOT NULL,
+  `session` tinyint(2) NOT NULL DEFAULT '0',
+  `monthly` tinyint(2) NOT NULL DEFAULT '0',
+  `total_session` int(11) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `note` varchar(255) NOT NULL,
-  PRIMARY KEY (`package_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `description` varchar(255) NOT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `mas_packagecol` int(11) NOT NULL,
+  `update_datetime` timestamp NULL DEFAULT NULL,
+  `deleted` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -480,8 +487,33 @@ CREATE TABLE `mas_package` (
 
 LOCK TABLES `mas_package` WRITE;
 /*!40000 ALTER TABLE `mas_package` DISABLE KEYS */;
-INSERT INTO `mas_package` VALUES (1,'Per Session',1,50.00,'session','Gym package per session'),(2,'monthly fee',30,450.00,'monthly','Monthly FEE');
+INSERT INTO `mas_package` VALUES (1,'M','Per Session',1,0,1,50.00,'Gym package per session',1,'0000-00-00 00:00:00',1,'0000-00-00 00:00:00',0),(2,'M','monthly fee',0,1,30,450.00,'Monthly FEE',1,'0000-00-00 00:00:00',1,'0000-00-00 00:00:00',0),(3,'PT','1 Session',1,0,1,350.00,'&#8369; 350.00 Per Session',1,'0000-00-00 00:00:00',1,'0000-00-00 00:00:00',0),(4,'PT','5 Session',1,0,5,1000.00,'Save up to &#8369; <span class=\'text-cross\'>750.00</span>',1,'0000-00-00 00:00:00',1,'0000-00-00 00:00:00',0),(5,'PT','10 Session',1,0,10,2000.00,'Save up to &amp;#8369; <strike>1,500.00</strike>',1,'0000-00-00 00:00:00',1,'0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `mas_package` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mas_package_type`
+--
+
+DROP TABLE IF EXISTS `mas_package_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mas_package_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `package` varchar(45) NOT NULL,
+  `package_code` varchar(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mas_package_type`
+--
+
+LOCK TABLES `mas_package_type` WRITE;
+/*!40000 ALTER TABLE `mas_package_type` DISABLE KEYS */;
+INSERT INTO `mas_package_type` VALUES (1,'Member','M'),(2,'Personal Training','PT'),(3,'Special','S');
+/*!40000 ALTER TABLE `mas_package_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -564,34 +596,6 @@ LOCK TABLES `mas_post_tags` WRITE;
 /*!40000 ALTER TABLE `mas_post_tags` DISABLE KEYS */;
 INSERT INTO `mas_post_tags` VALUES (1,1),(2,1);
 /*!40000 ALTER TABLE `mas_post_tags` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `mas_pt`
---
-
-DROP TABLE IF EXISTS `mas_pt`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mas_pt` (
-  `pt_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `session` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `note` varchar(255) NOT NULL,
-  PRIMARY KEY (`pt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mas_pt`
---
-
-LOCK TABLES `mas_pt` WRITE;
-/*!40000 ALTER TABLE `mas_pt` DISABLE KEYS */;
-INSERT INTO `mas_pt` VALUES (1,'1 Session',1,350.00,'session','&#8369; 350.00 Per Session'),(2,'5 Session',5,1000.00,'session','Save up to &#8369; <span class=\'text-cross\'>750.00</span>'),(3,'10 Session',10,2000.00,'session','Save up to &amp;#8369; <strike>1,500.00</strike>');
-/*!40000 ALTER TABLE `mas_pt` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -884,4 +888,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-30 14:51:18
+-- Dump completed on 2015-07-30 15:53:20

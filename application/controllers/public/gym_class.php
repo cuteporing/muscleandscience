@@ -22,109 +22,15 @@ class gym_class extends pages {
 	}
 
 	/**
-	 * CREATES THE HEADING FOR THE ACCORDION
-	 *
-	 * @param String, $accord_id
-	 * @param String, $title
-	 * @param String, $subtitle
-	 * @return String
-	 * --------------------------------------------
-	 */
-	public function get_accord_head($accord_id, $title = '', $subtitle = '') {
-		$accord_heading = heading ( $title, '3' ) . heading ( $subtitle, '5' );
-
-		return anchor ( '#' . $accord_id, $accord_heading, array () );
-	}
-
-	/**
-	 * CREATES THE THUMBNAIL FOR THE ACCORDION
-	 *
-	 * @param String, $title
-	 * @param String, $src
-	 * @return String
-	 * --------------------------------------------
-	 */
-	public function get_thumb_img($title, $src) {
-		$img = img ( array (
-				'src' => $src,
-				'alt' => $src
-		) );
-
-		return anchor ( '#', $img, array (
-				'class' => 'thumb_img',
-				'title' => $title
-		) );
-	}
-
-	/**
-	 * LIMITS THE DISPLAYED DESCRIPTION
-	 *
-	 * @param String, $type
-	 * @param String, $text
-	 * @return String
-	 * --------------------------------------------
-	 */
-	public function get_about($limit = FALSE, $text = '') {
-		if ($limit = 'compact') {
-			return div ( character_limiter ( $text, 150 ), array (
-					'class' => 'text'
-			) );
-		} else {
-			return div ( $text, array (
-					'class' => 'text'
-			) );
-		}
-	}
-
-	/**
 	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
 	 *
 	 * @return List <dd>
 	 * --------------------------------------------
 	 */
 	public function display_gym_class_thumbnail() {
-		$result = $this->gym_class_model->get_gym_class_thumb ();
+		$data['result'] = $this->gym_class_model->get_gym_class_thumb ();
 
-		// Clear the gym class list
-		$this->gym_class_list = '';
-		$dl_class = array (
-				'class' => 'accordion accordion-gym-fitness',
-				'data-accordion' => ''
-		);
-		$btn_class = array (
-				'class' => 'more icon-small-arrow margin-right-white'
-		);
-
-		$list = element_tag ( 'dl', 'open', $dl_class );
-
-		foreach ( $result as $item ) {
-			// button detail link for the each class.
-			$footer = '';
-			$footer .= anchor ( 'gym_class/' . $item ['slug'], 'details', $btn_class );
-			$footer .= anchor ( '#', 'Timetable', $btn_class );
-
-			// contents of the gym classes displayed in the accordion
-			$about = '';
-			$about .= $this->get_thumb_img ( $item ['title'], $item ['img_thumb'] );
-			$about .= $this->get_about ( 'compact', $item ['about'] );
-			$about .= div ( $footer, array (
-					'class' => 'item-footer clearfix'
-			) );
-
-			$list .= element_tag ( 'dd', 'open', array (
-					'class' => 'accordion-navigation'
-			) );
-			$list .= $this->get_accord_head ( $item ['slug'], $item ['title'], $item ['subtitle'] );
-			$list .= div ( $about, array (
-					'class' => 'content item-content clearfix',
-					'id' => $item ['slug']
-			) );
-			$list .= element_tag ( 'dd' );
-		}
-
-		$this->gym_class_list = $list . '</dl>';
-
-		return $this->gym_class_list;
+		return $this->load->view ( TPL_CLASS_ACCORDION_THUMB, $data, true );
 	}
 
 	/**
@@ -150,17 +56,51 @@ class gym_class extends pages {
 	}
 
 	/**
-	 * GET HOMEBOX FOR PACKAGE
+	 * GET SEARCH PARAMETERS
+	 *
+	 * --------------------------------------------
+	 * @param (String) $type
+	 */
+	private function get_params( $type ) {
+		$this->params = array ();
+
+		$this->params ['where'] = array (
+			"package_type" => $type,
+			"deleted" => 0
+		);
+	}
+
+	/**
+	 * GET HOMEBOX FOR MEMBERSHIP PACKAGE
+	 *
+	 * --------------------------------------------
+	 * @return
+	 */
+	public function get_package_homebox() {
+		$homebox = new homebox ();
+		$this->get_params('M');
+		$result = $this->package_model->get_package ( $this->params );
+
+		$data['title']    = "Gym Packages";
+		$data['subtitle'] = "membership promos";
+		$data['list']     = $result;
+
+		return $homebox->create_homebox( 'LG', $data, true );
+	}
+
+	/**
+	 * GET HOMEBOX FOR PERSONAL TRAINING PACKAGE
 	 *
 	 * @return
 	 * --------------------------------------------
 	 */
-	public function get_package_homebox() {
+	public function get_pt_homebox() {
 		$homebox = new homebox ();
-		$result = $this->package_model->get_package ();
+		$this->get_params('PT');
+		$result = $this->package_model->get_package ( $this->params );
 
-		$data['title']    = "Gym Packages";
-		$data['subtitle'] = "membership promos";
+		$data['title']    = "Personal Training";
+		$data['subtitle'] = "sign up today";
 		$data['list']     = $result;
 
 		return $homebox->create_homebox( 'G', $data, true );
@@ -173,7 +113,8 @@ class gym_class extends pages {
 	 * --------------------------------------------
 	 */
 	public function get_homebox() {
-		$homebox = $this->get_package_homebox();
+		$homebox = $this->get_package_homebox ();
+		$homebox.= $this->get_pt_homebox ();
 
 		return $homebox;
 	}

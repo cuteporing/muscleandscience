@@ -69,11 +69,32 @@ class Package_model extends CI_Model {
 	/**
 	 * GET PACKAGE
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return
 	 */
-	public function get_package() {
-		$query = $this->db->get ( TBL_PACKAGE );
+	public function get_package($params) {
+		$this->get_where ( $params );
+		$this->get_orderby ( $params );
+
+		// limit | offset
+		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
+			if (! isset ( $params ['limiter'] ['offset'] )) {
+				$params ['limiter'] ['offset'] = 0;
+			}
+
+			$query = $this->db->get ( TBL_PACKAGE, $params ['limiter'] ['limit'], $params ['limiter'] ['offset'] );
+		} else {
+			$this->db->from ( TBL_PACKAGE );
+			$query = $this->db->get ();
+		}
+
+		if ($query->num_rows () > 0) {
+			return $query->result_array ();
+		} else {
+			return null;
+		}
+
+// 		$query = $this->db->get ( TBL_PACKAGE );
 
 		return $query->result_array();
 	}

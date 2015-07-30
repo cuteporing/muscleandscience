@@ -26,6 +26,8 @@ $lang ['LBL_00024'] = "Timetable";
 $lang ['LBL_00025'] = "Contact us";
 $lang ['LBL_00026'] = "Sign in";
 $lang ['LBL_00027'] = "Go to your account";
+$lang ['LBL_00028'] = "Details";
+$lang ['LBL_00029'] = "Timetable";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

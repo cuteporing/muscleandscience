@@ -104,8 +104,7 @@ class homebox extends CI_controller {
 		$data['icon'] = $icon;
 		$data['list'] = $list;
 
-		$temp_path = 'pages/templates/homebox_list';
-		$list = $this->load->view ( $temp_path, $data, true );
+		$list = $this->load->view ( TPL_HOMEBOX_LIST, $data, true );
 
 		return $list;
 	}
