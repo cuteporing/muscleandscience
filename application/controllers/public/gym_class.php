@@ -13,8 +13,8 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class gym_class extends pages {
-	private $gym_class_list;
 	private $params = array ();
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gym_class_model' );
@@ -134,8 +134,6 @@ class gym_class extends pages {
 	 * --------------------------------------------
 	 */
 	public function get_all_class() {
-// 		$this->get_params ();
-
 		$result = $this->gym_class_model->get_class ( $this->params );
 
 		if (! is_null ( $result )) {

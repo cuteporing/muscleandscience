@@ -122,6 +122,7 @@ define ( 'TPL_PAGE_FORMS', 				'pages/forms/' );
 define ( 'TPL_PAGE_LIST', 				'pages/templates/list' );
 define ( 'TPL_PAGE_BREADCRUMBS', 		'pages/templates/breadcrumbs' );
 define ( 'TPL_CLASS_ACCORDION_LIST',	'pages/templates/class_accordion_list' );
+define ( 'TPL_CLASS_ACCORDION_THUMB',	'pages/templates/class_accordion_thumb' );
 define ( 'TPL_FOOTER_COMPANY_INFO',		'pages/templates/footer_company_info' );
 define ( 'TPL_FOOTER_COMPANY_SOCIAL', 	'pages/templates/footer_company_social' );
 define ( 'TPL_FOOTER_COMPANY_OPERATION','pages/templates/footer_company_operation' );
