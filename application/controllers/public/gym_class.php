@@ -126,8 +126,6 @@ class gym_class extends pages {
 
 		return $this->gym_class_list;
 	}
-	public function get_params() {
-	}
 
 	/**
 	 * GET ALL GYM CLASS
@@ -136,7 +134,7 @@ class gym_class extends pages {
 	 * --------------------------------------------
 	 */
 	public function get_all_class() {
-		$this->get_params ();
+// 		$this->get_params ();
 
 		$result = $this->gym_class_model->get_class ( $this->params );
 
@@ -154,7 +152,7 @@ class gym_class extends pages {
 	}
 
 	/**
-	 * GET HOMEBOX FOR PACKAGGE
+	 * GET HOMEBOX FOR PACKAGE
 	 *
 	 * @return
 	 * --------------------------------------------
@@ -166,9 +164,16 @@ class gym_class extends pages {
 		$data['title']    = "Gym Packages";
 		$data['subtitle'] = "membership promos";
 		$data['list']     = $result;
+
 		return $homebox->create_homebox( 'G', $data, true );
 	}
 
+	/**
+	 * GET HOMEBOX
+	 *
+	 * @return
+	 * --------------------------------------------
+	 */
 	public function get_homebox() {
 		$homebox = $this->get_package_homebox();
 
@@ -183,12 +188,12 @@ class gym_class extends pages {
 	 */
 	public function view($page) {
 		$common = new common ();
-		$class_path = 'pages/templates/class_accordion_list';
-		$homebox_path = 'pages/templates/class_homebox';
+		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 		$data ['class_result'] = $this->get_all_class ();
-		$data ['class_list'] = $this->load->view ( $class_path, $data, true );
-		$data ['homebox'] = $this->get_homebox();
-		$data ['breadcrumbs'] = $common->get_breadcrumbs ( $page );
+		$data ['homebox']      = $this->get_homebox();
+		$data ['class_list']   = $this->load->view (
+				TPL_CLASS_ACCORDION_LIST, $data, true );
+
 		$this->load->view ( 'pages/' . $page, $data );
 	}
 }

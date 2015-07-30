@@ -18,44 +18,14 @@ class home extends pages {
 	}
 
 	/**
-	 * CREATES A LOG-IN FORM
+	 * GET LOG-IN FORM
 	 *
+	 * --------------------------------------------
 	 * @return (String) $container
-	 *         --------------------------------------------
 	 */
 	static function create_login_form() {
-		$attributes = array (
-				'autocomplete' => 'off'
-		);
-		$username = array (
-				'name' => 'username',
-				'placeholder' => 'Username'
-		);
-		$password = array (
-				'name' => 'password',
-				'placeholder' => 'Password'
-		);
-		$submit = array (
-				'class' => 'more black icon-small-arrow margin-right-white',
-				'data-msg' => 'Please wait...',
-				'name' => 'btn_login',
-				'value' => 'Sign in'
-		);
-
-		$form = form_open ( '#', $attributes );
-		$form .= form_input ( $username );
-		$form .= form_password ( $password );
-		$form .= form_submit ( $submit );
-
-		$panel = heading ( 'Sign in', '2' );
-		$panel .= heading ( 'Go to your account', '3' );
-		$panel .= div ( '', array (
-				'class' => 'error-msg'
-		) );
-		$panel .= div ( $form, array (
-				'class' => 'login-panel'
-		) );
-
+		$common = new common ();
+		$panel = $common->get_form( TPL_PAGE_FORMS, 'login' );
 		$container = homebox::create_homebox ( 'G', $panel, true );
 
 		return $container;
@@ -64,8 +34,9 @@ class home extends pages {
 	/**
 	 * CREATES A LOG-IN FORM
 	 *
+	 * --------------------------------------------
+	 * @param (String) $page
 	 * @return (Object) $data
-	 *         --------------------------------------------
 	 */
 	public function view($page) {
 		$homebox = new homebox ();

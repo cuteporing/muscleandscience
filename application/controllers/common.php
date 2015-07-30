@@ -32,17 +32,9 @@ class common extends CI_controller
 	 */
 	public function get_breadcrumbs($page)
 	{
-		$class = array('class'=>'breadcrumbs clearfix bread-crumb');
-		$container = element_tag('ul', 'open', $class);
-		$container.= element_tag('li', 'open', array('class'=>'no-arrow'));
-		$container.= anchor(base_url().'home/', $this->lang->line('LBL_00009'));
-		$container.= element_tag('li');
-		$container.= element_tag('li', 'open', array('class'=>'current'));
-		$container.= anchor(base_url().$page.'/', str_replace('_', ' ', $page));
-		$container.= element_tag('li');
-		$container.= element_tag('ul');
+		$data['page'] = $page;
 
-		return $container;
+		return $this->load->view( TPL_PAGE_BREADCRUMBS, $data, true);
 	}
 
 	/**
@@ -58,7 +50,7 @@ class common extends CI_controller
 	{
 		$form = $form.'_form';
 
-		if(is_null($data)){
+		if ( is_null( $data ) ) {
 			return $this->load->view($form_path.$form, '', true);
 		}
 		else {
@@ -79,7 +71,7 @@ class common extends CI_controller
 		$data['title'] = $title;
 		$data['list']  = json_decode($value);
 
-		return $this->load->view('pages/templates/list', $data, true);
+		return $this->load->view( TPL_PAGE_LIST, $data, true);
 	}
 
 	/**

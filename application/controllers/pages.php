@@ -21,7 +21,6 @@ include_once ('public/home.php');
 include_once ('public/news.php');
 
 class pages extends CI_controller {
-	public $form_path = 'pages/forms/';
 	public function __construct() {
 		parent::__construct ();
 	}

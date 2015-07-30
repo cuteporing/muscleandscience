@@ -27,6 +27,7 @@ class format extends CI_controller {
 	static function format_date($datetime, $format = 'Y-m-d') {
 		$date = new DateTime ( $datetime );
 		$formatted = $date->format ( $format );
+
 		return $formatted;
 	}
 }
