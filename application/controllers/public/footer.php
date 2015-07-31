@@ -69,8 +69,8 @@ class footer extends CI_controller {
 	/**
 	 * FOOTER DISPLAY
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return
 	 */
 	public function view() {
 		$data['result_info']      = $this->company_info;

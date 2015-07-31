@@ -92,8 +92,8 @@ class gym_class extends pages {
 	/**
 	 * GET HOMEBOX FOR PERSONAL TRAINING PACKAGE
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return
 	 */
 	public function get_pt_homebox() {
 		$homebox = new homebox ();

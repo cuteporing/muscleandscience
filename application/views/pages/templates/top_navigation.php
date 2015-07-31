@@ -5,7 +5,7 @@
 				<li class="name">
 					<h1>
 						<a href="<?=base_url()?>"><img
-							data-interchange="[<?=base_url()?>assets/img/logo.png, (default)], [<?=base_url()?>assets/img/logo-small.jpg, (only screen and (max-width: 640px))]"
+							data-interchange="[<?=base_url()?>assets/img/logo.png, (default)], [<?=base_url()?>assets/img/logo-small.jpg, (only screen and (max-width: 1280px))]"
 							id="logo"></a>
 					</h1>
 				</li>

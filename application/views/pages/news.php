@@ -7,12 +7,12 @@
 					<h4><?=$this->lang->line('LBL_00016')?></h4>
 				</div>
 			</div>
-			<?php if(isset($breadcrumbs)): ?><?=$breadcrumbs ?><?php endif ?>
+			<?php if(isset($breadcrumbs)): ?><?=$breadcrumbs ?><?php endif; ?>
 			<div class="page-left">
-				<?php if(isset($news_list)): ?><?=$news_list ?><?php endif ?>
-				<?php if(isset($comments)): ?><?=$comments ?><?php endif ?>
-				<?php if(isset($pagination)): ?><?=$pagination?><?php endif ?>
-				<?php if(isset($comment_form)): ?><?=$comment_form?><?php endif ?>
+				<?php if(isset($news_list)): ?><?=$news_list ?><?php endif; ?>
+				<?php if(isset($comments)): ?><?=$comments ?><?php endif; ?>
+				<?php if(isset($pagination)): ?><?=$pagination?><?php endif; ?>
+				<?php if(isset($comment_form)): ?><?=$comment_form?><?php endif; ?>
 			</div>
 			<div class="page-right">
 				<h3 class="box-header margin"><?=$this->lang->line('LBL_00021')?></h3>
@@ -25,8 +25,8 @@
 							class="selected" <?php endif; ?>>
 									<?=anchor(base_url().'news/tag/'.str_replace(" ", "-", $tags['tag_name']), $tags['tag_name'], array('data-tooltip'=>'','title'=>$tags['tag_name']))?>
 								</li>
-							<?php endforeach ?>
-						<?php endif ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

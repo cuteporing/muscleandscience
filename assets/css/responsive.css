@@ -78,6 +78,10 @@
 	.top-hint {
 		margin-top: -494px;
 	}
+	.top-bar-container, .top-bar {
+		height: 91px;
+  	 	line-height: 91px;
+	}
 	.page-layout {
 		margin-left: 1.2rem;
 		margin-right: 1.2rem;
@@ -360,7 +364,7 @@
 	}
 	.comment-box .comments-number {
 		float: right;
-		padding: 9px 0 6px;
+		padding: 3px 0 6px;
 	}
 	#comments-list .comment-author-avatar {
 		display: none;
