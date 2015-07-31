@@ -36,6 +36,7 @@ $lang ['LBL_00034'] = "Special Package";
 $lang ['LBL_00035'] = "senior cards";
 $lang ['LBL_00036'] = "Untitle homebox";
 $lang ['LBL_00037'] = "no subtitle";
+$lang ['LBL_00038'] = "More";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

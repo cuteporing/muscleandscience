@@ -124,6 +124,7 @@ define ( 'TPL_PAGE_LIST', 				'pages/templates/list' );
 define ( 'TPL_PAGE_HEADER', 			'pages/templates/header' );
 define ( 'TPL_PAGE_NAVIGATION',			'pages/templates/top_navigation' );
 define ( 'TPL_PAGE_BREADCRUMBS', 		'pages/templates/breadcrumbs' );
+define ( 'TPL_PAGE_NEWS_LIST', 			'pages/templates/news_list' );
 define ( 'TPL_PAGE_NEWS_COMMENTS', 		'pages/templates/news_comments' );
 define ( 'TPL_PAGE_NEWS_COMMENT_LIST', 	'pages/templates/news_comment_list' );
 define ( 'TPL_HOMEBOX',					'pages/templates/homebox' );

@@ -21,7 +21,7 @@
 						<?php if(isset($tag_list)): ?>
 							<?php foreach ($tag_list as $tags): ?>
 								<li
-							<?php if($view == "tag" && $search_value == $tags['tag_name']): ?>
+							<?php if( ( $view == "tag" || $view == "title" ) && $search_value == $tags['tag_name'] ): ?>
 							class="selected" <?php endif; ?>>
 									<?=anchor(base_url().'news/tag/'.str_replace(" ", "-", $tags['tag_name']), $tags['tag_name'], array('data-tooltip'=>'','title'=>$tags['tag_name']))?>
 								</li>

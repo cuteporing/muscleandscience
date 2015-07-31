@@ -62,196 +62,14 @@ class news extends pages {
 		return $tags;
 	}
 
-	/**
-	 * GET COMMENT BOX
-	 *
-	 * --------------------------------------------
-	 * @param (Object) $data
-	 * @return $container
-	 */
-	public function comment_box($data) {
-		$day = format::format_date ( $data ['update_datetime'], 'd' );
-		$month = format::format_date ( $data ['update_datetime'], 'M' );
-
-		$contents = div ( $day . span ( $month, array (
-				'class' => 'second-row'
-		) ), array (
-				'class' => 'first-row'
-		) );
-		$contents .= anchor ( '#', $data ['comment_count'], array (
-				'title' => $data ['comment_count'] . ' comment/s',
-				'class' => 'comments-number'
-		) );
-		$container = div ( $contents, array (
-				'class' => 'comment-box'
-		) );
-		return $container;
-	}
-
-	/**
-	 * GET POST IMAGE
-	 *
-	 * --------------------------------------------
-	 * @param $path
-	 * @param $title
-	 * @param $id
-	 * @return $img
-	 */
-	public function get_post_img($path, $title, $id) {
-		$img = "";
-		if ($path != "") {
-			$img = anchor ( '#', img ( $path ), array (
-					'class' => 'post-image',
-					'title' => $title
-			) );
-		}
-		return $img;
-	}
-
-	/**
-	 * GET POST TITLE
-	 *
-	 * --------------------------------------------
-	 * @param $link
-	 * @param $title
-	 * @param $slug
-	 * @return $heading
-	 */
-	public function get_post_title($link, $title, $slug) {
-		$content = anchor ( $link . $slug, $title, array (
-				'title' => $title
-		) );
-		$heading = heading ( $content, '2' );
-
-		return $heading;
-	}
-
-	/**
-	 * GET POST DESCRIPTION
-	 *
-	 * --------------------------------------------
-	 * @param $data
-	 * @param $char_limit
-	 * @return $description
-	 */
-	public function get_description($data, $char_limit = 0) {
-		$description = "";
-		foreach ( $data as $row ) {
-			($char_limit != 0) ? $description .= character_limiter ( $row, $char_limit ) : $description .= $row;
-		}
-		return $description;
-	}
-
-	/**
-	 * GET POST TAGS
-	 *
-	 * --------------------------------------------
-	 * @param $data
-	 * @return $tags
-	 */
-	public function get_post_tag($data) {
-		$tags = "";
-		$class = array (
-				'data-tooltip' => '',
-				'title' => ''
-		);
-		foreach ( $data as $tag_name ) {
-			$tag_slug = str_replace ( " ", "-", $tag_name );
-			$class ['title'] = $tag_name;
-			$tags .= element_tag ( 'li', 'open' );
-			$tags .= anchor ( base_url () . 'news/tag/' . $tag_slug, $tag_name, $class );
-			$tags .= element_tag ( 'li' );
-		}
-		return $tags;
-	}
-
-	/**
-	 * GET POST FOOTER
-	 *
-	 * --------------------------------------------
-	 * @param $author
-	 * @param $tags
-	 * @return $container
-	 */
-	public function get_post_footer($author, $tags) {
-		$author = $this->lang->line ( 'LBL_00012' ) . anchor ( '#', $author ['firstname'] . ' ' . $author ['lastname'], array (
-				'class' => 'author'
-		) );
-
-		$contents = element_tag ( 'ul', 'open', array (
-				'class' => 'categories'
-		) );
-		$contents .= element_tag ( 'li', 'open', array (
-				'class' => 'posted-by'
-		) );
-		$contents .= $author;
-		$contents .= element_tag ( 'li' );
-		$contents .= $this->get_post_tag ( $tags );
-		$contents .= element_tag ( 'ul' );
-		$container = div ( $contents, array (
-				'class' => 'post-footer'
-		) );
-
-		return $container;
-	}
-
-	/**
-	 * GET POST CONTENTS
-	 *
-	 * --------------------------------------------
-	 * @param $data
-	 * @param $char_limit
-	 * @return $container
-	 */
-	public function post_content($data, $char_limit) {
-		$content = $this->get_post_img ( $data ['image'], $data ['title'], $data ['id'] );
-		$content .= $this->get_post_title ( base_url () . 'news/title/', $data ['title'], $data ['slug'] );
-		$content .= $this->get_description ( $data ['description'], $char_limit );
-		$content .= $this->get_post_footer ( $data ['author'], $data ['tags'] );
-		if ($char_limit > 0) {
-			$content .= anchor ( base_url () . 'news/title/' . $data ['slug'], 'More', array (
-					'class' => 'more icon-small-arrow margin-right-white',
-					'title' => $data ['title'],
-					'id' => 'superb'
-			) );
-		}
-		$container = div ( $content, array (
-				'class' => 'post-content'
-		) );
-
-		return $container;
-	}
-
-	/**
-	 * GET NEWS LIST
-	 *
-	 * --------------------------------------------
-	 * @param $data
-	 * @return $list
-	 */
-	public function news_list($data, $char_limit = 0) {
-		$list = '';
-
-		foreach ( $data as $row ) {
-			$list .= element_tag ( 'li', 'open', array (
-					'class' => 'post'
-			) );
-			$list .= $this->comment_box ( $row );
-			$list .= $this->post_content ( $row, $char_limit );
-			$list .= element_tag ( 'li' );
-		}
-
-		return $list;
-	}
-
 
 	/**
 	 * GET COMMENTS
 	 *
 	 * --------------------------------------------
-	 * @param $post_id
-	 * @param $offset
-	 * @return $result
+	 * @param (Integer) $post_id
+	 * @param (Integer) $offset
+	 * @return (Object)
 	 */
 	public function get_comments($post_id = null, $offset = 0) {
 		if (! is_null ( $post_id )) {
@@ -273,8 +91,8 @@ class news extends pages {
 	 * @param $view_type
 	 * @return
 	 */
-	public function get_pagination($view_type) {
-		$config ['base_url'] = base_url () . 'news/' . $view_type . '/';
+	public function get_pagination($view) {
+		$config ['base_url'] = base_url () . 'news/' . $view . '/';
 		$config ['uri_segment'] = 3;
 		$config ['total_rows'] = $this->total_rows;
 		$config ['per_page'] = $this->per_page;
@@ -304,9 +122,11 @@ class news extends pages {
 	 * @param $offset
 	 * @return $return_value
 	 */
-	static function cannot_find_page($total_rows, $offset) {
+	static function cannot_find_page($total_rows, $offset = 0) {
 		$return_value = false;
 		if ($offset > $total_rows) {
+			$return_value = true;
+		} elseif ( is_null( $total_rows ) ) {
 			$return_value = true;
 		}
 		return $return_value;
@@ -339,12 +159,8 @@ class news extends pages {
 
 		if ($other == "latest") {
 			$this->params ['limiter'] ['limit'] = 2;
-			$this->params ['where'] = array (
-					"deleted" => 0
-			);
-			$this->params ['order_by'] = array (
-					"update_datetime" => "desc"
-			);
+			$this->params ['where'] = array ( "deleted" => 0 );
+			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		} elseif ($other == "comments") {
 			$this->params ['limiter'] ['limit'] = $this->comments_limit;
 			$this->params ['order_by'] = array (
@@ -353,21 +169,13 @@ class news extends pages {
 		} elseif (! $type || $type == "blog") {
 			$this->params ['limiter'] ['limit'] = $this->blog_limit;
 			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array (
-					"deleted" => 0
-			);
-			$this->params ['order_by'] = array (
-					"update_datetime" => "desc"
-			);
+			$this->params ['where'] = array ( "deleted" => 0 );
+			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		} elseif ($type == "post") {
 			$this->params ['limiter'] ['limit'] = $this->post_limit;
 			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array (
-					"deleted" => 0
-			);
-			$this->params ['order_by'] = array (
-					"update_datetime" => "desc"
-			);
+			$this->params ['where'] = array ( "deleted" => 0 );
+			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		} elseif ($type == "tag") {
 			$slug = str_replace ( '-', ' ', $page );
 			$this->params ['limiter'] ['limit'] = $this->blog_limit;
@@ -376,19 +184,12 @@ class news extends pages {
 					TBL_TAGS . ".tag_name" => $slug,
 					TBL_POST . ".deleted" => 0
 			);
-			$this->params ['order_by'] = array (
-					"update_datetime" => "desc"
-			);
+			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		} elseif ($type == "title") {
 			$this->params ['limiter'] ['limit'] = $this->post_limit;
 			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array (
-					"deleted" => 0,
-					"slug" => $page
-			);
-			$this->params ['order_by'] = array (
-					"update_datetime" => "desc"
-			);
+			$this->params ['where'] = array ( "deleted" => 0, "slug" => $page );
+			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		}
 	}
 
@@ -410,12 +211,8 @@ class news extends pages {
 
 				// search paramter for post description
 				$this->params ['limiter'] ['limit'] = $this->blog_desc_limit;
-				$this->params ['where'] = array (
-						"post_id" => $post_id
-				);
-				$this->params ['order_by'] = array (
-						"sequence" => "asc"
-				);
+				$this->params ['where'] = array ( "post_id" => $post_id );
+				$this->params ['order_by'] = array ( "sequence" => "asc" );
 
 				// get post description
 				$result_details = $this->news_model->get_news_details ( $this->params );
@@ -444,19 +241,11 @@ class news extends pages {
 	 * @return $container
 	 */
 	public function view_latest_news() {
-		$container = "";
 		$result = $this->get_latest_news ();
-		if (count ( $result ) > 0 and ! is_null ( $result )) {
-			$class = array (
-					'class' => 'blog clearfix animated fadeIn'
-			);
-			$container = element_tag ( 'ul', 'open', $class );
-			$container .= $this->news_list ( $result, 450 );
-			$container .= element_tag ( 'ul' );
-			$container .= self::show_all_btn ();
-		}
+		$data ['char_limit']  = 450;
+		$data ['news_result'] = $result;
 
-		return $container;
+		return $this->load->view ( TPL_PAGE_NEWS_LIST, $data, true ).self::show_all_btn ();
 	}
 
 	/**
@@ -523,62 +312,51 @@ class news extends pages {
 	 */
 	public function view($page) {
 		$common = new common ();
-		$view = str_replace ( '/', '', $this->uri->slash_segment ( 2, 'leading' ) );
-		$value = str_replace ( '/', '', $this->uri->slash_segment ( 3, 'leading' ) );
-		$class = array (
-				'class' => 'blog clearfix animated fadeIn'
-		);
-		$character_limit = 0;
-		$container = "";
+		$view   = str_replace ( '/', '', $this->uri->slash_segment ( 2, 'leading' ) );
+		$value  = str_replace ( '/', '', $this->uri->slash_segment ( 3, 'leading' ) );
 
-		// SEARCH BY BLOG
-		if (! $view || $view == "blog") {
-			$character_limit = 450;
-			$result = $this->get_all_news ();
+		$result = $this->get_all_news ();
+
+		if (self::cannot_find_page ( $result )) {
+			return show_404 ();
+		}
+
+		// SEARCH BY BLOG / TAGS
+		if (! $view || $view == "blog" || $view == "tag") {
 			$this->per_page = $this->blog_limit;
-			$data ['pagination'] = $this->get_pagination ( $view );
-			$data ['view'] = "blog";
+			$data ['char_limit'] = 450;
 		}
 		// SEARCH BY SINGLE POST
 		elseif ($view == "post") {
-			$character_limit = 800;
-			$result = $this->get_all_news ();
 			$this->per_page = $this->post_limit;
-			$data ['pagination'] = $this->get_pagination ( $view );
-			$data ['view'] = "post";
-		}
-		// SEARCH BY TAGS
-		elseif ($view == "tag") {
-			$character_limit = 450;
-			$result = $this->get_all_news ();
-			$this->per_page = $this->blog_limit;
-			$data ['pagination'] = $this->get_pagination ( $view );
-			$data ['view'] = "tag";
-			$data ['search_value'] = str_replace ( '-', ' ', $value );
+			$data ['char_limit'] = 800;
 		}
 		// SEARCH BY TITLE
 		elseif ($view == "title") {
-			$character_limit = 0;
-			$result = $this->get_all_news ();
 			$this->per_page = $this->post_limit;
 			if (! is_null ( $result )) {
-				$data ['comment_result']  = $this->get_comments ( $result[0]['id'], 0 );
-				$data ['comment_display'] = $this->load->view ( TPL_PAGE_NEWS_COMMENT_LIST, $data, true );
-				$data ['comments'] 	      = $this->load->view ( TPL_PAGE_NEWS_COMMENTS, $data, true );
+				$data ['comment_result']  = $this->get_comments (
+						$result[0]['id'], 0 );
+				$data ['comment_display'] = $this->load->view (
+						TPL_PAGE_NEWS_COMMENT_LIST, $data, true );
+				$data ['comments'] 	      = $this->load->view (
+						TPL_PAGE_NEWS_COMMENTS, $data, true );
 			}
 			$data ['view'] = "title";
-			$data ['comment_form'] = $common->get_form ( TPL_PAGE_FORMS, 'comment' );
+			$data ['comment_form'] = $common->get_form (
+					TPL_PAGE_FORMS, 'comment' );
 		}
 
-		if (! is_null ( $result )) {
-			$container = element_tag ( 'ul', 'open', $class );
-			$container .= $this->news_list ( $result, $character_limit );
-			$container .= element_tag ( 'ul' );
-		}
+		if ( $view != 'title' )
+			$data ['pagination'] = $this->get_pagination ( $view );
 
-		$data ['breadcrumbs'] = $common->get_breadcrumbs ( $page );
-		$data ['news_list'] = $container;
-		$data ['tag_list'] = $this->news_model->get_news_tags ();
+		$data ['view']         = $view;
+		$data ['news_result']  = $result;
+		$data ['search_value'] = str_replace ( '-', ' ', $value );
+		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+		$data ['tag_list']     = $this->news_model->get_news_tags ();
+		$data ['news_list']    = $this->load->view (
+				TPL_PAGE_NEWS_LIST, $data, true );
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}
