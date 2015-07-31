@@ -11,7 +11,9 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class home extends pages {
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'banner_model' );
@@ -25,8 +27,9 @@ class home extends pages {
 	 */
 	static function create_login_form() {
 		$common = new common ();
-		$panel = $common->get_form( TPL_PAGE_FORMS, 'login' );
-		$container = homebox::create_homebox ( 'G', $panel, true );
+		$homebox = new homebox ();
+		$data['display']  = $common->get_form( TPL_PAGE_FORMS, 'login' );
+		$container = $homebox->create_homebox ( 'G', $data, true );
 
 		return $container;
 	}

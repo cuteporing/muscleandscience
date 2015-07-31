@@ -18,7 +18,6 @@ class footer extends CI_controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'company_model' );
-
 		$this->company_info = $this->company_model->get_company_info ();
 	}
 

@@ -28,6 +28,14 @@ $lang ['LBL_00026'] = "Sign in";
 $lang ['LBL_00027'] = "Go to your account";
 $lang ['LBL_00028'] = "Details";
 $lang ['LBL_00029'] = "Timetable";
+$lang ['LBL_00030'] = "Gym Packages";
+$lang ['LBL_00031'] = "membership promos";
+$lang ['LBL_00032'] = "Personal Training";
+$lang ['LBL_00033'] = "sign up today";
+$lang ['LBL_00034'] = "Special Package";
+$lang ['LBL_00035'] = "senior cards";
+$lang ['LBL_00036'] = "Untitle homebox";
+$lang ['LBL_00037'] = "no subtitle";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

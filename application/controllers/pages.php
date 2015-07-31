@@ -34,7 +34,7 @@ class pages extends CI_controller {
 	 */
 	public function getHeader($data) {
 		$data ['title'] = ucfirst(str_replace('_', ' ', $data ['title']));
-		$this->load->view ( 'pages/templates/header', $data );
+		$this->load->view ( TPL_PAGE_HEADER, $data );
 	}
 
 	/**
@@ -45,43 +45,7 @@ class pages extends CI_controller {
 	 * @return (View)
 	 */
 	public function displayTopNav($data) {
-		$this->load->view ( 'pages/templates/top_navigation', $data );
-	}
-
-	/**
-	 * DISPLAY HOME PAGE
-	 *
-	 * --------------------------------------------
-	 * @param (String) $page
-	 * @return (View)
-	 */
-	public function home($page) {
-		$home = new home ();
-		$data = $home->view ( $page );
-	}
-
-	/**
-	 * DISPLAY NEWS PAGE
-	 *
-	 * --------------------------------------------
-	 * @param (String) $page
-	 * @return (View)
-	 */
-	public function news($page) {
-		$news = new news ();
-		$data = $news->view ( $page );
-	}
-
-	/**
-	 * DISPLAY GYM CLASS PAGE
-	 *
-	 * --------------------------------------------
-	 * @param (String) $page
-	 * @return (View)
-	 */
-	public function gym_class($page) {
-		$gym_class = new gym_class ();
-		$data = $gym_class->view ( $page );
+		$this->load->view ( TPL_PAGE_NAVIGATION, $data );
 	}
 
 	/**
@@ -102,18 +66,19 @@ class pages extends CI_controller {
 		$this->getHeader ( $data );
 		$this->displayTopNav ( $data );
 
+		// Initialize page display
 		switch ($page) {
-			case 'home' :
-				$this->home ( $page );
-				break;
 			case 'news' :
-				$this->news ( $page );
+				$news = new news ();
+				$news->view ( $page );
 				break;
 			case 'gym_class' :
-				$this->gym_class ( $page );
+				$gym_class = new gym_class ();
+				$gym_class->view ( $page );
 				break;
 			default :
-				$this->home ( $page );
+				$home = new home ();
+				$home->view ( $page );
 				break;
 		}
 

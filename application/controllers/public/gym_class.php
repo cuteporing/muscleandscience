@@ -24,8 +24,8 @@ class gym_class extends pages {
 	/**
 	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
 	 *
-	 * @return List <dd>
 	 * --------------------------------------------
+	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
 		$data['result'] = $this->gym_class_model->get_gym_class_thumb ();
@@ -36,8 +36,8 @@ class gym_class extends pages {
 	/**
 	 * GET ALL GYM CLASS
 	 *
-	 * @return List <dd>
 	 * --------------------------------------------
+	 * @return (Array) $result
 	 */
 	public function get_all_class() {
 		$result = $this->gym_class_model->get_class ( $this->params );
@@ -47,7 +47,7 @@ class gym_class extends pages {
 				$id = $result[$i]['id'];
 
 				$this->params ['where'] = array (
-						TBL_CLASS_TRAINER . ".class_id" => $id
+					TBL_CLASS_TRAINER . ".class_id" => $id
 				);
 				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $this->params );
 			}
@@ -81,9 +81,10 @@ class gym_class extends pages {
 		$this->get_params('M');
 		$result = $this->package_model->get_package ( $this->params );
 
-		$data['title']    = "Gym Packages";
-		$data['subtitle'] = "membership promos";
-		$data['list']     = $result;
+		$data['title']    = $this->lang->line ( 'LBL_00030' );
+		$data['subtitle'] = $this->lang->line ( 'LBL_00031' );
+		$data['display']  = $result;
+		$data['type']     = 'list';
 
 		return $homebox->create_homebox( 'LG', $data, true );
 	}
@@ -99,22 +100,43 @@ class gym_class extends pages {
 		$this->get_params('PT');
 		$result = $this->package_model->get_package ( $this->params );
 
-		$data['title']    = "Personal Training";
-		$data['subtitle'] = "sign up today";
-		$data['list']     = $result;
+		$data['title']    = $this->lang->line ( 'LBL_00032' );
+		$data['subtitle'] = $this->lang->line ( 'LBL_00033' );
+		$data['display']  = $result;
+		$data['type']     = 'list';
 
 		return $homebox->create_homebox( 'G', $data, true );
 	}
 
 	/**
-	 * GET HOMEBOX
+	 * GET HOMEBOX FOR SPECIAL PACKAGE
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return
+	 */
+	public function get_sp_homebox() {
+		$homebox = new homebox ();
+		$this->get_params('S');
+		$result = $this->package_model->get_package ( $this->params );
+
+		$data['title']    = $this->lang->line ( 'LBL_00034' );
+		$data['subtitle'] = $this->lang->line ( 'LBL_00035' );
+		$data['display']  = $result;
+		$data['type']     = 'list';
+
+		return $homebox->create_homebox( 'D', $data, true );
+	}
+
+	/**
+	 * GET RIGHT HOMEBOX DISPLAY
+	 *
+	 * --------------------------------------------
+	 * @return $homebox
 	 */
 	public function get_homebox() {
 		$homebox = $this->get_package_homebox ();
 		$homebox.= $this->get_pt_homebox ();
+		$homebox.= $this->get_sp_homebox ();
 
 		return $homebox;
 	}
@@ -122,8 +144,9 @@ class gym_class extends pages {
 	/**
 	 * VIEW GYM CLASS
 	 *
-	 * @param $page
 	 * --------------------------------------------
+	 * @param (String) $page
+	 * @return (View)
 	 */
 	public function view($page) {
 		$common = new common ();

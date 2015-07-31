@@ -20,53 +20,29 @@ class homebox extends CI_controller {
 	}
 
 	/**
-	 * CREATES THE TITLE HEADER FOR HOMEBOX <h2>
+	 * CREATES LIST INSIDE THE HOMEBOX
 	 *
 	 * --------------------------------------------
-	 * @param (String) $title
-	 * @param (String) $link
-	 * @return (String) $homebox_title
+	 * @param (Object) $data
+	 * @param (Object) $list
+	 * @return (View)
 	 */
-	private function homebox_title($title, $link = '') {
-		($title == "") ?
-		  $homebox_title = heading ( anchor ( '#', 'Untitled homebox' ), '2' )
-		: $homebox_title = heading ( anchor ( $link, $title, array (
-				'title' => $title
-		) ), '2' );
+	private function homebox_list($data, $list) {
+		$data['result'] = $list;
 
-		return $homebox_title;
+		return $this->load->view ( TPL_HOMEBOX_LIST, $data, true );
 	}
 
 	/**
-	 * CREATES THE SUBTITLE HEADER FOR HOMEBOX <h3>
+	 * CREATES BUTTON FOR HOMEBOX
 	 *
 	 * --------------------------------------------
-	 * @param (String) $subtitle
-	 * @return (String) $homebox_subtitle
+	 * @param (String) $type
+	 * @return
 	 */
-	private function homebox_subtitle($subtitle) {
-		($subtitle == "") ?
-		  $homebox_subtitle = heading ( anchor ( '#', 'no subtitle' ), '3' )
-		: $homebox_subtitle = heading ( $subtitle, '3' );
-
-		return $homebox_subtitle;
-	}
-
-	/**
-	 * CREATES THE DESCRIPTION FOR HOMEBOX
-	 *
-	 * --------------------------------------------
-	 * @param (String) $about
-	 * @return (String) $description
-	 */
-	private function homebox_about($about) {
-		($about == "") ?
-		  $description = heading ( anchor ( '#', 'no description available!' ), '2' )
-		: $description = div ( character_limiter ( $about, 100 ), array (
-				'class' => 'text'
-		) );
-
-		return $description;
+	private function homebox_button($type) {
+		return anchor(base_url().'/home',
+				$this->lang->line('LBL_00025'), array('class'=>$type));
 	}
 
 	/**
@@ -91,95 +67,83 @@ class homebox extends CI_controller {
 	}
 
 	/**
-	 * CREATES LIST INSIDE THE HOMEBOX
+	 * CREATES THE DESCRIPTION FOR HOMEBOX
 	 *
 	 * --------------------------------------------
-	 * @param (String) $box_color
-	 * @param (String) $icon
-	 * @param (String) $list
-	 * @return (View) $list
+	 * @param (String) $about
+	 * @return (String) $description
 	 */
-	private function homebox_list($box_color, $icon, $list) {
-		$data['box_color'] = $box_color;
-		$data['icon'] = $icon;
-		$data['list'] = $list;
+	private function homebox_about($about) {
+		($about == "") ?
+		$description = heading ( anchor ( '#', 'no description available!' ), '2' )
+		: $description = div ( character_limiter ( $about, 100 ), array (
+				'class' => 'text'
+		) );
 
-		$list = $this->load->view ( TPL_HOMEBOX_LIST, $data, true );
-
-		return $list;
-	}
-
-	/**
-	 * CREATES BUTTON FOR HOMEBOX
-	 *
-	 * --------------------------------------------
-	 * @param (String) $type
-	 * @return
-	 */
-	private function homebox_button($type) {
-		return anchor(base_url().'/home',
-				$this->lang->line('LBL_00025'), array('class'=>$type));
+		return $description;
 	}
 
 	/**
 	 * CREATES A HOMEBOX PANEL
+	 * DEFAULT DISPLAYS HORIZONTALLY
 	 *
+	 * $contents['title'] -- homebox title
+	 * $contents['subtitle'] -- homebox subtitle
+	 * $contents['display'] -- homebox content ( html, text, array )
+	 * $contents['banner_icon'] -- homebox icon
+	 * $contents['display_limit'] -- homebox content character limit
+	 * $contents['type'] -- homebox type ( news, list )
 	 * --------------------------------------------
 	 * @param (String) $type
 	 * @param (String) $contents
 	 * @param (Boolean) $is_block
-	 * @return (String) $homebox
+	 * @return (View)
 	 */
-	public function create_homebox($type = 'G', $contents = '', $is_block = false) {
+	public function create_homebox($type = 'G', $contents, $is_block = false) {
+		$data['contents']  = $contents;
+
 		switch ($type) {
-			case 'G' :
-				$box_color = "green";
-				$list_icon = "icon-card-white";
-				$button    = "more black icon-small-arrow margin-right-white";
+			case 'G' : // GREEN
+				$data['box_color'] = "green";
+				$data['icon']      = "icon-card-white";
+				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
-			case 'LG':
-				$box_color = "light-green";
-				$list_icon = "icon-card-white";
-				$button    = "more black icon-small-arrow margin-right-white";
+			case 'LG': // LIGHT GREEN
+				$data['box_color'] = "light-green";
+				$data['icon']      = "icon-card-white";
+				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
-			case 'W' :
-				$box_color = 'white';
-				$list_icon = "icon-card-white";
-				$button    = "more black icon-small-arrow margin-right-white";
+			case 'W' : // WHITE
+				$data['box_color'] = "white";
+				$data['icon'] = "icon-card-white";
+				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
-			case 'D' :
-				$box_color = 'dark';
-				$list_icon = "icon-card-green";
-				$button = "more black icon-small-arrow margin-right-white";
+			case 'D' : // DARK
+				$data['box_color'] = "dark";
+				$data['icon']      = "icon-card-green";
+				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
-			default  :
-				$box_color = 'green';
-				$list_icon = "icon-card-white";
-				$button = "more black icon-small-arrow margin-right-white";
+			default  : // GREEN
+				$data['box_color'] = "green";
+				$data['icon']      = "icon-card-white";
+				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
 		}
 
-		($is_block === true) ? $box_color = $box_color . ' block' : $box_color;
+		// display vertically
+		if ( $is_block === true )
+		  $data['box_color'] = $data['box_color'] . ' block';
 
-		$attribute = array (
-				'class' => 'home-box ' . $box_color
-		);
-
-		$homebox = element_tag ( 'li', 'open', $attribute );
-
-		if( is_array( $contents ) ) {
-			$homebox .= $this->homebox_title( $contents['title'] );
-			$homebox .= $this->homebox_subtitle ( $contents ['subtitle'] );
-			$homebox .= $this->homebox_list ( $box_color, $list_icon, $contents['list'] );
-			$homebox .= $this->homebox_button ( $button );
+		if ( isset( $contents['type'] ) && $contents['type'] == 'list' ) {
+			$data['display'] = $this->homebox_list ( $data, $contents['display'] );
 		}else{
-			$homebox .= $contents;
+			$data['display'] = ( isset( $contents['display'] ) )?
+									$contents['display'] : '';
 		}
 
-		$homebox .= element_tag ( 'li' );
-
-		return $homebox;
+		return $this->load->view ( TPL_HOMEBOX, $data, true );
 	}
+
 
 	/**
 	 * CREATES THE DISPLAY FOR HOME BOX BANNER
@@ -191,19 +155,14 @@ class homebox extends CI_controller {
 		$result = $this->homebox_model->get_homebox ();
 		$box = '';
 		foreach ( $result as $item ) {
-			$attributes = array (
-					'title' => $item ['title'],
-					'target' => '_blank',
-					'class' => 'more black icon-small-arrow margin-right-white'
-			);
+			$data['title']         = $item['title'];
+			$data['subtitle']      = $item['subtitle'];
+			$data['display']       = $item ['about'];
+			$data['banner_icon']   = $item ['icon'];
+			$data['display_limit'] = 100;
+			$data['type']          = 'news';
 
-			$contents = '';
-			$contents .= $this->homebox_title ( $item ['title'], $item ['link'] );
-			$contents .= $this->homebox_subtitle ( $item ['subtitle'] );
-			$contents .= $this->homebox_content ( $item ['icon'], $item ['about'], $item ['link'] );
-			$contents .= anchor ( $item ['link'], 'More', $attributes );
-
-			$box .= $this->create_homebox ( $item ['type'], $contents );
+			$box .= $this->create_homebox( $item ['type'], $data );
 		}
 
 		return $box;

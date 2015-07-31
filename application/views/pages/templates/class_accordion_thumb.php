@@ -2,10 +2,12 @@
 	<?php if ( isset( $result ) ): ?>
 		<?php foreach ( $result as $row ): ?>
 			<dd class="accordion-navigation">
+				<!-- TITLE -->
 				<a href="#<?=$row['slug'] ?>">
 					<h3><?=$row['title'] ?></h3>
 					<h5><?=$row['subtitle'] ?></h5>
 				</a>
+				<!-- CONTENTS -->
 				<div id="<?=$row['slug'] ?>" class="content item-content clearfix">
 					<a href="#" title="<?=$row['title'] ?>" class="thumb_img">
 						<img alt="<?=$row['img_thumb'] ?>" src="<?=$row['img_thumb'] ?>">

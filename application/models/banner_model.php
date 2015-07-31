@@ -19,8 +19,8 @@ class Banner_model extends CI_Model {
 	/**
 	 * GET BANNER
 	 *
-	 * @return (Object)
 	 * --------------------------------------------
+	 * @return (Object)
 	 */
 	public function get_banner() {
 		$query = $this->db->get ( 'mas_banner' );
@@ -30,8 +30,8 @@ class Banner_model extends CI_Model {
 	/**
 	 * SET BANNER
 	 *
-	 * @return
 	 * --------------------------------------------
+	 * @return
 	 */
 	public function set_banner() {
 		$this->load->helper ( 'url' );
