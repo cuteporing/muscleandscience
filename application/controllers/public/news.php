@@ -291,13 +291,13 @@ class news extends pages {
 				// get news author
 				$result_author = $this->news_model->get_news_author ( $author_id );
 
-				$result_post [$i] ['author'] = $result_author [0];
-				$result_post [$i] ['tags'] = $this->extract_post_tags ( $result_tags );
-				$result_post [$i] ['description'] = $result_tags;
-				$result_post [$i] ['description'] = array (
-						$result_details [0] ['description']
+				$result_post[$i]['author'] = $result_author [0];
+				$result_post[$i]['tags'] = $this->extract_post_tags ( $result_tags );
+				$result_post[$i]['description'] = $result_tags;
+				$result_post[$i]['description'] = array (
+						$result_details[0]['description']
 				);
-				$result_post [$i] ['comment_count'] = $this->news_model->get_comment_count ( $result_post [$i] ['id'] );
+				$result_post[$i]['comment_count'] = $this->news_model->get_comment_count ( $result_post [$i] ['id'] );
 			}
 		}
 

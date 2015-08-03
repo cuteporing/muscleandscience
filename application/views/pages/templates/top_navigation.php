@@ -9,7 +9,7 @@
 							id="logo"></a>
 					</h1>
 				</li>
-				<li class="toggle-topbar menu-icon"><a href="#"></a></li>
+				<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
 			</ul>
 
 			<section class="top-bar-section">
@@ -23,11 +23,13 @@
 					<li class="has-dropdown"><a href="<?=base_url()?>gym_class/"><?=$this->lang->line('LBL_00002')?></a>
 						<ul class="dropdown">
 						<?php //get_class_topbar();?>
-					</ul></li>
-					<li><a href="gallery.php" class="main-link"><?=$this->lang->line('LBL_00008')?></a></li>
+						</ul>
+					</li>
+					<li><a href="<?=base_url()?>gallery.php" class="main-link"><?=$this->lang->line('LBL_00008')?></a></li>
 					<li><a href="contact.php" class="main-link"><?=$this->lang->line('LBL_00006')?></a></li>
 				</ul>
 			</section>
 		</nav>
 	</div>
 </div>
+

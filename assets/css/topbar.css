@@ -10,6 +10,10 @@
 	background: #000000;
 }
 
+.top-bar.expanded {
+	z-index: 100;
+}
+
 .top-bar-section ul.right {
 	font-size: 16px;
 	margin-top: 92px;
@@ -25,3 +29,8 @@
 .top-bar-section ul li.active {
 	border-bottom: 2px solid #91b034;
 }
+
+.top-bar .toggle-topbar.menu-icon a {
+	color: #7d972d;
+}
+

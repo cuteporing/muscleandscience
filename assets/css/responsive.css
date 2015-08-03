@@ -82,6 +82,15 @@
 		height: 91px;
   	 	line-height: 91px;
 	}
+	.top-bar-section ul.right {
+		margin-top: 47px;
+	}
+	.top-bar .title-area {
+		height: 91px;
+	}
+	.top-bar.expanded .title-area {
+		background : none;
+	}
 	.page-layout {
 		margin-left: 1.2rem;
 		margin-right: 1.2rem;
@@ -288,6 +297,9 @@
 }
 
 @media only screen and (max-width: 640px) {
+	.top-bar-section ul.right {
+		margin-top: 0px;
+	}
 	.home-box .news .text {
 		width: 347px;
 	}

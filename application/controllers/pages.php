@@ -19,6 +19,7 @@ include_once ('public/footer.php');
 include_once ('public/gym_class.php');
 include_once ('public/home.php');
 include_once ('public/news.php');
+include_once ('public/gallery.php');
 
 class pages extends CI_controller {
 	public function __construct() {
@@ -75,6 +76,11 @@ class pages extends CI_controller {
 			case 'gym_class' :
 				$gym_class = new gym_class ();
 				$gym_class->view ( $page );
+				break;
+			case 'gallery' :
+				var_dump( $page );
+				$gallery = new gallery ();
+				$gallery->view ( $page );
 				break;
 			default :
 				$home = new home ();
