@@ -15,8 +15,8 @@ if (! defined ( 'BASEPATH' ))
 class news extends pages {
 	private $total_rows = 0;
 	private $blog_limit = 10;
-	private $comments_limit = 10;
 	private $post_limit = 1;
+	private $comments_limit = 10;
 	private $blog_desc_limit = 1;
 	private $per_page = 0;
 	private $params = array ();
@@ -199,8 +199,13 @@ class news extends pages {
 	 * --------------------------------------------
 	 * @return $result_post
 	 */
-	public function get_latest_news() {
+	public function get_latest_news( $limit ) {
 		$this->get_params ( 'latest' );
+
+		if( isset( $limit ) ) {
+			$this->params ['limiter'] ['limit'] = $limit;
+		}
+
 
 		$result_post = $this->news_model->get_news ( $this->params );
 

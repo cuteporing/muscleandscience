@@ -3,7 +3,7 @@
 		<div class="footer-box-container clearfix">
 			<?=$footer['info'] ?>
 			<?=$footer['opening'] ?>
-			<div class="footer-box"></div>
+			<?=$footer['recent_post'] ?>
 		</div>
 		<div class="copyright-area">
 			<?=COPYRIGHT ?>

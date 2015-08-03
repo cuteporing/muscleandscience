@@ -31,6 +31,8 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/responsive.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/animate.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/slick.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/foundation-icons.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/tinycarousel.css" />
 		<link rel="shortcut icon" href="<?=base_url()?>assets/img/icon.png" />
 		<script src="<?=base_url()?>assets/js/vendor/modernizr.js"></script>
 		<script src="<?=base_url()?>assets/js/vendor/jquery.js"></script>

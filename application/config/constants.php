@@ -134,6 +134,7 @@ define ( 'TPL_CLASS_ACCORDION_THUMB',	'pages/templates/class_accordion_thumb' );
 define ( 'TPL_FOOTER_COMPANY_INFO',		'pages/templates/footer_company_info' );
 define ( 'TPL_FOOTER_COMPANY_SOCIAL', 	'pages/templates/footer_company_social' );
 define ( 'TPL_FOOTER_COMPANY_OPERATION','pages/templates/footer_company_operation' );
+define ( 'TPL_FOOTER_RECENT_POST',		'pages/templates/footer_recent_post' );
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

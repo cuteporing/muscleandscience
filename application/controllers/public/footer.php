@@ -73,14 +73,18 @@ class footer extends CI_controller {
 	 * @return
 	 */
 	public function view() {
+		$news = new news ();
 		$data['result_info']      = $this->company_info;
 		$data['result_social']    = $this->company_model->get_company_social ();
 		$data['result_operation'] = $this->get_company_operation ();
+		$data['result_recent_post'] = $news->get_latest_news ( 10 );
 
 		$data ['footer'] ['info'] = $this->load->view (
 				TPL_FOOTER_COMPANY_INFO, $data, true );
 		$data ['footer'] ['opening'] = $this->load->view (
 				TPL_FOOTER_COMPANY_OPERATION, $data, true );
+		$data ['footer'] ['recent_post'] = $this->load->view (
+				TPL_FOOTER_RECENT_POST, $data, true );
 
 		$this->load->view ( 'pages/templates/footer', $data );
 	}

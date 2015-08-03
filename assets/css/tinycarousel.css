@@ -138,9 +138,10 @@
 	line-height: 150%;
 }
 
-#upcoming .overview  li a:hover, .scrolling-list.latest-tweets li a:hover,
-	.scrolling-list.recent-post-small li a:hover {
-	text-decoration: underline;
+#upcoming .overview li a:hover,
+.scrolling-list.latest-tweets li a:hover,
+.scrolling-list.recent-post-small li a:hover {
+	text-decoration: none;
 }
 
 .timeago, .time-desc {

@@ -37,6 +37,7 @@ $lang ['LBL_00035'] = "senior cards";
 $lang ['LBL_00036'] = "Untitle homebox";
 $lang ['LBL_00037'] = "no subtitle";
 $lang ['LBL_00038'] = "More";
+$lang ['LBL_00039'] = "Recent Posts";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */
