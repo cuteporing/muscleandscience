@@ -25,7 +25,7 @@
 						<?php //get_class_topbar();?>
 						</ul>
 					</li>
-					<li><a href="<?=base_url()?>gallery.php" class="main-link"><?=$this->lang->line('LBL_00008')?></a></li>
+					<li><a href="<?=base_url()?>gallery" class="main-link"><?=$this->lang->line('LBL_00008')?></a></li>
 					<li><a href="contact.php" class="main-link"><?=$this->lang->line('LBL_00006')?></a></li>
 				</ul>
 			</section>

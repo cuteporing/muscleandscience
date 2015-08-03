@@ -16,7 +16,6 @@ class Gallery_model extends Common_model {
 
 	public function __construct()
 	{
-		parent::__construct();
 	}
 
 	public function sample() {

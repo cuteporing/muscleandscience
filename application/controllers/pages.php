@@ -78,7 +78,6 @@ class pages extends CI_controller {
 				$gym_class->view ( $page );
 				break;
 			case 'gallery' :
-				var_dump( $page );
 				$gallery = new gallery ();
 				$gallery->view ( $page );
 				break;

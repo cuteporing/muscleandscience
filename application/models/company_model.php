@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Company_model extends CI_Model {
+class Company_model extends Common_model {
 	public function __construct() {
 		$this->load->database ();
 	}

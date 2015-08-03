@@ -29,7 +29,7 @@ if (! defined ( 'BASEPATH' ))
  * | 6. Models
  * |
  */
-	
+
 /*
  * | -------------------------------------------------------------------
  * | Auto-load Packges
@@ -56,7 +56,7 @@ $autoload ['packages'] = array ();
 
 $autoload ['libraries'] = array (
 		'database',
-		'session' 
+		'session'
 );
 
 /*
@@ -74,7 +74,7 @@ $autoload ['helper'] = array (
 		'file',
 		'html',
 		'text',
-		'url' 
+		'url'
 );
 
 /*
@@ -117,7 +117,10 @@ $autoload ['language'] = array ();
  * |
  */
 
-$autoload ['model'] = array ();
+$autoload ['model'] = array (
+		'Common_model'
+
+);
 
 
 /* End of file autoload.php */

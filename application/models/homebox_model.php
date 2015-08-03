@@ -12,7 +12,8 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Homebox_model extends CI_Model {
+class Homebox_model extends Common_model {
+
 	public function __construct() {
 		$this->load->database ();
 	}
