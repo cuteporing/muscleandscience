@@ -26,7 +26,6 @@
 								href="#<?=$trainer_id?>"><?=$this->lang->line('LBL_00023')?></a>
 							</li>
 							<?php endif; ?>
-							<li class="ui-state-default ui-corner-top"><a href="#Timetable"><?=$this->lang->line('LBL_00024')?></a>
 							</li>
 						</ul>
 						<!-- end BUTTONS -->

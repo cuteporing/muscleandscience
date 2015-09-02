@@ -39,7 +39,7 @@ class Gallery_model extends Common_model {
 			$query = $this->db->get ();
 		}
 
-		if ($query->num_rows () > 0) {
+		if ($query->num_rows() > 0) {
 			return $query->result_array ();
 		} else {
 			return null;
