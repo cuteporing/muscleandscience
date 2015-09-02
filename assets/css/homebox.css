@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* HOME BOX CONTAINER         */
+.homebox-top {
+	margin-top: -70px;
+}
+
+.home-box-container,
+.box-panel-containter {
+	margin-left: 0;
+	z-index: 2;
+	position: relative;
+}
+
+.home-box {
+	float: left;
+	width: 33.33333%;
+	height: 240px;
+	padding: 25px 30px 30px;
+	list-style-type: none;
+}
+
+.home-box.block {
+	width: 100%;
+	height: auto;
+}
+
+.home-box.white,
+.box-panel.white {
+	background: white;
+}
+
+.home-box.light-green,
+.box-panel.light-green,
+.light-green {
+	background: #A5C73E;
+}
+
+.home-box.green,
+.box-panel.green,
+.green {
+	background: #829e2d;
+}
+
+.home-box.dark,
+.box-panel.dark {
+	background-color: #303030;
+}
+
+.box-panel.light {
+	background-color: rgb(224, 224, 224);
+}
+
+.home-box .header-left {
+	float: left;
+	width: 185px;
+}
+
+.home-box .header-right {
+	width: 58px;
+}
+
+.header-right {
+	float: right;
+}
+
+.home-box .upcoming-classes {
+	width: 227px;
+	height: 141px;
+	padding-top: 8px;
+	overflow-y: hidden;
+}
+
+.home-box #upcoming-class-prev,
+.home-box #upcoming-class-next {
+	float: left;
+	width: 28px;
+	height: 28px;
+	border: 1px solid #eee;
+}
+
+.home-box #upcoming-class-next {
+	margin-left: 2px;
+}
+
+.home-box #upcoming-class-next:hover {
+	background-image: url(../img/icons/icon_arrow_right_white.png);
+}
+
+.home-box #upcoming-class-prev:hover {
+	background-image: url(../img/icons/icon_arrow_left_white.png);
+}
+
+.home-box #upcoming-class-prev:hover, .home-box #upcoming-class-next:hover
+	{
+	background-color: #000;
+	border-color: #000;
+}
+
+.home-box h2, .home-box h3 {
+	margin: 0;
+	line-height: 1;
+}
+
+.home-box h2 {
+	font-size: 24px;
+}
+
+.home-box h3 {
+	font-family: 'Droid Serif';
+	font-style: italic;
+	color: #000;
+	margin-top: 5px;
+	font-size: 18px;
+}
+
+.home-box.white h2 {
+	color: #A5C73E;
+}
+
+.home-box.light-green h2 a, .home-box.green h2 a, .home-box.dark h2 a,
+	.home-box h2 {
+	color: white;
+}
+
+.home-box.light-green h2 a:hover,
+.home-box.green h2 a:hover,
+.home-box.dark h2 a:hover
+	{
+	text-decoration: underline;
+}
+
+.home-box.dark h3 {
+	color: #999;
+}
+
+.home-box .news {
+	margin-top: 20px;
+}
+
+.home-box .news .banner-icon, .banner-icon {
+	float: left;
+	margin-right: 20px;
+	margin-top: 5px;
+}
+
+.banner-icon {
+	width: 50px;
+	height: 60px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.home-box .news .text {
+	float: left;
+	width: 190px;
+	line-height: 150%;
+	font-size: 12px;
+	color: white;
+}
+
+.home-box .more {
+	margin-top: 20px;
+}
+
+.banner-icon.icon-only {
+	padding: 2.275rem;
+	margin-right: 5px;
+}
+
+.banner-icon.icon-only:hover {
+	background-color: #ccc;
+}
+
+.banner-icon.icon-only.active {
+	background-color: #A5C73E;
+}

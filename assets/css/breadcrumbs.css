@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* BREADCRUMBS                */
+.bread-crumb {
+	background: none;
+	color: #999;
+	border-top: 1px solid #515151;
+	border-bottom: 1px solid #515151;
+	border-right: none;
+	border-left: none;
+	padding: 12px 0;
+	margin-top: 25px;
+}
+
+.breadcrumbs>*:before,
+.bread-crumb>*::before {
+	content: url(../img/icons/icon_arrow_right_white2.png) top;
+	color: #aaaaaa;
+	margin: 0 0.75rem;
+	position: relative;
+	top: 1px;
+}
+
+.bread-crumb .no-arrow:before {
+	content: "";
+	margin-right: 0px;
+}
+
+.bread-crumb a {
+	color: #A5C73E;
+}
+
+.bread-crumb li.current a,
+.bread-crumb a.current,
+.bread-crumb span {
+	color: #999;
+}
+
+.bread-crumb a:hover {
+	text-decoration: underline;
+}
+
+.bread-crumb a.current:hover,
+.bread-crumb li.current:hover a {
+	text-decoration: none;
+}

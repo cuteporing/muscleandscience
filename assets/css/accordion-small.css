@@ -1,0 +1,144 @@
+/* -------------------------- */
+/* SIDE-ACCORDION-SMALL       */
+.accordion-gym-fitness,
+.accordion-acc-nav {
+	margin-top: 0px;
+}
+
+.accordion dd > a,
+.accordion-acc-nav .accordion-navigation > a,
+.accordion-gym-fitness .accordion-navigation > a {
+	padding-left: 0;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	background: none;
+	background: url('../img/icons/icon_accordion_arrow_down.png') no-repeat
+		right center;
+	border-bottom: 1px solid #353535;
+}
+
+.accordion-acc-nav h3,
+.accordion-acc-nav h5,
+.accordion-gym-fitness h3,
+.accordion-gym-fitness h5 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	color: #9D9D9D;
+}
+
+.accordion-acc-nav h4 {
+	font-size: 16px;
+}
+
+.accordion-acc-nav h5,
+.accordion-gym-fitness h5 {
+	color: #999;
+	font-family: 'Droid Serif';
+	font-style: italic;
+	font-size: 13px;
+}
+
+.accordion dd > a,
+.accordion-gym-fitness .accordion-navigation > a {
+	/*background: transparent;*/
+	padding-left: 0rem;
+	padding-right: 0rem;
+}
+
+.accordion-acc-nav dd:first-child,
+.accordion-gym-fitness dd:first-child {
+	padding-top: 0px;
+}
+
+.accordion-acc-nav .content,
+.accordion-gym-fitness .content {
+	color: #c5c5c5;
+	font-size: 12px;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.accordion-gym-fitness h5 {
+	color: #999;
+}
+
+.accordion dd > .content.active,
+.accordion-acc-nav .content.active,
+.accordion-gym-fitness .accordion-navigation > .content.active {
+	background: none;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.accordion-gym-fitness img {
+	margin-right: 10px;
+}
+
+.item-footer .more a {
+	display: inline;
+}
+
+.accordion dd > a:hover,
+.accordion-acc-nav dd > a:hover,
+.accordion-gym-fitness .accordion-navigation > a:hover {
+	background: none;
+	border-bottom: 1px solid #91b034;
+	background: url('../img/icons/icon_accordion_arrow_down.png') no-repeat
+		right center;
+}
+
+.accordion-gym-fitness dd:hover > a h3,
+.accordion-gym-fitness dd.active > a h3,
+.accordion-gym-fitness dd.active:hover > a h3 {
+	color: #FFFFFF;
+}
+
+.accordion dd.active > a,
+.accordion-acc-nav dd.active > a,
+.accordion-acc-nav dd > a.active,
+.accordion-gym-fitness .accordion-navigation.active > a {
+	color: #829e2d;
+	border-bottom: 2px solid #91b034;
+	background: url('../img/icons/icon_accordion_arrow_up.png') no-repeat
+		right center;
+}
+
+.accordion-acc-nav .content a {
+	display: block;
+	color: rgba(125, 125, 125, 1);
+	padding: 10px 0;
+	border-bottom: 1px solid rgb(35, 35, 35);
+	border-top: 1px solid rgb(15, 14, 14);
+}
+
+.accordion-acc-nav .content a:first-child {
+	border-top: none;
+}
+
+.accordion-acc-nav .content a.active-link,
+.accordion-acc-nav .content a.active-link:hover {
+	color: #91b034;
+}
+
+.accordion-acc-nav .content a:hover {
+	color: white;
+}
+
+.accordion-acc-nav .content a i {
+	margin-right: 10px;
+	font-size: 18px;
+	line-height: 14px;
+}
+
+.accordion-acc-nav .content a > span.badge {
+	float: right;
+	background-color: #779227;
+	border-radius: 3px;
+	padding: 1px 4px 2px;
+	font-size: 11.844px;
+	line-height: 14px;
+	color: #ffffff;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}

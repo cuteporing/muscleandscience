@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* BOX PANEL                  */
+.box-panel-container {
+	margin-top: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.box-panel {
+	float: left;
+	width: 240px;
+	height: 240px;
+	padding: 25px 30px 30px;
+	list-style-type: none;
+	text-align: center;
+	margin-top: 1rem;
+	margin-right: 1.2rem;
+	-webkit-transition: all 300ms ease-out;
+	-moz-transition: all 300ms ease-out;
+	transition: all 300ms ease-out;
+}
+
+.box-panel i {
+	-webkit-animation-name: fadeInUp;
+	-webkit-animation-duration: 2s;
+	-moz-animation-name: fadeInUp;
+	-moz-animation-duration: 2s;
+	animation-name: fadeInUp;
+	animation-duration: 2s;
+}
+
+.box-panel.last {
+	margin-right: 0;
+}
+
+.box-panel.dark,
+.box-panel.green,
+.box-panel.light-green,
+a:hover > .box-panel.dark label,
+a:hover > .box-panel.green label,
+a:hover > .box-panel.light-green label {
+	color: #FFFFFF;
+}
+
+.box-panel.light,
+a:hover>.box-panel.light label {
+	color: #6B6A6A;
+}
+
+.box-panel i {
+	font-size: 9rem;
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+	-webkit-transition: -webkit-transform 0.9s;
+	-moz-transition: -moz-transform 0.9s;
+	-o-transition: -o-transform 0.9s;
+	transition: transform 0.9s;
+}
+
+.box-panel label {
+	visibility: hidden;
+	-webkit-transition: -webkit-transform 0.5s;
+	-moz-transition: -moz-transform 0.5s;
+	-o-transition: -o-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translateY(15px);
+	-moz-transform: translateY(15px);
+	-o-transform: translateY(15px);
+	transform: translateY(15px);
+}
+
+a:hover > .box-panel i {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+
+a:hover > .box-panel label {
+	visibility: visible;
+	-webkit-transform: translateY(-15px);
+	-moz-transform: translateY(-15px);
+	-o-transform: translateY(-15px);
+	transform: translateY(-15px);
+}
+
+.panel-click.dashed {
+	background: white;
+	padding: 107px 0;
+	border-style: dashed;
+	border-width: 2px;
+	text-align: center;
+}
+
+.panel-click.dashed:hover {
+	background: white;
+}
+
+.panel-click.dashed:hover h1 small {
+	color: #B8B8B8;
+}
+
+.panel-click {
+	background: #F9F9F9;
+	border-color: #E6E6E6;
+}
+
+.panel-click:hover {
+	background: #E1E1E1;
+	-webkit-transition: all .2s ease-in-out;
+}
+
+.panel-click:hover hr {
+	border-color: #BDBDBD;
+}
+
+.panel-click .panel-title {
+	width: 100%;
+	overflow: hidden !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.login-panel {
+	margin-top: 13px;
+}
+
+.login-panel .more {
+	margin-right: 0 !important;
+	margin-top: 0 !important;
+}

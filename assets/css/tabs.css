@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+/* -------------------------- */
+/* TABS                       */
+.tabs {
+	*zoom: 1;
+	margin-bottom: 0 !important;
+}
+
+.tabs:before, .tabs:after {
+	content: " ";
+	display: table;
+}
+
+.tabs:after {
+	clear: both;
+}
+
+.tabs dd {
+	position: relative;
+	margin-bottom: 0 !important;
+	top: 1px;
+	float: left;
+}
+
+.tabs dd>a {
+	display: block;
+	background: white;
+	color: #222222;
+	padding-top: 1rem;
+	padding-right: 2rem;
+	padding-bottom: 1.0625rem;
+	padding-left: 2rem;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	font-size: 1rem;
+}
+
+.tabs dd>a:hover {
+	background: none;
+	border-bottom: none;
+	color: #91b034;
+}
+
+.tabs dd.active a {
+	background: white;
+	border-bottom: 3px solid #91b034;
+}
+
+.tabs dd.active a:hover {
+	color: #222222;
+}
+
+.tabs-content {
+	*zoom: 1;
+	margin-bottom: 1.5rem;
+	width: 100%;
+}
+
+.tabs-content:before,
+.tabs-content:after {
+	content: " ";
+	display: table;
+}
+
+.tabs-content:after {
+	clear: both;
+}
+
+.tabs-content > .content {
+	display: none;
+	float: left;
+	padding: 0.9375em 0;
+	width: 100%;
+}
+
+.tabs-content>.content.active {
+	border-top: 1px solid #c5c5c5;
+	background: white;
+	display: block;
+	margin-top: -1px;
+}
+
+.tabs-content > .content.contained {
+	padding: 0.9375em;
+}
+
+.tabs-content.vertical {
+	display: block;
+}
+
+.tabs-content.vertical > .content {
+	padding: 0 0.9375em;
+}

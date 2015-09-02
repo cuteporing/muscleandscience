@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+@font-face {
+	font-family: 'Droid Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Droid Sans'), local('DroidSans'),
+		url(font/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff)
+		format('woff');
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	color: #C5C5C5;
+	background: #151515;
+	line-height: 1;
+	position: relative;
+	cursor: default;
+	word-break: break-word;
+}
+
+.text-cross {
+	text-decoration: line-through;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-capital {
+	text-transform: capitalize;
+}
+
+.text-upper {
+	text-transform: uppercase;
+}
+
+.text-lower {
+	text-transform: lowercase;
+}
+
+.text-under {
+	text-decoration: underline;
+}
+
+.top-hint {
+	position: relative;
+	float: right;
+	background-color: #829e2d;
+	padding: 9px 10px;
+	color: white;
+	font-size: 14px;
+	-webkit-animation-name: bounceInRight;
+	-webkit-animation-duration: 1s;
+	-moz-animation-name: bounceInRight;
+	-moz-animation-duration: 1s;
+	animation-name: bounceInRight;
+	animation-duration: 1s;
+}
+
+/* -------------------------- */
+/* LOADER                     */
+#progressbox {
+	height: 0.5625rem;
+	margin-top: -22px;
+}
