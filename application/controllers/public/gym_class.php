@@ -13,6 +13,7 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class gym_class extends pages {
+
 	private $params = array ();
 
 	public function __construct() {

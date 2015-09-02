@@ -14,7 +14,6 @@ if (! defined ( 'BASEPATH' ))
 
 class Company_model extends Common_model {
 	public function __construct() {
-		$this->load->database ();
 	}
 
 	/**

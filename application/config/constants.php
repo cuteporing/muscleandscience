@@ -78,14 +78,21 @@ define ( 'META_AUTHOR',			'KBVCodes, 2014' );
 
 /*
  * |--------------------------------------------------------------------------
- * | Image Path Modes
+ * | Image Modes
  * |--------------------------------------------------------------------------
  * |
- * | These modes are used to identify which path to save the images
+ * | These modes are used for image config
  * |
  */
 
-define ( 'IMG_BANNER', '/upload/banner/' );
+define ( 'IMG_BANNER', 			'/upload/banner/' );
+define ( 'NO_IMAGE_FILE_PATH', 	'assets/img/' );
+define ( 'NO_IMAGE_FILE_EXT', 	'.png' );
+define ( 'NO_IMAGE_RAW_NAME', 	'noPhoto-icon' );
+define ( 'IMG_ALLOWED_TYPE', 	'gif|jpg|png' );
+define ( 'IMG_MAX_SIZE', 		350 );
+define ( 'IMG_MAX_WIDTH',		1024 );
+define ( 'IMG_MAX_HEIGHT', 		768 );
 
 /*
  * |--------------------------------------------------------------------------

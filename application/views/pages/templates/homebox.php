@@ -32,5 +32,6 @@
 		<?php else: ?>
 			<?=$display ?>
 		<?php endif; ?>
+		<a href="<?=base_url()?>contact" class="<?=$button ?>" >Contact us</a>
 	<?php endif; ?>
 </li>

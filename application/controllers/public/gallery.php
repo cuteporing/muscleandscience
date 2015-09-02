@@ -14,13 +14,41 @@ if (! defined ( 'BASEPATH' ))
 
 class gallery extends CI_controller {
 
+	private $params    = array ();
+	private $view_type = null;
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gallery_model' );
 	}
 
-	public function view() {
-		$this->gallery_model->sample();
+	private function clear_params() {
+		$this->params = array ();
+	}
+
+	private function get_params() {
+		$this->clear_params ();
+
+		if ( $this->view_type == "public_album" ) {
+			$this->params ['where'] = array (
+				"deleted" => 0, "view" => "public" );
+		}
+	}
+
+	public function get_public_album( ) {
+		$this->view_type = "public_album";
+
+		$this->get_params ();
+
+
+	}
+
+	public function view( $page ) {
+		$common = new common ();
+		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+
+		$this->load->view ( 'pages/' . $page, $data );
+
 	}
 
 }

@@ -18,7 +18,32 @@ class Gallery_model extends Common_model {
 	{
 	}
 
-	public function sample() {
-		$this->sampleCommon();
+	public function get_album($params) {
+		$this->get_where ( $params );
+		$this->get_orderby ( $params );
+		$this->get_select ( $params, TBL_GALLERY );
+
+		// limit | offset
+		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
+			if (! isset ( $params ['limiter'] ['offset'] )) {
+				$params ['limiter'] ['offset'] = 0;
+			}
+
+			$query = $this->db->get (
+					TBL_GALLERY,
+					$params ['limiter'] ['limit'],
+					$params ['limiter'] ['offset']
+			);
+		} else {
+			$this->db->from ( TBL_GALLERY );
+			$query = $this->db->get ();
+		}
+
+		if ($query->num_rows () > 0) {
+			return $query->result_array ();
+		} else {
+			return null;
+		}
 	}
+
 }

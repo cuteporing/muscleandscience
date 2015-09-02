@@ -17,7 +17,7 @@ $lang ['LBL_00015'] = "upcoming classes";
 $lang ['LBL_00016'] = "we delivers enough to blog about";
 $lang ['LBL_00017'] = "WHAT'S NEW";
 $lang ['LBL_00018'] = "What's Next";
-$lang ['LBL_00019'] = "CLASSES";
+$lang ['LBL_00019'] = "";
 $lang ['LBL_00020'] = "our training classes";
 $lang ['LBL_00021'] = "Categories";
 $lang ['LBL_00022'] = "About";
@@ -38,6 +38,7 @@ $lang ['LBL_00036'] = "Untitle homebox";
 $lang ['LBL_00037'] = "no subtitle";
 $lang ['LBL_00038'] = "More";
 $lang ['LBL_00039'] = "Recent Posts";
+$lang ['LBL_00040'] = "our facilities and training rooms";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

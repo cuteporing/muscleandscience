@@ -3,7 +3,7 @@
 		<div class="page-layout">
 			<div class="page-header clearfix">
 				<div class="page-header-left">
-					<h1><?=$this->lang->line('LBL_00019')?></h1>
+					<h1><?=$this->lang->line('LBL_00002')?></h1>
 					<h4><?=$this->lang->line('LBL_00020')?></h4>
 				</div>
 			</div>

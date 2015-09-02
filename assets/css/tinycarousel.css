@@ -138,10 +138,14 @@
 	line-height: 150%;
 }
 
+.scrolling-list.recent-post-small li a abbr[title] {
+	border-bottom: none;
+}
+
 #upcoming .overview li a:hover,
 .scrolling-list.latest-tweets li a:hover,
-.scrolling-list.recent-post-small li a:hover {
-	text-decoration: none;
+.scrolling-list.recent-post-small li .title:hover {
+	text-decoration: underline;
 }
 
 .timeago, .time-desc {

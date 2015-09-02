@@ -15,7 +15,6 @@ if (! defined ( 'BASEPATH' ))
 class Package_model extends Common_model {
 
 	public function __construct() {
-		$this->load->database ();
 	}
 
 	/**

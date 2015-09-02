@@ -15,59 +15,8 @@ if (! defined ( 'BASEPATH' ))
 class Gym_Class_model extends Common_model {
 
 	public function __construct() {
-		$this->load->database ();
 	}
 
-	/**
-	 * GET WHERE STATEMENT
-	 *
-	 * @param $params
-	 * --------------------------------------------
-	 */
-	public function get_where($params) {
-		if ( isset ( $params ['where'] ) && count ( $params ['where'] ) > 0 ) {
-			foreach ( $params ['where'] as $field => $value ) {
-				$this->db->where ( $field, $value );
-			}
-		}
-	}
-
-	/**
-	 * GET ORDER BY STATEMENT
-	 *
-	 * @param $params
-	 * --------------------------------------------
-	 */
-	public function get_orderby($params) {
-		if ( isset ( $params ['order_by'] ) && count ( $params ['order_by'] ) > 0 ) {
-			foreach ( $params ['order_by'] as $field => $value ) {
-				$this->db->order_by ( $field, $value );
-			}
-		}
-	}
-
-	/**
-	 * GET SELECT
-	 *
-	 * --------------------------------------------
-	 * @param $params
-	 */
-	public function get_select($params, $table) {
-		if ( isset( $params ['select'] ) && count ( $params ['select'] ) > 0 ) {
-			$count = 0;
-
-			foreach ( $params ['select'] as $field => $value ) {
-				$count++;
-				$sql .= $value;
-
-				if ( $count != count ( $params ['select'] ) ) {
-					$sql .= ', ';
-				}
-			}
-
-			$this->db->select ( $sql );
-		}
-	}
 
 	/**
 	 * GET GYM CLASS THUMBNAIL

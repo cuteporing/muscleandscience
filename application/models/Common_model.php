@@ -70,10 +70,5 @@ class Common_model extends CI_Model {
 		}
 	}
 
-	public function sampleCommon() {
-		$string = "Hello World";
-		var_dump( $string );
-
-	}
 }
 ?>

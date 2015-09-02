@@ -14,11 +14,15 @@ if (! defined ( 'BASEPATH' ))
 
 class news extends pages {
 	private $total_rows = 0;
-	private $blog_limit = 10;
-	private $post_limit = 1;
-	private $comments_limit = 10;
-	private $blog_desc_limit = 1;
 	private $per_page = 0;
+
+	private $blog_limit      = 10;
+	private $post_limit      = 1;
+	private $comments_limit  = 10;
+	private $blog_desc_limit = 1;
+	private $latest_limit    = 2;
+
+	private $param_type = "";
 	private $params = array ();
 	public function __construct() {
 		parent::__construct ();
@@ -132,6 +136,12 @@ class news extends pages {
 		return $return_value;
 	}
 
+	public function set_param_type( $type ) {
+		$this->param_type = $type;
+
+		$this->get_params();
+	}
+
 	/**
 	 * GET SEARCH PARAMETER
 	 *
@@ -158,7 +168,7 @@ class news extends pages {
 		$this->params = array ();
 
 		if ($other == "latest") {
-			$this->params ['limiter'] ['limit'] = 2;
+			$this->params ['limiter'] ['limit'] = $this->latest_limit;
 			$this->params ['where'] = array ( "deleted" => 0 );
 			$this->params ['order_by'] = array ( "update_datetime" => "desc" );
 		} elseif ($other == "comments") {
@@ -199,13 +209,8 @@ class news extends pages {
 	 * --------------------------------------------
 	 * @return $result_post
 	 */
-	public function get_latest_news( $limit ) {
+	public function get_latest_news( ) {
 		$this->get_params ( 'latest' );
-
-		if( isset( $limit ) ) {
-			$this->params ['limiter'] ['limit'] = $limit;
-		}
-
 
 		$result_post = $this->news_model->get_news ( $this->params );
 

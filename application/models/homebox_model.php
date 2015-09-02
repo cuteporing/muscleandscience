@@ -15,7 +15,6 @@ if (! defined ( 'BASEPATH' ))
 class Homebox_model extends Common_model {
 
 	public function __construct() {
-		$this->load->database ();
 	}
 
 	/**
