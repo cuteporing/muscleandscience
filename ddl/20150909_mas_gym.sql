@@ -838,11 +838,11 @@ CREATE TABLE `mas_users` (
   `firstname` varchar(255) NOT NULL,
   `status` int(1) NOT NULL,
   `gender` varchar(2) NOT NULL,
-  `birthday` date NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `occupation` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `img` int(11) DEFAULT NULL,
   PRIMARY KEY (`_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -891,4 +891,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02  9:11:51
+-- Dump completed on 2015-09-02 11:52:47
