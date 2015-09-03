@@ -46,7 +46,7 @@ class pages extends CI_controller {
 	 * @return (View)
 	 */
 	public function displayTopNav($data) {
-		$this->load->view ( TPL_PAGE_NAVIGATION, $data );
+		return $this->load->view ( TPL_PAGE_NAVIGATION, $data );
 	}
 
 	/**
@@ -62,6 +62,7 @@ class pages extends CI_controller {
 		$common = new common ();
 		$common->load_language ();
 
+		$data ['page']  = $page;
 		$data ['title'] = ucfirst ( $page );
 
 		$this->getHeader ( $data );

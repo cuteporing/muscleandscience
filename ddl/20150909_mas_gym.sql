@@ -214,6 +214,7 @@ CREATE TABLE `mas_gallery` (
   `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_user_id` int(11) NOT NULL,
   `update_datetime` timestamp NULL DEFAULT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
