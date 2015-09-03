@@ -1,6 +1,6 @@
 <?php
 $lang ['LBL_00001'] = "News";
-$lang ['LBL_00002'] = "Classes";
+$lang ['LBL_00002'] = "Gym Class";
 $lang ['LBL_00003'] = "Blog";
 $lang ['LBL_00004'] = "Comment";
 $lang ['LBL_00005'] = "Comments";

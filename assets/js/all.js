@@ -95,10 +95,8 @@ $(document).ready(function() {
 		if(x.length > 0){
 			$('html, body').stop().animate({ scrollTop: x.offset().top - 15 }, 500);	
 		}
-		
 	}
 });
-
 
 /*//---------------------------------------
 //GALLERY

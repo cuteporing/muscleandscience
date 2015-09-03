@@ -24,7 +24,7 @@
 							<li><a href="<?=base_url()?>news/post/" class="main-link"><?=$this->lang->line('LBL_00014')?></a></li>
 						</ul></li>
 					<li class="has-dropdown <?php if( $page == strtolower( $this->lang->line('LBL_00002') ) ) { ?>active<?php } ?>">
-						<a href="<?=base_url()?>gym_class/"><?=$this->lang->line('LBL_00002')?></a>
+						<a href="<?=base_url()?>gym-class/"><?=$this->lang->line('LBL_00002')?></a>
 						<ul class="dropdown">
 						<?php //get_class_topbar();?>
 						</ul>

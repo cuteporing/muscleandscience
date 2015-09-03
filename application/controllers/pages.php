@@ -62,7 +62,7 @@ class pages extends CI_controller {
 		$common = new common ();
 		$common->load_language ();
 
-		$data ['page']  = $page;
+		$data ['page']  = strtolower( str_replace( "-", " ", $page ));
 		$data ['title'] = ucfirst ( $page );
 
 		$this->getHeader ( $data );
@@ -74,7 +74,7 @@ class pages extends CI_controller {
 				$news = new news ();
 				$news->view ( $page );
 				break;
-			case 'gym_class' :
+			case 'gym-class' :
 				$gym_class = new gym_class ();
 				$gym_class->view ( $page );
 				break;
