@@ -34,6 +34,10 @@ class footer extends CI_controller {
 		$type      = $this->company_info[0]['opening_day_type'];
 		$days      = array ();
 
+		if( count( $operation ) == 0 ) {
+			return;
+		}
+
 		foreach ( $operation as $row ) {
 			if ( $row->opening != "00:00" ) {
 				if ( !empty ( $days ) ) {
