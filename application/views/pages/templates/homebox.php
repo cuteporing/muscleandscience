@@ -29,9 +29,9 @@
 					</div>
 				<?php endif; ?>
 			</div>
+			<a href="<?=base_url()?>contact" class="<?=$button ?>" ><?=$this->lang->line( 'LBL_00025' ) ?></a>
 		<?php else: ?>
 			<?=$display ?>
 		<?php endif; ?>
-		<a href="<?=base_url()?>contact" class="<?=$button ?>" >Contact us</a>
 	<?php endif; ?>
 </li>

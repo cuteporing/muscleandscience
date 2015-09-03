@@ -458,6 +458,9 @@
 }
 
 @media only screen and (min-width: 40.063em) {
+	.top-bar-section .dropdown li a {
+		line-height: 18px;
+	}
 	.top-bar-section .has-dropdown>a {
 		padding-right: 15px!important;
 	}
