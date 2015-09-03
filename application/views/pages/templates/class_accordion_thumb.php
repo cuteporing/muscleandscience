@@ -16,9 +16,6 @@
 					<a href="gym_class/<?=$row['slug'] ?>" class="more icon-small-arrow margin-right-white">
 						<?=$this->lang->line('LBL_00028')?>
 					</a>
-					<a href="#" class="more icon-small-arrow margin-right-white">
-						<?=$this->lang->line('LBL_00029')?>
-					</a>
 				</div>
 			</dd>
 		<?php endforeach; ?>
