@@ -12,17 +12,17 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-include_once ('common.php');
-include_once ('banner.php');
-include_once ('format.php');
-include_once ('homebox.php');
-include_once ('public/footer.php');
-include_once ('public/home.php');
-include_once ('public/gym_class.php');
-include_once ('public/home.php');
-include_once ('public/news.php');
-include_once ('public/gallery.php');
-include_once ('public/contact.php');
+require_once ('common.php');
+require_once ('banner.php');
+require_once (PATH_UTILS.'format.php');
+require_once (PATH_UTILS.'homebox.php');
+require_once (PATH_PUBLIC.'footer.php');
+require_once (PATH_PUBLIC.'home.php');
+require_once (PATH_PUBLIC.'gym_class.php');
+require_once (PATH_PUBLIC.'home.php');
+require_once (PATH_PUBLIC.'news.php');
+require_once (PATH_PUBLIC.'gallery.php');
+require_once (PATH_PUBLIC.'contact.php');
 
 class pages extends CI_controller {
 	public function __construct() {

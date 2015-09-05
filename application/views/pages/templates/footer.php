@@ -20,7 +20,7 @@
 	$(document).ready(function(){
 		$('.slideshow-wrapper').slick({
 			arrows: true,
-			autoplay: false,
+			autoplay: true,
 			swipe: true,
 			touchMove: true,
 			lazyLoad: 'ondemand',

@@ -127,5 +127,17 @@ define ( 'TBL_USERS',			'mas_users' );
 define ( 'TPL_PAGE_FORMS',				'pages/forms/' );
 define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
 
+/*
+ * |--------------------------------------------------------------------------
+ * | Path Modes
+ * |--------------------------------------------------------------------------
+ * |
+ * | These modes are used to store path
+ * |
+ */
+
+define ( 'PATH_PUBLIC',			'public/' );
+define ( 'PATH_UTILS',			'utils/' );
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
