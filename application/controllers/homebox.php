@@ -106,29 +106,26 @@ class homebox extends CI_controller {
 			case 'G' : // GREEN
 				$data['box_color'] = "green";
 				$data['icon']      = "icon-card-white";
-				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
 			case 'LG': // LIGHT GREEN
 				$data['box_color'] = "light-green";
 				$data['icon']      = "icon-card-white";
-				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
 			case 'W' : // WHITE
 				$data['box_color'] = "white";
-				$data['icon'] = "icon-card-white";
-				$data['button']    = "more black icon-small-arrow margin-right-white";
+				$data['icon']      = "icon-card-white";
 				break;
 			case 'D' : // DARK
 				$data['box_color'] = "dark";
 				$data['icon']      = "icon-card-green";
-				$data['button']    = "more black icon-small-arrow margin-right-white";
 				break;
 			default  : // GREEN
 				$data['box_color'] = "green";
 				$data['icon']      = "icon-card-white";
-				$data['button']    = "more black icon-small-arrow margin-right-white";
+				
 				break;
 		}
+		$data['button'] = "more black icon-small-arrow margin-right-white";
 
 		// display vertically
 		if ( $is_block === true )
@@ -157,8 +154,8 @@ class homebox extends CI_controller {
 		foreach ( $result as $item ) {
 			$data['title']         = $item['title'];
 			$data['subtitle']      = $item['subtitle'];
-			$data['display']       = $item ['about'];
-			$data['banner_icon']   = $item ['icon'];
+			$data['display']       = $item['about'];
+			$data['banner_icon']   = $item['icon'];
 			$data['display_limit'] = 100;
 			$data['type']          = 'news';
 

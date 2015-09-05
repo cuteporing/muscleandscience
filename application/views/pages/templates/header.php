@@ -6,7 +6,7 @@
 		<meta name="description" content="<?=META_DESCRIPTION ?>" />
 		<meta name="keywords" content="<?=META_KEYWORDS ?>">
 		<meta name="author" content="<?=META_AUTHOR ?>">
-		<title><?=$title ?></title>
+		<title>Muscle and Science - <?=ucfirst(str_replace( '-', ' ', $title )) ?></title>
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/normalize.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/foundation.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/topbar.css" />
