@@ -13,6 +13,7 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 include_once ('common.php');
+include_once ('banner.php');
 include_once ('format.php');
 include_once ('homebox.php');
 include_once ('public/footer.php');

@@ -18,8 +18,6 @@ class Banner_model extends Common_model {
 
 	/**
 	 * GET BANNER
-	 *
-	 * --------------------------------------------
 	 * @return (Object)
 	 */
 	public function get_banner() {
@@ -29,8 +27,6 @@ class Banner_model extends Common_model {
 
 	/**
 	 * SET BANNER
-	 *
-	 * --------------------------------------------
 	 * @return
 	 */
 	public function set_banner() {
@@ -43,9 +39,9 @@ class Banner_model extends Common_model {
 
 		// Set parameters to an array data
 		$data = array (
-				'img' => $img,
-				'title' => $this->input->post ( 'title' ),
-				'subtitle' => $this->input->post ( 'subtitle' )
+			'img' => $img,
+			'title' => $this->input->post ( 'title' ),
+			'subtitle' => $this->input->post ( 'subtitle' )
 		);
 
 		// @TABLE_NAME = mas_banner

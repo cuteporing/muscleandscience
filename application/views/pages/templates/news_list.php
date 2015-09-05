@@ -1,4 +1,4 @@
-<ul class="blog clearfix animated fadeIn">
+<ul class="blog clearfix ">
 	<?php if ( !is_null( $news_result ) ): ?>
 		<?php
 		foreach ( $news_result as $row ):

@@ -77,17 +77,6 @@ $(document).ready(function() {
 	// 	showSideNavigation();
 	// }, 300, true));
 
-	//----------------------------------------
-	//Featured banner
-	//Before and after banner change 
-	//----------------------------------------
-	// $("#banner").on("before-slide-change.fndtn.orbit", function(event) {
-	// 	$('.orbit-caption').fadeOut(100);
-	// });
-	// $("#banner").on("after-slide-change.fndtn.orbit", function(event, orbit) {
-	// 	$('.orbit-caption').fadeIn(500);
-	// });
-
 	/* ---------------------------------------------------
 	 * FUNCTION FOR SMOOTH SCROLLING
 	 * -------------------------------------------------*/
@@ -96,7 +85,11 @@ $(document).ready(function() {
 			$('html, body').stop().animate({ scrollTop: x.offset().top - 15 }, 500);	
 		}
 	}
+	
+	$()
 });
+
+
 
 /*//---------------------------------------
 //GALLERY

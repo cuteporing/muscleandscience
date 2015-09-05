@@ -22,6 +22,9 @@ body {
 	word-break: break-word;
 }
 
+.hidden {
+	display: none;
+}
 .text-cross {
 	text-decoration: line-through;
 }

@@ -1,10 +1,6 @@
 <div class="content">
 
-	<div class="slideshow-wrapper">
-	<?php foreach ($banner as $banner_item): ?>
-		<div><?=img(array( 'alt' => $banner_item['title'], 'src' => $banner_item['img'] ), TRUE) ?></div>
-	<?php endforeach ?>
-	</div>
+	<?=$banner ?>
 
 	<div class="row homebox-top">
 		<div class="top-hint">Give us a call: +123 356 123 124</div>

@@ -13,7 +13,7 @@
 						<img alt="<?=$row['img_thumb'] ?>" src="<?=$row['img_thumb'] ?>">
 					</a>
 					<div class="text"><?=character_limiter ( $row['about'], 150 ) ?></div>
-					<a href="gym_class/<?=$row['slug'] ?>" class="more icon-small-arrow margin-right-white">
+					<a href="gym-class/<?=$row['slug'] ?>" class="more icon-small-arrow margin-right-white">
 						<?=$this->lang->line('LBL_00028')?>
 					</a>
 				</div>

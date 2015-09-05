@@ -19,8 +19,12 @@
 
 	$(document).ready(function(){
 		$('.slideshow-wrapper').slick({
-			arrows: false,
-			vertical: true,
+			arrows: true,
+			autoplay: false,
+			swipe: true,
+			touchMove: true,
+			prevArrow: '<button type="button" data-role="none" class="slick-prev">Previous</button>',
+			nextArrow: '<button type="button" data-role="none" class="slick-next">Next</button>',
 			responsive: [
 				{
 					breakpoint: 768,
@@ -32,7 +36,15 @@
 						variableWidth: true
 					}
 				}
-			]
+			],
+			onBeforeChange: function() {
+
+				$('.slide-caption').slideUp(300);
+
+			},
+			onAfterChange: function() {
+				$('.slick-active .slide-caption').slideDown(500);
+			}
 		});
 	});
 </script>
