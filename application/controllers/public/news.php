@@ -14,7 +14,7 @@ if (! defined ( 'BASEPATH' ))
 
 class news extends pages {
 	private $total_rows = 0;
-	private $per_page = 0;
+	private $per_page   = 0;
 
 	private $blog_limit      = 10;
 	private $post_limit      = 1;
@@ -24,6 +24,7 @@ class news extends pages {
 
 	private $param_type = "";
 	private $params = array ();
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'news_model' );
@@ -32,8 +33,6 @@ class news extends pages {
 
 	/**
 	 * SHOW ALL BUTTON
-	 *
-	 * --------------------------------------------
 	 * @return
 	 */
 	static function show_all_btn() {
@@ -47,12 +46,11 @@ class news extends pages {
 		) );
 	}
 
+
 	/**
 	 * EXTRACT POST TAGS
-	 *
-	 * --------------------------------------------
-	 * @param $data
-	 * @return $tags
+	 * @param (ArrayObject) $data
+	 * @return (ArrayObject) $tags
 	 */
 	public function extract_post_tags($data) {
 		$tags = array ();
@@ -69,8 +67,6 @@ class news extends pages {
 
 	/**
 	 * GET COMMENTS
-	 *
-	 * --------------------------------------------
 	 * @param (Integer) $post_id
 	 * @param (Integer) $offset
 	 * @return (Object)
@@ -90,8 +86,6 @@ class news extends pages {
 
 	/**
 	 * GET PAGINATION
-	 *
-	 * --------------------------------------------
 	 * @param $view_type
 	 * @return
 	 */
@@ -121,7 +115,6 @@ class news extends pages {
 
 	/**
 	 * IF OFFSET IS MORE THAN THE NO OF NEWS
-	 *
 	 * @param $total_rows
 	 * @param $offset
 	 * @return $return_value
@@ -144,8 +137,6 @@ class news extends pages {
 
 	/**
 	 * GET SEARCH PARAMETER
-	 *
-	 * --------------------------------------------
 	 * @param $other
 	 * @param $other_offset
 	 */
@@ -205,8 +196,6 @@ class news extends pages {
 
 	/**
 	 * GET LATEST NEWS
-	 *
-	 * --------------------------------------------
 	 * @return $result_post
 	 */
 	public function get_latest_news( ) {
@@ -246,8 +235,6 @@ class news extends pages {
 
 	/**
 	 * VIEW LATEST NEWS
-	 *
-	 * --------------------------------------------
 	 * @return $container
 	 */
 	public function view_latest_news() {
@@ -255,13 +242,11 @@ class news extends pages {
 		$data ['char_limit']  = 450;
 		$data ['news_result'] = $result;
 
-		return $this->load->view ( TPL_PAGE_NEWS_LIST, $data, true ).self::show_all_btn ();
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'news_list', $data, true ).self::show_all_btn ();
 	}
 
 	/**
 	 * GET ALL NEWS
-	 *
-	 * --------------------------------------------
 	 * @return $result_post
 	 */
 	public function get_all_news() {
@@ -316,8 +301,6 @@ class news extends pages {
 
 	/**
 	 * VIEW NEWS
-	 *
-	 * --------------------------------------------
 	 * @param (String) $page
 	 */
 	public function view($page) {
@@ -348,9 +331,9 @@ class news extends pages {
 				$data ['comment_result']  = $this->get_comments (
 						$result[0]['id'], 0 );
 				$data ['comment_display'] = $this->load->view (
-						TPL_PAGE_NEWS_COMMENT_LIST, $data, true );
+						TPL_PAGE_TEMPLATES.'news_comment_list', $data, true );
 				$data ['comments'] 	      = $this->load->view (
-						TPL_PAGE_NEWS_COMMENTS, $data, true );
+						TPL_PAGE_TEMPLATES.'news_comments', $data, true );
 			}
 			$data ['view'] = "title";
 			$data ['comment_form'] = $common->get_form (
@@ -366,7 +349,7 @@ class news extends pages {
 		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 		$data ['tag_list']     = $this->news_model->get_news_tags ();
 		$data ['news_list']    = $this->load->view (
-				TPL_PAGE_NEWS_LIST, $data, true );
+				TPL_PAGE_TEMPLATES.'news_list', $data, true );
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}

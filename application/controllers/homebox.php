@@ -21,8 +21,6 @@ class homebox extends CI_controller {
 
 	/**
 	 * CREATES LIST INSIDE THE HOMEBOX
-	 *
-	 * --------------------------------------------
 	 * @param (Object) $data
 	 * @param (Object) $list
 	 * @return (View)
@@ -30,13 +28,11 @@ class homebox extends CI_controller {
 	private function homebox_list($data, $list) {
 		$data['result'] = $list;
 
-		return $this->load->view ( TPL_HOMEBOX_LIST, $data, true );
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'homebox_list', $data, true );
 	}
 
 	/**
 	 * CREATES BUTTON FOR HOMEBOX
-	 *
-	 * --------------------------------------------
 	 * @param (String) $type
 	 * @return
 	 */
@@ -47,8 +43,6 @@ class homebox extends CI_controller {
 
 	/**
 	 * CREATES THE CONTENT FOR THE HOME BOX
-	 *
-	 * --------------------------------------------
 	 * @param (String) $icon
 	 * @param (String) $about
 	 * @param (String) $link
@@ -68,8 +62,6 @@ class homebox extends CI_controller {
 
 	/**
 	 * CREATES THE DESCRIPTION FOR HOMEBOX
-	 *
-	 * --------------------------------------------
 	 * @param (String) $about
 	 * @return (String) $description
 	 */
@@ -85,14 +77,13 @@ class homebox extends CI_controller {
 
 	/**
 	 * CREATES A HOMEBOX PANEL
-	 * DEFAULT DISPLAYS HORIZONTALLY
-	 *
-	 * $contents['title'] -- homebox title
-	 * $contents['subtitle'] -- homebox subtitle
-	 * $contents['display'] -- homebox content ( html, text, array )
-	 * $contents['banner_icon'] -- homebox icon
+	 * DEFAULT DISPLAY ( HORIZONTAL )
+	 * $contents['title']         -- homebox title
+	 * $contents['subtitle']      -- homebox subtitle
+	 * $contents['display']       -- homebox content ( html, text, array )
+	 * $contents['banner_icon']   -- homebox icon
 	 * $contents['display_limit'] -- homebox content character limit
-	 * $contents['type'] -- homebox type ( news, list )
+	 * $contents['type']          -- homebox type ( news, list )
 	 * --------------------------------------------
 	 * @param (String) $type
 	 * @param (String) $contents
@@ -122,7 +113,7 @@ class homebox extends CI_controller {
 			default  : // GREEN
 				$data['box_color'] = "green";
 				$data['icon']      = "icon-card-white";
-				
+
 				break;
 		}
 		$data['button'] = "more black icon-small-arrow margin-right-white";
@@ -138,15 +129,12 @@ class homebox extends CI_controller {
 									$contents['display'] : '';
 		}
 
-		return $this->load->view ( TPL_HOMEBOX, $data, true );
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'homebox', $data, true );
 	}
-
 
 	/**
 	 * CREATES THE DISPLAY FOR HOME BOX BANNER
-	 *
-	 * --------------------------------------------
-	 * @return (String)
+	 * @return (String) $box
 	 */
 	public function display_homebox_banner() {
 		$result = $this->homebox_model->get_homebox ();

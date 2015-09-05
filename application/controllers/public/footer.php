@@ -25,9 +25,7 @@ class footer extends CI_controller {
 	/**
 	 * GET THE DISPLAYED OPENING HRS. DEPENDING ON
 	 * THE TYPE OF DISPLAY
-	 *
-	 * --------------------------------------------
-	 * @return (Array)
+	 * @return (Array) $days
 	 */
 	public function get_company_operation() {
 		$operation = json_decode (  $this->company_info[0]['opening_hours'] );
@@ -72,9 +70,7 @@ class footer extends CI_controller {
 
 	/**
 	 * FOOTER DISPLAY
-	 *
-	 * --------------------------------------------
-	 * @return
+	 * @return (View) -- Display page
 	 */
 	public function view() {
 		$news = new news ();
@@ -84,11 +80,11 @@ class footer extends CI_controller {
 		$data['result_recent_post'] = $news->get_latest_news ( 10 );
 
 		$data ['footer'] ['info'] = $this->load->view (
-				TPL_FOOTER_COMPANY_INFO, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_company_info', $data, true );
 		$data ['footer'] ['opening'] = $this->load->view (
-				TPL_FOOTER_COMPANY_OPERATION, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_company_operation', $data, true );
 		$data ['footer'] ['recent_post'] = $this->load->view (
-				TPL_FOOTER_RECENT_POST, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_recent_post', $data, true );
 
 		$this->load->view ( 'pages/templates/footer', $data );
 	}

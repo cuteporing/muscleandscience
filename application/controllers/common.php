@@ -13,6 +13,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class common extends CI_controller
 {
+	private static $instance;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,22 +27,18 @@ class common extends CI_controller
 
 	/**
 	 * GET BREADCRUMBS
-	 *
-	 * --------------------------------------------
 	 * @param (String) $page
-	 * @return $container
+	 * @return (View)
 	 */
 	public function get_breadcrumbs($page)
 	{
 		$data['page'] = $page;
 
-		return $this->load->view( TPL_PAGE_BREADCRUMBS, $data, true);
+		return $this->load->view( TPL_PAGE_TEMPLATES.'breadcrumbs', $data, true);
 	}
 
 	/**
 	 * GET FORM
-	 *
-	 * --------------------------------------------
 	 * @param (String) $form_path
 	 * @param (Form) $form
 	 * @param (Object) $data
@@ -60,24 +58,23 @@ class common extends CI_controller
 
 	/**
 	 * CREATES LIST
-	 *
-	 * --------------------------------------------
 	 * @param (String) $title
 	 * @param (Json) $value
 	 * @return (View)
 	 */
-	public function get_list($title, $value)
+	public static function get_list($title, $value)
 	{
+		if (!self::$instance)
+			self::$instance = new self();
+
 		$data['title'] = $title;
 		$data['list']  = json_decode($value);
 
-		return $this->load->view( TPL_PAGE_LIST, $data, true);
+		return self::$instance->load->view( TPL_PAGE_TEMPLATES.'list', $data, true);
 	}
 
 	/**
 	 * CREATES BOX HEADER
-	 *
-	 * --------------------------------------------
 	 * @param (String) $title
 	 * @return $heading
 	 */
@@ -89,16 +86,14 @@ class common extends CI_controller
 
 	/**
 	 * CHECK DATA IF NULL
-	 *
-	 * --------------------------------------------
 	 * @param (Object) $data
 	 * @return (Object) $data
 	 */
 	static function checkData($data)
 	{
 		(isset($data) && !empty($data))?
-		  $data = $data
-		: $data = '';
+			$data = $data
+		:	$data = '';
 
 		return $data;
 	}

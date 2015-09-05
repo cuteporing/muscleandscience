@@ -17,10 +17,12 @@ include_once ('banner.php');
 include_once ('format.php');
 include_once ('homebox.php');
 include_once ('public/footer.php');
+include_once ('public/home.php');
 include_once ('public/gym_class.php');
 include_once ('public/home.php');
 include_once ('public/news.php');
 include_once ('public/gallery.php');
+include_once ('public/contact.php');
 
 class pages extends CI_controller {
 	public function __construct() {
@@ -29,31 +31,25 @@ class pages extends CI_controller {
 
 	/**
 	 * GET HEADER
-	 *
-	 * --------------------------------------------
 	 * @param (Object) $data
 	 * @return (View)
 	 */
 	public function getHeader($data) {
 		$data ['title'] = ucfirst(str_replace('_', ' ', $data ['title']));
-		$this->load->view ( TPL_PAGE_HEADER, $data );
+		$this->load->view ( TPL_PAGE_TEMPLATES.'header', $data );
 	}
 
 	/**
 	 * DISPLAY TOP NAVIGATION
-	 *
-	 * --------------------------------------------
 	 * @param (Object) $data
 	 * @return (View)
 	 */
 	public function displayTopNav($data) {
-		return $this->load->view ( TPL_PAGE_NAVIGATION, $data );
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'top_navigation', $data );
 	}
 
 	/**
 	 * PAGE VIEW
-	 *
-	 * --------------------------------------------
 	 * @param (String) $page
 	 */
 	public function view($page = 'home') {
@@ -83,6 +79,10 @@ class pages extends CI_controller {
 				$gallery = new gallery ();
 				$gallery->view ( $page );
 				break;
+			case 'contact' :
+				$contact = new contact ();
+				$contact->view ( $page );
+				break;;
 			default :
 				$home = new home ();
 				$home->view ( $page );

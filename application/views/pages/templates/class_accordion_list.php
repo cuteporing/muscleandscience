@@ -1,6 +1,5 @@
 <dl class="accordion accordion-gym-fitness" data-accordion>
 	<?php if(isset($class_result)): ?>
-	<?php $common = new common?>
 		<?php foreach ($class_result as $class): ?>
 			<?php
 			$newTitle = strtolower ( str_replace ( " ", "-", $class ['title'] ) );
@@ -57,7 +56,7 @@
 								</div>
 								<!-- end COLUMN LEFT -->
 								<div class="column-right">
-									<?= $common->get_list('Features', $class['features'])?>
+									<?= common::get_list('Features', $class['features'])?>
 								</div>
 								<!-- end COLUMN RIGHT -->
 							</div>
@@ -85,10 +84,10 @@
 
 									<div class="column-container clearfix">
 										<div class="column-left">
-											<?= $common->get_list('Skills', $trainer['skills'])?>
+											<?= common::get_list('Skills', $trainer['skills'])?>
 										</div>
 										<div class="column-right">
-											<?= $common->get_list('Achievements', $trainer['achievement'])?>
+											<?= common::get_list('Achievements', $trainer['achievement'])?>
 										</div>
 									</div>
 								<?php endforeach; ?>

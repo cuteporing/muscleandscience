@@ -20,10 +20,14 @@ class banner extends CI_controller
 		$this->load->model ( 'banner_model' );
 	}
 
+	/**
+	 * Function for displaying banner in home screen
+	 * @return (View)
+	 */
 	public function view () {
 		$data['result'] = $this->banner_model->get_banner();
 
-		return $this->load->view ( TPL_PAGE_BANNER, $data, true );
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'banner', $data, true );
 	}
 }
 ?>

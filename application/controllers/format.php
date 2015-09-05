@@ -11,15 +11,15 @@
  ********************************************************************************/
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
+
 class format extends CI_controller {
+
 	public function __construct() {
 		parent::__construct ();
 	}
 
 	/**
 	 * FORMAT DATE
-	 *
-	 * --------------------------------------------
 	 * @param (String) $datetime
 	 * @param (String) $format
 	 * @return (String) $formatted
@@ -33,8 +33,6 @@ class format extends CI_controller {
 
 	/**
 	 * CALCULATE TIME
-	 *
-	 * --------------------------------------------
 	 * @param (String) $time
 	 * @return
 	 */

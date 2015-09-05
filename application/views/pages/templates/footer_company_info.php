@@ -9,7 +9,7 @@
 	<?= common::box_header( $this->lang->line('LBL_00007') )?>
 	<ul class="footer-contact-info-container clearfix">
 		<li class="footer-contact-info-row">
-			<div class="footer-contact-info-left">
+			<div class="clearfix footer-contact-info-left">
 				<?= common::checkData( $result_info[0]['street_address_1'] ) ?>
 			</div>
 			<div class="footer-contact-info-right">

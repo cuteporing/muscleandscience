@@ -12,57 +12,33 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class gallery extends pages {
+class contact extends pages {
 
 	private $params;
 
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model ( 'gallery_model' );
-
 		$this->params = array ();
+		$this->load->model ( 'company_model' );
 	}
 
-	/**
-	 * CLEAR PARAMTERES
-	 */
 	private function clear_params() {
 		$this->params = array ();
 	}
 
-	/**
-	 * GET PARAMETERS
-	 * @param (String) $type
-	 */
 	private function get_params( $type ) {
 		$this->clear_params ();
-
-		if( $type == "public_album" ) {
-			$this->params ['where'] = array ( "deleted" => 0, "view" => "public" );
-		}
 	}
 
-	/**
-	 * GET PUBLIC ALBUM
-	 */
 	public function get_public_album( ) {
-		$this->get_params ( "public_album" );
-
-		$result = $this->gallery_model->get_album ( $this->params );
-		print_r( $result, 1 );
-		return $result;
 	}
 
-	/* (non-PHPdoc)
-	 * @see pages::view()
-	 */
 	public function view( $page ) {
 		$common = new common ();
-		$data ['result']       = $this->get_public_album();
 		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+		$data ['company_info'] = $this->company_model->get_company_info ();
 
 		$this->load->view ( 'pages/' . $page, $data );
-
 	}
 
 }

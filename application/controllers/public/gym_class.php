@@ -24,20 +24,16 @@ class gym_class extends pages {
 
 	/**
 	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
-	 *
-	 * --------------------------------------------
 	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
 		$data['result'] = $this->gym_class_model->get_gym_class_thumb ();
 
-		return $this->load->view ( TPL_CLASS_ACCORDION_THUMB, $data, true );
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
 	}
 
 	/**
 	 * GET ALL GYM CLASS
-	 *
-	 * --------------------------------------------
 	 * @return (Array) $result
 	 */
 	public function get_all_class() {
@@ -58,8 +54,6 @@ class gym_class extends pages {
 
 	/**
 	 * GET SEARCH PARAMETERS
-	 *
-	 * --------------------------------------------
 	 * @param (String) $type
 	 */
 	private function get_params( $type ) {
@@ -73,8 +67,6 @@ class gym_class extends pages {
 
 	/**
 	 * GET HOMEBOX FOR MEMBERSHIP PACKAGE
-	 *
-	 * --------------------------------------------
 	 * @return
 	 */
 	public function get_package_homebox() {
@@ -92,8 +84,6 @@ class gym_class extends pages {
 
 	/**
 	 * GET HOMEBOX FOR PERSONAL TRAINING PACKAGE
-	 *
-	 * --------------------------------------------
 	 * @return
 	 */
 	public function get_pt_homebox() {
@@ -111,8 +101,6 @@ class gym_class extends pages {
 
 	/**
 	 * GET HOMEBOX FOR SPECIAL PACKAGE
-	 *
-	 * --------------------------------------------
 	 * @return
 	 */
 	public function get_sp_homebox() {
@@ -130,8 +118,6 @@ class gym_class extends pages {
 
 	/**
 	 * GET RIGHT HOMEBOX DISPLAY
-	 *
-	 * --------------------------------------------
 	 * @return $homebox
 	 */
 	public function get_homebox() {
@@ -144,8 +130,6 @@ class gym_class extends pages {
 
 	/**
 	 * VIEW GYM CLASS
-	 *
-	 * --------------------------------------------
 	 * @param (String) $page
 	 * @return (View)
 	 */
@@ -155,7 +139,7 @@ class gym_class extends pages {
 		$data ['class_result'] = $this->get_all_class ();
 		$data ['homebox']      = $this->get_homebox();
 		$data ['class_list']   = $this->load->view (
-				TPL_CLASS_ACCORDION_LIST, $data, true );
+				TPL_PAGE_TEMPLATES.'class_accordion_list', $data, true );
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}
