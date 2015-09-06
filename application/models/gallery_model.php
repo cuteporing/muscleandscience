@@ -21,7 +21,7 @@ class Gallery_model extends Common_model {
 	public function get_album($params) {
 		$this->get_where ( $params );
 		$this->get_orderby ( $params );
-		$this->get_select ( $params, TBL_GALLERY );
+		$this->get_select ( $params );
 
 		// limit | offset
 		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {

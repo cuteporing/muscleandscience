@@ -14,7 +14,7 @@ if (! defined ( 'BASEPATH' ))
 
 class gym_class extends pages {
 
-	private $params = array ();
+	private $params;
 
 	public function __construct() {
 		parent::__construct ();
@@ -27,9 +27,15 @@ class gym_class extends pages {
 	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
-		$data['result'] = $this->gym_class_model->get_gym_class_thumb ();
+		$this->get_params( "class_thumb" );
+		$data['result'] = $this->gym_class_model->get_class ( $this->params );
 
 		return $this->load->view ( TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
+	}
+
+	public function get_class_list() {
+		$this->get_params( "class_list" );
+		return $this->gym_class_model->get_class ( $this->params );
 	}
 
 	/**
@@ -37,6 +43,7 @@ class gym_class extends pages {
 	 * @return (Array) $result
 	 */
 	public function get_all_class() {
+		$this->get_params( );
 		$result = $this->gym_class_model->get_class ( $this->params );
 
 		if (! is_null ( $result )) {
@@ -56,13 +63,28 @@ class gym_class extends pages {
 	 * GET SEARCH PARAMETERS
 	 * @param (String) $type
 	 */
-	private function get_params( $type ) {
+	private function get_params( $type = "", $value = "" ) {
 		$this->params = array ();
 
-		$this->params ['where'] = array (
-			"package_type" => $type,
-			"deleted" => 0
-		);
+		if( empty( $type ) ) return;
+
+		if( $type == "package" ) {
+			$this->params ['where'] = array (
+				"package_type" => $value,
+				"deleted" => 0
+			);
+		} elseif ( $type == "class_thumb" ) {
+			$this->params['select'] = array (
+				'title',
+				'subtitle',
+				'about',
+				'img_thumb',
+				'slug'
+			);
+		} elseif( $type == "class_list" ) {
+			$this->params['select'] = array ( 'title', 'slug' );
+		}
+
 	}
 
 	/**
@@ -71,7 +93,7 @@ class gym_class extends pages {
 	 */
 	public function get_package_homebox() {
 		$homebox = new homebox ();
-		$this->get_params('M');
+		$this->get_params( 'package', 'M');
 		$result = $this->package_model->get_package ( $this->params );
 
 		$data['title']    = $this->lang->line ( 'LBL_00030' );
@@ -88,7 +110,7 @@ class gym_class extends pages {
 	 */
 	public function get_pt_homebox() {
 		$homebox = new homebox ();
-		$this->get_params('PT');
+		$this->get_params( 'package', 'PT');
 		$result = $this->package_model->get_package ( $this->params );
 
 		$data['title']    = $this->lang->line ( 'LBL_00032' );
@@ -105,7 +127,7 @@ class gym_class extends pages {
 	 */
 	public function get_sp_homebox() {
 		$homebox = new homebox ();
-		$this->get_params('S');
+		$this->get_params( 'package', 'S');
 		$result = $this->package_model->get_package ( $this->params );
 
 		$data['title']    = $this->lang->line ( 'LBL_00034' );

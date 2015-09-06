@@ -3,7 +3,7 @@
 	<?=$banner ?>
 
 	<div class="row homebox-top">
-		<div class="top-hint">Give us a call: +123 356 123 124</div>
+		<div class="top-hint animated flipInX">Give us a call: +123 356 123 124</div>
 		<ul class="home-box-container clearfix">
 			<li id="upcoming" class="home-box white">
 				<div class="clearfix">
@@ -50,7 +50,7 @@
 			<div class="page-right clearfix">
 				<?=$gym_class?>
 				<div class="sidebar-box">
-					<ul class="home-box-container login-box">
+					<ul id="login-box" class="home-box-container login-box">
 						<?=$login?>
 					</ul>
 				</div>

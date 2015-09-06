@@ -8,6 +8,8 @@ $(document).ready(function() {
 			init: function(){
 				this.getActiveLink();
 				this.activeAccordionLink();
+				this.evClickAccordion();
+				this.evClickTabAccordion();
 			},
 
 			//ADD CLASS ACTIVE TO TOP NAVIGATION LINK
@@ -40,12 +42,57 @@ $(document).ready(function() {
 			//ACTIVATE FIRST-CHILD OF ACCORDION
 			//----------------------------------------
 			activeAccordionLink: function(){
-				$('.accordion dd:first-child').addClass("active");
-				$('.accordion dd:first-child .content').slideToggle('fast').addClass("active");
+				index = this.page.indexOf( 'gym-class/' );
+				this.page = this.page.split( 'gym-class/' )[1];
+
+				if( index != -1 && this.page != "" ) { 
+					var target = '#accordion-'+ this.page;
+					$( target ).addClass("active")
+						.find('.content').slideToggle('fast').addClass("active");
+					
+					scrollPage( $( target ) );
+				} else {
+					$('.accordion dd:first-child').addClass("active");
+					$('.accordion dd:first-child .content').slideToggle('fast').addClass("active");
+				}
+			},
+
+			// ACCORDION EASE EFFECT
+			//----------------------------------------
+			evClickAccordion: function() {
+				$(".accordion").on("click", "dd:not(.active)",
+					Foundation.utils.debounce(function (e) {
+						$(this).parent()
+							.find("dd.active").removeClass('active')
+							.find(".content").slideToggle("fast");
+						$(this).addClass('active')
+							.find(".content").slideToggle("fast");
+				}, 300, true));
+			},
+
+			// ACCORDION CLICK FUNCTION FOR GYM CLASSES
+			//----------------------------------------
+			evClickTabAccordion: function() {
+				$('.ui-state-default').click(function() {
+					var id     = $(this).find("a").attr("href");
+					var target = id;
+					$(this).addClass('ui-tabs-selected')
+							.siblings().removeClass('ui-tabs-selected');
+					$(id).removeClass("ui-tabs-hide")
+							.siblings('div').addClass("ui-tabs-hide");
+					scrollPage( $(target) );
+				});
 			}
 		}
 		return getLink.init();
 	})();
+	
+	$( 'a[data-link-pointer]').click(function ( e ) {
+		e.prevenDefault;
+		
+		var target = $( this ).attr('href');
+		scrollPage( $( target ) );
+	});
 
 	/* ---------------------------------------------------
 	 * ACCORDION FUNCTIONS
@@ -53,24 +100,6 @@ $(document).ready(function() {
 	function showSideNavigation(){
 		$('.page-right-account').toggle("blind");
 	}
-
-	//Accordion Smooth effect
-	//----------------------------------------
-	$(".accordion").on("click", "dd:not(.active)",
-		Foundation.utils.debounce(function (e) {
-			$(this).parent().find("dd.active").removeClass('active').find(".content").slideToggle("fast");
-			$(this).addClass('active').find(".content").slideToggle("fast");
-	}, 300, true));
-
-	//Accordion click function for Gym Classes
-	//----------------------------------------
-	$('.ui-state-default').click(function() {
-		var id     = $(this).find("a").attr("href");
-		var target = id;
-		$(this).addClass('ui-tabs-selected').siblings().removeClass('ui-tabs-selected');
-		$(id).removeClass("ui-tabs-hide").siblings('div').addClass("ui-tabs-hide");
-		scrollPage($(target));
-	});
 
 	// $('.open-navi, .close-navi').on('click',
 	// 	Foundation.utils.debounce(function (e){
@@ -85,11 +114,7 @@ $(document).ready(function() {
 			$('html, body').stop().animate({ scrollTop: x.offset().top - 15 }, 500);	
 		}
 	}
-	
-	$()
 });
-
-
 
 /*//---------------------------------------
 //GALLERY
@@ -111,17 +136,10 @@ function carousel_gallery_desc() {
 	scrollPage(target);
 }
 
-/
-
-
-
 function backTop(){
   jQuery('html, body').animate({scrollTop: 0}, 500);
   return false; 
 }
-
-
-
 
 //refined search checkbox
 //change search input[type=search] to input[type=date] if query needs

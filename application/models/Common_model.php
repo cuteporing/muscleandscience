@@ -21,9 +21,7 @@ class Common_model extends CI_Model {
 
 	/**
 	 * GET WHERE STATEMENT
-	 *
 	 * @param $params
-	 * --------------------------------------------
 	 */
 	public function get_where($params) {
 		if ( isset ( $params ['where'] ) && count ( $params ['where'] ) > 0 ) {
@@ -35,9 +33,7 @@ class Common_model extends CI_Model {
 
 	/**
 	 * GET ORDER BY STATEMENT
-	 *
 	 * @param $params
-	 * --------------------------------------------
 	 */
 	public function get_orderby($params) {
 		if ( isset ( $params ['order_by'] ) && count ( $params ['order_by'] ) > 0 ) {
@@ -49,13 +45,12 @@ class Common_model extends CI_Model {
 
 	/**
 	 * GET SELECT
-	 *
-	 * --------------------------------------------
 	 * @param $params
 	 */
-	public function get_select($params, $table) {
+	public function get_select($params) {
 		if ( isset( $params ['select'] ) && count ( $params ['select'] ) > 0 ) {
 			$count = 0;
+			$sql = "";
 
 			foreach ( $params ['select'] as $field => $value ) {
 				$count++;

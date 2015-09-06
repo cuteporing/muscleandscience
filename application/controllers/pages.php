@@ -45,6 +45,8 @@ class pages extends CI_controller {
 	 * @return (View)
 	 */
 	public function displayTopNav($data) {
+		$gym_class = new gym_class ();
+		$data['result'] = $gym_class->get_class_list();
 		return $this->load->view ( TPL_PAGE_TEMPLATES.'top_navigation', $data );
 	}
 

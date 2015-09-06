@@ -26,7 +26,11 @@
 					<li class="has-dropdown <?php if( $page == strtolower( $this->lang->line('LBL_00002') ) ) { ?>active<?php } ?>">
 						<a href="<?=base_url()?>gym-class/"><?=$this->lang->line('LBL_00002')?></a>
 						<ul class="dropdown">
-						<?php //get_class_topbar();?>
+							<?php if( isset( $result ) && !is_null( $result ) ): ?>
+								<?php foreach ($result as $row): ?>
+									<li><a href="<?=base_url()?>gym-class/<?=$row['slug'] ?>" class="main-link"><?=$row['title'] ?></a></li>
+								<?php endforeach; ?>
+							<?php endif; ?>
 						</ul>
 					</li>
 					<li <?php if( $page == strtolower( $this->lang->line('LBL_00008') ) ) { ?>class="active"<?php } ?> >
@@ -34,6 +38,9 @@
 					</li>
 					<li <?php if( $page == strtolower( $this->lang->line('LBL_00006') ) ) { ?>class="active"<?php } ?> >
 						<a href="<?=base_url()?>contact" class="main-link"><?=$this->lang->line('LBL_00006')?></a>
+					</li>
+					<li <?php if( $page == strtolower( $this->lang->line('LBL_00026') ) ) { ?>class="active"<?php } ?> >
+						<a href="#login-box" class="main-link" data-link-pointer ><?=$this->lang->line('LBL_00026')?></a>
 					</li>
 				</ul>
 			</section>

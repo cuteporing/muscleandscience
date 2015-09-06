@@ -17,31 +17,15 @@ class Gym_Class_model extends Common_model {
 	public function __construct() {
 	}
 
-
-	/**
-	 * GET GYM CLASS THUMBNAIL
-	 *
-	 * --------------------------------------------
-	 * @return
-	 */
-	public function get_gym_class_thumb() {
-		$this->db->select ( 'title, subtitle, about, img_thumb, slug' );
-		$query = $this->db->get ( TBL_CLASS );
-
-		return $query->result_array ();
-	}
-
 	/**
 	 * GET GYM CLASS
-	 *
-	 * --------------------------------------------
 	 * @param $params
 	 * @return
 	 */
 	public function get_class($params) {
 		$this->get_where ( $params );
 		$this->get_orderby ( $params );
-		$this->get_select ( $params, TBL_CLASS );
+		$this->get_select ( $params );
 
 		// limit | offset
 		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
@@ -68,8 +52,6 @@ class Gym_Class_model extends Common_model {
 
 	/**
 	 * GET GYM CLASS TRAINER
-	 *
-	 * --------------------------------------------
 	 * @param $params
 	 * @return
 	 */

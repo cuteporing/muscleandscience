@@ -1,5 +1,5 @@
 <dl class="accordion accordion-gym-fitness" data-accordion>
-	<?php if ( isset( $result ) ): ?>
+	<?php if ( isset( $result ) && !is_null( $result ) ): ?>
 		<?php foreach ( $result as $row ): ?>
 			<dd class="accordion-navigation">
 				<!-- TITLE -->

@@ -56,12 +56,6 @@ body {
 	padding: 9px 10px;
 	color: white;
 	font-size: 14px;
-	-webkit-animation-name: bounceInRight;
-	-webkit-animation-duration: 1s;
-	-moz-animation-name: bounceInRight;
-	-moz-animation-duration: 1s;
-	animation-name: bounceInRight;
-	animation-duration: 1s;
 }
 
 /* -------------------------- */
