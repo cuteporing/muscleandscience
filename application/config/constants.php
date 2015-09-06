@@ -103,11 +103,15 @@ define ( 'IMG_MAX_HEIGHT', 		768 );
  * |
  */
 
+define ( 'TBL_BANNER',			'mas_banner' );
 define ( 'TBL_CLASS',			'mas_class' );
 define ( 'TBL_CLASS_TRAINER',	'mas_class_trainer' );
+define ( 'TBL_COMPANY_INFO',	'mas_company_info' );
+define ( 'TBL_COMPANY_SOCIAL',	'mas_company_social' );
 define ( 'TBL_COMMENTS',		'mas_comments' );
 define ( 'TBL_GALLERY',			'mas_gallery' );
 define ( 'TBL_GALLERY_PHOTOS',	'mas_gallery_photos' );
+define ( 'TBL_HOMEBOX',			'mas_homebox' );
 define ( 'TBL_PACKAGE',			'mas_package' );
 define ( 'TBL_POST',			'mas_post' );
 define ( 'TBL_POST_DETAILS',	'mas_post_details' );

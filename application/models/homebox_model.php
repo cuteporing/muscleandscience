@@ -19,20 +19,17 @@ class Homebox_model extends Common_model {
 
 	/**
 	 * GET HOMEBOX
-	 *
-	 * @param $params
-	 * --------------------------------------------
+	 * @param (Array) $params
+	 * @return
 	 */
-	public function get_homebox() {
-		$query = $this->db->get ( 'mas_homebox' );
-		return $query->result_array ();
+	public function get_homebox( $other_params = array() ) {
+		$params['from'] = TBL_HOMEBOX;
+
+		return $this->get_result( $params );
 	}
 
 	/**
 	 * SET HOMEBOX
-	 *
-	 * @param $params
-	 * --------------------------------------------
 	 */
 	public function set_homebox() {
 		return $this->db->insert ( 'mas_homebox', $data );

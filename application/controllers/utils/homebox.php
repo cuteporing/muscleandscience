@@ -14,6 +14,8 @@ if (! defined ( 'BASEPATH' ))
 
 class homebox extends CI_controller {
 
+	private $params;
+
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'homebox_model' );

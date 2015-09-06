@@ -18,55 +18,45 @@ class Package_model extends Common_model {
 	}
 
 	/**
-	 * SET TITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
-	 */
-	public function set_title($param) {
-		$this->gym_class->title = $param;
-	}
-
-	/**
-	 * SET SUBTITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
-	 */
-	public function set_subtitle($param) {
-		$this->gym_class->subtitle = $param;
-	}
-
-
-	/**
-	 * GET PACKAGE
-	 *
-	 * --------------------------------------------
+	 * GET MEMBERSHIP PACKAGE
+	 * @param (Boolean) $is_active
 	 * @return
 	 */
-	public function get_package($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
+	public function get_mem_package( $is_active = true ) {
+		$params['from']  = TBL_PACKAGE;
+		$params['where'] = array (
+				"package_type" => 'M',
+				"deleted" => ( $is_active )? 0 : 1
+		);
+		return $this->get_result( $params );
+	}
 
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
+	/**
+	 * GET PERSONAL TRAINING PACKAGE
+	 * @param (Boolean) $is_active
+	 * @return
+	 */
+	public function get_pt_package( $is_active = true ) {
+		$params['from']  = TBL_PACKAGE;
+		$params['where'] = array (
+				"package_type" => 'PT',
+				"deleted" => ( $is_active )? 0 : 1
+		);
+		return $this->get_result( $params );
+	}
 
-			$query = $this->db->get ( TBL_PACKAGE, $params ['limiter'] ['limit'], $params ['limiter'] ['offset'] );
-		} else {
-			$this->db->from ( TBL_PACKAGE );
-			$query = $this->db->get ();
-		}
-
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
-
-		return $query->result_array();
+	/**
+	 * GET SPECIAL PACKAGE
+	 * @param (Boolean) $is_active
+	 * @return
+	 */
+	public function get_sp_package( $is_active = true ) {
+		$params['from']  = TBL_PACKAGE;
+		$params['where'] = array (
+				"package_type" => 'S',
+				"deleted" => ( $is_active )? 0 : 1
+		);
+		return $this->get_result( $params );
 	}
 }
 ?>

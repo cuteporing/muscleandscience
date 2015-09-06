@@ -13,16 +13,18 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class Banner_model extends Common_model {
+
 	public function __construct() {
 	}
 
 	/**
 	 * GET BANNER
-	 * @return (Object)
+	 * @return
 	 */
 	public function get_banner() {
-		$query = $this->db->get ( 'mas_banner' );
-		return $query->result_array ();
+		$params['from'] = TBL_BANNER;
+
+		return $this->get_result( $params );
 	}
 
 	/**

@@ -14,8 +14,6 @@ if (! defined ( 'BASEPATH' ))
 
 class gym_class extends pages {
 
-	private $params;
-
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gym_class_model' );
@@ -27,15 +25,13 @@ class gym_class extends pages {
 	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
-		$this->get_params( "class_thumb" );
-		$data['result'] = $this->gym_class_model->get_class ( $this->params );
-
-		return $this->load->view ( TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
+		$data['result'] = $this->gym_class_model->get_class();
+		return $this->load->view (
+				TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
 	}
 
 	public function get_class_list() {
-		$this->get_params( "class_list" );
-		return $this->gym_class_model->get_class ( $this->params );
+		return $this->gym_class_model->get_class_list ( );
 	}
 
 	/**
@@ -43,48 +39,16 @@ class gym_class extends pages {
 	 * @return (Array) $result
 	 */
 	public function get_all_class() {
-		$this->get_params( );
-		$result = $this->gym_class_model->get_class ( $this->params );
+		$result = $this->gym_class_model->get_class ();
 
 		if (! is_null ( $result )) {
 			for($i = 0; $i < count ( $result ); $i ++) {
 				$id = $result[$i]['id'];
-
-				$this->params ['where'] = array (
-					TBL_CLASS_TRAINER . ".class_id" => $id
-				);
-				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $this->params );
+				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer(
+					array( 'class_id' => $id ) );
 			}
 		}
 		return $result;
-	}
-
-	/**
-	 * GET SEARCH PARAMETERS
-	 * @param (String) $type
-	 */
-	private function get_params( $type = "", $value = "" ) {
-		$this->params = array ();
-
-		if( empty( $type ) ) return;
-
-		if( $type == "package" ) {
-			$this->params ['where'] = array (
-				"package_type" => $value,
-				"deleted" => 0
-			);
-		} elseif ( $type == "class_thumb" ) {
-			$this->params['select'] = array (
-				'title',
-				'subtitle',
-				'about',
-				'img_thumb',
-				'slug'
-			);
-		} elseif( $type == "class_list" ) {
-			$this->params['select'] = array ( 'title', 'slug' );
-		}
-
 	}
 
 	/**
@@ -92,15 +56,14 @@ class gym_class extends pages {
 	 * @return
 	 */
 	public function get_package_homebox() {
-		$homebox = new homebox ();
-		$this->get_params( 'package', 'M');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_mem_package();
 
 		$data['title']    = $this->lang->line ( 'LBL_00030' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00031' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'LG', $data, true );
 	}
 
@@ -109,15 +72,14 @@ class gym_class extends pages {
 	 * @return
 	 */
 	public function get_pt_homebox() {
-		$homebox = new homebox ();
-		$this->get_params( 'package', 'PT');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_pt_package();
 
 		$data['title']    = $this->lang->line ( 'LBL_00032' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00033' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'G', $data, true );
 	}
 
@@ -126,15 +88,14 @@ class gym_class extends pages {
 	 * @return
 	 */
 	public function get_sp_homebox() {
-		$homebox = new homebox ();
-		$this->get_params( 'package', 'S');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_sp_package();
 
 		$data['title']    = $this->lang->line ( 'LBL_00034' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00035' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'D', $data, true );
 	}
 

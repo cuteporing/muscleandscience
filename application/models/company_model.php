@@ -18,31 +18,25 @@ class Company_model extends Common_model {
 
 	/**
 	 * GET COMPANY INFORMATION
-	 *
-	 *  --------------------------------------------
-	 *  @return (Array)
+	 * @return
 	 */
-	public function get_company_info() {
-		$query = $this->db->get ( 'mas_company_info' );
-		return $query->result_array ();
+	public function get_company_info( ) {
+		$params['from'] = TBL_COMPANY_INFO;
+		return $this->get_result( $params );
 	}
 
 	/**
 	 * GET COMPANY SOCIAL MEDIA
-	 *
-	 *  --------------------------------------------
-	 *  @return (Array)
+	 * @return
 	 */
 	public function get_company_social() {
-		$query = $this->db->get ( 'mas_company_social' );
-		return $query->result_array ();
+		$params['from'] = TBL_COMPANY_SOCIAL;
+		return $this->get_result( $params );
 	}
 
 	/**
 	 * SET COMPANY INFORMATION
-	 *
-	 *  --------------------------------------------
-	 *  @return (Array)
+	 *  @return
 	 */
 	public function set_company_info() {
 		return $this->db->insert ( 'mas_company_info', $data );
@@ -50,9 +44,7 @@ class Company_model extends Common_model {
 
 	/**
 	 * SET COMPANY INFORMATION
-	 *
-	 *  --------------------------------------------
-	 *  @return (Array)
+	 *  @return
 	 */
 	public function set_company_social() {
 		return $this->db->insert ( 'mas_company_social', $data );

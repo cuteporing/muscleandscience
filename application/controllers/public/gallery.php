@@ -14,55 +14,21 @@ if (! defined ( 'BASEPATH' ))
 
 class gallery extends pages {
 
-	private $params;
-
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gallery_model' );
-
-		$this->params = array ();
 	}
 
 	/**
-	 * CLEAR PARAMTERES
-	 */
-	private function clear_params() {
-		$this->params = array ();
-	}
-
-	/**
-	 * GET PARAMETERS
-	 * @param (String) $type
-	 */
-	private function get_params( $type ) {
-		$this->clear_params ();
-
-		if( $type == "public_album" ) {
-			$this->params ['where'] = array ( "deleted" => 0, "view" => "public" );
-		}
-	}
-
-	/**
-	 * GET PUBLIC ALBUM
-	 */
-	public function get_public_album( ) {
-		$this->get_params ( "public_album" );
-
-		$result = $this->gallery_model->get_album ( $this->params );
-		print_r( $result, 1 );
-		return $result;
-	}
-
-	/* (non-PHPdoc)
-	 * @see pages::view()
+	 * VIEW GALLERY PAGE
+	 * @param (String) $page
 	 */
 	public function view( $page ) {
 		$common = new common ();
-		$data ['result']       = $this->get_public_album();
+		$data ['result']       = $this->gallery_model->get_public_album();
 		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 
 		$this->load->view ( 'pages/' . $page, $data );
-
 	}
 
 }

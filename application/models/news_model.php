@@ -49,8 +49,6 @@ class News_model extends Common_model {
 
 	/**
 	 * GET NEWS
-	 *
-	 * --------------------------------------------
 	 * @param $where
 	 * @param $limiter
 	 * @param $orderBy
