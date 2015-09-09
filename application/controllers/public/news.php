@@ -140,77 +140,14 @@ class news extends pages {
 		return $return_value;
 	}
 
-	public function set_param_type( $type ) {
-		$this->param_type = $type;
-
-		$this->get_params();
-	}
-
-	/**
-	 * GET SEARCH PARAMETER
-	 * @param $other
-	 * @param $other_offset
-	 */
-	public function get_params($other = "", $other_offset = 0) {
-		$type = str_replace ( '/', '', $this->uri->slash_segment ( 2, 'leading' ) );
-		$page = str_replace ( '/', '', $this->uri->slash_segment ( 3, 'leading' ) );
-
-		(! $page) ? $offset = 0 : $offset = $page;
-
-		if ($other == "comments") {
-			(! $other_offset) ? $offset = 0 : $offset = $other_offset;
-		} else {
-			(! $page) ? $offset = 0 : $offset = $page;
-		}
-
-		if (self::cannot_find_page ( $this->total_rows, $offset )) {
-			return show_404 ();
-		}
-
-		$this->params = array ();
-
-		if ($other == "comments") {
-			$this->params ['limiter'] ['limit'] = $this->comments_limit;
-			$this->params ['order_by'] = array (
-					'mas_comments.update_datetime' => 'desc'
-			);
-		} elseif (! $type || $type == "blog") {
-			$this->params ['limiter'] ['limit'] = $this->blog_limit;
-			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array ( 'deleted' => 0 );
-			$this->params ['order_by'] = array ( 'update_datetime' => 'desc' );
-		} elseif ($type == "post") {
-			$this->params ['limiter'] ['limit'] = $this->post_limit;
-			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array ( 'deleted' => 0 );
-			$this->params ['order_by'] = array ( 'update_datetime' => 'desc' );
-		} elseif ($type == "tag") {
-			$slug = str_replace ( '-', ' ', $page );
-			$this->params ['limiter'] ['limit'] = $this->blog_limit;
-			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array (
-					'mas_tags.tag_name' => $slug,
-					'mas_post.deleted' => 0
-			);
-			$this->params ['order_by'] = array ( 'update_datetime' => 'desc' );
-		} elseif ($type == "title") {
-			$this->params ['limiter'] ['limit'] = $this->post_limit;
-			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array ( 'deleted' => 0, 'slug' => $page );
-			$this->params ['order_by'] = array ( 'update_datetime' => 'desc' );
-		}
+	public function get_comment_offset( $offset = 0 ) {
+		return $offset;
 	}
 
 	public function get_offset() {
-		(! $this->value) ? $offset = 0 : $offset = $this->value;
+		(! $this->value ) ? $offset = 0 : $offset = $this->value;
 
 		return $offset;
-
-// 		if ($other == "comments") {
-// 			(! $other_offset) ? $offset = 0 : $offset = $other_offset;
-// 		} else {
-// 			(! $page) ? $offset = 0 : $offset = $page;
-// 		}
 	}
 
 	public function get_limit() {
