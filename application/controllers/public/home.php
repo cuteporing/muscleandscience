@@ -16,6 +16,7 @@ class home extends pages {
 
 	public function __construct() {
 		parent::__construct ();
+		$this->load->model ( 'banner_model' );
 	}
 
 	/**
@@ -31,17 +32,22 @@ class home extends pages {
 		return $container;
 	}
 
+	public function get_banner(){
+		$data['result'] = $this->banner_model->get_banner();
+
+		return $this->load->view ( TPL_PAGE_TEMPLATES.'banner', $data, true );
+	}
+
 	/**
 	 * CREATES A LOG-IN FORM
 	 * @param (String) $page
 	 */
 	public function view($page) {
-		$banner = new banner ();
 		$homebox = new homebox ();
 		$gym_class = new gym_class ();
 		$news = new news ();
 		$data ['login'] = self::create_login_form ();
-		$data ['banner'] = $banner->view();
+		$data ['banner'] = $this->get_banner();
 		$data ['homebox'] = $homebox->display_homebox_banner ();
 		$data ['gym_class'] = $gym_class->display_gym_class_thumbnail ();
 		$data ['latest_news'] = $news->view_latest_news ();

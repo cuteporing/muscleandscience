@@ -73,7 +73,6 @@ class news extends pages {
 		return $tags;
 	}
 
-
 	/**
 	 * GET COMMENTS
 	 * @param (Integer) $post_id

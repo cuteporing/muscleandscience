@@ -103,8 +103,10 @@ define ( 'IMG_MAX_HEIGHT', 		768 );
  * | These modes are used to store template path
  * |
  */
-define ( 'TPL_PAGE_FORMS',				'pages/forms/' );
+define ( 'TPL_PAGE_FORMS',					'pages/forms/' );
 define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
+define ( 'TPL_PAGE_FORMS',					'account/forms/' );
+define ( 'TPL_ACCOUNT_TEMPLATES',		'account/templates/' );
 
 /*
  * |--------------------------------------------------------------------------
@@ -115,6 +117,7 @@ define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
  * |
  */
 
+define ( 'PATH_ACCOUNT',		'account/' );
 define ( 'PATH_PUBLIC',			'public/' );
 define ( 'PATH_UTILS',			'utils/' );
 

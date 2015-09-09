@@ -41,12 +41,10 @@ if (! defined ( 'BASEPATH' ))
  * | in the URL cannot be matched to a valid route.
  * |
  */
+$route['account/(:any)'] = 'account/view/$1';
 
 $route ['(:any)'] = 'pages/view/$1';
 $route ['default_controller'] = 'pages/view';
-
-
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
