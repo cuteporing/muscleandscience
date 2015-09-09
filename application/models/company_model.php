@@ -21,8 +21,7 @@ class Company_model extends Common_model {
 	 * @return
 	 */
 	public function get_company_info( ) {
-		$params['from'] = TBL_COMPANY_INFO;
-		return $this->get_result( $params );
+		return $this->get_result( 'mas_company_info' );
 	}
 
 	/**
@@ -30,8 +29,7 @@ class Company_model extends Common_model {
 	 * @return
 	 */
 	public function get_company_social() {
-		$params['from'] = TBL_COMPANY_SOCIAL;
-		return $this->get_result( $params );
+		return $this->get_result( 'mas_company_social' );
 	}
 
 	/**

@@ -9,7 +9,7 @@
 							id="logo"></a>
 					</h1>
 				</li>
-				<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+				<li class="toggle-topbar menu-icon"><a href="#"></a></li>
 			</ul>
 
 			<section class="top-bar-section">

@@ -22,8 +22,7 @@ class Gym_Class_model extends Common_model {
 	 * @return
 	 */
 	public function get_class() {
-		$params['from'] = TBL_CLASS;
-		return $this->get_result( $params );
+		return $this->get_result( 'mas_class' );
 	}
 
 	/**
@@ -31,9 +30,8 @@ class Gym_Class_model extends Common_model {
 	 * @return NULL
 	 */
 	public function get_class_list() {
-		$params['select'] = array ( 'title', 'slug' );
-		$params['from']   = TBL_CLASS;
-		return $this->get_result( $params );
+		$this->db->select ( 'title, slug' );
+		return $this->get_result( 'mas_class' );
 	}
 
 	/**
@@ -41,33 +39,16 @@ class Gym_Class_model extends Common_model {
 	 * @param $params
 	 * @return
 	 */
-	public function get_class_trainer( $other_params = array() ) {
+	public function get_class_trainer( $class_id ) {
 
-		$sql = TBL_TRAINER . ".*, ";
-		$sql.= "CONCAT(" . TBL_TRAINER . ".firstname, ";
-		$sql.= "Char(32), " . TBL_TRAINER . ".lastname ) AS name ";
+		$sql = 'mas_trainer.*, ';
+		$sql.= 'CONCAT(mas_trainer.firstname, ';
+		$sql.= 'Char(32), mas_trainer.lastname ) AS name ';
 
-		$params['select'] = $sql;
-
-
-		if( count( $other_params ) > 0 ) {
-			if( isset( $other_params['class_id'] ) ) {
-				$params['where'] = array(
-					TBL_CLASS_TRAINER . ".class_id" => $other_params['class_id'] );
-			}
-		}
-
-		$tempArray = array();
-
-		array_push( $tempArray, array(
-			'table' => TBL_TRAINER,
-			'condition' => TBL_CLASS_TRAINER.".class_id = ".TBL_TRAINER.".id"
-		 ) );
-
-		$params['from'] = TBL_CLASS_TRAINER;
-		$params['join'] = $tempArray;
-
-		return $this->get_result( $params );
+		$this->db->select( $sql );
+		$this->db->where( 'mas_class_trainer.class_id', $class_id );
+		$this->db->join ( 'mas_trainer', 'mas_class_trainer.class_id = mas_trainer.id' );
+		return $this->get_result( 'mas_class_trainer' );
 
 	}
 }

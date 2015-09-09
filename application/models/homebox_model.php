@@ -23,9 +23,7 @@ class Homebox_model extends Common_model {
 	 * @return
 	 */
 	public function get_homebox( $other_params = array() ) {
-		$params['from'] = TBL_HOMEBOX;
-
-		return $this->get_result( $params );
+		return $this->get_result( 'mas_homebox' );
 	}
 
 	/**

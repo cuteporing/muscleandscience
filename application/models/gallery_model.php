@@ -19,12 +19,10 @@ class Gallery_model extends Common_model {
 	}
 
 	public function get_public_album( $is_active = true ) {
-		$params['from']  = TBL_GALLERY;
-		$params['where'] = array (
-				"deleted" => ( $is_active )? 0 : 1,
-				"view" => "public" );
-
-		return $this->get_result( $params );
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'view', 'public' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_gallery' );
 	}
 
 }

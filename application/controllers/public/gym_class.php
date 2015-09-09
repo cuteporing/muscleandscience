@@ -44,8 +44,7 @@ class gym_class extends pages {
 		if (! is_null ( $result )) {
 			for($i = 0; $i < count ( $result ); $i ++) {
 				$id = $result[$i]['id'];
-				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer(
-					array( 'class_id' => $id ) );
+				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $id );
 			}
 		}
 		return $result;

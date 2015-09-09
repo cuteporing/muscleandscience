@@ -23,12 +23,10 @@ class Package_model extends Common_model {
 	 * @return
 	 */
 	public function get_mem_package( $is_active = true ) {
-		$params['from']  = TBL_PACKAGE;
-		$params['where'] = array (
-				"package_type" => 'M',
-				"deleted" => ( $is_active )? 0 : 1
-		);
-		return $this->get_result( $params );
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'M' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 
 	/**
@@ -37,12 +35,10 @@ class Package_model extends Common_model {
 	 * @return
 	 */
 	public function get_pt_package( $is_active = true ) {
-		$params['from']  = TBL_PACKAGE;
-		$params['where'] = array (
-				"package_type" => 'PT',
-				"deleted" => ( $is_active )? 0 : 1
-		);
-		return $this->get_result( $params );
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'PT' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 
 	/**
@@ -51,12 +47,10 @@ class Package_model extends Common_model {
 	 * @return
 	 */
 	public function get_sp_package( $is_active = true ) {
-		$params['from']  = TBL_PACKAGE;
-		$params['where'] = array (
-				"package_type" => 'S',
-				"deleted" => ( $is_active )? 0 : 1
-		);
-		return $this->get_result( $params );
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'S' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 }
 ?>

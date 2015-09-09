@@ -1,6 +1,7 @@
 <div class="content">
-
-	<?=$banner ?>
+	<?php if( isset( $banner )): ?>
+	<?=$banner?>
+	<?php endif; ?>
 
 	<div class="row homebox-top">
 		<div class="top-hint animated flipInX">Give us a call: +123 356 123 124</div>
@@ -39,16 +40,22 @@
 					</div>
 				</div>
 			</li>
+			<?php if( isset( $homebox )): ?>
 			<?=$homebox?>
+			<?php endif; ?>
 		</ul>
 
 		<div class="page-layout clearfix">
 			<div id="latest-news" class="page-left clearfix">
 				<div class="preloader" style="position: absolute; margin-top: 6rem;"></div>
+				<?php if( isset( $latest_news )): ?>
 				<?=$latest_news?>
+				<?php endif; ?>
 			</div>
 			<div class="page-right clearfix">
+				<?php if( isset( $gym_class )): ?>
 				<?=$gym_class?>
+				<?php endif; ?>
 				<div class="sidebar-box">
 					<ul id="login-box" class="home-box-container login-box">
 						<?=$login?>

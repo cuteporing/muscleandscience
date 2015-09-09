@@ -22,9 +22,7 @@ class Banner_model extends Common_model {
 	 * @return
 	 */
 	public function get_banner() {
-		$params['from'] = TBL_BANNER;
-
-		return $this->get_result( $params );
+		return $this->get_result( 'mas_banner' );
 	}
 
 	/**
@@ -32,10 +30,7 @@ class Banner_model extends Common_model {
 	 * @return
 	 */
 	public function set_banner() {
-		$this->load->helper ( 'url' );
-
 		// get constant image path for banner
-		$common = new common ();
 		$imgPath = IMG_BANNER;
 		$img = $this->input->post ( 'img' );
 
