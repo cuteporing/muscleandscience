@@ -21,9 +21,7 @@ class news extends pages {
 	public $comments_limit;
 	public $blog_desc_limit;
 	public $latest_limit;
-
-	public $param_type = "";
-	public $params = array ();
+	public $recent_limit;
 
 	public $news_type;
 	public $value;
@@ -39,6 +37,7 @@ class news extends pages {
 		$this->comments_limit  = 10;
 		$this->blog_desc_limit = 1;
 		$this->latest_limit    = 2;
+		$this->recent_limit   = 10;
 	}
 
 	/**
@@ -170,8 +169,13 @@ class news extends pages {
 	 * GET LATEST NEWS
 	 * @return $result_post
 	 */
-	public function get_latest_news( ) {
-		$this->news_type = "latest";
+	public function get_latest_news( $limit = null ) {
+		if( !is_null( $limit ) ) {
+			$this->news_type = "recent";
+		} else {
+			$this->news_type = "latest";
+		}
+
 		$result_post = $this->news_model->get_latest_news ( $this->get_limit() );
 
 		if (! is_null ( $result_post )) {

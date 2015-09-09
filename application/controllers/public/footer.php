@@ -77,7 +77,7 @@ class footer extends CI_controller {
 		$data['result_info']      = $this->company_info;
 		$data['result_social']    = $this->company_model->get_company_social ();
 		$data['result_operation'] = $this->get_company_operation ();
-		$data['result_recent_post'] = $news->get_latest_news ( 10 );
+		$data['result_recent_post'] = $news->get_latest_news();
 
 		$data ['footer'] ['info'] = $this->load->view (
 				TPL_PAGE_TEMPLATES.'footer_company_info', $data, true );
