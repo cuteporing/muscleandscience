@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class gym_class extends pages {
+class Gym_class extends Pages {
 
 	public function __construct() {
 		parent::__construct ();

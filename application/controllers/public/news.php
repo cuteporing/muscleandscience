@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class news extends pages {
+class News extends Pages {
 	public $total_rows = 0;
 	public $per_page   = 0;
 

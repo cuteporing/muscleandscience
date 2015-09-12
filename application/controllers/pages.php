@@ -23,7 +23,7 @@ require_once (PATH_PUBLIC.'news.php');
 require_once (PATH_PUBLIC.'gallery.php');
 require_once (PATH_PUBLIC.'contact.php');
 
-class pages extends CI_controller {
+class Pages extends CI_controller {
 	public function __construct() {
 		parent::__construct ();
 	}
@@ -69,23 +69,23 @@ class pages extends CI_controller {
 		// Initialize page display
 		switch ($page) {
 			case 'news' :
-				$news = new news ();
+				$news = new News ();
 				$news->view ( $page );
 				break;
 			case 'gym-class' :
-				$gym_class = new gym_class ();
+				$gym_class = new Gym_class ();
 				$gym_class->view ( $page );
 				break;
 			case 'gallery' :
-				$gallery = new gallery ();
+				$gallery = new Gallery ();
 				$gallery->view ( $page );
 				break;
 			case 'contact' :
-				$contact = new contact ();
+				$contact = new Contact ();
 				$contact->view ( $page );
-				break;;
+				break;
 			default :
-				$home = new home ();
+				$home = new Home ();
 				$home->view ( $page );
 				break;
 		}

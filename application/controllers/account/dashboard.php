@@ -12,34 +12,16 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Contact extends Pages {
-
-	private $params;
+class Dashboard extends Account {
 
 	public function __construct() {
 		parent::__construct ();
-		$this->params = array ();
-		$this->load->model ( 'company_model' );
+		$page = "dashboard";
 	}
 
-	private function clear_params() {
-		$this->params = array ();
+
+	public function view($page) {
+		$this->load->view ( 'account/' . $page);
 	}
-
-	private function get_params( $type ) {
-		$this->clear_params ();
-	}
-
-	public function get_public_album( ) {
-	}
-
-	public function view( $page ) {
-		$common = new common ();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
-		$data ['company_info'] = $this->company_model->get_company_info ();
-
-		$this->load->view ( 'pages/' . $page, $data );
-	}
-
 }
 ?>

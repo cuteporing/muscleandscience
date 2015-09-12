@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class gallery extends pages {
+class Gallery extends Pages {
 
 	public function __construct() {
 		parent::__construct ();
