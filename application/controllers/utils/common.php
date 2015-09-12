@@ -20,11 +20,6 @@ class common extends CI_controller
 		parent::__construct();
 	}
 
-	public function load_language()
-	{
-		$this->lang->load('labels', 'english');
-	}
-
 	/**
 	 * GET BREADCRUMBS
 	 * @param (String) $page
@@ -33,7 +28,6 @@ class common extends CI_controller
 	public function get_breadcrumbs($page)
 	{
 		$data['page'] = $page;
-
 		return $this->load->view( TPL_PAGE_TEMPLATES.'breadcrumbs', $data, true);
 	}
 

@@ -40,7 +40,7 @@
 						<a href="<?=base_url()?>contact" class="main-link"><?=$this->lang->line('LBL_00006')?></a>
 					</li>
 					<li <?php if( $page == strtolower( $this->lang->line('LBL_00026') ) ) { ?>class="active"<?php } ?> >
-						<a href="#login-box" class="main-link" data-link-pointer ><?=$this->lang->line('LBL_00026')?></a>
+						<a href="<?=base_url()?>account/dashboard" class="main-link" data-link-pointer ><?=$this->lang->line('LBL_00026')?></a>
 					</li>
 				</ul>
 			</section>

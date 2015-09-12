@@ -105,7 +105,8 @@ define ( 'IMG_MAX_HEIGHT', 		768 );
  */
 define ( 'TPL_PAGE_FORMS',					'pages/forms/' );
 define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
-define ( 'TPL_PAGE_FORMS',					'account/forms/' );
+define ( 'TPL_ACCOUNT',							'account/');
+define ( 'TPL_ACCOUNT_FORMS',				'account/forms/' );
 define ( 'TPL_ACCOUNT_TEMPLATES',		'account/templates/' );
 
 /*
