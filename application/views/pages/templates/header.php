@@ -41,5 +41,11 @@
 		<script src="<?=base_url()?>assets/js/carousel.js"></script>
 		<script src="<?=base_url()?>assets/js/slick.min.js"></script>
 		<script src="<?=base_url()?>assets/js/all.js"></script>
+
+		<?php if( isset( $header_scripts ) && !empty( $header_scripts ) ): ?>
+			<?php foreach ( $header_scripts as $src ):?>
+				<script src="<?=base_url().PATH_JS.$src?>"></script>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</head>
 	<body>

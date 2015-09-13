@@ -56,7 +56,9 @@ $autoload ['packages'] = array ();
 
 $autoload ['libraries'] = array (
 		'database',
-		'session'
+		'session',
+		'bcrypt',
+		'response'
 );
 
 /*
@@ -73,6 +75,7 @@ $autoload ['helper'] = array (
 		'form',
 		'file',
 		'html',
+		'security',
 		'text',
 		'url'
 );
@@ -106,7 +109,8 @@ $autoload ['config'] = array ();
  */
 
 $autoload ['language'] = array (
-		'labels'
+		'labels',
+		'error'
 );
 
 /*
@@ -119,7 +123,7 @@ $autoload ['language'] = array (
  * |
  */
 
-$autoload ['model'] = array ( 'common_model' );
+$autoload ['model'] = array ( 'common_model', 'user_model' );
 
 
 /* End of file autoload.php */

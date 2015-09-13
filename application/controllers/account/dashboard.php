@@ -18,12 +18,30 @@ class Dashboard extends Account {
 		parent::__construct();
 	}
 
-	public function get_script() {
-		$scripts = array(
-				'flot' => array(
-						'jquery.flot.js',
-						'jquery.flot.pie.js'
-				)
+	/**
+	 * Get js script source
+	 */
+	private function get_script() {
+		return array(
+			'gentelella/bootstrap.min.js',
+			'gentelella/nicescroll/jquery.nicescroll.min.js',
+			'gentelella/chartjs/chart.min.js',
+			'gentelella/progressbar/bootstrap-progressbar.min.js',
+			'gentelella/icheck/icheck.min.js',
+			'gentelella/moment.min2.js',
+			'gentelella/datepicker/daterangepicker.js',
+			'gentelella/sparkline/jquery.sparkline.min.js',
+			'gentelella/custom.js',
+			'gentelella/flot/jquery.flot.js',
+			'gentelella/flot/jquery.flot.pie.js',
+			'gentelella/flot/jquery.flot.orderBars.js',
+			'gentelella/flot/jquery.flot.time.min.js',
+			'gentelella/flot/date.js',
+			'gentelella/flot/jquery.flot.spline.js',
+			'gentelella/flot/jquery.flot.stack.js',
+			'gentelella/flot/curvedLines.js',
+			'gentelella/flot/jquery.flot.resize.js',
+			'account/controller/dashboardController.js',
 		);
 	}
 
@@ -33,14 +51,21 @@ class Dashboard extends Account {
 	 * @return (View)
 	 */
 	public function view($page) {
+		if( !$this->user_model->authenticated() ) {
+			redirect('', 'refresh');
+		}
+
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
+		$data['current_user_name'] = $this->user_model->get_name();
+		$data['footer_scripts'] = $this->get_script();
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar' );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
 		$this->load->view( TPL_ACCOUNT.$page );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer' );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer', $data );
 	}
 }
 ?>

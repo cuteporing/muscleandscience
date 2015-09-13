@@ -42,7 +42,9 @@ if (! defined ( 'BASEPATH' ))
  * |
  */
 $route['account/(:any)'] = 'account/view';
-$route['account/login'] = 'login/view';
+$route['account/login']  = 'login/view';
+$route['account/user-login'] = 'login/user_login/$1';
+$route['account/user-logout'] = 'login/user_logout/$1';
 
 $route ['(:any)'] = 'pages/view/$1';
 $route ['default_controller'] = 'pages/view';

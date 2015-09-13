@@ -20,8 +20,6 @@ class Account extends CI_controller {
 		parent::__construct ();
 	}
 
-
-
 	public function view($page = 'dashboard') {
 		$data ['page']  = strtolower( str_replace( "-", " ", $page ));
 		$data ['title'] = ucfirst ( $page );
@@ -30,7 +28,7 @@ class Account extends CI_controller {
 		$instance = new Dashboard ();
 
 		// Initialize view
-		$instance->view ( $page );
+		$instance->view($page);
 
 	}
 }

@@ -20,6 +20,19 @@ class Home extends Pages {
 	}
 
 	/**
+	 * Get js script source
+	 */
+	private function get_script() {
+		return array(
+			'account/model/optionsModel.js',
+			'account/model/responseModel.js',
+			'account/controller/commonController.js',
+			'account/controller/loginController.js',
+			'public/controller/homeController.js',
+		);
+	}
+
+	/**
 	 * GET LOG-IN FORM
 	 * @return (String) $container
 	 */
@@ -46,11 +59,12 @@ class Home extends Pages {
 		$homebox = new homebox ();
 		$gym_class = new gym_class ();
 		$news = new news ();
-		$data ['login'] = self::create_login_form ();
-		$data ['banner'] = $this->get_banner();
-		$data ['homebox'] = $homebox->display_homebox_banner ();
-		$data ['gym_class'] = $gym_class->display_gym_class_thumbnail ();
-		$data ['latest_news'] = $news->view_latest_news ();
+		$data['login'] = self::create_login_form ();
+		$data['banner'] = $this->get_banner();
+		$data['homebox'] = $homebox->display_homebox_banner ();
+		$data['gym_class'] = $gym_class->display_gym_class_thumbnail ();
+		$data['latest_news'] = $news->view_latest_news ();
+		$data['footer_scripts'] = $this->get_script();
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}

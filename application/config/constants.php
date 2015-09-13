@@ -121,6 +121,8 @@ define ( 'TPL_ACCOUNT_TEMPLATES',		'account/templates/' );
 define ( 'PATH_ACCOUNT',		'account/' );
 define ( 'PATH_PUBLIC',			'public/' );
 define ( 'PATH_UTILS',			'utils/' );
+define ( 'PATH_JS',					'assets/js/' );
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

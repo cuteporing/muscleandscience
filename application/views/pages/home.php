@@ -64,5 +64,9 @@
 			</div>
 		</div>
 	</div>
-
 </div>
+<?php if( isset( $footer_scripts ) && !empty( $footer_scripts ) ): ?>
+		<?php foreach ( $footer_scripts as $src ):?>
+			<script src="<?=base_url().PATH_JS.$src?>"></script>
+		<?php endforeach; ?>
+	<?php endif; ?>

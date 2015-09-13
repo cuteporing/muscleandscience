@@ -21,25 +21,23 @@ class common extends CI_controller
 	}
 
 	/**
-	 * GET BREADCRUMBS
+	 * Get breadcrumbs
 	 * @param (String) $page
 	 * @return (View)
 	 */
-	public function get_breadcrumbs($page)
-	{
+	public function get_breadcrumbs($page) {
 		$data['page'] = $page;
 		return $this->load->view( TPL_PAGE_TEMPLATES.'breadcrumbs', $data, true);
 	}
 
 	/**
-	 * GET FORM
+	 * Get form
 	 * @param (String) $form_path
 	 * @param (Form) $form
 	 * @param (Object) $data
 	 * @return (View)
 	 */
-	public function get_form($form_path, $form, $data = null)
-	{
+	public function get_form($form_path, $form, $data = null) {
 		$form = $form.'_form';
 
 		if ( is_null( $data ) ) {
@@ -51,13 +49,12 @@ class common extends CI_controller
 	}
 
 	/**
-	 * CREATES LIST
+	 * Create list
 	 * @param (String) $title
 	 * @param (Json) $value
 	 * @return (View)
 	 */
-	public static function get_list($title, $value)
-	{
+	public static function get_list($title, $value) {
 		if (!self::$instance)
 			self::$instance = new self();
 
@@ -68,28 +65,48 @@ class common extends CI_controller
 	}
 
 	/**
-	 * CREATES BOX HEADER
+	 * Create box header
 	 * @param (String) $title
 	 * @return $heading
 	 */
-	static function box_header($title)
-	{
+	static function box_header($title) {
 		return heading($title, '3', 'class="box-header"');
 	}
 
 
 	/**
-	 * CHECK DATA IF NULL
+	 * Check if data is null
 	 * @param (Object) $data
 	 * @return (Object) $data
 	 */
-	static function checkData($data)
-	{
+	static function checkData($data) {
 		(isset($data) && !empty($data))?
 			$data = $data
 		:	$data = '';
 
 		return $data;
 	}
+
+// 	public static function createErrorMsg( $errorCode ) {
+// 		if ( isset( $errorCode ) && !empty( $errorCode ) ){
+// 			if( !defined( $errorCode ) ){
+// 				$errorMsg = $errorCode;
+// 			} else {
+// 				$errorMsg = constant($errorCode);
+// 			}
+
+// 			Logger::error( $errorMsg );
+// 		} else {
+// 			$errorMsg = "";
+// 		}
+
+// 		return $errorMsg;
+// 	}
+
+// 	public static function createResponse( $errorCode, $data ) {
+// 		$msg['responseName'] = $_POST['responseName'];
+// 		$msg['errorCode']    = self::createErrorCode( $errorCode );
+// 		$msg['errorMsg']     = self::createErrorMsg( $errorCode );
+// 	}
 }
 ?>

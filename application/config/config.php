@@ -355,15 +355,5 @@ $config ['rewrite_short_tags'] = FALSE;
  */
 $config ['proxy_ips'] = '';
 
-/*
- * |--------------------------------------------------------------------------
- * | CSS Header
- * |--------------------------------------------------------------------------
- * |
- * |
- */
-
-
-
 /* End of file config.php */
 /* Location: ./application/config/config.php */

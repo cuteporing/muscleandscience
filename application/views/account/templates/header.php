@@ -15,6 +15,7 @@
 		<link href="<?=base_url()?>assets/css/gentelella/maps/jquery-jvectormap-2.0.1.css" rel="stylesheet"/>
 		<link href="<?=base_url()?>assets/css/gentelella/icheck/flat/green.css" rel="stylesheet">
 		<link href="<?=base_url()?>assets/css/gentelella/floatexamples.css" rel="stylesheet" />
+		<link href="<?=base_url()?>assets/img/icon.png" rel="shortcut icon" />
 
 		<script src="<?=base_url()?>assets/js/gentelella/jquery.min.js"></script>
 
@@ -27,6 +28,10 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
+<?php if( $title == "Login" ): ?>
+	<body style="background:#F7F7F7;">
+<?php else: ?>
 	<body class="nav-md">
 		<div class="container body">
 				<div class="main_container">
+<?php endif; ?>
