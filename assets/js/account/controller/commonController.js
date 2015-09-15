@@ -2,7 +2,6 @@
 // COMMON CONTROLLER
 //-------------------------------------------------------------------
 var common = {
-	
 	/**
 	 * SEND POST
 	 * @param (object) options

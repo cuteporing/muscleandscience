@@ -1,12 +1,11 @@
 <h2><?=$this->lang->line('LBL_00026') ?></h2>
 <h3><?=$this->lang->line('LBL_00027') ?></h3>
-<div class="error-msg" role="error-alert"><span class="msg"></span></div>
+<div class="error-msg"></div>
 <div class="login-panel">
 	<?php
 		$form = array(
-				'id'          => 'login-form',
 				'autocomplete'=>'off',
-				'onsubmit'    =>'return false'
+				'onsubmit'=>'return false'
 		);
 		$username = array (
 				'id'   => 'username',

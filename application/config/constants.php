@@ -85,15 +85,14 @@ define ( 'META_AUTHOR',			'KBVCodes, 2014' );
  * |
  */
 
-define ( 'IMG_BANNER', 					'upload/banner/' );
-define ( 'IMG_GALLERY',					'upload/gallery/' );
+define ( 'IMG_BANNER', 			'/upload/banner/' );
 define ( 'NO_IMAGE_FILE_PATH', 	'assets/img/' );
 define ( 'NO_IMAGE_FILE_EXT', 	'.png' );
 define ( 'NO_IMAGE_RAW_NAME', 	'noPhoto-icon' );
-define ( 'IMG_ALLOWED_TYPE', 		'gif|jpg|png' );
-define ( 'IMG_MAX_SIZE', 				350 );
-define ( 'IMG_MAX_WIDTH',				1024 );
-define ( 'IMG_MAX_HEIGHT', 			768 );
+define ( 'IMG_ALLOWED_TYPE', 	'gif|jpg|png' );
+define ( 'IMG_MAX_SIZE', 		350 );
+define ( 'IMG_MAX_WIDTH',		1024 );
+define ( 'IMG_MAX_HEIGHT', 		768 );
 
 
 /*
@@ -123,7 +122,6 @@ define ( 'PATH_ACCOUNT',		'account/' );
 define ( 'PATH_PUBLIC',			'public/' );
 define ( 'PATH_UTILS',			'utils/' );
 define ( 'PATH_JS',					'assets/js/' );
-define ( 'PATH_CSS',				'assets/css/' );
 
 
 /* End of file constants.php */

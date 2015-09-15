@@ -39,17 +39,9 @@
 					<li <?php if( $page == strtolower( $this->lang->line('LBL_00006') ) ) { ?>class="active"<?php } ?> >
 						<a href="<?=base_url()?>contact" class="main-link"><?=$this->lang->line('LBL_00006')?></a>
 					</li>
-					<?php if( !$this->user_model->authenticated() ): ?>
 					<li <?php if( $page == strtolower( $this->lang->line('LBL_00026') ) ) { ?>class="active"<?php } ?> >
 						<a href="<?=base_url()?>account/login" class="main-link" data-link-pointer ><?=$this->lang->line('LBL_00026')?></a>
 					</li>
-					<?php else: ?>
-					<li>
-						<a href="<?=base_url()?>account/dashboard" class="main-link" data-link-pointer >
-							My page
-						</a>
-					</li>
-					<?php endif; ?>
 				</ul>
 			</section>
 		</nav>

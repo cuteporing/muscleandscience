@@ -5,22 +5,19 @@
 	<div id="wrapper">
 		<div id="login" class="animate form">
 			<section class="login_content">
-
-				<form action="<?=base_url()?>account/user-login" id="login-form">
+				<form action="<?=base_url()?>account/user-login">
 					<h1>Login Form</h1>
-					<span class="error-msg"><span class="msg">&nbsp;</span></span>
 					<div>
-						<input id="username" type="text" class="form-control"
-							placeholder="Username" required="required" />
+						<input id="username" type="text" class="form-control" placeholder="Username"
+							required="" />
 					</div>
 					<div>
-						<input id="password" type="password" class="form-control"
-							placeholder="Password" required="" />
+						<input id="password" type="password" class="form-control" placeholder="Password"
+							required="" />
 					</div>
 					<div>
-						<button id="loginBtn" class="btn btn-default submit" type="submit">Log
-							in</button>
-						<a class="reset_pass" href="#">Lost your password?</a>
+						<a id="loginBtn" class="btn btn-default submit" href="login">Log in</a> <a
+							class="reset_pass" href="#">Lost your password?</a>
 					</div>
 					<div class="clearfix"></div>
 					<div class="separator">
@@ -32,8 +29,8 @@
 						<br />
 						<div>
 							<h1>Muscle and Science</h1>
-							<p>&#169; 2015 All Rights Reserved. Muscle and Science. Privacy
-								and Terms</p>
+							<p>&#169; 2015 All Rights Reserved. Muscle and Science. Privacy and
+								Terms</p>
 						</div>
 					</div>
 				</form>
@@ -71,8 +68,8 @@
 						<br />
 						<div>
 							<h1>Muscle and Science</h1>
-							<p>&#169; 2015 All Rights Reserved. Muscle and Science. Privacy
-								and Terms</p>
+							<p>&#169; 2015 All Rights Reserved. Muscle and Science. Privacy and
+								Terms</p>
 						</div>
 					</div>
 				</form>

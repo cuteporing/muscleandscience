@@ -16,7 +16,6 @@ class Dashboard extends Account {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('members_model');
 	}
 
 	/**
@@ -29,55 +28,21 @@ class Dashboard extends Account {
 			'gentelella/chartjs/chart.min.js',
 			'gentelella/progressbar/bootstrap-progressbar.min.js',
 			'gentelella/icheck/icheck.min.js',
+			'gentelella/moment.min2.js',
+			'gentelella/datepicker/daterangepicker.js',
+			'gentelella/sparkline/jquery.sparkline.min.js',
 			'gentelella/custom.js',
+			'gentelella/flot/jquery.flot.js',
+			'gentelella/flot/jquery.flot.pie.js',
+			'gentelella/flot/jquery.flot.orderBars.js',
+			'gentelella/flot/jquery.flot.time.min.js',
+			'gentelella/flot/date.js',
+			'gentelella/flot/jquery.flot.spline.js',
+			'gentelella/flot/jquery.flot.stack.js',
+			'gentelella/flot/curvedLines.js',
+			'gentelella/flot/jquery.flot.resize.js',
 			'account/controller/dashboardController.js',
 		);
-	}
-
-	public function get_toptiles() {
-		$result = array();
-		if( $this->user_model->get_user_kbn() != 10 ) {
-			// Get total members
-			$temp = array(
-					'count' => $this->members_model->count_gym_members(),
-					'icon'  => 'fa fa-caret-square-o-right',
-					'title' => 'Gym Members',
-					'subtitle' => 'Total number of gym members'
-			);
-			array_push($result, $temp);
-
-			// Get total personal training members
-			$temp = array(
-					'count' => $this->members_model->count_pt_members(),
-					'icon'  => 'fa fa-comments-o',
-					'title' => 'Personal Training',
-					'subtitle' => 'Total number of PT members'
-			);
-			array_push($result, $temp);
-
-			// Get members with pending balance
-			$temp = array(
-					'count' => $this->members_model->count_unpaid_members(),
-					'icon'  => 'fa fa-sort-amount-desc',
-					'title' => 'Unpaid Members',
-					'subtitle' => 'Total number of unpaid members'
-			);
-			array_push($result, $temp);
-
-			// Get new sign ups
-			$temp = array(
-				'count' => $this->user_model->count_new_user(),
-				'icon'  => 'fa fa-check-square-o',
-				'title' => 'New Sign Ups',
-				'subtitle' => 'There are accounts that needs activation'
-			);
-			array_push($result, $temp);
-		} else {
-
-		}
-		$data['top_tiles_data'] = $result;
-
-		return $this->load->view( TPL_ACCOUNT_TEMPLATES.'top_tiles', $data, true );
 	}
 
 	/**
@@ -90,16 +55,14 @@ class Dashboard extends Account {
 			redirect('', 'refresh');
 		}
 
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
+		$data['current_user_name'] = $this->user_model->get_name();
 		$data['footer_scripts'] = $this->get_script();
-		$data['sidebar'] = $this->sidebar_model->get_sidebar();
-		$data['top_tiles'] = $this->get_toptiles();
-		$data['gym_toplist'] = $this->members_model->top_gym_members();
-		$data['pt_toplist'] = $this->members_model->top_pt_members();
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar' );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
 		$this->load->view( TPL_ACCOUNT.$page );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer', $data );

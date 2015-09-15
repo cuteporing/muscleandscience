@@ -58,9 +58,7 @@
 				<?php endif; ?>
 				<div class="sidebar-box">
 					<ul id="login-box" class="home-box-container login-box">
-						<?php if( isset( $login )): ?>
 						<?=$login?>
-						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

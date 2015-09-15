@@ -23,12 +23,10 @@ class Login extends CI_Controller {
 	 */
 	private function get_script() {
 		return array(
-			'gentelella/bootstrap.min.js',
 			'account/model/optionsModel.js',
 			'account/model/responseModel.js',
 			'account/controller/commonController.js',
 			'account/controller/loginController.js'
-
 		);
 	}
 

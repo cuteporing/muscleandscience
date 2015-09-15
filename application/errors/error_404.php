@@ -65,7 +65,8 @@ p {
 </head>
 <body>
 	<div id="container">
-	<img alt="404" src="<?=base_url()?>assets/img/page_not_found.jpg">
+		<h1><?php echo $heading; ?></h1>
+		<?php echo $message; ?>
 	</div>
 </body>
 </html>

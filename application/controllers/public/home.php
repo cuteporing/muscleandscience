@@ -59,15 +59,12 @@ class Home extends Pages {
 		$homebox = new homebox ();
 		$gym_class = new gym_class ();
 		$news = new news ();
+		$data['login'] = self::create_login_form ();
 		$data['banner'] = $this->get_banner();
 		$data['homebox'] = $homebox->display_homebox_banner ();
 		$data['gym_class'] = $gym_class->display_gym_class_thumbnail ();
 		$data['latest_news'] = $news->view_latest_news ();
 		$data['footer_scripts'] = $this->get_script();
-
-		if( !$this->user_model->authenticated() ) {
-			$data['login'] = self::create_login_form ();
-		}
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}
