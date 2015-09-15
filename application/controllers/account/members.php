@@ -9,13 +9,20 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-if (! defined ( 'BASEPATH' ))
-	exit ( 'No direct script access allowed' );
+if(! defined( 'BASEPATH' ))
+	exit( 'No direct script access allowed' );
 
-class Login extends CI_Controller {
+class Dashboard extends Account {
 
 	public function __construct() {
-		parent::__construct ();
+		parent::__construct();
+		$this->load->model('members_model');
+	}
+
+	private function get_styles() {
+		return array(
+				'gentelella/datatables/tools/css/dataTables.tableTools.css'
+		);
 	}
 
 	/**
@@ -23,32 +30,15 @@ class Login extends CI_Controller {
 	 */
 	private function get_script() {
 		return array(
-			'gentelella/bootstrap.min.js',
-			'account/model/optionsModel.js',
-			'account/model/responseModel.js',
-			'account/controller/commonController.js',
-			'account/controller/loginController.js'
-
+				'gentelella/bootstrap.min.js',
+				'gentelella/nicescroll/jquery.nicescroll.min.js',
+				'gentelella/chartjs/chart.min.js',
+				'gentelella/progressbar/bootstrap-progressbar.min.js',
+				'gentelella/icheck/icheck.min.js',
+				'gentelella/custom.js',
+				'gentelella/datatables/js/jquery.dataTables.js',
+				'gentelella/datatables/tools/js/dataTables.tableTools.js'
 		);
-	}
-
-	public function user_logout() {
-		session_start();
-		$this->session->unset_userdata('mas_user');
-		session_destroy();
-		return redirect('home', 'refresh');
-	}
-
-	public function user_login() {
-		$this->user_model->set_username( $this->input->post('username') );
-		$this->user_model->set_password( $this->input->post('password') );
-
-		if( !$this->user_model->authenticated() ) {
-			$this->response->generate( 'ERROR_00001' );
-		} else {
-			$this->response->generate( '', array(
-					'redirect'=>base_url().'account/dashboard') );
-		}
 	}
 
 	/**
@@ -56,17 +46,24 @@ class Login extends CI_Controller {
 	 * @param (String) $page
 	 * @return (View)
 	 */
-	public function view($page = "login") {
-		if( $this->user_model->authenticated() ) {
-			redirect('account/dashboard', 'refresh');
+	public function view($page) {
+		if( !$this->user_model->authenticated() ) {
+			redirect('', 'refresh');
 		}
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
 		$data['footer_scripts'] = $this->get_script();
+		$data['sidebar']        = $this->sidebar_model->get_sidebar();
+		$data['top_tiles']      = $this->get_toptiles();
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
-		$this->load->view( TPL_ACCOUNT."login" );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
+		$this->load->view( TPL_ACCOUNT.$page );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer', $data );
 	}
+
 }
+
 ?>
