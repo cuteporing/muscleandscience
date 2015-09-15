@@ -41,7 +41,7 @@ class News extends Pages {
 	}
 
 	/**
-	 * SHOW ALL BUTTON
+	 * Show all button
 	 * @return
 	 */
 	static function show_all_btn() {
@@ -57,9 +57,9 @@ class News extends Pages {
 
 
 	/**
-	 * EXTRACT POST TAGS
-	 * @param (ArrayObject) $data
-	 * @return (ArrayObject) $tags
+	 * Extract post tags
+	 * @param array $data
+	 * @return array $tags
 	 */
 	public function extract_post_tags($data) {
 		$tags = array ();
@@ -80,21 +80,12 @@ class News extends Pages {
 	 * @return (Object)
 	 */
 	public function get_comments($post_id = null, $offset = 0) {
-		if (! is_null ( $post_id )) {
-			$this->get_params ();
-			$this->params ['limiter'] ['offset'] = $offset;
-			$this->params ['where'] = array (
-					'mas_comments.deleted' => 0,
-					'mas_comments.post_id' => $post_id
-			);
-
-			return $this->news_model->get_comments(
+		return $this->news_model->get_comments(
 					$post_id, $this->comments_limit, $offset );
-		}
 	}
 
 	/**
-	 * GET PAGINATION
+	 * Get pagination
 	 * @param $view_type
 	 * @return
 	 */
@@ -123,7 +114,7 @@ class News extends Pages {
 	}
 
 	/**
-	 * IF OFFSET IS MORE THAN THE NO OF NEWS
+	 * If offset is more than the no. of news
 	 * @param $total_rows
 	 * @param $offset
 	 * @return $return_value
@@ -138,16 +129,29 @@ class News extends Pages {
 		return $return_value;
 	}
 
+	/**
+	 * Function to get comment offset
+	 * @param number $offset
+	 * @return number $offset
+	 */
 	public function get_comment_offset( $offset = 0 ) {
 		return $offset;
 	}
 
+	/**
+	 * Function to get offset
+	 * @return $offset
+	 */
 	public function get_offset() {
 		(! $this->value ) ? $offset = 0 : $offset = $this->value;
 
 		return $offset;
 	}
 
+	/**
+	 * Function to get limit
+	 * @return number
+	 */
 	public function get_limit() {
 		if( $this->news_type == "blog" || $this->news_type == "tag" ) {
 			return $this->blog_limit;
@@ -156,6 +160,10 @@ class News extends Pages {
 		}
 	}
 
+	/**
+	 * Function to get slug
+	 * @return string
+	 */
 	public function get_slug() {
 		if( $this->news_type == "tag" ) {
 			return str_replace ( '-', ' ', $this->value );
@@ -165,7 +173,7 @@ class News extends Pages {
 	}
 
 	/**
-	 * GET LATEST NEWS
+	 * Get latest news
 	 * @return $result_post
 	 */
 	public function get_latest_news( $limit = null ) {
@@ -204,7 +212,7 @@ class News extends Pages {
 	}
 
 	/**
-	 * VIEW LATEST NEWS
+	 * View latest news
 	 * @return $container
 	 */
 	public function view_latest_news() {

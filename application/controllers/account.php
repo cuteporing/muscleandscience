@@ -18,6 +18,7 @@ if (! defined ( 'BASEPATH' ))
 class Account extends CI_controller {
 	public function __construct() {
 		parent::__construct ();
+		$this->load->model( 'sidebar_model' );
 	}
 
 	public function view($page = 'dashboard') {
@@ -25,7 +26,10 @@ class Account extends CI_controller {
 		$data ['title'] = ucfirst ( $page );
 
 		// Initialize controller
-		$instance = new Dashboard ();
+		if( $page == "members" )
+			$instance = new Members();
+		else
+			$instance = new Dashboard();
 
 		// Initialize view
 		$instance->view($page);

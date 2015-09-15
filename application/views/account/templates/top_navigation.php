@@ -11,7 +11,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="">
 					<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-						<img src="<?=base_url()?>assets/img/gentelella/img.jpg" alt=""><?=$current_user_name ?>
+						<img src="<?=base_url().IMG_GALLERY.$this->user_model->get_user_photo()?>" alt="">
+						<?=$this->user_model->get_name()?>
 						<span class=" fa fa-angle-down"></span>
 					</a>
 					<ul

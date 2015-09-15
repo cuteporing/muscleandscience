@@ -17,6 +17,12 @@
 		<link href="<?=base_url()?>assets/css/gentelella/floatexamples.css" rel="stylesheet" />
 		<link href="<?=base_url()?>assets/img/icon.png" rel="shortcut icon" />
 
+		<?php if( isset( $header_styles ) && !empty( $header_styles ) ): ?>
+			<?php foreach ( $header_styles as $src ):?>
+				<link href=""<?=base_url().PATH_CSS.$src?>" rel="stylesheet" />
+			<?php endforeach; ?>
+		<?php endif; ?>
+
 		<script src="<?=base_url()?>assets/js/gentelella/jquery.min.js"></script>
 
 		<!--[if lt IE 9]>

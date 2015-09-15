@@ -57,6 +57,8 @@ class Gym_class extends Pages {
 	public function get_package_homebox() {
 		$result = $this->package_model->get_mem_package();
 
+		if( is_null( $result ) ) return $result;
+
 		$data['title']    = $this->lang->line ( 'LBL_00030' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00031' );
 		$data['display']  = $result;
@@ -73,6 +75,8 @@ class Gym_class extends Pages {
 	public function get_pt_homebox() {
 		$result = $this->package_model->get_pt_package();
 
+		if( is_null( $result ) ) return $result;
+
 		$data['title']    = $this->lang->line ( 'LBL_00032' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00033' );
 		$data['display']  = $result;
@@ -88,6 +92,8 @@ class Gym_class extends Pages {
 	 */
 	public function get_sp_homebox() {
 		$result = $this->package_model->get_sp_package();
+
+		if( is_null( $result ) ) return $result;
 
 		$data['title']    = $this->lang->line ( 'LBL_00034' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00035' );
