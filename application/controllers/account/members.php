@@ -12,7 +12,7 @@
 if(! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
-class Dashboard extends Account {
+class Members extends Account {
 
 	public function __construct() {
 		parent::__construct();
@@ -33,16 +33,16 @@ class Dashboard extends Account {
 				'gentelella/bootstrap.min.js',
 				'gentelella/nicescroll/jquery.nicescroll.min.js',
 				'gentelella/chartjs/chart.min.js',
-				'gentelella/progressbar/bootstrap-progressbar.min.js',
 				'gentelella/icheck/icheck.min.js',
 				'gentelella/custom.js',
 				'gentelella/datatables/js/jquery.dataTables.js',
-				'gentelella/datatables/tools/js/dataTables.tableTools.js'
+// 				'gentelella/datatables/tools/js/dataTables.tableTools.js',
+				'account/controller/tableController.js'
 		);
 	}
 
 	/**
-	 * VIEW ACCOUNT DASHBOARD
+	 * View gym members
 	 * @param (String) $page
 	 * @return (View)
 	 */
@@ -51,11 +51,12 @@ class Dashboard extends Account {
 			redirect('', 'refresh');
 		}
 
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
+		$data['header_styles'] = $this->get_styles();
 		$data['footer_scripts'] = $this->get_script();
-		$data['sidebar']        = $this->sidebar_model->get_sidebar();
-		$data['top_tiles']      = $this->get_toptiles();
+		$data['sidebar'] = $this->sidebar_model->get_sidebar();
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );

@@ -19,6 +19,10 @@ var loginController = (function() {
 
 	loginForm.on("submit", function(e){
 		e.preventDefault();
+		
+		if( !$('#username').val().length > 0 || !$('#password').val().length > 0)
+			return;
+		
 		var data = {};
 		data.username = $('#username').val();
 		data.password = $('#password').val();

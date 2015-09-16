@@ -12,9 +12,7 @@
 		<link href="<?=base_url()?>assets/css/gentelella/animate.min.css" rel="stylesheet">
 		<!-- Custom styling plus plugins -->
 		<link href="<?=base_url()?>assets/css/gentelella/custom.css" rel="stylesheet">
-		<link href="<?=base_url()?>assets/css/gentelella/maps/jquery-jvectormap-2.0.1.css" rel="stylesheet"/>
 		<link href="<?=base_url()?>assets/css/gentelella/icheck/flat/green.css" rel="stylesheet">
-		<link href="<?=base_url()?>assets/css/gentelella/floatexamples.css" rel="stylesheet" />
 		<link href="<?=base_url()?>assets/img/icon.png" rel="shortcut icon" />
 
 		<?php if( isset( $header_styles ) && !empty( $header_styles ) ): ?>

@@ -267,9 +267,11 @@ $('.bulk_action input#check-all').on('ifUnchecked', function () {
 
 function countChecked() {
         if (check_state == 'check_all') {
+        	console.log('check_all');
             $(".bulk_action input[name='table_records']").iCheck('check');
         }
         if (check_state == 'uncheck_all') {
+        	console.log('uncheck_all');
             $(".bulk_action input[name='table_records']").iCheck('uncheck');
         }
         var n = $(".bulk_action input[name='table_records']:checked").length;

@@ -90,7 +90,6 @@ class Dashboard extends Account {
 			redirect('', 'refresh');
 		}
 
-
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
 		$data['footer_scripts'] = $this->get_script();

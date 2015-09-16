@@ -13,7 +13,7 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 	require_once( PATH_UTILS.'common.php');
-	require_once( PATH_ACCOUNT.'dashboard.php' );
+
 
 class Account extends CI_controller {
 	public function __construct() {
@@ -21,15 +21,21 @@ class Account extends CI_controller {
 		$this->load->model( 'sidebar_model' );
 	}
 
-	public function view($page = 'dashboard') {
-		$data ['page']  = strtolower( str_replace( "-", " ", $page ));
-		$data ['title'] = ucfirst ( $page );
+	public function view($page) {
 
 		// Initialize controller
-		if( $page == "members" )
+		if( $page == "members" ) {
+			require_once( PATH_ACCOUNT.'members.php' );
 			$instance = new Members();
-		else
+		}
+
+		else {
+			require_once( PATH_ACCOUNT.'dashboard.php' );
 			$instance = new Dashboard();
+		}
+
+
+
 
 		// Initialize view
 		$instance->view($page);
