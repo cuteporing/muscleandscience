@@ -372,20 +372,20 @@ CREATE TABLE IF NOT EXISTS `mas_message` (
 --
 
 INSERT INTO `mas_message` (`msg_id`, `msg_to`, `msg_from`, `msg_date`, `subject`, `sent`, `status`, `deleted`) VALUES
-(1, 'Admin, TechAdmin', 1400003, '2014-07-07 21:12:26', 'Contact Message', 1, 1, 0),
-(2, 'Admin, TechAdmin', 1400003, '2014-07-07 21:15:18', 'Contact Message', 1, 1, 0),
-(3, 'Admin, TechAdmin', 1400003, '2014-07-07 21:36:10', 'Contact Message', 1, 1, 0),
-(4, 'Admin, TechAdmin', 1400003, '2014-07-07 21:36:15', 'Contact Message', 1, 1, 0),
-(5, 'Admin, TechAdmin', 1400003, '2014-07-07 21:37:04', 'Contact Message', 1, 1, 0),
-(6, 'Admin, TechAdmin', 1400003, '2014-07-07 21:37:26', 'Contact Message', 1, 1, 0),
-(7, 'Admin, TechAdmin', 1400003, '2014-07-07 21:42:11', 'Contact Message', 1, 1, 0),
-(8, 'Admin, TechAdmin', 1400003, '2014-07-07 22:27:39', 'Contact Message', 1, 1, 0),
-(9, 'Admin, TechAdmin', 1400003, '2014-07-07 22:30:18', 'Contact Message', 1, 1, 0),
-(10, 'Admin, TechAdmin', 1400003, '2014-07-07 22:36:20', 'Contact Message', 1, 1, 0),
-(11, 'Admin, TechAdmin', 1400003, '2014-07-07 22:39:58', 'Contact Message', 1, 1, 0),
-(12, 'Admin, TechAdmin', 1400003, '2014-07-07 23:22:16', 'Contact Message', 1, 1, 0),
-(13, 'Admin, TechAdmin', 1400001, '2014-07-10 17:37:39', 'Contact Message', 1, 1, 0),
-(14, 'Admin, TechAdmin', 1400003, '2014-07-10 22:11:18', 'Contact Message', 1, 1, 0);
+(1, 'Admin, TechAdmin', 1, '2014-07-07 21:12:26', 'Contact Message', 1, 1, 0),
+(2, 'Admin, TechAdmin', 1, '2014-07-07 21:15:18', 'Contact Message', 1, 1, 0),
+(3, 'Admin, TechAdmin', 1, '2014-07-07 21:36:10', 'Contact Message', 1, 1, 0),
+(4, 'Admin, TechAdmin', 1, '2014-07-07 21:36:15', 'Contact Message', 1, 1, 0),
+(5, 'Admin, TechAdmin', 1, '2014-07-07 21:37:04', 'Contact Message', 1, 1, 0),
+(6, 'Admin, TechAdmin', 1, '2014-07-07 21:37:26', 'Contact Message', 1, 1, 0),
+(7, 'Admin, TechAdmin', 1, '2014-07-07 21:42:11', 'Contact Message', 1, 1, 0),
+(8, 'Admin, TechAdmin', 1, '2014-07-07 22:27:39', 'Contact Message', 1, 1, 0),
+(9, 'Admin, TechAdmin', 1, '2014-07-07 22:30:18', 'Contact Message', 1, 1, 0),
+(10, 'Admin, TechAdmin', 1, '2014-07-07 22:36:20', 'Contact Message', 1, 1, 0),
+(11, 'Admin, TechAdmin', 1, '2014-07-07 22:39:58', 'Contact Message', 1, 1, 0),
+(12, 'Admin, TechAdmin', 1, '2014-07-07 23:22:16', 'Contact Message', 1, 1, 0),
+(13, 'Admin, TechAdmin', 1, '2014-07-10 17:37:39', 'Contact Message', 1, 1, 0),
+(14, 'Admin, TechAdmin', 1, '2014-07-10 22:11:18', 'Contact Message', 1, 1, 0);
 
 -- --------------------------------------------------------
 
