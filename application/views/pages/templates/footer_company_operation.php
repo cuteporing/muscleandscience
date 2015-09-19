@@ -1,5 +1,5 @@
 <div class="footer-box">
-	<?= common::box_header( $this->lang->line('LBL_00011') )?>
+	<h3 class="box-header"><?=$this->lang->line('LBL_00011')?></h3>
 	<ul class="list-items gray opening-hours">
 		<?php if( isset( $result_operation ) ): ?>
 			<?php foreach ( $result_operation as $row ): ?>

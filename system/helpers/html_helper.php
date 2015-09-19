@@ -449,6 +449,29 @@ if (! function_exists ( 'span' )) {
 // ------------------------------------------------------------------------
 
 /**
+ * Generates small element
+ *
+ * @access public
+ * @param string, array
+ * @return string
+ */
+if (! function_exists ( 'small' )) {
+	function small($text, $param = array()) {
+		$small = '<small ';
+
+		foreach ( $param as $attr => $value ) {
+			$small .= $attr . '="' . $value . '" ';
+		}
+
+		$small .= '>' . $text;
+		$small .= '</small>';
+		return $small;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Generates button element
 *
 * @access public

@@ -1,5 +1,5 @@
 <div class="comment-form-container">
-	<?= common::box_header( $this->lang->line('LBL_00010') )?>
+	<h3 class="box-header"><?=$this->lang->line('LBL_00010')?></h3>
 	<form class="comment-form" id="comment-form" method="post" action="?page=post">
 		<fieldset class="left">
 			<input class="text-input hint" value="" placeholder="Your name" type="text">

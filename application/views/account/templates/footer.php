@@ -1,5 +1,5 @@
-<?php if( $title != "Login" ): ?>
-<!-- footer content -->
+	<?php if( $title != "Login" ): ?>
+				<!-- footer content -->
 				<footer>
 					<div class="">
 						<p class="pull-right">

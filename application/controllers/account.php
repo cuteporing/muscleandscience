@@ -12,13 +12,9 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-	require_once( PATH_UTILS.'common.php');
-
-
 class Account extends CI_controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model( 'sidebar_model' );
 	}
 
 	public function view($page) {
@@ -33,9 +29,6 @@ class Account extends CI_controller {
 			require_once( PATH_ACCOUNT.'dashboard.php' );
 			$instance = new Dashboard();
 		}
-
-
-
 
 		// Initialize view
 		$instance->view($page);

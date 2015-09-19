@@ -38,9 +38,9 @@
 							<span class="logo-left">MAS</span>
 							<span class="logo-right">GYM</span>
 							<p>
-								<?= common::checkData( $company_info[0]['street_address_1'] ) ?>&nbsp;
-								<?= common::checkData( $company_info[0]['street_address_2'] ) ?>,&nbsp;
-								<?= common::checkData( $company_info[0]['city'] ) ?><br>
+								<?= check_data( $company_info[0]['street_address_1'] ) ?>&nbsp;
+								<?= check_data( $company_info[0]['street_address_2'] ) ?>,&nbsp;
+								<?= check_data( $company_info[0]['city'] ) ?><br>
 							</p>
 							<ul class="contact-data">
 								<li class="phone">+123 655 655</li>

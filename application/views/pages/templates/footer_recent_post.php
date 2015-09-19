@@ -2,7 +2,9 @@
 	<div id="recent_post">
 		<div class="clearfix">
 			<!-- RECENT POST HEADER -->
-			<div class="header-left"><?= common::box_header( $this->lang->line('LBL_00039') )?></div>
+			<div class="header-left">
+				<h3 class="box-header"><?=$this->lang->line('LBL_00039')?></h3>
+			</div>
 			<div class="header-right">
 				<a class="prev scrolling-list-control-left icon-small-arrow left-white" href="#"></a>
 				<a class="next scrolling-list-control-right icon-small-arrow right-white" href="#"></a>

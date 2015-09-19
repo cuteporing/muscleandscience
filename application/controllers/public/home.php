@@ -36,10 +36,9 @@ class Home extends Pages {
 	 * GET LOG-IN FORM
 	 * @return (String) $container
 	 */
-	static function create_login_form() {
-		$common = new common ();
+	public function create_login_form() {
+		$data['display']  =  $this->load->view('pages/forms/login_form', '', true);
 		$homebox = new homebox ();
-		$data['display']  = $common->get_form( TPL_PAGE_FORMS, 'login' );
 		$container = $homebox->create_homebox ( 'G', $data, true );
 
 		return $container;
@@ -66,7 +65,7 @@ class Home extends Pages {
 		$data['footer_scripts'] = $this->get_script();
 
 		if( !$this->user_model->authenticated() ) {
-			$data['login'] = self::create_login_form ();
+			$data['login'] = $this->create_login_form ();
 		}
 
 		$this->load->view ( 'pages/' . $page, $data );

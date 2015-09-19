@@ -14,23 +14,10 @@ if (! defined ( 'BASEPATH' ))
 
 class Contact extends Pages {
 
-	private $params;
-
 	public function __construct() {
 		parent::__construct ();
-		$this->params = array ();
+		$this->load->model ( 'gym_class_model' );
 		$this->load->model ( 'company_model' );
-	}
-
-	private function clear_params() {
-		$this->params = array ();
-	}
-
-	private function get_params( $type ) {
-		$this->clear_params ();
-	}
-
-	public function get_public_album( ) {
 	}
 
 	public function view( $page ) {

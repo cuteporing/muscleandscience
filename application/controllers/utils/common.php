@@ -30,23 +30,6 @@ class common extends CI_controller
 		return $this->load->view( TPL_PAGE_TEMPLATES.'breadcrumbs', $data, true);
 	}
 
-	/**
-	 * Get form
-	 * @param (String) $form_path
-	 * @param (Form) $form
-	 * @param (Object) $data
-	 * @return (View)
-	 */
-	public function get_form($form_path, $form, $data = null) {
-		$form = $form.'_form';
-
-		if ( is_null( $data ) ) {
-			return $this->load->view($form_path.$form, '', true);
-		}
-		else {
-			return $this->load->view($form_path.$form, $data, true);
-		}
-	}
 
 	/**
 	 * Create list
@@ -63,50 +46,5 @@ class common extends CI_controller
 
 		return self::$instance->load->view( TPL_PAGE_TEMPLATES.'list', $data, true);
 	}
-
-	/**
-	 * Create box header
-	 * @param (String) $title
-	 * @return $heading
-	 */
-	static function box_header($title) {
-		return heading($title, '3', 'class="box-header"');
-	}
-
-
-	/**
-	 * Check if data is null
-	 * @param (Object) $data
-	 * @return (Object) $data
-	 */
-	static function checkData($data) {
-		(isset($data) && !empty($data))?
-			$data = $data
-		:	$data = '';
-
-		return $data;
-	}
-
-// 	public static function createErrorMsg( $errorCode ) {
-// 		if ( isset( $errorCode ) && !empty( $errorCode ) ){
-// 			if( !defined( $errorCode ) ){
-// 				$errorMsg = $errorCode;
-// 			} else {
-// 				$errorMsg = constant($errorCode);
-// 			}
-
-// 			Logger::error( $errorMsg );
-// 		} else {
-// 			$errorMsg = "";
-// 		}
-
-// 		return $errorMsg;
-// 	}
-
-// 	public static function createResponse( $errorCode, $data ) {
-// 		$msg['responseName'] = $_POST['responseName'];
-// 		$msg['errorCode']    = self::createErrorCode( $errorCode );
-// 		$msg['errorMsg']     = self::createErrorMsg( $errorCode );
-// 	}
 }
 ?>

@@ -12,11 +12,14 @@
 if(! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
-class Dashboard extends Account {
+require( 'widget.php' );
+
+class Dashboard extends CI_controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('members_model');
+		$this->load->model( 'sidebar_model' );
+		$this->load->model( 'members_model' );
 	}
 
 	/**
@@ -34,6 +37,10 @@ class Dashboard extends Account {
 		);
 	}
 
+	/**
+	 * Get top tiles data
+	 * @return view
+	 */
 	public function get_toptiles() {
 		$result = array();
 		if( $this->user_model->get_user_kbn() != 10 ) {
@@ -81,6 +88,39 @@ class Dashboard extends Account {
 	}
 
 	/**
+	 * Get list of top 5 gym members
+	 */
+	public function get_gym_toplist() {
+		$data['result'] = $this->members_model->top_gym_members();
+
+		$config['title']    = "Top 5";
+		$config['subtitle'] = "Gym Members";
+		$config['content']  = $this->load->view(
+				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
+
+		$widget = new widget();
+		$widget->initialize($config);
+		return $widget->create_widget();
+	}
+
+	/**
+	 * Gete top 5 personal training members
+	 */
+	public function get_pt_toplist() {
+		$data['result'] = $this->members_model->top_pt_members();
+
+		$config['title']    = "Top 5";
+		$config['subtitle'] = "Personal Training Members";
+		$config['content']  = $this->load->view(
+				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
+
+		$widget = new widget();
+		$widget->initialize($config);
+		return $widget->create_widget();
+
+	}
+
+	/**
 	 * VIEW ACCOUNT DASHBOARD
 	 * @param (String) $page
 	 * @return (View)
@@ -90,13 +130,16 @@ class Dashboard extends Account {
 			redirect('', 'refresh');
 		}
 
+		$widgets = array();
+		array_push($widgets, $this->get_gym_toplist());
+		array_push($widgets, $this->get_pt_toplist());
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
+		$data['top_tiles']      = $this->get_toptiles();
 		$data['footer_scripts'] = $this->get_script();
-		$data['sidebar'] = $this->sidebar_model->get_sidebar();
-		$data['top_tiles'] = $this->get_toptiles();
-		$data['gym_toplist'] = $this->members_model->top_gym_members();
-		$data['pt_toplist'] = $this->members_model->top_pt_members();
+		$data['sidebar']        = $this->sidebar_model->get_sidebar();
+		$data['widgets']        = $widgets;
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );

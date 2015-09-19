@@ -5,7 +5,7 @@ if (! defined ( 'BASEPATH' ))
 /**
  * Response class
  *
- * @package CodeIgniter
+ * @package Muscle and Science
  * @subpackage Libraries
  * @author Ashenvale
  *

@@ -313,8 +313,8 @@ class News extends Pages {
 						TPL_PAGE_TEMPLATES.'news_comments', $data, true );
 			}
 			$data ['view'] = "title";
-			$data ['comment_form'] = $common->get_form (
-					TPL_PAGE_FORMS, 'comment' );
+			$data ['comment_form'] = $this->load->view (TPL_PAGE_FORMS.'comment_form',
+					 '', true );
 		}
 
 		if ( $this->news_type != 'title' )

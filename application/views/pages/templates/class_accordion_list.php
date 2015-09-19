@@ -36,11 +36,11 @@
 
 							<div class="column-container column-margin-top clearfix">
 								<div class="column-left">
-									<?= common::box_header($class['title'])?>
+									<h3 class="box-header"><?=$class['title']?></h3>
 									<p><?=$class['about'] ?></p>
 
 									<?php if(isset($class['trainer'])): ?>
-										<?= common::box_header('Trainers')?>
+										<h3 class="box-header">Trainers</h3>
 										<ul class="list top-marker trainers">
 										<!-- TRAINER'S LIST -->
 											<?php foreach ($class['trainer'] as $trainer): ?>
@@ -78,7 +78,7 @@
 									<?php endif; ?>
 									<!-- TRAINER'S ABOUT INFO -->
 									<?php if(!is_null($trainer['about'])): ?>
-										<?= common::box_header('About')?>
+										<h3 class="box-header">About</h3>
 										<p><?= $trainer['about'] ?></p>
 									<?php endif; ?>
 

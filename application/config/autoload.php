@@ -72,6 +72,7 @@ $autoload ['libraries'] = array (
 
 $autoload ['helper'] = array (
 		'date',
+		'data',
 		'form',
 		'file',
 		'html',

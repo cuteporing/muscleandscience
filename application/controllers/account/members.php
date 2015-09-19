@@ -12,17 +12,11 @@
 if(! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
-class Members extends Account {
+class Members extends CI_controller {
 
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('members_model');
-	}
-
-	private function get_styles() {
-		return array(
-				'gentelella/datatables/tools/css/dataTables.tableTools.css'
-		);
 	}
 
 	/**
@@ -36,7 +30,6 @@ class Members extends Account {
 				'gentelella/icheck/icheck.min.js',
 				'gentelella/custom.js',
 				'gentelella/datatables/js/jquery.dataTables.js',
-// 				'gentelella/datatables/tools/js/dataTables.tableTools.js',
 				'account/controller/tableController.js'
 		);
 	}
@@ -51,10 +44,8 @@ class Members extends Account {
 			redirect('', 'refresh');
 		}
 
-
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
-		$data['header_styles'] = $this->get_styles();
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar'] = $this->sidebar_model->get_sidebar();
 
