@@ -12,8 +12,6 @@
 if (! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
-
-require_once(PATH_UTILS.'format.php');
 require_once(PATH_UTILS.'homebox.php');
 require_once(PATH_PUBLIC.'footer.php');
 require_once(PATH_PUBLIC.'home.php');

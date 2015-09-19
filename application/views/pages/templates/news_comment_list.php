@@ -9,7 +9,7 @@
 <?php else: ?>
 	<?php
 	foreach ( $comment_result as $row ):
-		$date = format::format_date ( $row['update_datetime'], 'd M Y, g.i a' );
+		$date = format_date( $row['update_datetime'], 'd M Y, g.i a' );
 	?>
 		<li class="comment clearfix">
 			<!-- USER AVATAR -->

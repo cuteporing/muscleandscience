@@ -17,8 +17,8 @@
 								<li class="icon-small-arrow right-white">
 									<a href="<?=base_url() ?>news/title/<?=$row ['slug'] ?>">
 										<span class="title"><?=character_limiter ( $row ['title'], 100 ) ?></span>
-										<abbr title="<?=format::format_date( $row['post_date'], "D M d H:i:s Y" ) ?>" class="timeago">
-											<?=format::calc_time(strtotime($row['post_date'])) ?> ago
+										<abbr title="<?=format_date( $row['post_date'], "D M d H:i:s Y" ) ?>" class="timeago">
+											<?=calc_time($row['post_date']) ?>
 										</abbr>
 									</a>
 								</li>
