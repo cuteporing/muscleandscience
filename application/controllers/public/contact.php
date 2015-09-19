@@ -21,8 +21,8 @@ class Contact extends Pages {
 	}
 
 	public function view( $page ) {
-		$common = new common ();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 		$data ['company_info'] = $this->company_model->get_company_info ();
 
 		$this->load->view ( 'pages/' . $page, $data );

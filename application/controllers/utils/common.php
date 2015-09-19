@@ -19,32 +19,5 @@ class common extends CI_controller
 	{
 		parent::__construct();
 	}
-
-	/**
-	 * Get breadcrumbs
-	 * @param (String) $page
-	 * @return (View)
-	 */
-	public function get_breadcrumbs($page) {
-		$data['page'] = $page;
-		return $this->load->view( TPL_PAGE_TEMPLATES.'breadcrumbs', $data, true);
-	}
-
-
-	/**
-	 * Create list
-	 * @param (String) $title
-	 * @param (Json) $value
-	 * @return (View)
-	 */
-	public static function get_list($title, $value) {
-		if (!self::$instance)
-			self::$instance = new self();
-
-		$data['title'] = $title;
-		$data['list']  = json_decode($value);
-
-		return self::$instance->load->view( TPL_PAGE_TEMPLATES.'list', $data, true);
-	}
 }
 ?>

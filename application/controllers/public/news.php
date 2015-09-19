@@ -282,7 +282,6 @@ class News extends Pages {
 	 * @param (String) $page
 	 */
 	public function view($page) {
-		$common = new common ();
 		$this->news_type = str_replace( '/', '', $this->uri->slash_segment( 2, 'leading' ) );
 		$this->value     = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
 
@@ -323,8 +322,9 @@ class News extends Pages {
 		$data ['view']         = $this->news_type;
 		$data ['news_result']  = $result;
 		$data ['search_value'] = str_replace ( '-', ' ', $this->value );
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 		$data ['tag_list']     = $this->news_model->get_news_tags ();
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 		$data ['news_list']    = $this->load->view (
 				TPL_PAGE_TEMPLATES.'news_list', $data, true );
 

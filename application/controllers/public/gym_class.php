@@ -122,10 +122,10 @@ class Gym_class extends Pages {
 	 * @return (View)
 	 */
 	public function view($page) {
-		$common = new common ();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 		$data ['class_result'] = $this->get_all_class ();
 		$data ['homebox']      = $this->get_homebox();
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 		$data ['class_list']   = $this->load->view (
 				TPL_PAGE_TEMPLATES.'class_accordion_list', $data, true );
 

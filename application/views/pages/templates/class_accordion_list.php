@@ -56,7 +56,7 @@
 								</div>
 								<!-- end COLUMN LEFT -->
 								<div class="column-right">
-									<?= common::get_list('Features', $class['features'])?>
+									<?= homebox::homebox_list('', $class['features'], 'Features', true)?>
 								</div>
 								<!-- end COLUMN RIGHT -->
 							</div>
@@ -84,10 +84,10 @@
 
 									<div class="column-container clearfix">
 										<div class="column-left">
-											<?= common::get_list('Skills', $trainer['skills'])?>
+											<?= homebox::homebox_list('', $trainer['skills'], 'Skills', true)?>
 										</div>
 										<div class="column-right">
-											<?= common::get_list('Achievements', $trainer['achievement'])?>
+											<?= homebox::homebox_list('', $trainer['achievement'], 'Achievements', true)?>
 										</div>
 									</div>
 								<?php endforeach; ?>

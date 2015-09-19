@@ -12,7 +12,7 @@
 if (! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
-require_once(PATH_UTILS.'common.php');
+
 require_once(PATH_UTILS.'format.php');
 require_once(PATH_UTILS.'homebox.php');
 require_once(PATH_PUBLIC.'footer.php');
@@ -20,8 +20,6 @@ require_once(PATH_PUBLIC.'home.php');
 require_once(PATH_PUBLIC.'gym_class.php');
 require_once(PATH_PUBLIC.'home.php');
 require_once(PATH_PUBLIC.'news.php');
-require_once(PATH_PUBLIC.'gallery.php');
-require_once(PATH_PUBLIC.'contact.php');
 
 class Pages extends CI_controller {
 	public function __construct() {
@@ -51,14 +49,20 @@ class Pages extends CI_controller {
 		$this->displayTopNav( $data );
 
 		// Initialize controller
-		if( $page == "news" )
+		if( $page == "news" ) {
 			$instance = new News();
-		elseif( $page == "gym-class" )
+		}
+		elseif( $page == "gym-class" ) {
 			$instance = new Gym_class();
-		elseif( $page == "gallery" )
+		}
+		elseif( $page == "gallery" ) {
+			require_once(PATH_PUBLIC.'gallery.php');
 			$instance = new Gallery();
-		elseif( $page == "contact" )
+		}
+		elseif( $page == "contact" ) {
+			require_once(PATH_PUBLIC.'contact.php');
 			$instance = new Contact();
+		}
 		else
 			$instance = new Home();
 

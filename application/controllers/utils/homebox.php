@@ -15,6 +15,7 @@ if (! defined ( 'BASEPATH' ))
 class homebox extends CI_controller {
 
 	private $params;
+	private static $instance;
 
 	public function __construct() {
 		parent::__construct ();
@@ -27,10 +28,18 @@ class homebox extends CI_controller {
 	 * @param (Object) $list
 	 * @return (View)
 	 */
-	private function homebox_list($data, $list) {
-		$data['result'] = $list;
+	static function homebox_list($data = array(), $list, $title='', $custom = FALSE) {
+		if (!self::$instance)
+			self::$instance = new self();
 
-		return $this->load->view ( TPL_PAGE_TEMPLATES.'homebox_list', $data, true );
+		if( $custom ) {
+			$data['title'] = $title;
+			$data['result'] = json_decode($list);
+			return self::$instance->load->view( TPL_PAGE_TEMPLATES.'list', $data, true);
+		} else {
+			$data['result'] = $list;
+			return self::$instance->load->view ( TPL_PAGE_TEMPLATES.'homebox_list', $data, true );
+		}
 	}
 
 	/**
@@ -125,7 +134,7 @@ class homebox extends CI_controller {
 		  $data['box_color'] = $data['box_color'] . ' block';
 
 		if ( isset( $contents['type'] ) && $contents['type'] == 'list' ) {
-			$data['display'] = $this->homebox_list ( $data, $contents['display'] );
+			$data['display'] = self::homebox_list ( $data, $contents['display'] );
 		}else{
 			$data['display'] = ( isset( $contents['display'] ) )?
 									$contents['display'] : '';

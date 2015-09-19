@@ -24,9 +24,9 @@ class Gallery extends Pages {
 	 * @param (String) $page
 	 */
 	public function view( $page ) {
-		$common = new common ();
 		$data ['result']       = $this->gallery_model->get_public_album();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}
