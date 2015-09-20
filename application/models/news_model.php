@@ -92,7 +92,7 @@ class News_model extends Common_model {
 	 */
 	public function get_news_author($user_id) {
 		$this->db->select ( 'firstname, lastname' );
-		$this->db->where ( '_id', $user_id );
+		$this->db->where ( 'id', $user_id );
 		return $this->get_result( 'mas_users' );
 	}
 
@@ -125,7 +125,7 @@ class News_model extends Common_model {
 		$sql.= 'mas_gallery_photos.photo_thumb ';
 
 		$this->db->select( $sql );
-		$this->db->join( 'mas_users', 'mas_comments.id =  mas_users._id' );
+		$this->db->join( 'mas_users', 'mas_comments.id =  mas_users.id' );
 		$this->db->join( 'mas_gallery_photos', 'mas_gallery_photos.id = mas_users.img' );
 		$this->db->where( 'mas_comments.post_id', $post_id );
 		$this->db->where( 'mas_comments.deleted', 0 );

@@ -20,9 +20,12 @@ var homeController = (function() {
 			}
 		],
 		onBeforeChange: function() {
+			$('.slide-caption').off();
 			$('.slide-caption').slideUp(300);
 		},
 		onAfterChange: function() {
+			$('.slide-caption').off();
+			$('.slick-active .slide-caption').off();
 			$('.slick-active .slide-caption').slideDown(500);
 		}
 	});

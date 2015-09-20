@@ -39,8 +39,8 @@ class Login extends CI_Controller {
 	}
 
 	public function user_login() {
-		$this->user_model->set_username( $this->input->post('username') );
-		$this->user_model->set_password( $this->input->post('password') );
+		$this->user_model->set('username', $this->input->post('username') );
+		$this->user_model->set('password', $this->input->post('password') );
 
 		if( !$this->user_model->authenticated() ) {
 			$this->response->generate( 'ERROR_00001' );

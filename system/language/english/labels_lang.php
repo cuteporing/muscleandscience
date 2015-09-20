@@ -40,6 +40,7 @@ $lang ['LBL_00038'] = "More";
 $lang ['LBL_00039'] = "Recent Posts";
 $lang ['LBL_00040'] = "our facilities and training rooms";
 $lang ['LBL_00041'] = "get in touch with us";
+$lang ['LBL_00042'] = "Action";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

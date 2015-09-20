@@ -16,6 +16,7 @@ class Members extends CI_controller {
 
 	public function __construct() {
 		parent::__construct();
+		$this->load->model( 'sidebar_model' );
 		$this->load->model('members_model');
 	}
 
@@ -34,6 +35,13 @@ class Members extends CI_controller {
 		);
 	}
 
+	public function get_all_members(){
+		$data['result']  = $this->members_model->get_all_members();
+		$data['has_check'] = true;
+		$data['has_action'] = true;
+		return $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
+	}
+
 	/**
 	 * View gym members
 	 * @param (String) $page
@@ -48,6 +56,9 @@ class Members extends CI_controller {
 		$data['title'] = ucfirst( $data['page'] );
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar'] = $this->sidebar_model->get_sidebar();
+
+		$data['list']  = $this->get_all_members();
+
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );

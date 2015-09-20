@@ -14,9 +14,7 @@ if (! defined( 'BASEPATH' ))
 
 require_once(PATH_UTILS.'homebox.php');
 require_once(PATH_PUBLIC.'footer.php');
-require_once(PATH_PUBLIC.'home.php');
 require_once(PATH_PUBLIC.'gym_class.php');
-require_once(PATH_PUBLIC.'home.php');
 require_once(PATH_PUBLIC.'news.php');
 
 class Pages extends CI_controller {
@@ -61,9 +59,10 @@ class Pages extends CI_controller {
 			require_once(PATH_PUBLIC.'contact.php');
 			$instance = new Contact();
 		}
-		else
+		else {
+			require_once(PATH_PUBLIC.'home.php');
 			$instance = new Home();
-
+		}
 		// Initialize display
 		$instance->view( $page );
 

@@ -20,6 +20,10 @@ class Common_model extends CI_Model {
 		$this->load->database ();
 	}
 
+	public function validate($property, $type, $mandatory) {
+
+	}
+
 	/**
 	 * SET TABLE FROM, LIMIT AND OFFSET
 	 * @param (Array) $params

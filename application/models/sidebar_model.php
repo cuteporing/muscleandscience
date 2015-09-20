@@ -31,7 +31,7 @@ class Sidebar_model extends Common_model {
 	 * @return NULL
 	 */
 	public function get_sidebar() {
-		$user_kbn = $this->user_model->get_user_kbn();
+		$user_kbn = $this->user_model->get('user_kbn');
 		$this->db->where( 'user_kbn <= ', $user_kbn );
 		$this->db->order_by( 'sequence', 'asc' );
 

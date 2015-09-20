@@ -43,7 +43,7 @@ class Dashboard extends CI_controller {
 	 */
 	public function get_toptiles() {
 		$result = array();
-		if( $this->user_model->get_user_kbn() != 10 ) {
+		if( $this->user_model->get('user_kbn')!= 10 ) {
 			// Get total members
 			$temp = array(
 					'count' => $this->members_model->count_gym_members(),
@@ -108,7 +108,6 @@ class Dashboard extends CI_controller {
 	 */
 	public function get_pt_toplist() {
 		$data['result'] = $this->members_model->top_pt_members();
-
 		$config['title']    = "Top 5";
 		$config['subtitle'] = "Personal Training Members";
 		$config['content']  = $this->load->view(
@@ -140,6 +139,8 @@ class Dashboard extends CI_controller {
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar']        = $this->sidebar_model->get_sidebar();
 		$data['widgets']        = $widgets;
+
+
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );
