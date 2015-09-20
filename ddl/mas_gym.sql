@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2015 at 05:12 PM
+-- Generation Time: Sep 20, 2015 at 05:04 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `mas_company_info` (
 `company_info_id` int(11) NOT NULL,
   `street_address_1` varchar(255) NOT NULL,
   `street_address_2` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `city` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `opening_hours` text,
@@ -282,7 +282,7 @@ INSERT INTO `mas_homebox` (`boxid`, `type`, `title`, `subtitle`, `about`, `icon`
 
 CREATE TABLE IF NOT EXISTS `mas_members` (
 `member_id` int(11) NOT NULL,
-  `_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `package_id` int(11) NOT NULL,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
@@ -295,15 +295,16 @@ CREATE TABLE IF NOT EXISTS `mas_members` (
   `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_user_id` int(11) NOT NULL,
   `update_datetime` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `mas_members`
 --
 
-INSERT INTO `mas_members` (`member_id`, `_id`, `package_id`, `date_start`, `date_end`, `amount`, `discount`, `balance`, `note`, `session_left`, `create_user_id`, `create_datetime`, `update_user_id`, `update_datetime`) VALUES
+INSERT INTO `mas_members` (`member_id`, `user_id`, `package_id`, `date_start`, `date_end`, `amount`, `discount`, `balance`, `note`, `session_left`, `create_user_id`, `create_datetime`, `update_user_id`, `update_datetime`) VALUES
 (1, 3, 2, '2014-07-13', '2014-08-13', '450.00', '0.00', '100.00', '', 0, 1, '2015-09-13 10:45:55', 1, '2015-09-13 10:45:55'),
-(2, 4, 4, '2014-08-31', '2014-08-31', '50.00', '0.00', '50.00', '', 0, 1, '2015-09-13 10:45:55', 1, '2015-09-13 10:45:55');
+(2, 3, 3, '2014-08-01', '2014-08-31', '50.00', '0.00', '50.00', '', 1, 1, '2015-09-13 10:45:55', 1, '2015-09-13 10:45:55'),
+(3, 4, 2, '2015-09-01', '2015-09-30', '450.00', '0.00', '50.00', NULL, 10, 1, '2015-09-19 14:48:04', 1, '2015-09-13 10:45:55');
 
 -- --------------------------------------------------------
 
@@ -320,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `mas_members_payment` (
   `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_user_id` int(11) NOT NULL,
   `update_datetime` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `mas_members_payment`
@@ -337,18 +338,17 @@ INSERT INTO `mas_members_payment` (`id`, `member_id`, `amount`, `date_paid`, `cr
 --
 
 CREATE TABLE IF NOT EXISTS `mas_members_ranking` (
-`id` int(11) NOT NULL,
-  `_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `points` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `mas_members_ranking`
 --
 
-INSERT INTO `mas_members_ranking` (`id`, `_id`, `points`) VALUES
-(1, 3, 30),
-(2, 4, 5);
+INSERT INTO `mas_members_ranking` (`user_id`, `points`) VALUES
+(3, 30),
+(4, 5);
 
 -- --------------------------------------------------------
 
@@ -472,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `mas_package` (
 
 INSERT INTO `mas_package` (`id`, `package_type_id`, `package_type`, `package`, `session`, `monthly`, `total_session`, `price`, `points`, `description`, `deleted`, `create_user_id`, `create_datetime`, `update_user_id`, `update_datetime`) VALUES
 (1, 1, 'M', 'Per Session', 1, 0, 1, '50.00', 1, 'Gym package per session', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
-(2, 1, 'M', 'monthly fee', 0, 1, 30, '450.00', 30, 'Monthly FEE', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(2, 1, 'M', 'Monthly', 0, 1, 30, '450.00', 30, 'Monthly FEE', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
 (3, 2, 'PT', '1 Session', 1, 0, 1, '350.00', 5, '&#8369; 350.00 Per Session', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
 (4, 2, 'PT', '5 Session', 1, 0, 5, '1000.00', 25, 'Save up to &#8369; <span class=''text-cross''>750.00</span>', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
 (5, 2, 'PT', '10 Session', 1, 0, 10, '2000.00', 50, 'Save up to &amp;#8369; <strike>1,500.00</strike>', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
@@ -496,7 +496,7 @@ CREATE TABLE IF NOT EXISTS `mas_package_type` (
 --
 
 INSERT INTO `mas_package_type` (`id`, `package`, `package_code`) VALUES
-(1, 'Member', 'M'),
+(1, 'Gym Member', 'M'),
 (2, 'Personal Training', 'PT'),
 (3, 'Special', 'S');
 
@@ -836,7 +836,7 @@ INSERT INTO `mas_trainer` (`id`, `firstname`, `lastname`, `quote`, `about`, `ski
 --
 
 CREATE TABLE IF NOT EXISTS `mas_users` (
-`_id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_kbn` tinyint(1) NOT NULL,
@@ -857,11 +857,11 @@ CREATE TABLE IF NOT EXISTS `mas_users` (
 -- Dumping data for table `mas_users`
 --
 
-INSERT INTO `mas_users` (`_id`, `username`, `password`, `user_kbn`, `lastname`, `firstname`, `status`, `gender`, `birthday`, `phone`, `email`, `occupation`, `address`, `img`, `deleted`) VALUES
+INSERT INTO `mas_users` (`id`, `username`, `password`, `user_kbn`, `lastname`, `firstname`, `status`, `gender`, `birthday`, `phone`, `email`, `occupation`, `address`, `img`, `deleted`) VALUES
 (1, 'admin', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 30, 'Science', 'Muscle', 1, 'F', '1991-05-20', '', 'muscleandscience@gmail.com', '', '', 1, 0),
 (2, 'Guest', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 10, '', 'Guest', 1, '', '2014-07-07', '', '', '', '', 2, 0),
 (3, 'aeone.rivera', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 10, 'Rivera', 'Aeone', 1, 'F', '2009-00-06', '', 'rivera@yahoo.com', '', '', 3, 0),
-(4, 'steven.sky', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 10, 'Sky', 'Steven', 2, 'M', '0000-00-00', '', '', '', '', 4, 0),
+(4, 'steven.sky', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 10, 'Sky', 'Steven', 1, 'M', '0000-00-00', '', '', '', '', 4, 0),
 (5, 'denise', '$2a$08$D2p9EUfl7N/pVd7KVKrBB.IGhFYsNdCKH9DzB5L0EbMinFSS0Zzsu', 20, 'Valencia', 'Denise', 1, 'M', '1984-11-06', NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -944,12 +944,6 @@ ALTER TABLE `mas_members`
 -- Indexes for table `mas_members_payment`
 --
 ALTER TABLE `mas_members_payment`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `mas_members_ranking`
---
-ALTER TABLE `mas_members_ranking`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -1046,7 +1040,7 @@ ALTER TABLE `mas_trainer`
 -- Indexes for table `mas_users`
 --
 ALTER TABLE `mas_users`
- ADD PRIMARY KEY (`_id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `mas_users_login`
@@ -1107,16 +1101,11 @@ MODIFY `boxid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `mas_members`
 --
 ALTER TABLE `mas_members`
-MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mas_members_payment`
 --
 ALTER TABLE `mas_members_payment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `mas_members_ranking`
---
-ALTER TABLE `mas_members_ranking`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `mas_message`
@@ -1197,7 +1186,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `mas_users`
 --
 ALTER TABLE `mas_users`
-MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `mas_users_login`
 --
