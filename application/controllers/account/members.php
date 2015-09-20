@@ -52,12 +52,24 @@ class Members extends CI_controller {
 			redirect('', 'refresh');
 		}
 
+		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
+
+		if( $view_type == "gym" ) {
+			$result = $this->members_model->get_gym_members();
+		} elseif ( $view_type == "pt" ) {
+			$result = $this->members_model->get_pt_members();
+		} else{
+			$result = $this->members_model->get_all_members();
+		}
+
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar'] = $this->sidebar_model->get_sidebar();
-
-		$data['list']  = $this->get_all_members();
+		$data['result']  = $result;
+		$data['has_check'] = true;
+		$data['has_action'] = true;
+		$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
 
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );

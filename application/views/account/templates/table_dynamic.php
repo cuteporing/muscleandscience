@@ -1,3 +1,4 @@
+<?php if( isset($result) && !is_null($result)):?>
 <table id="dt_table" class="table table-striped responsive-utilities jambo_table bulk_action">
 	<thead>
 		<tr class="headings">
@@ -17,25 +18,28 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ( $result as $row ): ?>
-			<tr>
-				<?php if( isset( $has_check ) && $has_check === true ):?>
-				<td class="a-center "><input type="checkbox" name="table_records" class="tableflat"></td>
-				<?php endif; ?>
-				<?php foreach( $row as $key => $value ): ?>
-					<?php if( $key != 'id'):?>
-						<td><?=$value?></td>
+			<?php foreach ( $result as $row ): ?>
+				<tr>
+					<?php if( isset( $has_check ) && $has_check === true ):?>
+					<td class="a-center "><input type="checkbox" name="table_records" class="tableflat"></td>
+					<?php endif; ?>
+					<?php foreach( $row as $key => $value ): ?>
+						<?php if( $key != 'id'):?>
+							<td><?=$value?></td>
+						<?php endif;?>
+					<?php endforeach; ?>
+					<?php if( isset($has_action ) && $has_action === true ): ?>
+						<td>
+							<div class="btn-group  btn-group-sm">
+								<button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-bars"></i></button>
+								<button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
+							</div>
+						</td>
 					<?php endif;?>
-				<?php endforeach; ?>
-				<?php if( isset($has_action ) && $has_action === true ): ?>
-					<td>
-						<div class="btn-group  btn-group-sm">
-							<button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-bars"></i></button>
-							<button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
-						</div>
-					</td>
-				<?php endif;?>
-			</tr>
-		<?php endforeach; ?>
+				</tr>
+			<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else:?>
+<h1>No data found</h1>
+<?php endif;?>

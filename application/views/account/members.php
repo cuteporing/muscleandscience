@@ -4,7 +4,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Members <small> Some examples to get you started </small>
+								&nbsp;
 							</h3>
 						</div>
 
@@ -12,9 +12,8 @@
 							<div
 								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="Search for..."> <span
-										class="input-group-btn">
+									<input type="text" class="form-control" placeholder="Search for...">
+										<span class="input-group-btn">
 										<button class="btn btn-default" type="button">Go!</button>
 									</span>
 								</div>
@@ -29,7 +28,7 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>
-										Daily active users <small>Sessions</small>
+										List of active members <small>Gym and Personal Training</small>
 									</h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a href="#"><i class="fa fa-chevron-up"></i></a></li>
@@ -37,8 +36,9 @@
 											data-toggle="dropdown" role="button" aria-expanded="false"><i
 												class="fa fa-wrench"></i></a>
 											<ul class="dropdown-menu" role="menu">
-												<li><a href="#">Settings 1</a></li>
-												<li><a href="#">Settings 2</a></li>
+												<li><a href="<?=base_url()?>account/members/">All Members</a></li>
+												<li><a href="<?=base_url()?>account/members/gym">Gym Members</a></li>
+												<li><a href="<?=base_url()?>account/members/pt">Personal Training</a></li>
 											</ul></li>
 										<li><a href="#"><i class="fa fa-close"></i></a></li>
 									</ul>

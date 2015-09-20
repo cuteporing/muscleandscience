@@ -62,12 +62,14 @@ class Members_model extends Common_model {
 	 * @return (integer)
 	 */
 	public function count_gym_members() {
-		$this->db->where( 'mas_package_type.package_code', 'M' );
-		$this->db->where( 'mas_members.date_end >=', date("Y-m-d"));
 		$this->db->from( 'mas_members' );
-
-		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
-		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
+		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
+		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
+		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
+		$this->db->where('mas_members.date_end >=', date("Y-m-d"));
+		$this->db->where('mas_users.user_kbn', 10);
+		$this->db->where('mas_users.deleted', 0);
+		$this->db->where('mas_users.status', 1);
 
 		return $this->db->count_all_results ();
 	}
@@ -77,12 +79,13 @@ class Members_model extends Common_model {
 	 * return (integer)
 	 */
 	public function count_pt_members() {
-		$this->db->where( 'mas_package_type.package_code', 'PT' );
-		$this->db->where( 'mas_members.session_left !=', 0 );
-		$this->db->from( 'mas_members' );
 
+		$this->db->from('mas_members');
 		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
+		$this->db->where('mas_package_type.package_code', 'PT');
+		$this->db->where('mas_package_type.id', 1);
+		$this->db->where('mas_members.session_left !=', 0 );
 
 		return $this->db->count_all_results ();
 	}
@@ -93,7 +96,7 @@ class Members_model extends Common_model {
 	 */
 	public function count_unpaid_members() {
 		$this->db->where( 'balance >', 0 );
-		$this->db->from( 'mas_members' );
+		$this->db->from( 'mas_members');
 		return $this->db->count_all_results ();
 	}
 
@@ -126,7 +129,7 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
 		$this->db->where('mas_package_type.package_code', 'M');
 		$this->db->where('mas_users.deleted', 0);
-		$this->db->order_by( 'mas_members_ranking.points', 'desc' );
+		$this->db->order_by('mas_members_ranking.points', 'desc');
 		$this->db->group_by('name');
 
 		return $this->get_result( 'mas_members_ranking', 5 );
@@ -160,7 +163,7 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members_ranking', 5 );
 	}
 
-	public function get_all_members() {
+	public function get_gym_members() {
 		$sql = "mas_users.id,
 						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
 						mas_package_type.package AS membership,
@@ -175,11 +178,74 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
 		$this->db->where('mas_members.date_end >=', date("Y-m-d"));
+		$this->db->where('mas_package_type.id', 1);
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 
 		return $this->get_result( 'mas_members' );
+	}
+
+	public function get_pt_members() {
+		$sql = "mas_users.id,
+						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
+						mas_package_type.package AS membership,
+						mas_package.package,
+						mas_members.balance,
+						(CASE
+							WHEN mas_package_type.id = 1 THEN '---'
+							ELSE mas_members.session_left END ) AS session_left";
+
+		$this->db->select($sql);
+		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
+		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
+		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
+		$this->db->where('mas_package_type.id', 2);
+		$this->db->where('mas_members.session_left !=', 0);
+		$this->db->where('mas_users.user_kbn', 10);
+		$this->db->where('mas_users.deleted', 0);
+		$this->db->where('mas_users.status', 1);
+
+		return $this->get_result( 'mas_members' );
+	}
+
+	function super_unique($array)
+	{
+		$result = array_map("unserialize", array_unique(array_map("serialize", $array)));
+		foreach ($result as $key => $value)  {
+			if ( is_array($value) ) {
+				$result[$key] = super_unique($value);
+			}
+		}
+		return $result;
+	}
+
+	function merge_arrays($arr1, $arr2) {
+		$arr1 = (array)$arr1;
+		$arr2 = (array)$arr2;
+		$output = array_merge($arr1, $arr2);
+		sort($output);
+		return super_unique($output);
+	}
+
+	/**
+	 * Function to get all members
+	 * @return
+	 */
+	public function get_all_members() {
+		$gym_members = $this->get_gym_members();
+		$pt_members  = $this->get_pt_members();
+
+		if( !is_null( $gym_members ) && !is_null( $pt_members ) ) {
+			return $gym_members + $pt_members;
+		} elseif ( !is_null($gym_members) && is_null($pt_members) ) {
+			return $gym_members;
+
+		} elseif ( is_null($gym_members) && !is_null($pt_members) ) {
+			return $pt_members;
+		} else {
+			return null;
+		}
 	}
 }
 ?>
