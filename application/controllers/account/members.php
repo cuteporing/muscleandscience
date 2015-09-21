@@ -36,6 +36,41 @@ class Members extends CI_controller {
 		);
 	}
 
+	public function custom_action_btn($id) {
+		$icon = icon("fa fa-bars");
+
+		$custom_btn =  '<div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-xs" type="button"> Dropdown <span class="caret"></span> </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Dropdown link 1</a>
+                                                    </li>
+                                                    <li><a href="#">Dropdown link 2</a>
+                                                    </li>
+                                                    <li><a href="#">Dropdown link 3</a>
+                                                    </li>
+                                                </ul>
+                                            </div>';
+
+		return $custom_btn;
+
+	}
+
+	public function member_history($id) {
+		$data['result'] = $this->members_model->get_membership_history($id);
+		for( $i = 0; $i < count($data['result']); $i++) {
+			if( $data['result'][$i]['balance'] > 0 ) {
+				$data['result'][$i]['balance'] = $data['result'][$i]['balance'].' <span class="label label-danger">Unpaid</span>';
+			} elseif ( $data['result'][$i]['balance'] == '0.00' ) {
+				$data['result'][$i]['amount'] = $data['result'][$i]['amount'].' <span class="label label-success">Paid</span>';
+				$data['result'][$i]['balance'] = 0;
+			}
+
+			$data['result'][$i]['Action'] = $this->custom_action_btn($data['result'][$i]['id']);
+		}
+		$data['has_num'] = true;
+		return $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_striped', $data, true);
+	}
+
 	/**
 	 * Admin view
 	 * @param (String) $page
@@ -65,14 +100,14 @@ class Members extends CI_controller {
 		elseif( $view_type == "unpaid" ) {
 			$result = $this->members_model->get_unpaid_members();
 		}
-		else {
+		// Member's profile
+		elseif( $view_type == "profile" ) {
 			$action = str_replace( '/', '', $this->uri->slash_segment( 4, 'leading' ) );
 			$id     = str_replace( '/', '', $this->uri->slash_segment( 5, 'leading' ) );
 			if( $action == "view") {
 				$result['member_profile'] = $this->user_model->search_user($id);
-
+				$result['member_history'] = $this->member_history($id);
 			}
-
 		}
 
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
@@ -81,7 +116,9 @@ class Members extends CI_controller {
 		$data['sidebar'] = $this->sidebar_model->get_sidebar();
 		$data['result'] = $result;
 
-		if( $view_type != "profile" ) {
+		if( $view_type == "profile" ){
+			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', $data, true);
+		} else {
 			$data['page_title']    = "List of active members";
 			$data['page_subtitle'] = "Gym and Personal Training";
 			$data['has_check']     = true;
@@ -89,8 +126,6 @@ class Members extends CI_controller {
 			$data['action_view']   = "account/members/profile/view/";
 			$data['action_delete'] = "account/members/profile/delete/";
 			$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
-		} else {
-			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', $data, true);
 		}
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );

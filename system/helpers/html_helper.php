@@ -518,5 +518,21 @@ if (! function_exists ( 'element_tag' )) {
 		return $tag;
 	}
 }
+
+// ------------------------------------------------------------------------
+
+/**
+ * Generates icon
+ *
+ * @access public
+ * @param string, string, array
+ * @return string
+ */
+if (! function_exists ( 'icon' )) {
+	function icon($type) {
+		$icon = '<i class="'.$type.'"></i>';
+		return $icon;
+	}
+}
 /* End of file html_helper.php */
 /* Location: ./system/helpers/html_helper.php */

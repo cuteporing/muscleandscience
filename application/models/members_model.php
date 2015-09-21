@@ -190,6 +190,10 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members' );
 	}
 
+	/**
+	 * Get list of unpaid members
+	 * @return
+	 */
 	public function get_unpaid_members() {
 		$sql = "mas_users.id,
 						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
@@ -207,23 +211,19 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members' );
 	}
 
-	/**
-	 * Function to get all members
-	 * @return
-	 */
-	public function get_all_members() {
-		$gym_members = $this->get_gym_members();
-		$pt_members  = $this->get_pt_members();
+	public function get_membership_history($id) {
+		$sql = "mas_members.member_id AS id,
+						mas_package_type.package AS membership,
+						mas_package.package,
+						mas_members.amount,
+						mas_members.balance,";
+		$this->db->select($sql);
+		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
+		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
+		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
+		$this->db->where('mas_users.id', $id);
 
-		if( !is_null( $gym_members ) && !is_null( $pt_members ) ) {
-			return $gym_members + $pt_members;
-		} elseif ( !is_null($gym_members) && is_null($pt_members) ) {
-			return $gym_members;
-		} elseif ( is_null($gym_members) && !is_null($pt_members) ) {
-			return $pt_members;
-		} else {
-			return null;
-		}
+		return $this->get_result( 'mas_members' );
 	}
 }
 ?>
