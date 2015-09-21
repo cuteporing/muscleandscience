@@ -4,7 +4,7 @@
 		<tr>
 			<?php if( isset( $has_num ) && $has_num = true ):?><th>#</th><?php endif; ?>
 			<?php foreach ( $result[0] as $row =>$value): ?>
-				<th><?=ucfirst($row)?></th>
+				<th><?=ucfirst(str_replace('_',' ',$row))?></th>
 			<?php endforeach; ?>
 		</tr>
 	</thead>
@@ -22,4 +22,6 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+<h4>No data</h4>
 <?php endif; ?>

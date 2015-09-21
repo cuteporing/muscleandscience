@@ -18,13 +18,11 @@ class Account extends CI_controller {
 	}
 
 	public function view($page) {
-
 		// Initialize controller
 		if( $page == "members" ) {
 			require_once( PATH_ACCOUNT.'members.php' );
 			$instance = new Members();
 		}
-
 		else {
 			require_once( PATH_ACCOUNT.'dashboard.php' );
 			$instance = new Dashboard();

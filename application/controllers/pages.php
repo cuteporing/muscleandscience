@@ -23,7 +23,7 @@ class Pages extends CI_controller {
 	}
 
 	/**
-	 * DISPLAY TOP NAVIGATION
+	 * Displays top public top navigation
 	 * @param (Object) $data
 	 * @return (View)
 	 */
@@ -34,7 +34,7 @@ class Pages extends CI_controller {
 	}
 
 	/**
-	 * PAGE VIEW
+	 * Controls the display for public view
 	 * @param (String) $page
 	 */
 	public function view($page = 'home') {

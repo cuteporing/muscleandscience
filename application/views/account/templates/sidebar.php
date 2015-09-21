@@ -11,12 +11,12 @@
 		<div class="profile">
 			<div class="profile_pic">
 				<img
-					src="<?=base_url().IMG_GALLERY.$this->user_model->get('photo')?>"
+					src="<?=base_url().IMG_GALLERY.$this->user_model->get('img')?>"
 					alt="..." class="img-circle profile_img">
 			</div>
 			<div class="profile_info">
 				<span>Welcome,</span>
-				<h2><?=$this->user_model->get('name')?></h2>
+				<h2><?=$this->user_model->get_name()?></h2>
 			</div>
 		</div>
 		<!-- /menu prile quick info -->
@@ -27,7 +27,7 @@
 		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 			<div class="menu_section">
-				<h3><?=$this->user_model->get('title')?></h3>
+				<h3><?=$this->user_model->get_user_level()?></h3>
 				<ul class="nav side-menu">
 					<?php if( isset( $sidebar ) && !is_null( $sidebar ) ): ?>
 					<?php foreach ( $sidebar as $row ): ?>

@@ -14,7 +14,7 @@ if (! defined ( 'BASEPATH' ))
 
 class User_model extends Common_model {
 
-	private $id       = null;
+	private $id        = null;
 	private $username  = "";
 	private $password  = "";
 	private $user_kbn  = null;
@@ -28,18 +28,20 @@ class User_model extends Common_model {
 	private $occupation= null;
 	private $address   = null;
 	private $img       = null;
-	private $photo     = "";
-
-	private $title     = "";
-	private $name      = "";
+	private $deleted   = 1;
 
 	public function __construct() {
-		parent::__construct();
+// 		parent::__construct();
 	}
+
+	private function get_model() {
+		return (array) $this;
+	}
+
 
 	/**
 	 * Function to get a property
-	 * @param $property
+	 * @param string -- property
 	 */
 	public function get($property) {
 		if (property_exists($this, $property)) {
@@ -49,8 +51,8 @@ class User_model extends Common_model {
 
 	/**
 	 * Function for setting a value to a property
-	 * @param (string) $property
-	 * @param (string, number) $value
+	 * @param string
+	 * @param string, number
 	 * @return User_model
 	 */
 	public function set($property, $value) {
@@ -63,7 +65,7 @@ class User_model extends Common_model {
 
 	/**
 	 * Set user info
-	 * @param (array) $result -- associative array
+	 * @param array -- associative array
 	 */
 	public function set_user($result) {
 		foreach ($result as $user => $row) {
@@ -74,15 +76,24 @@ class User_model extends Common_model {
 	}
 
 	/**
-	 * Function for setting an equivalent title per user_kbn
+	 * Get user's full name
+	 * @return string -- user's full name (firstname lastname)
 	 */
-	public function set_title() {
+	public function get_name() {
+		return $this->firstname.' '.$this->lastname;
+	}
+
+	/**
+	 * Get user's logged in level
+	 * @return string
+	 */
+	public function get_user_level() {
 		if( $this->user_kbn == 30 )
-			$this->set('title', 'Technical Admin');
+			return 'Technical Admin';
 		elseif( $this->user_kbn == 20 )
-			$this->set('title', 'Administrator');
+			return 'Administrator';
 		else
-			$this->set('title', 'Member');
+			return 'Member';
 	}
 
 	/**
@@ -91,13 +102,11 @@ class User_model extends Common_model {
 	 */
 	public function set_login_data($result) {
 		$this->set_user($result);
-		$this->set_title();
 	}
 
 	/**
 	 * Generate the encrypted version of the user's password
-	 * @param (Array) $user_info
-	 * @return (String) $encrypted_password
+	 * @return string - encrypted_password
 	 */
 	private function generate_password() {
 		return $this->bcrypt->hash_password($this->get('password'));
@@ -105,24 +114,23 @@ class User_model extends Common_model {
 
 	/**
 	 * Check if user exist
-	 * @return (Array)
+	 * @return array -- associative array of query result
 	 */
 	public function check_login_user( $authenticated = false ) {
-		$this->db->select( 'mas_users.*, mas_gallery_photos.photo' );
 		if( $authenticated ) {
-			$this->db->where( 'mas_users.id', $this->get('id') );
+			$this->db->where( 'mas_users.id', $this->id );
 		} else {
-			$this->db->where( 'username', $this->get('username') );
+			$this->db->where( 'username', $this->username );
 		}
 
 		$this->db->where( 'status', 1 );
 		$this->db->where( 'deleted', 0 );
-		$this->db->join ( 'mas_gallery_photos', 'mas_users.img = mas_gallery_photos.id', 'left' );
 		return $this->get_result( 'mas_users', 1 );
 	}
 
 	/**
 	 * Count all new user that signed up
+	 * user's that has a status of 2
 	 */
 	public function count_new_user() {
 		$this->db->where( 'status', 2 );
@@ -137,6 +145,8 @@ class User_model extends Common_model {
 	 */
 	public function authenticated() {
 		$mas_user = $this->session->userdata('mas_user');
+
+		// User is already logged in
 		if( $mas_user !== FALSE ) {
 			// Get user info
 			$this->set( 'id', $mas_user['id'] );

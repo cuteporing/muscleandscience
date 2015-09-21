@@ -36,9 +36,9 @@
 											data-toggle="dropdown" role="button" aria-expanded="false"><i
 												class="fa fa-wrench"></i></a>
 											<ul class="dropdown-menu" role="menu">
-												<li><a href="<?=base_url()?>account/members/">All Members</a></li>
-												<li><a href="<?=base_url()?>account/members/gym">Gym Members</a></li>
-												<li><a href="<?=base_url()?>account/members/pt">Personal Training</a></li>
+												<li><a href="<?=base_url()?>account/members/unpaid"><?= $this->lang->line('LBL_00045')?></a></li>
+												<li><a href="<?=base_url()?>account/members/gym"><?= $this->lang->line('LBL_00043')?></a></li>
+												<li><a href="<?=base_url()?>account/members/pt"><?= $this->lang->line('LBL_00044')?></a></li>
 											</ul></li>
 										<li><a href="#"><i class="fa fa-close"></i></a></li>
 									</ul>

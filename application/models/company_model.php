@@ -22,7 +22,6 @@ class Company_model extends Common_model {
 	private $opening_hours    = null;
 	private $opening_day_type = null;
 	private $create_user_id   = "";
-	private $phone            = "";
 	private $create_datetime  = "";
 	private $update_user_id   = null;
 	private $update_datetime  = "";

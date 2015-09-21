@@ -22,6 +22,7 @@ class Members extends CI_controller {
 
 	/**
 	 * Get js script source
+	 * @return (Array) -- JS script source
 	 */
 	private function get_script() {
 		return array(
@@ -33,13 +34,6 @@ class Members extends CI_controller {
 				'gentelella/datatables/js/jquery.dataTables.js',
 				'account/controller/tableController.js'
 		);
-	}
-
-	public function get_all_members(){
-		$data['result']  = $this->members_model->get_all_members();
-		$data['has_check'] = true;
-		$data['has_action'] = true;
-		return $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
 	}
 
 	/**
@@ -54,12 +48,12 @@ class Members extends CI_controller {
 
 		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
 
+		// View Gym members
 		if( $view_type == "gym" ) {
 			$result = $this->members_model->get_gym_members();
+		// View Personal Training members
 		} elseif ( $view_type == "pt" ) {
 			$result = $this->members_model->get_pt_members();
-		} else{
-			$result = $this->members_model->get_all_members();
 		}
 
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
@@ -70,7 +64,6 @@ class Members extends CI_controller {
 		$data['has_check'] = true;
 		$data['has_action'] = true;
 		$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
-
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );

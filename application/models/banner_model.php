@@ -14,6 +14,15 @@ if (! defined ( 'BASEPATH' ))
 
 class Banner_model extends Common_model {
 
+	private $banner_id;
+	private $img;
+	private $title;
+	private $subtitle;
+	private $create_user_id;
+	private $create_datetime;
+	private $update_user_id;
+	private $update_datetime;
+
 	public function __construct() {
 	}
 
@@ -23,26 +32,6 @@ class Banner_model extends Common_model {
 	 */
 	public function get_banner() {
 		return $this->get_result( 'mas_banner' );
-	}
-
-	/**
-	 * SET BANNER
-	 * @return
-	 */
-	public function set_banner() {
-		// get constant image path for banner
-		$imgPath = IMG_BANNER;
-		$img = $this->input->post ( 'img' );
-
-		// Set parameters to an array data
-		$data = array (
-			'img' => $img,
-			'title' => $this->input->post ( 'title' ),
-			'subtitle' => $this->input->post ( 'subtitle' )
-		);
-
-		// @TABLE_NAME = mas_banner
-		return $this->db->insert ( 'mas_banner', $data );
 	}
 }
 ?>

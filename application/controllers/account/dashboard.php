@@ -46,37 +46,37 @@ class Dashboard extends CI_controller {
 		if( $this->user_model->get('user_kbn')!= 10 ) {
 			// Get total members
 			$temp = array(
-					'count' => $this->members_model->count_gym_members(),
-					'icon'  => 'fa fa-caret-square-o-right',
-					'title' => 'Gym Members',
-					'subtitle' => 'Total number of gym members'
+					'count'    => $this->members_model->count_gym_members(),
+					'icon'     => 'fa fa-caret-square-o-right',
+					'title'    => $this->lang->line('LBL_00043'),
+					'subtitle' => $this->lang->line('LBL_00046')
 			);
 			array_push($result, $temp);
 
 			// Get total personal training members
 			$temp = array(
-					'count' => $this->members_model->count_pt_members(),
-					'icon'  => 'fa fa-comments-o',
-					'title' => 'Personal Training',
-					'subtitle' => 'Total number of PT members'
+					'count'    => $this->members_model->count_pt_members(),
+					'icon'     => 'fa fa-comments-o',
+					'title'    => $this->lang->line('LBL_00044'),
+					'subtitle' => $this->lang->line('LBL_00047')
 			);
 			array_push($result, $temp);
 
 			// Get members with pending balance
 			$temp = array(
-					'count' => $this->members_model->count_unpaid_members(),
-					'icon'  => 'fa fa-sort-amount-desc',
-					'title' => 'Unpaid Members',
-					'subtitle' => 'Total number of unpaid members'
+					'count'    => $this->members_model->count_unpaid_members(),
+					'icon'     => 'fa fa-sort-amount-desc',
+					'title'    => $this->lang->line('LBL_00045'),
+					'subtitle' => $this->lang->line('LBL_00048')
 			);
 			array_push($result, $temp);
 
 			// Get new sign ups
 			$temp = array(
-					'count' => $this->user_model->count_new_user(),
-					'icon'  => 'fa fa-check-square-o',
-					'title' => 'New Sign Ups',
-					'subtitle' => 'There are accounts that needs activation'
+					'count'    => $this->user_model->count_new_user(),
+					'icon'     => 'fa fa-check-square-o',
+					'title'    => $this->lang->line('LBL_00019'),
+					'subtitle' => $this->lang->line('LBL_00049')
 			);
 			array_push($result, $temp);
 		} else {
@@ -90,11 +90,11 @@ class Dashboard extends CI_controller {
 	/**
 	 * Get list of top 5 gym members
 	 */
-	public function get_gym_toplist() {
-		$data['result'] = $this->members_model->top_gym_members();
+	public function get_monthly_gym() {
+		$data['result'] = $this->members_model->month_enrolled_gym_members();
 
-		$config['title']    = "Top 5";
-		$config['subtitle'] = "Gym Members";
+		$config['title']    = "Gym Members";
+		$config['subtitle'] = "Enrolled for the month of ".date('F');
 		$config['content']  = $this->load->view(
 				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
 
@@ -106,10 +106,11 @@ class Dashboard extends CI_controller {
 	/**
 	 * Gete top 5 personal training members
 	 */
-	public function get_pt_toplist() {
-		$data['result'] = $this->members_model->top_pt_members();
-		$config['title']    = "Top 5";
-		$config['subtitle'] = "Personal Training Members";
+	public function get_monthly_pt() {
+		$data['result'] = $this->members_model->month_enrolled_pt_members();
+
+		$config['title']    = "PT Members";
+		$config['subtitle'] = "Enrolled for the month of ".date('F');
 		$config['content']  = $this->load->view(
 				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
 
@@ -130,11 +131,11 @@ class Dashboard extends CI_controller {
 		}
 
 		$widgets = array();
-		array_push($widgets, $this->get_gym_toplist());
-		array_push($widgets, $this->get_pt_toplist());
+		array_push($widgets, $this->get_monthly_gym());
+		array_push($widgets, $this->get_monthly_pt());
 
-		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
-		$data['title'] = ucfirst( $data['page'] );
+		$data['page']           = strtolower( str_replace( "-", " ", $page ) );
+		$data['title']          = ucfirst( $data['page'] );
 		$data['top_tiles']      = $this->get_toptiles();
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar']        = $this->sidebar_model->get_sidebar();

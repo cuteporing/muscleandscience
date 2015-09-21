@@ -20,8 +20,20 @@ class Common_model extends CI_Model {
 		$this->load->database ();
 	}
 
-	public function validate($property, $type, $mandatory) {
-
+	/**
+	 * Extract the properties of a model
+	 * @param (Array) $model
+	 * @param (String) $model_name
+	 * @return (Array) $extracted
+	 */
+	public function get_properties($model, $model_name) {
+		$properties = $model;
+		$extracted = array();
+		foreach ($properties as $prop => $value) {
+			array_push($extracted,  array(str_replace($model_name,'',$prop) => $value));
+		}
+		array_pop($extracted);
+		return $extracted;
 	}
 
 	/**

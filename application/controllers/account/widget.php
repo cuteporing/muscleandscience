@@ -52,6 +52,11 @@ class Widget {
 		$this->set_widget_class();
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Set class name for widget container
+	 */
 	function set_widget_class() {
 		switch( $this->width ) {
 			case 1: break;
@@ -65,6 +70,12 @@ class Widget {
 		}
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Set the title for the widget
+	 * @return string
+	 */
 	function get_title() {
 		$widget_heading = heading($this->title.small( $this->subtitle ), '2');
 
@@ -82,6 +93,12 @@ class Widget {
 		return div($widget_heading, array('class'=>'x_title'));
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Creates a widget
+	 * @return string
+	 */
 	function create_widget() {
 		$output = "";
 		$output.= $this->get_title();
