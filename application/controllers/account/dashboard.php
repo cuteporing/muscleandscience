@@ -141,13 +141,11 @@ class Dashboard extends CI_controller {
 		$data['sidebar']        = $this->sidebar_model->get_sidebar();
 		$data['widgets']        = $widgets;
 
-
-
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar' );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
 		$this->load->view( TPL_ACCOUNT.$page );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer', $data );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer' );
 	}
 }
 ?>

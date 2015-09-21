@@ -80,7 +80,6 @@ class Members_model extends Common_model {
 	 * return (integer)
 	 */
 	public function count_pt_members() {
-
 		$this->db->from('mas_members');
 		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
@@ -96,7 +95,8 @@ class Members_model extends Common_model {
 	 */
 	public function count_unpaid_members() {
 		$this->db->where( 'balance >', 0 );
-		$this->db->from( 'mas_members');
+		$this->db->from( 'mas_members' );
+		$this->db->group_by('user_id');
 		return $this->db->count_all_results ();
 	}
 
@@ -116,7 +116,7 @@ class Members_model extends Common_model {
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
-		$this->db->group_by('name');
+		$this->db->group_by('mas_users.id');
 
 		return $this->get_result( 'mas_members');
 	}
@@ -136,42 +136,16 @@ class Members_model extends Common_model {
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
-		$this->db->group_by('name');
+		$this->db->group_by('mas_users.id');
 
 		return $this->get_result( 'mas_members');
 	}
 
 	/**
-	 * Function for getting the top 5 personal training members
+	 * Get active gym members
 	 * @return
 	 */
-// 	public function top_pt_members() {
-// 		$sql = "CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name, ";
-// 		$sql.= "mas_members_ranking.points, ";
-// 		$sql.= "(SELECT SUM(mas_package.total_session) FROM mas_members ";
-// 		$sql.= " LEFT JOIN mas_package ON mas_members.package_id = mas_package.id";
-// 		$sql.= " WHERE";
-// 		$sql.= "   mas_members.user_id = mas_members_ranking.user_id AND";
-// 		$sql.= "   mas_package.session = 1 AND";
-// 		$sql.= "   mas_package.package_type='PT'";
-// 		$sql.= " ) AS session, ";
-
-// 		$this->db->select($sql);
-// 		$this->db->join('mas_users', 'mas_members_ranking.user_id = mas_users.id', 'left');
-// 		$this->db->join('mas_members', 'mas_members_ranking.user_id = mas_members.user_id', 'left');
-// 		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
-// 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
-// 		$this->db->where('mas_package_type.id', 2);
-// 		$this->db->where('mas_users.user_kbn', 10);
-// 		$this->db->where('mas_users.deleted', 0);
-// 		$this->db->where('mas_users.status', 1);
-// 		$this->db->order_by('mas_members_ranking.points', 'desc');
-// 		$this->db->group_by('name');
-
-// 		return $this->get_result( 'mas_members_ranking', 5 );
-// 	}
-
-	public function get_gym_members() {
+	public function get_active_gym_members() {
 		$sql = "mas_users.id,
 						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
 						mas_package_type.package AS membership,
@@ -191,7 +165,11 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members' );
 	}
 
-	public function get_pt_members() {
+	/**
+	 * Get list of active personal training members
+	 * @return
+	 */
+	public function get_active_pt_members() {
 		$sql = "mas_users.id,
 						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
 						mas_package_type.package AS membership,
@@ -212,6 +190,23 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members' );
 	}
 
+	public function get_unpaid_members() {
+		$sql = "mas_users.id,
+						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
+						(SELECT SUM(balance) FROM mas_members WHERE mas_members.user_id=mas_users.id) AS total_balance";
+
+		$this->db->select($sql);
+		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
+		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
+		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
+		$this->db->where('mas_users.user_kbn', 10);
+		$this->db->where('mas_users.deleted', 0);
+		$this->db->where('mas_users.status', 1);
+		$this->db->group_by('mas_users.id');
+
+		return $this->get_result( 'mas_members' );
+	}
+
 	/**
 	 * Function to get all members
 	 * @return
@@ -224,7 +219,6 @@ class Members_model extends Common_model {
 			return $gym_members + $pt_members;
 		} elseif ( !is_null($gym_members) && is_null($pt_members) ) {
 			return $gym_members;
-
 		} elseif ( is_null($gym_members) && !is_null($pt_members) ) {
 			return $pt_members;
 		} else {

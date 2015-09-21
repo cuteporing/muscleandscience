@@ -53,7 +53,7 @@ $active_record = TRUE;
 
 $db ['default'] ['hostname'] = '127.0.0.1';
 $db ['default'] ['username'] = 'root';
-$db ['default'] ['password'] = '';
+$db ['default'] ['password'] = 'mysqladmin';
 $db ['default'] ['database'] = 'mas_gym';
 $db ['default'] ['dbdriver'] = 'mysql';
 $db ['default'] ['dbprefix'] = '';

@@ -31,7 +31,7 @@
 					<?php if( isset($has_action ) && $has_action === true ): ?>
 						<td>
 							<div class="btn-group  btn-group-sm">
-								<button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-bars"></i></button>
+								<a href="<?=base_url().$action_view?>" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-bars"></i></a>
 								<button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
 							</div>
 						</td>

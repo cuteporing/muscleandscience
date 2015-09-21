@@ -36,6 +36,60 @@ class Members extends CI_controller {
 		);
 	}
 
+	public function admin_view($page) {
+		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
+
+		// View Gym members
+		if( $view_type == "gym" ) {
+			$result = $this->members_model->get_active_gym_members();
+			for( $i = 0; $i < count($result); $i++) {
+				if( $result[$i]['balance'] > 0 ) {
+					$result[$i]['balance'] = $result[$i]['balance'].' <span class="label label-danger">Unpaid</span>';
+				}
+			}
+		}
+		// View Personal Training members
+		elseif ( $view_type == "pt" ) {
+			$result = $this->members_model->get_active_pt_members();
+			for( $i = 0; $i < count($result); $i++) {
+				if( $result[$i]['balance'] > 0 ) {
+					$result[$i]['balance'] = $result[$i]['balance'].' <span class="label label-danger">Unpaid</span>';
+				}
+			}
+		}
+		// View Unpaid members
+		elseif( $view_type == "unpaid" ) {
+			$result = $this->members_model->get_unpaid_members();
+		}
+		else {
+			$result = null;
+		}
+
+		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
+		$data['title'] = ucfirst( $data['page'] );
+		$data['footer_scripts'] = $this->get_script();
+		$data['sidebar'] = $this->sidebar_model->get_sidebar();
+		$data['result'] = $result;
+
+		if( $view_type != "profile" ) {
+			$data['page_title']    = "List of active members";
+			$data['page_subtitle'] = "Gym and Personal Training";
+			$data['has_check']     = true;
+			$data['has_action']    = true;
+			$data['action_view']   = "account/members/profile/view/";
+			$data['action_delete'] = "account/members/profile/delete/";
+			$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
+		} else {
+			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', '', true);
+		}
+
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar' );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
+		$this->load->view( TPL_ACCOUNT.$page );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer' );
+	}
+
 	/**
 	 * View gym members
 	 * @param (String) $page
@@ -46,30 +100,11 @@ class Members extends CI_controller {
 			redirect('', 'refresh');
 		}
 
-		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
+		if( $this->user_model->get('user_kbn') > 10 ) {
+			$this->admin_view($page);
+		} else {
 
-		// View Gym members
-		if( $view_type == "gym" ) {
-			$result = $this->members_model->get_gym_members();
-		// View Personal Training members
-		} elseif ( $view_type == "pt" ) {
-			$result = $this->members_model->get_pt_members();
 		}
-
-		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
-		$data['title'] = ucfirst( $data['page'] );
-		$data['footer_scripts'] = $this->get_script();
-		$data['sidebar'] = $this->sidebar_model->get_sidebar();
-		$data['result']  = $result;
-		$data['has_check'] = true;
-		$data['has_action'] = true;
-		$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
-
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar', $data );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
-		$this->load->view( TPL_ACCOUNT.$page );
-		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer', $data );
 	}
 }
 ?>
