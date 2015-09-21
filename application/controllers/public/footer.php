@@ -23,8 +23,7 @@ class footer extends CI_controller {
 
 
 	/**
-	 * GET THE DISPLAYED OPENING HRS. DEPENDING ON
-	 * THE TYPE OF DISPLAY
+	 * Get the displayed opening hrs depending on the type of display
 	 * @return (Array) $days
 	 */
 	public function get_company_operation() {
@@ -69,7 +68,7 @@ class footer extends CI_controller {
 	}
 
 	/**
-	 * FOOTER DISPLAY
+	 * Footer display
 	 * @return (View) -- Display page
 	 */
 	public function view() {

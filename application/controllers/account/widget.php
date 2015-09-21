@@ -24,7 +24,7 @@ class Widget {
 	 * Constructor
 	 *
 	 * @access public
-	 * @param array initialization parameters
+	 * @param (Array) initialization parameters
 	 */
 	public function __construct($params = array()) {
 		if (count ( $params ) > 0) {
@@ -38,7 +38,7 @@ class Widget {
 	 * Initialize Preferences
 	 *
 	 * @access public
-	 * @param array initialization parameters
+	 * @param (Array) initialization parameters
 	 * @return void
 	 */
 	function initialize($params = array()) {
@@ -74,7 +74,7 @@ class Widget {
 
 	/**
 	 * Set the title for the widget
-	 * @return string
+	 * @return (String) -- widget title
 	 */
 	function get_title() {
 		$widget_heading = heading($this->title.small( $this->subtitle ), '2');
@@ -97,7 +97,7 @@ class Widget {
 
 	/**
 	 * Creates a widget
-	 * @return string
+	 * @return (String) $output -- widget
 	 */
 	function create_widget() {
 		$output = "";

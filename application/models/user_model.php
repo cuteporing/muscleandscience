@@ -172,5 +172,11 @@ class User_model extends Common_model {
 			return false;
 		}
 	}
+
+	public function search_user($id) {
+		$this->db->where('id', $id);
+		$result = $this->get_result( 'mas_users', 1 );
+		return $result[0];
+	}
 }
 ?>

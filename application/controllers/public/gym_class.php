@@ -21,7 +21,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
+	 * Display gym class accordion (COMPACT)
 	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
@@ -35,7 +35,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * GET ALL GYM CLASS
+	 * Get all gym class
 	 * @return (Array) $result
 	 */
 	public function get_all_class() {
@@ -51,7 +51,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * GET HOMEBOX FOR MEMBERSHIP PACKAGE
+	 * Create homebox for membership package
 	 * @return
 	 */
 	public function get_package_homebox() {
@@ -69,7 +69,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * GET HOMEBOX FOR PERSONAL TRAINING PACKAGE
+	 * Create homebox for personal training package
 	 * @return
 	 */
 	public function get_pt_homebox() {
@@ -87,7 +87,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * GET HOMEBOX FOR SPECIAL PACKAGE
+	 * Create homebox for special package
 	 * @return
 	 */
 	public function get_sp_homebox() {
@@ -105,8 +105,8 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * GET RIGHT HOMEBOX DISPLAY
-	 * @return $homebox
+	 * Get package homebox display
+	 * @return (String) $homebox
 	 */
 	public function get_homebox() {
 		$homebox = $this->get_package_homebox ();
@@ -117,7 +117,7 @@ class Gym_class extends Pages {
 	}
 
 	/**
-	 * VIEW GYM CLASS
+	 * View gym class
 	 * @param (String) $page
 	 * @return (View)
 	 */

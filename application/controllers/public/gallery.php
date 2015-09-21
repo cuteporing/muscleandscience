@@ -20,7 +20,7 @@ class Gallery extends Pages {
 	}
 
 	/**
-	 * VIEW GALLERY PAGE
+	 * View gallery page
 	 * @param (String) $page
 	 */
 	public function view( $page ) {

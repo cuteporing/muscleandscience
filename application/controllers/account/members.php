@@ -28,7 +28,7 @@ class Members extends CI_controller {
 		return array(
 				'gentelella/bootstrap.min.js',
 				'gentelella/nicescroll/jquery.nicescroll.min.js',
-				'gentelella/chartjs/chart.min.js',
+				'gentelella/progressbar/bootstrap-progressbar.min.js',
 				'gentelella/icheck/icheck.min.js',
 				'gentelella/custom.js',
 				'gentelella/datatables/js/jquery.dataTables.js',
@@ -36,6 +36,10 @@ class Members extends CI_controller {
 		);
 	}
 
+	/**
+	 * Admin view
+	 * @param (String) $page
+	 */
 	public function admin_view($page) {
 		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
 
@@ -62,7 +66,13 @@ class Members extends CI_controller {
 			$result = $this->members_model->get_unpaid_members();
 		}
 		else {
-			$result = null;
+			$action = str_replace( '/', '', $this->uri->slash_segment( 4, 'leading' ) );
+			$id     = str_replace( '/', '', $this->uri->slash_segment( 5, 'leading' ) );
+			if( $action == "view") {
+				$result['member_profile'] = $this->user_model->search_user($id);
+
+			}
+
 		}
 
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
@@ -80,7 +90,7 @@ class Members extends CI_controller {
 			$data['action_delete'] = "account/members/profile/delete/";
 			$data['list']  = $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_dynamic', $data, true);
 		} else {
-			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', '', true);
+			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', $data, true);
 		}
 
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'header', $data );
