@@ -32,10 +32,8 @@
 					<?php endforeach; ?>
 					<?php if( isset($has_action ) && $has_action === true ): ?>
 						<td>
-							<div class="btn-group  btn-group-sm">
-								<a href="<?=base_url().$action_view.$id?>" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-bars"></i></a>
-								<button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
-							</div>
+							<a href="<?=base_url().$action_view.$id?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+              <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
 						</td>
 					<?php endif;?>
 				</tr>

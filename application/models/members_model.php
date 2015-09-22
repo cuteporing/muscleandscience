@@ -17,8 +17,8 @@ class Members_model extends Common_model {
 	private $member_id      = null;
 	private $user_id        = null;
 	private $package_id     = null;
-	private $date_start     = "";
-	private $date_end       = "";
+	private $start_date     = "";
+	private $end_date       = "";
 	private $amount         = null;
 	private $discount       = null;
 	private $note           = "";
@@ -66,7 +66,7 @@ class Members_model extends Common_model {
 		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
 		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
-		$this->db->where('mas_members.date_end >=', date("Y-m-d"));
+		$this->db->where('mas_members.end_date >=', date("Y-m-d"));
 		$this->db->where('mas_package_type.id', 1);
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
@@ -107,11 +107,11 @@ class Members_model extends Common_model {
 	 */
 	public function month_enrolled_gym_members() {
 		$this->db->select("CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name, mas_package.package, ");
-		$this->db->select("DATE_FORMAT(mas_members.date_start, '%M %e, %Y') AS date_start", FALSE);
+		$this->db->select("DATE_FORMAT(mas_members.start_date, '%M %e, %Y') AS start_date", FALSE);
 		$this->db->join('mas_users', 'mas_members.user_id = mas_users.id', 'left');
 		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
-		$this->db->where("( MONTH(mas_members.date_start) = '".date('m')."' OR  MONTH(mas_members.date_end) = '".date('m')."' )", NULL, FALSE);
+		$this->db->where("( MONTH(mas_members.start_date) = '".date('m')."' OR  MONTH(mas_members.end_date) = '".date('m')."' )", NULL, FALSE);
 		$this->db->where('mas_package_type.id', 1);
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
@@ -130,7 +130,7 @@ class Members_model extends Common_model {
 		$this->db->join('mas_users', 'mas_members.user_id = mas_users.id', 'left');
 		$this->db->join('mas_package', 'mas_members.package_id = mas_package.id', 'left');
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
-		$this->db->where("( MONTH(mas_members.date_start) = '".date('m')."' )", NULL, FALSE);
+		$this->db->where("( MONTH(mas_members.start_date) = '".date('m')."' )", NULL, FALSE);
 		$this->db->where('mas_package_type.id', 2);
 
 		$this->db->where('mas_users.user_kbn', 10);
@@ -146,17 +146,13 @@ class Members_model extends Common_model {
 	 * @return
 	 */
 	public function get_active_gym_members() {
-		$sql = "mas_users.id,
-						CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name,
-						mas_package_type.package AS membership,
-						mas_package.package,
-						mas_members.balance";
-
-		$this->db->select($sql);
+		$this->db->select("mas_users.id, CONCAT(mas_users.firstname, Char(32), mas_users.lastname ) AS name, ");
+		$this->db->select("mas_package_type.package AS membership, mas_package.package,");
+		$this->db->select("mas_members.start_date, mas_members.end_date, mas_members.balance");
 		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
 		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
-		$this->db->where('mas_members.date_end >=', date("Y-m-d"));
+		$this->db->where('mas_members.end_date >=', date("Y-m-d"));
 		$this->db->where('mas_package_type.id', 1);
 		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
@@ -222,6 +218,7 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
 		$this->db->where('mas_users.id', $id);
+		$this->db->order_by( 'mas_members.start_date', 'desc' );
 
 		return $this->get_result( 'mas_members' );
 	}

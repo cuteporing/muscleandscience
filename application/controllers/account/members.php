@@ -12,6 +12,8 @@
 if(! defined( 'BASEPATH' ))
 	exit( 'No direct script access allowed' );
 
+require( 'tabpanel.php' );
+
 class Members extends CI_controller {
 
 	public function __construct() {
@@ -40,14 +42,10 @@ class Members extends CI_controller {
 		$icon = icon("fa fa-bars");
 
 		$custom_btn =  '<div class="btn-group">
-                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-xs" type="button"> Dropdown <span class="caret"></span> </button>
+                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-xs" type="button"> Action <span class="caret"></span> </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="#">Dropdown link 1</a>
-                                                    </li>
-                                                    <li><a href="#">Dropdown link 2</a>
-                                                    </li>
-                                                    <li><a href="#">Dropdown link 3</a>
-                                                    </li>
+                                                    <li><a href="#">Settle payment</a></li>
+                                                    <li><a href="#">Check payment history</a> </li>
                                                 </ul>
                                             </div>';
 
@@ -71,13 +69,7 @@ class Members extends CI_controller {
 		return $this->load->view(TPL_ACCOUNT_TEMPLATES.'table_striped', $data, true);
 	}
 
-	/**
-	 * Admin view
-	 * @param (String) $page
-	 */
-	public function admin_view($page) {
-		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
-
+	public function get_admin_member_result($view_type) {
 		// View Gym members
 		if( $view_type == "gym" ) {
 			$result = $this->members_model->get_active_gym_members();
@@ -109,14 +101,26 @@ class Members extends CI_controller {
 				$result['member_history'] = $this->member_history($id);
 			}
 		}
+		return $result;
+	}
+	/**
+	 * Admin view
+	 * @param (String) $page
+	 */
+	public function admin_view($page) {
+		$view_type = str_replace( '/', '', $this->uri->slash_segment( 3, 'leading' ) );
 
 		$data['page']  = strtolower( str_replace( "-", " ", $page ) );
 		$data['title'] = ucfirst( $data['page'] );
 		$data['footer_scripts'] = $this->get_script();
 		$data['sidebar'] = $this->sidebar_model->get_sidebar();
-		$data['result'] = $result;
+		$data['result'] = $this->get_admin_member_result($view_type);
 
 		if( $view_type == "profile" ){
+			$tab_panel = new tab_panel();
+			$tab_panel->set('Membership history', $data['result']['member_history']);
+			$tab_panel->set('Training program', '');
+			$data['tab_panel'] = $tab_panel->create();
 			$data['profile'] = $this->load->view(TPL_ACCOUNT_TEMPLATES.'member_profile', $data, true);
 		} else {
 			$data['page_title']    = "List of active members";
