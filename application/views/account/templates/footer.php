@@ -25,5 +25,15 @@
 			<script src="<?=base_url().PATH_JS.$src?>"></script>
 		<?php endforeach; ?>
 	<?php endif; ?>
+
+	<script>
+	$('#settle').click(function() {
+		$('#settle').attr('data-target','.bs-example-modal-lg');
+		$('.modal-title').html('');
+		$('.modal-body').html('');
+		console.log('modal');
+	});
+
+	</script>
 	</body>
 </html>

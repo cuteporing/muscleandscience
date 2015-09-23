@@ -109,6 +109,7 @@ define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
 define ( 'TPL_ACCOUNT',							'account/');
 define ( 'TPL_ACCOUNT_FORMS',				'account/forms/' );
 define ( 'TPL_ACCOUNT_TEMPLATES',		'account/templates/' );
+define ( 'TPL_ACCOUNT_MODALS',			'account/modals/' );
 
 /*
  * |--------------------------------------------------------------------------

@@ -210,6 +210,7 @@ class Members_model extends Common_model {
 	public function get_membership_history($id) {
 		$sql = "mas_members.member_id AS id,
 						mas_package_type.package AS membership,
+						mas_members.start_date,
 						mas_package.package,
 						mas_members.amount,
 						mas_members.balance,";

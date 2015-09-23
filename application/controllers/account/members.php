@@ -39,15 +39,17 @@ class Members extends CI_controller {
 	}
 
 	public function custom_action_btn($id) {
-		$icon = icon("fa fa-bars");
+		$btn_attr = array(
+				'class'      => 'btn btn-default dropdown-toggle btn-xs',
+				'data-toggle'=> 'dropdown',
+				'type'       => 'button' );
 
-		$custom_btn =  '<div class="btn-group">
-                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-xs" type="button"> Action <span class="caret"></span> </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="#">Settle payment</a></li>
-                                                    <li><a href="#">Check payment history</a> </li>
-                                                </ul>
-                                            </div>';
+		$custom_btn = '<div class="btn-group">';
+		$custom_btn.= button('Action <span class="caret"></span>', $btn_attr );
+		$custom_btn.= '<ul class="dropdown-menu">';
+		$custom_btn.= '<li><a href="'.base_url().'modal/settle_payment/'.$id.'" id="settle-modal" data-toggle="modal" data-target="">Settle payment</a></li>';
+		$custom_btn.= '<li><a href="#" id="payment-history-modal" >Check payment history</a></li>';
+		$custom_btn.= '</ul></div>';
 
 		return $custom_btn;
 
@@ -136,6 +138,7 @@ class Members extends CI_controller {
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'sidebar' );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'top_navigation' );
 		$this->load->view( TPL_ACCOUNT.$page );
+		$this->load->view( TPL_ACCOUNT_TEMPLATES.'modal' );
 		$this->load->view( TPL_ACCOUNT_TEMPLATES.'footer' );
 	}
 

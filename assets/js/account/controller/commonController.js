@@ -13,4 +13,5 @@ var common = {
 			
 		return posting;
 	}
+
 };
