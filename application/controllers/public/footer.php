@@ -17,8 +17,9 @@ class footer extends CI_controller {
 
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model ( 'company_model' );
-		$this->company_info = $this->company_model->get_company_info ();
+		$this->load->model ( 'company_info_model' );
+		$this->load->model ( 'company_social_model' );
+		$this->company_info = $this->company_info_model->get_company_info ();
 	}
 
 
@@ -74,7 +75,7 @@ class footer extends CI_controller {
 	public function view() {
 		$news = new news ();
 		$data['result_info']      = $this->company_info;
-		$data['result_social']    = $this->company_model->get_company_social ();
+		$data['result_social']    = $this->company_social_model->get_company_social ();
 		$data['result_operation'] = $this->get_company_operation ();
 		$data['result_recent_post'] = $news->get_latest_news();
 

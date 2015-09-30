@@ -15,12 +15,19 @@ if (! defined ( 'BASEPATH' ))
 class Package_model extends Common_model {
 
 	public function __construct() {
+		parent::__construct();
+	}
+
+	public function get_package($type, $is_active = TRUE){
+		( $is_active )? $is_active = 0 : $is_active = 1;
+
+		return $this->get_result( 'mas_package' );
 	}
 
 	/**
-	 * GET MEMBERSHIP PACKAGE
-	 * @param (Boolean) $is_active
-	 * @return
+	 * Get membership package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
 	public function get_mem_package( $is_active = true ) {
 		( $is_active )? $is_active = 0 : $is_active = 1;
@@ -30,9 +37,9 @@ class Package_model extends Common_model {
 	}
 
 	/**
-	 * GET PERSONAL TRAINING PACKAGE
-	 * @param (Boolean) $is_active
-	 * @return
+	 * Get personal training package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
 	public function get_pt_package( $is_active = true ) {
 		( $is_active )? $is_active = 0 : $is_active = 1;
@@ -42,9 +49,9 @@ class Package_model extends Common_model {
 	}
 
 	/**
-	 * GET SPECIAL PACKAGE
-	 * @param (Boolean) $is_active
-	 * @return
+	 * Get special package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
 	public function get_sp_package( $is_active = true ) {
 		( $is_active )? $is_active = 0 : $is_active = 1;

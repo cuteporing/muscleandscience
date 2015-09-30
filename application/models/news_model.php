@@ -15,12 +15,17 @@ if (! defined ( 'BASEPATH' ))
 class News_model extends Common_model {
 
 	public function __construct() {
+		parent::__construct();
 	}
 
+
 	/**
-	 * GET NEWS
-	 * @param $params
-	 * @return
+	 * Get news
+	 * @param string $type
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @param string $slug
+	 * @return associative array of query result
 	 */
 	public function get_news($type="blog", $limit, $offset, $slug = '') {
 		if( $type == "blog" || $type == "post" ) {
@@ -34,10 +39,14 @@ class News_model extends Common_model {
 		return $this->get_result( 'mas_post', $limit, $offset );
 	}
 
+
 	/**
-	 * GET NEWS COUNT
-	 * @param $params
-	 * @return
+	 * Get news count
+	 * @param string $type
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @param string $slug
+	 * @return integer
 	 */
 	public function get_news_count($type="blog", $limit, $offset, $slug = '') {
 
@@ -52,18 +61,23 @@ class News_model extends Common_model {
 		return $this->db->count_all_results ();
 	}
 
+	/**
+	 * Get latest news
+	 * @param integer $limit
+	 * @return associative array of query result
+	 */
 	public function get_latest_news( $limit ) {
 		$this->db->where( 'deleted', 0 );
 		$this->db->order_by( 'update_datetime', 'desc' );
 		return $this->get_result( 'mas_post', $limit );
 	}
 
+
 	/**
-	 * GET NEWS
-	 * @param $where
-	 * @param $limiter
-	 * @param $orderBy
-	 * @return
+	 * Get news details
+	 * @param integer $post_id
+	 * @param integer $limit
+	 * @return associative array of query result
 	 */
 	public function get_news_details($post_id, $limit) {
 		$this->db->where( 'post_id', $post_id );
@@ -72,9 +86,9 @@ class News_model extends Common_model {
 	}
 
 	/**
-	 * GET NEWS TAGS
+	 * Get news tags
 	 * @param $post_id
-	 * @return
+	 * @return associative array of query result
 	 */
 	public function get_news_tags($post_id = null) {
 		$this->db->select( 'mas_tags.tag_name' );
@@ -86,9 +100,9 @@ class News_model extends Common_model {
 	}
 
 	/**
-	 * GET NEWS AUTHOR
+	 * Get news author
 	 * @param $user_id
-	 * @return
+	 * @return associative arrray of query result
 	 */
 	public function get_news_author($user_id) {
 		$this->db->select ( 'firstname, lastname' );
@@ -99,9 +113,9 @@ class News_model extends Common_model {
 
 
 	/**
-	 * GET COMMENT COUNT PER POST
+	 * Get comment count per post
 	 * @param $post_id
-	 * @return
+	 * @return integer
 	 */
 	public function get_comment_count($post_id) {
 		$this->db->from ( 'mas_comments' );
@@ -109,10 +123,13 @@ class News_model extends Common_model {
 		return $this->db->count_all_results ();
 	}
 
+
 	/**
-	 * GET COMMENTS
-	 * @param $post_id
-	 * @return
+	 * Get comments
+	 * @param integer $post_id
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @return associative array of query result
 	 */
 	public function get_comments( $post_id, $limit, $offset ) {
 		$sql = 'mas_comments.id, ';
@@ -134,10 +151,13 @@ class News_model extends Common_model {
 		return $this->get_result( 'mas_comments', $limit, $offset );
 	}
 
+
 	/**
-	 * GET NEWS BY TAG
-	 * @param $params
-	 * @return
+	 * Get news by tag
+	 * @param string $slug
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @return associative array of query result
 	 */
 	public function get_news_by_tag($slug, $limit, $offset) {
 		$this->db->select( 'mas_post.* ' );

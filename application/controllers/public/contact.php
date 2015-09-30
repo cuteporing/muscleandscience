@@ -17,13 +17,13 @@ class Contact extends Pages {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gym_class_model' );
-		$this->load->model ( 'company_model' );
+		$this->load->model ( 'company_info_model' );
 	}
 
 	public function view( $page ) {
 		$data ['breadcrumbs']  = $this->load->view(
 				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
-		$data ['company_info'] = $this->company_model->get_company_info ();
+		$data ['company_info'] = $this->company_info_model->get_company_info ();
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}

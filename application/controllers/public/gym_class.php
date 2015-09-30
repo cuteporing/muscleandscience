@@ -30,8 +30,8 @@ class Gym_class extends Pages {
 				TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
 	}
 
-	public function get_class_list() {
-		return $this->gym_class_model->get_class_list ( );
+	public function get_class( $is_list ) {
+		return $this->gym_class_model->get_class ( $is_list );
 	}
 
 	/**

@@ -37,6 +37,30 @@ class Common_model extends CI_Model {
 	}
 
 	/**
+	 * Function to get a property
+	 * @param $property
+	 */
+	public function get($property) {
+		if (property_exists($this, $property)) {
+			return $this->$property;
+		}
+	}
+
+	/**
+	 * Function for setting a value to a property
+	 * @param (string) $property
+	 * @param (string, number) $value
+	 * @return User_model
+	 */
+	public function set($property, $value) {
+		if (property_exists($this, $property)) {
+			$this->$property = $value;
+		}
+
+		return $this;
+	}
+
+	/**
 	 * SET TABLE FROM, LIMIT AND OFFSET
 	 * @param (Array) $params
 	 * @return

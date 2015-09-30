@@ -12,35 +12,42 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
+
 class Gym_Class_model extends Common_model {
+	private $id;
+	private $title;
+	private $subtitle;
+	private $about;
+	private $features;
+	private $img;
+	private $img_thumb;
+	private $slug;
+	private $create_user_id   = "";
+	private $create_datetime  = "";
+	private $update_user_id   = null;
+	private $update_datetime  = "";
 
 	public function __construct() {
+		parent::__construct();
 	}
 
 	/**
-	 * GET GYM CLASS
+	 * Get gym class
 	 * @return
 	 */
-	public function get_class() {
+	public function get_class($is_list = FALSE) {
+		if( $is_list ) {
+			$this->db->select ( 'title, slug' );
+		}
 		return $this->get_result( 'mas_class' );
 	}
 
 	/**
-	 * GET GYM CLASS LIST
-	 * @return NULL
-	 */
-	public function get_class_list() {
-		$this->db->select ( 'title, slug' );
-		return $this->get_result( 'mas_class' );
-	}
-
-	/**
-	 * GET GYM CLASS TRAINER
-	 * @param $params
-	 * @return
+	 * Get gym class trainer
+	 * @param integer $class_id
+	 * @return associative array of query result
 	 */
 	public function get_class_trainer( $class_id ) {
-
 		$sql = 'mas_trainer.*, ';
 		$sql.= 'CONCAT(mas_trainer.firstname, ';
 		$sql.= 'Char(32), mas_trainer.lastname ) AS name ';

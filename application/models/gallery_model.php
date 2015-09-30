@@ -14,8 +14,9 @@ if (! defined ( 'BASEPATH' ))
 
 class Gallery_model extends Common_model {
 
-	public function __construct()
-	{
+
+	public function __construct() {
+		parent::__construct();
 	}
 
 	public function get_public_album( $is_active = true ) {

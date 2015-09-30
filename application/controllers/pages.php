@@ -29,7 +29,7 @@ class Pages extends CI_controller {
 	 */
 	public function displayTopNav($data) {
 		$gym_class = new gym_class();
-		$data['result'] = $gym_class->get_class_list();
+		$data['result'] = $gym_class->get_class(true);
 		return $this->load->view( TPL_PAGE_TEMPLATES.'top_navigation', $data );
 	}
 

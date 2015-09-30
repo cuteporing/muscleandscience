@@ -5,19 +5,22 @@
 			<?php if( isset( $has_check ) && $has_check === true ): ?>
 				<th><input id="check-all" type="checkbox" class="tableflat"></th>
 			<?php endif; ?>
-			<?php foreach ( $result[0] as $row =>$value): ?>
-				<?php if( $row != 'id'):?>
-					<th><?=ucfirst(str_replace('_', ' ', $row))?></th>
-				<?php endif;?>
-			<?php endforeach; ?>
-			<?php if( isset( $has_action ) && $has_action === true ): ?>
-				<th class=" no-link last">
-					<span class="nobr"><?=$this->lang->line('LBL_00042')?></span>
-				</th>
+			<?php if( count($result) ): ?>
+				<?php foreach ( $result[0] as $row =>$value): ?>
+					<?php if( $row != 'id'):?>
+						<th><?=ucfirst(str_replace('_', ' ', $row))?></th>
+					<?php endif;?>
+				<?php endforeach; ?>
+				<?php if( isset( $has_action ) && $has_action === true ): ?>
+					<th class=" no-link last">
+						<span class="nobr"><?=$this->lang->line('LBL_00042')?></span>
+					</th>
+				<?php endif; ?>
 			<?php endif; ?>
 		</tr>
 	</thead>
 	<tbody>
+		<?php if( count($result) ): ?>
 			<?php foreach ( $result as $row ): ?>
 				<tr>
 					<?php if( isset( $has_check ) && $has_check === true ):?>
@@ -33,11 +36,12 @@
 					<?php if( isset($has_action ) && $has_action === true ): ?>
 						<td>
 							<a href="<?=base_url().$action_view.$id?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-              <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+              <a href="<?php base_url().$action_delete.$id?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
 						</td>
 					<?php endif;?>
 				</tr>
 			<?php endforeach; ?>
+		<?php endif; ?>
 	</tbody>
 </table>
 <?php else:?>

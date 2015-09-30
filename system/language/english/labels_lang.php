@@ -48,6 +48,7 @@ $lang ['LBL_00046'] = "Total number of gym members";
 $lang ['LBL_00047'] = "PT members w/ available session";
 $lang ['LBL_00048'] = "Total number of unpaid members";
 $lang ['LBL_00049'] = "There are accounts that needs activation";
+$lang ['LBL_00050'] = "PT Members";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

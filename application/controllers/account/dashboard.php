@@ -93,7 +93,7 @@ class Dashboard extends CI_controller {
 	public function get_monthly_gym() {
 		$data['result'] = $this->members_model->month_enrolled_gym_members();
 
-		$config['title']    = "Gym Members";
+		$config['title']    = $this->lang->line("LBL_00043");
 		$config['subtitle'] = "Enrolled for the month of ".date('F');
 		$config['content']  = $this->load->view(
 				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
@@ -109,7 +109,7 @@ class Dashboard extends CI_controller {
 	public function get_monthly_pt() {
 		$data['result'] = $this->members_model->month_enrolled_pt_members();
 
-		$config['title']    = "PT Members";
+		$config['title']    = $this->lang->line("LBL_00050");
 		$config['subtitle'] = "Enrolled for the month of ".date('F');
 		$config['content']  = $this->load->view(
 				TPL_ACCOUNT_TEMPLATES.'table_hover', $data, true );
@@ -117,11 +117,10 @@ class Dashboard extends CI_controller {
 		$widget = new widget();
 		$widget->initialize($config);
 		return $widget->create_widget();
-
 	}
 
 	/**
-	 * VIEW ACCOUNT DASHBOARD
+	 * View account dashboard
 	 * @param (String) $page
 	 * @return (View)
 	 */

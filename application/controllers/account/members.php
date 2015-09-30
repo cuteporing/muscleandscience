@@ -72,6 +72,7 @@ class Members extends CI_controller {
 	}
 
 	public function get_admin_member_result($view_type) {
+		$result = array();
 		// View Gym members
 		if( $view_type == "gym" ) {
 			$result = $this->members_model->get_active_gym_members();

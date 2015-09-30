@@ -14,53 +14,28 @@ if (! defined ( 'BASEPATH' ))
 
 class User_model extends Common_model {
 
-	private $id        = null;
-	private $username  = "";
-	private $password  = "";
-	private $user_kbn  = null;
-	private $lastname  = "";
-	private $firstname = "";
-	private $status    = null;
-	private $gender    = "";
-	private $birthday  = "";
-	private $phone     = null;
-	private $email     = null;
-	private $occupation= null;
-	private $address   = null;
-	private $img       = null;
-	private $deleted   = 1;
+	protected $id        = null;
+	protected $username  = "";
+	protected $password  = "";
+	protected $user_kbn  = null;
+	protected $lastname  = "";
+	protected $firstname = "";
+	protected $status    = null;
+	protected $gender    = "";
+	protected $birthday  = "";
+	protected $phone     = null;
+	protected $email     = null;
+	protected $occupation= null;
+	protected $address   = null;
+	protected $img       = null;
+	protected $deleted   = 1;
 
 	public function __construct() {
-// 		parent::__construct();
+		parent::__construct();
 	}
 
-	private function get_model() {
+	protected function get_model() {
 		return (array) $this;
-	}
-
-
-	/**
-	 * Function to get a property
-	 * @param string -- property
-	 */
-	public function get($property) {
-		if (property_exists($this, $property)) {
-			return $this->$property;
-		}
-	}
-
-	/**
-	 * Function for setting a value to a property
-	 * @param string
-	 * @param string, number
-	 * @return User_model
-	 */
-	public function set($property, $value) {
-		if (property_exists($this, $property)) {
-			$this->$property = $value;
-		}
-
-		return $this;
 	}
 
 	/**
@@ -98,7 +73,7 @@ class User_model extends Common_model {
 
 	/**
 	 * Function for setting the logged in user info
-	 * @param (array) $result
+	 * @param array $result
 	 */
 	public function set_login_data($result) {
 		$this->set_user($result);
@@ -108,12 +83,13 @@ class User_model extends Common_model {
 	 * Generate the encrypted version of the user's password
 	 * @return string - encrypted_password
 	 */
-	private function generate_password() {
+	protected function generate_password() {
 		return $this->bcrypt->hash_password($this->get('password'));
 	}
 
 	/**
 	 * Check if user exist
+	 * @param boolean $authenticated
 	 * @return array -- associative array of query result
 	 */
 	public function check_login_user( $authenticated = false ) {

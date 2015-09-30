@@ -14,47 +14,23 @@ if (! defined ( 'BASEPATH' ))
 
 class Members_model extends Common_model {
 	// mas_members
-	private $member_id      = null;
-	private $user_id        = null;
-	private $package_id     = null;
-	private $start_date     = "";
-	private $end_date       = "";
-	private $amount         = null;
-	private $discount       = null;
-	private $note           = "";
-	private $session_left   = null;
-	private $create_user_id = null;
-	private $create_datetime= "";
-	private $update_user_id = null;
-	private $update_datetime= "";
+	protected $member_id      = null;
+	protected $user_id        = null;
+	protected $package_id     = null;
+	protected $start_date     = "";
+	protected $end_date       = "";
+	protected $amount         = null;
+	protected $discount       = null;
+	protected $note           = "";
+	protected $session_left   = null;
+	protected $create_user_id = null;
+	protected $create_datetime= "";
+	protected $update_user_id = null;
+	protected $update_datetime= "";
 
 
 	public function __construct() {
 		parent::__construct();
-	}
-
-	/**
-	 * Function to get a property
-	 * @param $property
-	 */
-	public function get($property) {
-		if (property_exists($this, $property)) {
-			return $this->$property;
-		}
-	}
-
-	/**
-	 * Function for setting a value to a property
-	 * @param (string) $property
-	 * @param (string, number) $value
-	 * @return User_model
-	 */
-	public function set($property, $value) {
-		if (property_exists($this, $property)) {
-			$this->$property = $value;
-		}
-
-		return $this;
 	}
 
 	/**
@@ -68,7 +44,6 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
 		$this->db->where('mas_members.end_date >=', date("Y-m-d"));
 		$this->db->where('mas_package_type.id', 1);
-		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 
@@ -113,7 +88,6 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
 		$this->db->where("( MONTH(mas_members.start_date) = '".date('m')."' OR  MONTH(mas_members.end_date) = '".date('m')."' )", NULL, FALSE);
 		$this->db->where('mas_package_type.id', 1);
-		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 		$this->db->group_by('mas_users.id');
@@ -132,8 +106,6 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package.package_type_id = mas_package_type.id', 'left');
 		$this->db->where("( MONTH(mas_members.start_date) = '".date('m')."' )", NULL, FALSE);
 		$this->db->where('mas_package_type.id', 2);
-
-		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 		$this->db->group_by('mas_users.id');
@@ -154,7 +126,6 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
 		$this->db->where('mas_members.end_date >=', date("Y-m-d"));
 		$this->db->where('mas_package_type.id', 1);
-		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 
@@ -179,7 +150,6 @@ class Members_model extends Common_model {
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');
 		$this->db->where('mas_package_type.id', 2);
 		$this->db->where('mas_members.session_left !=', 0);
-		$this->db->where('mas_users.user_kbn', 10);
 		$this->db->where('mas_users.deleted', 0);
 		$this->db->where('mas_users.status', 1);
 
@@ -188,7 +158,7 @@ class Members_model extends Common_model {
 
 	/**
 	 * Get list of unpaid members
-	 * @return
+	 * @return associative array of query result
 	 */
 	public function get_unpaid_members() {
 		$sql = "mas_users.id,
@@ -207,14 +177,20 @@ class Members_model extends Common_model {
 		return $this->get_result( 'mas_members' );
 	}
 
+	/**
+	 * Membership history
+	 * @param integer $id - user id
+	 * @return associative array of query result
+	 */
 	public function get_membership_history($id) {
 		$sql = "mas_members.member_id AS id,
 						mas_package_type.package AS membership,
 						mas_members.start_date,
+						(CASE WHEN mas_package_type.id != 2 THEN mas_members.end_date ELSE '---' END) AS end_date,
 						mas_package.package,
 						mas_members.amount,
-						mas_members.balance,";
-		$this->db->select($sql);
+						mas_members.balance";
+		$this->db->select($sql, FALSE);
 		$this->db->join('mas_users', 'mas_users.id = mas_members.user_id', 'left');
 		$this->db->join('mas_package', 'mas_package.id = mas_members.package_id', 'left');
 		$this->db->join('mas_package_type', 'mas_package_type.id = mas_package.package_type_id', 'left');

@@ -12,26 +12,31 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Homebox_model extends Common_model {
+class Company_Info_model extends Common_model {
+	private $company_info_id  = null;
+	private $street_address_1 = "";
+	private $street_address_2 = "";
+	private $city             = null;
+	private $email            = "";
+	private $phone            = "";
+	private $opening_hours    = null;
+	private $opening_day_type = null;
+	private $create_user_id   = "";
+	private $create_datetime  = "";
+	private $update_user_id   = null;
+	private $update_datetime  = "";
 
 	public function __construct() {
 		parent::__construct();
 	}
 
 	/**
-	 * GET HOMEBOX
-	 * @param (Array) $params
+	 * Get company information
 	 * @return
 	 */
-	public function get_homebox( $other_params = array() ) {
-		return $this->get_result( 'mas_homebox' );
+	public function get_company_info( ) {
+		return $this->get_result( 'mas_company_info' );
 	}
 
-	/**
-	 * SET HOMEBOX
-	 */
-	public function set_homebox() {
-		return $this->db->insert ( 'mas_homebox', $data );
-	}
 }
 ?>

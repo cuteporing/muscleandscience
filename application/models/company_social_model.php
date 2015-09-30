@@ -12,15 +12,11 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Company_model extends Common_model {
-	private $company_info_id  = null;
-	private $street_address_1 = "";
-	private $street_address_2 = "";
-	private $city             = null;
-	private $email            = "";
-	private $phone            = "";
-	private $opening_hours    = null;
-	private $opening_day_type = null;
+class Company_Social_model extends Common_model {
+	private $company_social_id=null;
+	private $social_network   = "";
+	private $link             = "";
+	private $icon             = "";
 	private $create_user_id   = "";
 	private $create_datetime  = "";
 	private $update_user_id   = null;
@@ -28,28 +24,6 @@ class Company_model extends Common_model {
 
 	public function __construct() {
 		parent::__construct();
-	}
-
-	public function get($property) {
-		if (property_exists($this, $property)) {
-			return $this->$property;
-		}
-	}
-
-	public function set($property, $value) {
-		if (property_exists($this, $property)) {
-			$this->$property = $value;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Get company information
-	 * @return
-	 */
-	public function get_company_info( ) {
-		return $this->get_result( 'mas_company_info' );
 	}
 
 	/**
