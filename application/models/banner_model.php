@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Banner_model extends CommonModel {
+class Banner_model extends Common_model {
 
 	private $banner_id;
 	private $img;
@@ -24,14 +24,17 @@ class Banner_model extends CommonModel {
 	private $update_datetime;
 
 	public function __construct() {
+		parent::__construct ();
 	}
 
 	/**
 	 * GET BANNER
+	 *
 	 * @return
+	 *
 	 */
-	public function get_banner() {
-		return $this->getResult('mas_banner');
+	public function getBanner() {
+		return $this->getResult ( 'mas_banner' );
 	}
 }
 ?>

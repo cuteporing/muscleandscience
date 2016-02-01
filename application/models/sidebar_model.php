@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Sidebar_model extends CommonModel {
+class Sidebar_model extends Common_model {
 
 	public function __construct() {
 	}

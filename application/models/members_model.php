@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Members_model extends CommonModel {
+class Members_model extends Common_model {
 	// mas_members
 	protected $member_id      = null;
 	protected $user_id        = null;

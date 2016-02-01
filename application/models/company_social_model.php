@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Company_Social_model extends CommonModel {
+class Company_Social_model extends Common_model {
 	private $company_social_id=null;
 	private $social_network   = "";
 	private $link             = "";

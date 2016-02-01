@@ -12,7 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class News_model extends CommonModel {
+class News_model extends Common_model {
 
 	public function __construct() {
 		parent::__construct();

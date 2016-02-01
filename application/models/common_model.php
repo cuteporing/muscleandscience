@@ -9,10 +9,10 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-if (!defined('BASEPATH'))
-	exit('No direct script access allowed');
+if (! defined ( 'BASEPATH' ))
+	exit ( 'No direct script access allowed' );
 
-class CommonModel extends CI_Model {
+class Common_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
@@ -23,7 +23,7 @@ class CommonModel extends CI_Model {
 	 * @param $property
 	 */
 	public function get($property) {
-		if (proerty_exists($this, $property)) {
+		if (property_exists($this, $property)) {
 			return $this->$property;
 		}
 	}

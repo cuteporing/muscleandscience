@@ -12,7 +12,8 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Company_Info_model extends CommonModel {
+class Company_Info_model extends Common_model {
+
 	private $company_info_id  = null;
 	private $street_address_1 = "";
 	private $street_address_2 = "";

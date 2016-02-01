@@ -13,7 +13,7 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 
-class Gym_Class_model extends CommonModel {
+class Gym_Class_model extends Common_model {
 	private $id;
 	private $title;
 	private $subtitle;
