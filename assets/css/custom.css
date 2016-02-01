@@ -22,6 +22,9 @@ body {
 	word-break: break-word;
 }
 
+.hidden {
+	display: none;
+}
 .text-cross {
 	text-decoration: line-through;
 }
@@ -53,12 +56,14 @@ body {
 	padding: 9px 10px;
 	color: white;
 	font-size: 14px;
-	-webkit-animation-name: bounceInRight;
-	-webkit-animation-duration: 1s;
-	-moz-animation-name: bounceInRight;
-	-moz-animation-duration: 1s;
-	animation-name: bounceInRight;
-	animation-duration: 1s;
+}
+
+.error-msg {
+	background: rgba(0,0,0,0.5);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 12px;
+  display: none;
 }
 
 /* -------------------------- */

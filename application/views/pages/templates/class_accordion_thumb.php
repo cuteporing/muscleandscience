@@ -1,5 +1,5 @@
 <dl class="accordion accordion-gym-fitness" data-accordion>
-	<?php if ( isset( $result ) ): ?>
+	<?php if ( isset( $result ) && !is_null( $result ) ): ?>
 		<?php foreach ( $result as $row ): ?>
 			<dd class="accordion-navigation">
 				<!-- TITLE -->
@@ -13,11 +13,8 @@
 						<img alt="<?=$row['img_thumb'] ?>" src="<?=$row['img_thumb'] ?>">
 					</a>
 					<div class="text"><?=character_limiter ( $row['about'], 150 ) ?></div>
-					<a href="gym_class/<?=$row['slug'] ?>" class="more icon-small-arrow margin-right-white">
+					<a href="gym-class/<?=$row['slug'] ?>" class="more icon-small-arrow margin-right-white">
 						<?=$this->lang->line('LBL_00028')?>
-					</a>
-					<a href="#" class="more icon-small-arrow margin-right-white">
-						<?=$this->lang->line('LBL_00029')?>
 					</a>
 				</div>
 			</dd>

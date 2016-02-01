@@ -15,195 +15,159 @@ if (! defined ( 'BASEPATH' ))
 class News_model extends Common_model {
 
 	public function __construct() {
+		parent::__construct();
 	}
 
+
 	/**
-	 * GET NEWS
-	 *
-	 * --------------------------------------------
-	 * @param $params
-	 * @return
+	 * Get news
+	 * @param string $type
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @param string $slug
+	 * @return associative array of query result
 	 */
-	public function get_news($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
-
-			$query = $this->db->get ( TBL_POST, $params ['limiter'] ['limit'], $params ['limiter'] ['offset'] );
-		} else {
-			$this->db->from ( TBL_POST );
-			$query = $this->db->get ();
+	public function get_news($type="blog", $limit, $offset, $slug = '') {
+		if( $type == "blog" || $type == "post" ) {
+			$this->db->where( 'deleted', 0 );
+		} elseif ( $type == "title" ) {
+			$this->db->where( 'slug', $slug );
+			$this->db->where( 'deleted', 0 );
 		}
 
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
+		$this->db->order_by ( 'update_datetime', 'desc' );
+		return $this->get_result( 'mas_post', $limit, $offset );
 	}
 
-	/**
-	 * GET NEWS
-	 *
-	 * --------------------------------------------
-	 * @param $where
-	 * @param $limiter
-	 * @param $orderBy
-	 * @return
-	 */
-	public function get_news_details($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
-
-			$query = $this->db->get ( TBL_POST_DETAILS, $params ['limiter'] ['limit'], $params ['limiter'] ['offset'] );
-		} else {
-			$this->db->from ( TBL_POST_DETAILS );
-			$query = $this->db->get ();
-		}
-
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
-	}
 
 	/**
-	 * GET NEWS TAGS
-	 *
-	 * --------------------------------------------
-	 * @param $post_id
-	 * @return
+	 * Get news count
+	 * @param string $type
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @param string $slug
+	 * @return integer
 	 */
-	public function get_news_tags($post_id = null) {
-		$this->db->select ( TBL_TAGS . '.tag_name' );
-		$this->db->from ( TBL_POST_TAGS );
-		$this->db->join ( TBL_TAGS, TBL_POST_TAGS . '.tag_id = ' . TBL_TAGS . '.id' );
-		if (! is_null ( $post_id )) {
-			$this->db->where ( TBL_POST_TAGS . '.post_id', $post_id );
-		}
-		$query = $this->db->get ();
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
-	}
+	public function get_news_count($type="blog", $limit, $offset, $slug = '') {
 
-	/**
-	 * GET NEWS AUTHOR
-	 *
-	 * --------------------------------------------
-	 * @param $user_id
-	 * @return
-	 */
-	public function get_news_author($user_id) {
-		$this->db->select ( 'firstname, lastname' );
-		$this->db->from ( TBL_USERS );
-		$this->db->where ( '_id', $user_id );
-
-		$query = $this->db->get ();
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
+		if( $type == "blog" || $type == "post" ) {
+			$this->db->where( 'deleted', 0 );
+		} elseif ( $type == "title" ) {
+			$this->db->where( 'slug', $slug );
+			$this->db->where( 'deleted', 0 );
 		}
-	}
 
-	/**
-	 * GET NEWS COUNT
-	 *
-	 * --------------------------------------------
-	 * @param $params
-	 * @return
-	 */
-	public function get_news_count($params) {
-		$this->db->from ( TBL_POST );
-		$this->get_where ( $params );
+		$this->db->from ( 'mas_post' );
 		return $this->db->count_all_results ();
 	}
 
 	/**
-	 * GET COMMENT COUNT PER POST
-	 *
-	 * --------------------------------------------
+	 * Get latest news
+	 * @param integer $limit
+	 * @return associative array of query result
+	 */
+	public function get_latest_news( $limit ) {
+		$this->db->where( 'deleted', 0 );
+		$this->db->order_by( 'update_datetime', 'desc' );
+		return $this->get_result( 'mas_post', $limit );
+	}
+
+
+	/**
+	 * Get news details
+	 * @param integer $post_id
+	 * @param integer $limit
+	 * @return associative array of query result
+	 */
+	public function get_news_details($post_id, $limit) {
+		$this->db->where( 'post_id', $post_id );
+		$this->db->order_by( 'sequence', 'asc' );
+		return $this->get_result( 'mas_post_details', $limit );
+	}
+
+	/**
+	 * Get news tags
 	 * @param $post_id
-	 * @return
+	 * @return associative array of query result
+	 */
+	public function get_news_tags($post_id = null) {
+		$this->db->select( 'mas_tags.tag_name' );
+		$this->db->join ( 'mas_tags', 'mas_post_tags.tag_id = mas_tags.id' );
+		if (! is_null ( $post_id ))
+			$this->db->where( 'mas_post_tags.post_id', $post_id );
+
+		return $this->get_result( 'mas_post_tags' );
+	}
+
+	/**
+	 * Get news author
+	 * @param $user_id
+	 * @return associative arrray of query result
+	 */
+	public function get_news_author($user_id) {
+		$this->db->select ( 'firstname, lastname' );
+		$this->db->where ( 'id', $user_id );
+		return $this->get_result( 'mas_users' );
+	}
+
+
+
+	/**
+	 * Get comment count per post
+	 * @param $post_id
+	 * @return integer
 	 */
 	public function get_comment_count($post_id) {
-		$this->db->from ( TBL_COMMENTS );
+		$this->db->from ( 'mas_comments' );
 		$this->db->where ( 'post_id', $post_id );
 		return $this->db->count_all_results ();
 	}
 
+
 	/**
-	 * GET COMMENTS
-	 *
-	 * --------------------------------------------
-	 * @param $post_id
-	 * @return
+	 * Get comments
+	 * @param integer $post_id
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @return associative array of query result
 	 */
-	public function get_comments($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
+	public function get_comments( $post_id, $limit, $offset ) {
+		$sql = 'mas_comments.id, ';
+		$sql.= 'mas_comments.post_id, ';
+		$sql.= 'mas_comments.comment, ';
+		$sql.= 'mas_comments.update_user_id, ';
+		$sql.= 'mas_comments.update_datetime, ';
+		$sql.= 'mas_users.firstname, ';
+		$sql.= 'mas_users.lastname, ';
+		$sql.= 'mas_gallery_photos.photo_thumb ';
 
-		$sql = TBL_COMMENTS . ".id, ";
-		$sql .= TBL_COMMENTS . ".post_id, ";
-		$sql .= TBL_COMMENTS . ".comment, ";
-		$sql .= TBL_COMMENTS . ".update_user_id, ";
-		$sql .= TBL_COMMENTS . ".update_datetime, ";
-		$sql .= TBL_USERS . ".firstname, ";
-		$sql .= TBL_USERS . ".lastname, ";
-		$sql .= TBL_GALLERY_PHOTOS . ".photo_thumb ";
+		$this->db->select( $sql );
+		$this->db->join( 'mas_users', 'mas_comments.id =  mas_users.id' );
+		$this->db->join( 'mas_gallery_photos', 'mas_gallery_photos.id = mas_users.img' );
+		$this->db->where( 'mas_comments.post_id', $post_id );
+		$this->db->where( 'mas_comments.deleted', 0 );
+		$this->db->order_by( 'mas_comments.update_datetime', 'desc' );
 
-		$this->db->select ( $sql );
-		$this->db->from ( TBL_COMMENTS );
-		$this->db->join ( TBL_USERS, TBL_COMMENTS . ".id = " . TBL_USERS . "._id" );
-		$this->db->join ( TBL_GALLERY_PHOTOS, TBL_GALLERY_PHOTOS . ".id = " . TBL_USERS . ".img" );
-
-		$query = $this->db->get ();
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
+		return $this->get_result( 'mas_comments', $limit, $offset );
 	}
 
+
 	/**
-	 * GET NEWS BY TAG
-	 *
-	 * --------------------------------------------
-	 * @param $params
-	 * @return
+	 * Get news by tag
+	 * @param string $slug
+	 * @param integer $limit
+	 * @param integer $offset
+	 * @return associative array of query result
 	 */
-	public function get_news_by_tag($params) {
-		$sql = TBL_POST . ".* ";
+	public function get_news_by_tag($slug, $limit, $offset) {
+		$this->db->select( 'mas_post.* ' );
+		$this->db->where( 'mas_tags.tag_name', $slug );
+		$this->db->where( 'mas_post.deleted', 0 );
+		$this->db->join( 'mas_post_tags', 'mas_tags.id = mas_post_tags.tag_id' );
+		$this->db->join( 'mas_post', 'mas_post.id = mas_tags.id' );
+		$this->db->order_by( 'update_datetime', 'desc' );
 
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-
-		$this->db->select ( $sql );
-		$this->db->from ( TBL_TAGS );
-		$this->db->join ( TBL_POST_TAGS, TBL_TAGS . ".id = " . TBL_POST_TAGS . ".tag_id" );
-		$this->db->join ( TBL_POST, TBL_POST . ".id = " . TBL_TAGS . ".id" );
-
-		$query = $this->db->get ();
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
+		return $this->get_result( 'mas_tags', $limit, $offset );
 	}
 }
 ?>

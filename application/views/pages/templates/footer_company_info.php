@@ -6,23 +6,23 @@
 	}
 ?>
 <div class="footer-box">
-	<?= common::box_header( $this->lang->line('LBL_00007') )?>
+	<h3 class="box-header"><?=$this->lang->line('LBL_00007')?></h3>
 	<ul class="footer-contact-info-container clearfix">
 		<li class="footer-contact-info-row">
-			<div class="footer-contact-info-left">
-				<?= common::checkData( $result_info[0]['street_address_1'] ) ?>
+			<div class="clearfix footer-contact-info-left">
+				<?= check_data( $result_info[0]['street_address_1'] ) ?>
 			</div>
 			<div class="footer-contact-info-right">
-				<?= common::checkData( $phone [0] ) ?>
+				<?= check_data( $phone [0] ) ?>
 			</div>
 			<div class="footer-contact-info-left">
-				<?= common::checkData( $result_info[0]['street_address_2'] ) ?>
+				<?= check_data( $result_info[0]['street_address_2'] ) ?>
 			</div>
 			<div class="footer-contact-info-right">
-				<?= common::checkData( $phone [1] ) ?>
+				<?= check_data( $phone [1] ) ?>
 			</div>
 			<div class="footer-contact-info-left">
-				<?= common::checkData( $result_info[0]['city'] ) ?>
+				<?= check_data( $result_info[0]['city'] ) ?>
 			</div>
 		</li>
 		<li class="footer-contact-info-row">

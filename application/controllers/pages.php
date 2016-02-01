@@ -9,86 +9,65 @@
  * All Rights Reserved.
  *
  ********************************************************************************/
-if (! defined ( 'BASEPATH' ))
-	exit ( 'No direct script access allowed' );
+if (! defined( 'BASEPATH' ))
+	exit( 'No direct script access allowed' );
 
-include_once ('common.php');
-include_once ('format.php');
-include_once ('homebox.php');
-include_once ('public/footer.php');
-include_once ('public/gym_class.php');
-include_once ('public/home.php');
-include_once ('public/news.php');
-include_once ('public/gallery.php');
+require_once(PATH_UTILS.'homebox.php');
+require_once(PATH_PUBLIC.'footer.php');
+require_once(PATH_PUBLIC.'gym_class.php');
+require_once(PATH_PUBLIC.'news.php');
 
-class pages extends CI_controller {
+class Pages extends CI_controller {
 	public function __construct() {
-		parent::__construct ();
+		parent::__construct();
 	}
 
 	/**
-	 * GET HEADER
-	 *
-	 * --------------------------------------------
-	 * @param (Object) $data
-	 * @return (View)
-	 */
-	public function getHeader($data) {
-		$data ['title'] = ucfirst(str_replace('_', ' ', $data ['title']));
-		$this->load->view ( TPL_PAGE_HEADER, $data );
-	}
-
-	/**
-	 * DISPLAY TOP NAVIGATION
-	 *
-	 * --------------------------------------------
+	 * Displays top public top navigation
 	 * @param (Object) $data
 	 * @return (View)
 	 */
 	public function displayTopNav($data) {
-		$this->load->view ( TPL_PAGE_NAVIGATION, $data );
+		$gym_class = new gym_class();
+		$data['result'] = $gym_class->get_class(true);
+		return $this->load->view( TPL_PAGE_TEMPLATES.'top_navigation', $data );
 	}
 
 	/**
-	 * PAGE VIEW
-	 *
-	 * --------------------------------------------
+	 * Controls the display for public view
 	 * @param (String) $page
 	 */
 	public function view($page = 'home') {
-		if (! file_exists ( APPPATH . '/views/pages/' . $page . '.php' )) {
-			show_404 ();
+		$data ['page']  = strtolower( str_replace( "-", " ", $page ));
+		$data ['title'] = ucfirst( str_replace('_', ' ', $page) );
+
+		$this->load->view( TPL_PAGE_TEMPLATES.'header', $data );
+		$this->displayTopNav( $data );
+
+		// Initialize controller
+		if( $page == "news" ) {
+			$instance = new News();
 		}
-		$common = new common ();
-		$common->load_language ();
-
-		$data ['title'] = ucfirst ( $page );
-
-		$this->getHeader ( $data );
-		$this->displayTopNav ( $data );
-
-		// Initialize page display
-		switch ($page) {
-			case 'news' :
-				$news = new news ();
-				$news->view ( $page );
-				break;
-			case 'gym_class' :
-				$gym_class = new gym_class ();
-				$gym_class->view ( $page );
-				break;
-			case 'gallery' :
-				$gallery = new gallery ();
-				$gallery->view ( $page );
-				break;
-			default :
-				$home = new home ();
-				$home->view ( $page );
-				break;
+		elseif( $page == "gym-class" ) {
+			$instance = new Gym_class();
 		}
+		elseif( $page == "gallery" ) {
+			require_once(PATH_PUBLIC.'gallery.php');
+			$instance = new Gallery();
+		}
+		elseif( $page == "contact" ) {
+			require_once(PATH_PUBLIC.'contact.php');
+			$instance = new Contact();
+		}
+		else {
+			require_once(PATH_PUBLIC.'home.php');
+			$instance = new Home();
+		}
+		// Initialize display
+		$instance->view( $page );
 
-		$footer = new footer ();
-		$footer->view ();
+		$footer = new footer();
+		$footer->view();
 	}
 }
 ?>

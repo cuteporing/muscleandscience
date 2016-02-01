@@ -14,36 +14,16 @@ if (! defined ( 'BASEPATH' ))
 
 class Gallery_model extends Common_model {
 
-	public function __construct()
-	{
+
+	public function __construct() {
+		parent::__construct();
 	}
 
-	public function get_album($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-		$this->get_select ( $params, TBL_GALLERY );
-
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
-
-			$query = $this->db->get (
-					TBL_GALLERY,
-					$params ['limiter'] ['limit'],
-					$params ['limiter'] ['offset']
-			);
-		} else {
-			$this->db->from ( TBL_GALLERY );
-			$query = $this->db->get ();
-		}
-
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
+	public function get_public_album( $is_active = true ) {
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'view', 'public' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_gallery' );
 	}
 
 }

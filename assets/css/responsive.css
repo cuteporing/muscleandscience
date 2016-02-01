@@ -24,7 +24,7 @@
 	.top-bar-section .right li .dropdown {
 		left: auto;
 		right: 0;
-		top: 45px;
+		top: 43px;
 	}
 	.tabs.vertical {
 		border-right: 1px solid #ccc;
@@ -454,5 +454,14 @@
 	}
 	.box-panel i {
 		margin-right: 0.5rem;
+	}
+}
+
+@media only screen and (min-width: 40.063em) {
+	.top-bar-section .dropdown li a {
+		line-height: 18px;
+	}
+	.top-bar-section .has-dropdown>a {
+		padding-right: 15px!important;
 	}
 }

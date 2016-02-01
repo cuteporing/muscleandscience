@@ -2,7 +2,9 @@
 	<div id="recent_post">
 		<div class="clearfix">
 			<!-- RECENT POST HEADER -->
-			<div class="header-left"><?= common::box_header( $this->lang->line('LBL_00039') )?></div>
+			<div class="header-left">
+				<h3 class="box-header"><?=$this->lang->line('LBL_00039')?></h3>
+			</div>
 			<div class="header-right">
 				<a class="prev scrolling-list-control-left icon-small-arrow left-white" href="#"></a>
 				<a class="next scrolling-list-control-right icon-small-arrow right-white" href="#"></a>
@@ -15,8 +17,8 @@
 								<li class="icon-small-arrow right-white">
 									<a href="<?=base_url() ?>news/title/<?=$row ['slug'] ?>">
 										<span class="title"><?=character_limiter ( $row ['title'], 100 ) ?></span>
-										<abbr title="<?=format::format_date( $row['post_date'], "D M d H:i:s Y" ) ?>" class="timeago">
-											<?=format::calc_time(strtotime($row['post_date'])) ?> ago
+										<abbr title="<?=format_date( $row['post_date'], "D M d H:i:s Y" ) ?>" class="timeago">
+											<?=calc_time($row['post_date']) ?>
 										</abbr>
 									</a>
 								</li>

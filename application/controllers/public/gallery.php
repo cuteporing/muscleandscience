@@ -12,43 +12,23 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class gallery extends CI_controller {
-
-	private $params    = array ();
-	private $view_type = null;
+class Gallery extends Pages {
 
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'gallery_model' );
 	}
 
-	private function clear_params() {
-		$this->params = array ();
-	}
-
-	private function get_params() {
-		$this->clear_params ();
-
-		if ( $this->view_type == "public_album" ) {
-			$this->params ['where'] = array (
-				"deleted" => 0, "view" => "public" );
-		}
-	}
-
-	public function get_public_album( ) {
-		$this->view_type = "public_album";
-
-		$this->get_params ();
-
-
-	}
-
+	/**
+	 * View gallery page
+	 * @param (String) $page
+	 */
 	public function view( $page ) {
-		$common = new common ();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
+		$data ['result']       = $this->gallery_model->get_public_album();
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 
 		$this->load->view ( 'pages/' . $page, $data );
-
 	}
 
 }

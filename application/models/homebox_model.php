@@ -15,24 +15,20 @@ if (! defined ( 'BASEPATH' ))
 class Homebox_model extends Common_model {
 
 	public function __construct() {
+		parent::__construct();
 	}
 
 	/**
 	 * GET HOMEBOX
-	 *
-	 * @param $params
-	 * --------------------------------------------
+	 * @param (Array) $params
+	 * @return
 	 */
-	public function get_homebox() {
-		$query = $this->db->get ( 'mas_homebox' );
-		return $query->result_array ();
+	public function get_homebox( $other_params = array() ) {
+		return $this->get_result( 'mas_homebox' );
 	}
 
 	/**
 	 * SET HOMEBOX
-	 *
-	 * @param $params
-	 * --------------------------------------------
 	 */
 	public function set_homebox() {
 		return $this->db->insert ( 'mas_homebox', $data );

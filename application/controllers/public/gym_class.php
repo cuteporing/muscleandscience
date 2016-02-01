@@ -12,9 +12,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class gym_class extends pages {
-
-	private $params = array ();
+class Gym_class extends Pages {
 
 	public function __construct() {
 		parent::__construct ();
@@ -23,116 +21,92 @@ class gym_class extends pages {
 	}
 
 	/**
-	 * DISPLAY THE GYM CLASS ACCORDION (COMPACT)
-	 *
-	 * --------------------------------------------
+	 * Display gym class accordion (COMPACT)
 	 * @return (View)
 	 */
 	public function display_gym_class_thumbnail() {
-		$data['result'] = $this->gym_class_model->get_gym_class_thumb ();
+		$data['result'] = $this->gym_class_model->get_class();
+		return $this->load->view (
+				TPL_PAGE_TEMPLATES.'class_accordion_thumb', $data, true );
+	}
 
-		return $this->load->view ( TPL_CLASS_ACCORDION_THUMB, $data, true );
+	public function get_class( $is_list ) {
+		return $this->gym_class_model->get_class ( $is_list );
 	}
 
 	/**
-	 * GET ALL GYM CLASS
-	 *
-	 * --------------------------------------------
+	 * Get all gym class
 	 * @return (Array) $result
 	 */
 	public function get_all_class() {
-		$result = $this->gym_class_model->get_class ( $this->params );
+		$result = $this->gym_class_model->get_class ();
 
 		if (! is_null ( $result )) {
 			for($i = 0; $i < count ( $result ); $i ++) {
 				$id = $result[$i]['id'];
-
-				$this->params ['where'] = array (
-					TBL_CLASS_TRAINER . ".class_id" => $id
-				);
-				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $this->params );
+				$result[$i]['trainer'] = $this->gym_class_model->get_class_trainer( $id );
 			}
 		}
 		return $result;
 	}
 
 	/**
-	 * GET SEARCH PARAMETERS
-	 *
-	 * --------------------------------------------
-	 * @param (String) $type
-	 */
-	private function get_params( $type ) {
-		$this->params = array ();
-
-		$this->params ['where'] = array (
-			"package_type" => $type,
-			"deleted" => 0
-		);
-	}
-
-	/**
-	 * GET HOMEBOX FOR MEMBERSHIP PACKAGE
-	 *
-	 * --------------------------------------------
+	 * Create homebox for membership package
 	 * @return
 	 */
 	public function get_package_homebox() {
-		$homebox = new homebox ();
-		$this->get_params('M');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_mem_package();
+
+		if( is_null( $result ) ) return $result;
 
 		$data['title']    = $this->lang->line ( 'LBL_00030' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00031' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'LG', $data, true );
 	}
 
 	/**
-	 * GET HOMEBOX FOR PERSONAL TRAINING PACKAGE
-	 *
-	 * --------------------------------------------
+	 * Create homebox for personal training package
 	 * @return
 	 */
 	public function get_pt_homebox() {
-		$homebox = new homebox ();
-		$this->get_params('PT');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_pt_package();
+
+		if( is_null( $result ) ) return $result;
 
 		$data['title']    = $this->lang->line ( 'LBL_00032' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00033' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'G', $data, true );
 	}
 
 	/**
-	 * GET HOMEBOX FOR SPECIAL PACKAGE
-	 *
-	 * --------------------------------------------
+	 * Create homebox for special package
 	 * @return
 	 */
 	public function get_sp_homebox() {
-		$homebox = new homebox ();
-		$this->get_params('S');
-		$result = $this->package_model->get_package ( $this->params );
+		$result = $this->package_model->get_sp_package();
+
+		if( is_null( $result ) ) return $result;
 
 		$data['title']    = $this->lang->line ( 'LBL_00034' );
 		$data['subtitle'] = $this->lang->line ( 'LBL_00035' );
 		$data['display']  = $result;
 		$data['type']     = 'list';
 
+		$homebox = new homebox ();
 		return $homebox->create_homebox( 'D', $data, true );
 	}
 
 	/**
-	 * GET RIGHT HOMEBOX DISPLAY
-	 *
-	 * --------------------------------------------
-	 * @return $homebox
+	 * Get package homebox display
+	 * @return (String) $homebox
 	 */
 	public function get_homebox() {
 		$homebox = $this->get_package_homebox ();
@@ -143,19 +117,17 @@ class gym_class extends pages {
 	}
 
 	/**
-	 * VIEW GYM CLASS
-	 *
-	 * --------------------------------------------
+	 * View gym class
 	 * @param (String) $page
 	 * @return (View)
 	 */
 	public function view($page) {
-		$common = new common ();
-		$data ['breadcrumbs']  = $common->get_breadcrumbs ( $page );
 		$data ['class_result'] = $this->get_all_class ();
 		$data ['homebox']      = $this->get_homebox();
+		$data ['breadcrumbs']  = $this->load->view(
+				TPL_PAGE_TEMPLATES.'breadcrumbs', '', true);
 		$data ['class_list']   = $this->load->view (
-				TPL_CLASS_ACCORDION_LIST, $data, true );
+				TPL_PAGE_TEMPLATES.'class_accordion_list', $data, true );
 
 		$this->load->view ( 'pages/' . $page, $data );
 	}

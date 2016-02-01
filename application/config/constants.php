@@ -85,36 +85,16 @@ define ( 'META_AUTHOR',			'KBVCodes, 2014' );
  * |
  */
 
-define ( 'IMG_BANNER', 			'/upload/banner/' );
+define ( 'IMG_BANNER', 					'upload/banner/' );
+define ( 'IMG_GALLERY',					'upload/gallery/' );
 define ( 'NO_IMAGE_FILE_PATH', 	'assets/img/' );
 define ( 'NO_IMAGE_FILE_EXT', 	'.png' );
 define ( 'NO_IMAGE_RAW_NAME', 	'noPhoto-icon' );
-define ( 'IMG_ALLOWED_TYPE', 	'gif|jpg|png' );
-define ( 'IMG_MAX_SIZE', 		350 );
-define ( 'IMG_MAX_WIDTH',		1024 );
-define ( 'IMG_MAX_HEIGHT', 		768 );
+define ( 'IMG_ALLOWED_TYPE', 		'gif|jpg|png' );
+define ( 'IMG_MAX_SIZE', 				350 );
+define ( 'IMG_MAX_WIDTH',				1024 );
+define ( 'IMG_MAX_HEIGHT', 			768 );
 
-/*
- * |--------------------------------------------------------------------------
- * | Table name Modes
- * |--------------------------------------------------------------------------
- * |
- * | These modes are used to identify DB table names
- * |
- */
-
-define ( 'TBL_CLASS',			'mas_class' );
-define ( 'TBL_CLASS_TRAINER',	'mas_class_trainer' );
-define ( 'TBL_COMMENTS',		'mas_comments' );
-define ( 'TBL_GALLERY',			'mas_gallery' );
-define ( 'TBL_GALLERY_PHOTOS',	'mas_gallery_photos' );
-define ( 'TBL_PACKAGE',			'mas_package' );
-define ( 'TBL_POST',			'mas_post' );
-define ( 'TBL_POST_DETAILS',	'mas_post_details' );
-define ( 'TBL_POST_TAGS',		'mas_post_tags' );
-define ( 'TBL_TAGS',			'mas_tags' );
-define ( 'TBL_TRAINER',			'mas_trainer' );
-define ( 'TBL_USERS',			'mas_users' );
 
 /*
  * |--------------------------------------------------------------------------
@@ -124,24 +104,28 @@ define ( 'TBL_USERS',			'mas_users' );
  * | These modes are used to store template path
  * |
  */
+define ( 'TPL_PAGE_FORMS',					'pages/forms/' );
+define ( 'TPL_PAGE_TEMPLATES',			'pages/templates/' );
+define ( 'TPL_ACCOUNT',							'account/');
+define ( 'TPL_ACCOUNT_FORMS',				'account/forms/' );
+define ( 'TPL_ACCOUNT_TEMPLATES',		'account/templates/' );
+define ( 'TPL_ACCOUNT_MODALS',			'account/modals/' );
 
+/*
+ * |--------------------------------------------------------------------------
+ * | Path Modes
+ * |--------------------------------------------------------------------------
+ * |
+ * | These modes are used to store path
+ * |
+ */
 
-define ( 'TPL_PAGE_FORMS', 				'pages/forms/' );
-define ( 'TPL_PAGE_LIST', 				'pages/templates/list' );
-define ( 'TPL_PAGE_HEADER', 			'pages/templates/header' );
-define ( 'TPL_PAGE_NAVIGATION',			'pages/templates/top_navigation' );
-define ( 'TPL_PAGE_BREADCRUMBS', 		'pages/templates/breadcrumbs' );
-define ( 'TPL_PAGE_NEWS_LIST', 			'pages/templates/news_list' );
-define ( 'TPL_PAGE_NEWS_COMMENTS', 		'pages/templates/news_comments' );
-define ( 'TPL_PAGE_NEWS_COMMENT_LIST', 	'pages/templates/news_comment_list' );
-define ( 'TPL_HOMEBOX',					'pages/templates/homebox' );
-define ( 'TPL_HOMEBOX_LIST',			'pages/templates/homebox_list' );
-define ( 'TPL_CLASS_ACCORDION_LIST',	'pages/templates/class_accordion_list' );
-define ( 'TPL_CLASS_ACCORDION_THUMB',	'pages/templates/class_accordion_thumb' );
-define ( 'TPL_FOOTER_COMPANY_INFO',		'pages/templates/footer_company_info' );
-define ( 'TPL_FOOTER_COMPANY_SOCIAL', 	'pages/templates/footer_company_social' );
-define ( 'TPL_FOOTER_COMPANY_OPERATION','pages/templates/footer_company_operation' );
-define ( 'TPL_FOOTER_RECENT_POST',		'pages/templates/footer_recent_post' );
+define ( 'PATH_ACCOUNT',		'account/' );
+define ( 'PATH_PUBLIC',			'public/' );
+define ( 'PATH_UTILS',			'utils/' );
+define ( 'PATH_JS',					'assets/js/' );
+define ( 'PATH_CSS',				'assets/css/' );
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

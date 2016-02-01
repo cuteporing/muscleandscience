@@ -16,7 +16,7 @@ if (! defined ( 'BASEPATH' ))
  * @filesource
  *
  */
-	
+
 // ------------------------------------------------------------------------
 
 /**
@@ -28,7 +28,7 @@ if (! defined ( 'BASEPATH' ))
  * @author ExpressionEngine Dev Team
  * @link http://codeigniter.com/user_guide/helpers/html_helper.html
  */
-	
+
 // ------------------------------------------------------------------------
 
 /**
@@ -38,10 +38,8 @@ if (! defined ( 'BASEPATH' ))
  * Second param is the size of the heading tag.
  *
  * @access public
- * @param
- *        	string
- * @param
- *        	integer
+ * @param string
+ * @param integer
  * @return string
  */
 if (! function_exists ( 'heading' )) {
@@ -59,10 +57,8 @@ if (! function_exists ( 'heading' )) {
  * Generates an HTML unordered list from an single or multi-dimensional array.
  *
  * @access public
- * @param
- *        	array
- * @param
- *        	mixed
+ * @param array
+ * @param mixed
  * @return string
  */
 if (! function_exists ( 'ul' )) {
@@ -79,10 +75,8 @@ if (! function_exists ( 'ul' )) {
  * Generates an HTML ordered list from an single or multi-dimensional array.
  *
  * @access public
- * @param
- *        	array
- * @param
- *        	mixed
+ * @param array
+ * @param mixed
  * @return string
  */
 if (! function_exists ( 'ol' )) {
@@ -99,14 +93,10 @@ if (! function_exists ( 'ol' )) {
  * Generates an HTML ordered list from an single or multi-dimensional array.
  *
  * @access private
- * @param
- *        	string
- * @param
- *        	mixed
- * @param
- *        	mixed
- * @param
- *        	integer
+ * @param string
+ * @param mixed
+ * @param mixed
+ * @param integer
  * @return string
  */
 if (! function_exists ( '_list' )) {
@@ -115,10 +105,10 @@ if (! function_exists ( '_list' )) {
 		if (! is_array ( $list )) {
 			return $list;
 		}
-		
+
 		// Set the indentation based on the depth
 		$out = str_repeat ( " ", $depth );
-		
+
 		// Were any attributes submitted? If so generate a string
 		if (is_array ( $attributes )) {
 			$atts = '';
@@ -129,20 +119,20 @@ if (! function_exists ( '_list' )) {
 		} elseif (is_string ( $attributes ) and strlen ( $attributes ) > 0) {
 			$attributes = ' ' . $attributes;
 		}
-		
+
 		// Write the opening list tag
 		$out .= "<" . $type . $attributes . ">\n";
-		
+
 		// Cycle through the list elements. If an array is
 		// encountered we will recursively call _list()
-		
+
 		static $_last_list_item = '';
 		foreach ( $list as $key => $val ) {
 			$_last_list_item = $key;
-			
+
 			$out .= str_repeat ( " ", $depth + 2 );
 			$out .= "<li>";
-			
+
 			if (! is_array ( $val )) {
 				$out .= $val;
 			} else {
@@ -150,16 +140,16 @@ if (! function_exists ( '_list' )) {
 				$out .= _list ( $type, $val, '', $depth + 4 );
 				$out .= str_repeat ( " ", $depth + 2 );
 			}
-			
+
 			$out .= "</li>\n";
 		}
-		
+
 		// Set the indentation for the closing tag
 		$out .= str_repeat ( " ", $depth );
-		
+
 		// Write the closing list tag
 		$out .= "</" . $type . ">\n";
-		
+
 		return $out;
 	}
 }
@@ -170,8 +160,7 @@ if (! function_exists ( '_list' )) {
  * Generates HTML BR tags based on number supplied
  *
  * @access public
- * @param
- *        	integer
+ * @param integer
  * @return string
  */
 if (! function_exists ( 'br' )) {
@@ -188,30 +177,29 @@ if (! function_exists ( 'br' )) {
  * Generates an <img /> element
  *
  * @access public
- * @param
- *        	mixed
+ * @param mixed
  * @return string
  */
 if (! function_exists ( 'img' )) {
 	function img($src = '', $index_page = FALSE) {
 		if (! is_array ( $src )) {
 			$src = array (
-					'src' => $src 
+					'src' => $src
 			);
 		}
-		
+
 		// If there is no alt attribute defined, set it to an empty string
 		if (! isset ( $src ['alt'] )) {
 			$src ['alt'] = '';
 		}
-		
+
 		$img = '<img';
-		
+
 		foreach ( $src as $k => $v ) {
-			
+
 			if ($k == 'src' and strpos ( $v, '://' ) === FALSE) {
 				$CI = & get_instance ();
-				
+
 				if ($index_page === TRUE) {
 					$img .= ' src="' . $CI->config->site_url ( $v ) . '"';
 				} else {
@@ -221,9 +209,9 @@ if (! function_exists ( 'img' )) {
 				$img .= " $k=\"$v\"";
 			}
 		}
-		
+
 		$img .= '/>';
-		
+
 		return $img;
 	}
 }
@@ -240,26 +228,25 @@ if (! function_exists ( 'img' )) {
  * doctypes config file.
  *
  * @access public
- * @param
- *        	string type The doctype to be generated
+ * @param string type The doctype to be generated
  * @return string
  */
 if (! function_exists ( 'doctype' )) {
 	function doctype($type = 'xhtml1-strict') {
 		global $_doctypes;
-		
+
 		if (! is_array ( $_doctypes )) {
 			if (defined ( 'ENVIRONMENT' ) and is_file ( APPPATH . 'config/' . ENVIRONMENT . '/doctypes.php' )) {
 				include (APPPATH . 'config/' . ENVIRONMENT . '/doctypes.php');
 			} elseif (is_file ( APPPATH . 'config/doctypes.php' )) {
 				include (APPPATH . 'config/doctypes.php');
 			}
-			
+
 			if (! is_array ( $_doctypes )) {
 				return FALSE;
 			}
 		}
-		
+
 		if (isset ( $_doctypes [$type] )) {
 			return $_doctypes [$type];
 		} else {
@@ -276,26 +263,20 @@ if (! function_exists ( 'doctype' )) {
  * Generates link to a CSS file
  *
  * @access public
- * @param
- *        	mixed stylesheet hrefs or an array
- * @param
- *        	string rel
- * @param
- *        	string type
- * @param
- *        	string title
- * @param
- *        	string media
- * @param
- *        	boolean should index_page be added to the css path
+ * @param mixed stylesheet hrefs or an array
+ * @param string rel
+ * @param string type
+ * @param string title
+ * @param string media
+ * @param boolean should index_page be added to the css path
  * @return string
  */
 if (! function_exists ( 'link_tag' )) {
 	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE) {
 		$CI = & get_instance ();
-		
+
 		$link = '<link ';
-		
+
 		if (is_array ( $href )) {
 			foreach ( $href as $k => $v ) {
 				if ($k == 'href' and strpos ( $v, '://' ) === FALSE) {
@@ -308,7 +289,7 @@ if (! function_exists ( 'link_tag' )) {
 					$link .= "$k=\"$v\" ";
 				}
 			}
-			
+
 			$link .= "/>";
 		} else {
 			if (strpos ( $href, '://' ) !== FALSE) {
@@ -318,20 +299,20 @@ if (! function_exists ( 'link_tag' )) {
 			} else {
 				$link .= 'href="' . $CI->config->slash_item ( 'base_url' ) . $href . '" ';
 			}
-			
+
 			$link .= 'rel="' . $rel . '" type="' . $type . '" ';
-			
+
 			if ($media != '') {
 				$link .= 'media="' . $media . '" ';
 			}
-			
+
 			if ($title != '') {
 				$link .= 'title="' . $title . '" ';
 			}
-			
+
 			$link .= '/>';
 		}
-		
+
 		return $link;
 	}
 }
@@ -342,8 +323,7 @@ if (! function_exists ( 'link_tag' )) {
  * Generates meta tags from an array of key/values
  *
  * @access public
- * @param
- *        	array
+ * @param array
  * @return string
  */
 if (! function_exists ( 'meta' )) {
@@ -356,28 +336,28 @@ if (! function_exists ( 'meta' )) {
 							'name' => $name,
 							'content' => $content,
 							'type' => $type,
-							'newline' => $newline 
-					) 
+							'newline' => $newline
+					)
 			);
 		} else {
 			// Turn single array into multidimensional
 			if (isset ( $name ['name'] )) {
 				$name = array (
-						$name 
+						$name
 				);
 			}
 		}
-		
+
 		$str = '';
 		foreach ( $name as $meta ) {
 			$type = (! isset ( $meta ['type'] ) or $meta ['type'] == 'name') ? 'name' : 'http-equiv';
 			$name = (! isset ( $meta ['name'] )) ? '' : $meta ['name'];
 			$content = (! isset ( $meta ['content'] )) ? '' : $meta ['content'];
 			$newline = (! isset ( $meta ['newline'] )) ? "\n" : $meta ['newline'];
-			
+
 			$str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
 		}
-		
+
 		return $str;
 	}
 }
@@ -388,8 +368,7 @@ if (! function_exists ( 'meta' )) {
  * Generates non-breaking space entities based on number supplied
  *
  * @access public
- * @param
- *        	integer
+ * @param integer
  * @return string
  */
 if (! function_exists ( 'nbs' )) {
@@ -404,18 +383,17 @@ if (! function_exists ( 'nbs' )) {
  * Generates div element
  *
  * @access public
- * @param
- *        	string, array
+ * @param string, array
  * @return string
  */
 if (! function_exists ( 'div' )) {
 	function div($text, $param = array()) {
 		$div = '<div ';
-		
+
 		foreach ( $param as $attr => $value ) {
 			$div .= $attr . '="' . $value . '" ';
 		}
-		
+
 		$div .= '>' . $text;
 		$div .= '</div>';
 		return $div;
@@ -428,18 +406,17 @@ if (! function_exists ( 'div' )) {
  * Generates p element
  *
  * @access public
- * @param
- *        	string, array
+ * @param string, array
  * @return string
  */
 if (! function_exists ( 'p' )) {
 	function p($text, $param = array()) {
 		$p = '<p ';
-		
+
 		foreach ( $param as $attr => $value ) {
 			$p .= $attr . '="' . $value . '" ';
 		}
-		
+
 		$p .= '>' . $text;
 		$p .= '</p>';
 		return $p;
@@ -452,18 +429,17 @@ if (! function_exists ( 'p' )) {
  * Generates span element
  *
  * @access public
- * @param
- *        	string, array
+ * @param string, array
  * @return string
  */
 if (! function_exists ( 'span' )) {
 	function span($text, $param = array()) {
 		$span = '<span ';
-		
+
 		foreach ( $param as $attr => $value ) {
 			$span .= $attr . '="' . $value . '" ';
 		}
-		
+
 		$span .= '>' . $text;
 		$span .= '</span>';
 		return $span;
@@ -473,28 +449,89 @@ if (! function_exists ( 'span' )) {
 // ------------------------------------------------------------------------
 
 /**
+ * Generates small element
+ *
+ * @access public
+ * @param string, array
+ * @return string
+ */
+if (! function_exists ( 'small' )) {
+	function small($text, $param = array()) {
+		$small = '<small ';
+
+		foreach ( $param as $attr => $value ) {
+			$small .= $attr . '="' . $value . '" ';
+		}
+
+		$small .= '>' . $text;
+		$small .= '</small>';
+		return $small;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Generates button element
+*
+* @access public
+* @param string, array
+* @return string
+*/
+if (! function_exists ( 'button' )) {
+	function button($text, $param = array()) {
+		$button = '<button ';
+
+		foreach ( $param as $attr => $value ) {
+			$button .= $attr . '="' . $value . '" ';
+		}
+
+		$button .= '>' . $text;
+		$button .= '</button>';
+		return $button;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Generates any kind of element tag
  *
  * @access public
- * @param
- *        	string, string, array
+ * @param string, string, array
  * @return string
  */
 if (! function_exists ( 'element_tag' )) {
 	function element_tag($element, $type = 'close', $param = array()) {
 		if ($type == 'open') {
 			$tag = '<' . $element . ' ';
-			
+
 			foreach ( $param as $attr => $value ) {
 				$tag .= $attr . '="' . $value . '" ';
 			}
-			
+
 			$tag .= '>';
 		} else {
 			$tag = '</' . $element . '>';
 		}
-		
+
 		return $tag;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Generates icon
+ *
+ * @access public
+ * @param string, string, array
+ * @return string
+ */
+if (! function_exists ( 'icon' )) {
+	function icon($type) {
+		$icon = '<i class="'.$type.'"></i>';
+		return $icon;
 	}
 }
 /* End of file html_helper.php */

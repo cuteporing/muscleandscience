@@ -15,58 +15,49 @@ if (! defined ( 'BASEPATH' ))
 class Package_model extends Common_model {
 
 	public function __construct() {
+		parent::__construct();
+	}
+
+	public function get_package($type, $is_active = TRUE){
+		( $is_active )? $is_active = 0 : $is_active = 1;
+
+		return $this->get_result( 'mas_package' );
 	}
 
 	/**
-	 * SET TITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
+	 * Get membership package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
-	public function set_title($param) {
-		$this->gym_class->title = $param;
+	public function get_mem_package( $is_active = true ) {
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'M' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 
 	/**
-	 * SET SUBTITLE
-	 *
-	 * @param $param
-	 * --------------------------------------------
+	 * Get personal training package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
-	public function set_subtitle($param) {
-		$this->gym_class->subtitle = $param;
+	public function get_pt_package( $is_active = true ) {
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'PT' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 
-
 	/**
-	 * GET PACKAGE
-	 *
-	 * --------------------------------------------
-	 * @return
+	 * Get special package
+	 * @param boolean $is_active
+	 * @return associative array of query result
 	 */
-	public function get_package($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
-
-			$query = $this->db->get ( TBL_PACKAGE, $params ['limiter'] ['limit'], $params ['limiter'] ['offset'] );
-		} else {
-			$this->db->from ( TBL_PACKAGE );
-			$query = $this->db->get ();
-		}
-
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
-
-		return $query->result_array();
+	public function get_sp_package( $is_active = true ) {
+		( $is_active )? $is_active = 0 : $is_active = 1;
+		$this->db->where ( 'package_type', 'S' );
+		$this->db->where ( 'deleted', $is_active );
+		return $this->get_result( 'mas_package' );
 	}
 }
 ?>

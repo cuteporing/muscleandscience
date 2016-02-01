@@ -17,22 +17,24 @@ class footer extends CI_controller {
 
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model ( 'company_model' );
-		$this->company_info = $this->company_model->get_company_info ();
+		$this->load->model ( 'company_info_model' );
+		$this->load->model ( 'company_social_model' );
+		$this->company_info = $this->company_info_model->get_company_info ();
 	}
 
 
 	/**
-	 * GET THE DISPLAYED OPENING HRS. DEPENDING ON
-	 * THE TYPE OF DISPLAY
-	 *
-	 * --------------------------------------------
-	 * @return (Array)
+	 * Get the displayed opening hrs depending on the type of display
+	 * @return (Array) $days
 	 */
 	public function get_company_operation() {
 		$operation = json_decode (  $this->company_info[0]['opening_hours'] );
 		$type      = $this->company_info[0]['opening_day_type'];
 		$days      = array ();
+
+		if( count( $operation ) == 0 ) {
+			return;
+		}
 
 		foreach ( $operation as $row ) {
 			if ( $row->opening != "00:00" ) {
@@ -67,24 +69,22 @@ class footer extends CI_controller {
 	}
 
 	/**
-	 * FOOTER DISPLAY
-	 *
-	 * --------------------------------------------
-	 * @return
+	 * Footer display
+	 * @return (View) -- Display page
 	 */
 	public function view() {
 		$news = new news ();
 		$data['result_info']      = $this->company_info;
-		$data['result_social']    = $this->company_model->get_company_social ();
+		$data['result_social']    = $this->company_social_model->get_company_social ();
 		$data['result_operation'] = $this->get_company_operation ();
-		$data['result_recent_post'] = $news->get_latest_news ( 10 );
+		$data['result_recent_post'] = $news->get_latest_news();
 
 		$data ['footer'] ['info'] = $this->load->view (
-				TPL_FOOTER_COMPANY_INFO, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_company_info', $data, true );
 		$data ['footer'] ['opening'] = $this->load->view (
-				TPL_FOOTER_COMPANY_OPERATION, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_company_operation', $data, true );
 		$data ['footer'] ['recent_post'] = $this->load->view (
-				TPL_FOOTER_RECENT_POST, $data, true );
+				TPL_PAGE_TEMPLATES.'footer_recent_post', $data, true );
 
 		$this->load->view ( 'pages/templates/footer', $data );
 	}

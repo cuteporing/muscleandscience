@@ -197,40 +197,6 @@ INSERT INTO `mas_company_social` VALUES (1,'Facebook','https://www.facebook.com/
 UNLOCK TABLES;
 
 --
--- Table structure for table `mas_constant`
---
-
-DROP TABLE IF EXISTS `mas_constant`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mas_constant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key_string` varchar(30) NOT NULL,
-  `value_name` varchar(45) NOT NULL,
-  `value1` varchar(45) NOT NULL,
-  `value2` varchar(45) DEFAULT NULL,
-  `value3` varchar(45) DEFAULT NULL,
-  `value4` varchar(45) DEFAULT NULL,
-  `value5` varchar(45) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `create_user_id` int(11) NOT NULL,
-  `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_user_id` int(11) NOT NULL,
-  `update_datetime` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mas_constant`
---
-
-LOCK TABLES `mas_constant` WRITE;
-/*!40000 ALTER TABLE `mas_constant` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mas_constant` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `mas_gallery`
 --
 
@@ -248,6 +214,7 @@ CREATE TABLE `mas_gallery` (
   `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_user_id` int(11) NOT NULL,
   `update_datetime` timestamp NULL DEFAULT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -743,14 +710,14 @@ DROP TABLE IF EXISTS `mas_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mas_tags` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(100) NOT NULL,
   `create_user_id` int(11) NOT NULL,
   `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_user_id` int(11) NOT NULL,
   `update_datetime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -772,9 +739,8 @@ DROP TABLE IF EXISTS `mas_tracer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mas_tracer` (
   `tracer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `_id` int(11) NOT NULL,
-  `date_exec` datetime NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `note` text NOT NULL,
   PRIMARY KEY (`tracer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
@@ -786,7 +752,7 @@ CREATE TABLE `mas_tracer` (
 
 LOCK TABLES `mas_tracer` WRITE;
 /*!40000 ALTER TABLE `mas_tracer` DISABLE KEYS */;
-INSERT INTO `mas_tracer` VALUES (1,1400001,'2014-07-07 17:20:37','Muscle Science','Created new user account (dylan.mckenzie) and added it to GYM members'),(2,1400001,'2014-07-07 17:21:01','Muscle Science','Created new user account (steven.sky) and added it to GYM members'),(3,1400001,'2014-07-07 17:21:23','Muscle Science','Created new user account (reikado.lezaille) and added it to PT members'),(4,1400001,'2014-07-07 17:21:36','Muscle Science','Created new user account (aeone.rivera) and added it to PT members'),(5,1400001,'2014-07-07 17:22:02','Muscle Science','Entered (aeone.rivera) payment for pt (&#8369; 1000)'),(6,1400001,'2014-07-07 19:07:51','Muscle Science','Deleted GYM membership of (dylan.mckenzie)'),(7,1400001,'2014-07-07 19:08:00','Muscle Science','Deleted GYM membership of (steven.sky)'),(8,1400001,'2014-07-07 19:08:15','Muscle Science','Deleted Personal Training membership of (aeone.rivera)'),(9,1400001,'2014-07-07 19:08:26','Muscle Science','Deleted Personal Training membership of (reikado.lezaille)'),(10,1400001,'2014-07-07 19:08:42','Muscle Science','Deleted (aeone.rivera)'),(11,1400001,'2014-07-07 19:08:50','Muscle Science','Deleted (1400004)'),(12,1400001,'2014-07-07 19:08:59','Muscle Science','Deleted (1400002)'),(13,1400001,'2014-07-07 19:09:08','Muscle Science','Deleted (1400003)'),(14,1400001,'2014-07-07 19:10:55','Muscle Science','Created new user account (aeone.rivera) and added it to PT members'),(15,1400001,'2014-07-13 13:43:36','Muscle Science','Edited (aeone.rivera) user account'),(16,1400001,'2014-07-13 13:47:23','Muscle Science','Created new user account (steven.sky) and added it to GYM members'),(17,1400001,'2014-07-17 14:31:19','Muscle Science','Entered (steven.sky) payment for member (&#8369; 50)'),(18,1400001,'2014-07-17 23:16:21','Muscle Science','Updated Gym class (Boxing), (about) field'),(19,1400001,'2014-07-20 17:47:10','Muscle Science','Added new gym class (Sdasda)'),(20,1400001,'2014-07-20 17:48:12','Muscle Science','Removed (Sdasda) from Gym class'),(21,1400001,'2014-07-21 01:22:10','Muscle Science','Entered (steven.sky) payment for member (&#8369; 100)'),(22,1400001,'2014-07-21 01:27:30','Muscle Science','Activated user acount (steven.sky)'),(23,1400001,'2014-07-21 17:07:13','Muscle Science','Updated Gym class (Gym Fitnesss), (about) field'),(24,1400001,'2014-08-31 12:30:08','Muscle Science','Added (steven.sky) to GYM members'),(25,1400001,'2014-08-31 12:30:31','Muscle Science','Entered (steven.sky) payment for member (&#8369; 5)'),(26,1400001,'2014-09-06 02:08:16','Muscle Science','Entered (aeone.rivera) payment for pt (&#8369; 50)');
+INSERT INTO `mas_tracer` VALUES (1,1400001,'2014-07-07 09:20:37','Created new user account (dylan.mckenzie) and added it to GYM members'),(2,1400001,'2014-07-07 09:21:01','Created new user account (steven.sky) and added it to GYM members'),(3,1400001,'2014-07-07 09:21:23','Created new user account (reikado.lezaille) and added it to PT members'),(4,1400001,'2014-07-07 09:21:36','Created new user account (aeone.rivera) and added it to PT members'),(5,1400001,'2014-07-07 09:22:02','Entered (aeone.rivera) payment for pt (&#8369; 1000)'),(6,1400001,'2014-07-07 11:07:51','Deleted GYM membership of (dylan.mckenzie)'),(7,1400001,'2014-07-07 11:08:00','Deleted GYM membership of (steven.sky)'),(8,1400001,'2014-07-07 11:08:15','Deleted Personal Training membership of (aeone.rivera)'),(9,1400001,'2014-07-07 11:08:26','Deleted Personal Training membership of (reikado.lezaille)'),(10,1400001,'2014-07-07 11:08:42','Deleted (aeone.rivera)'),(11,1400001,'2014-07-07 11:08:50','Deleted (1400004)'),(12,1400001,'2014-07-07 11:08:59','Deleted (1400002)'),(13,1400001,'2014-07-07 11:09:08','Deleted (1400003)'),(14,1400001,'2014-07-07 11:10:55','Created new user account (aeone.rivera) and added it to PT members'),(15,1400001,'2014-07-13 05:43:36','Edited (aeone.rivera) user account'),(16,1400001,'2014-07-13 05:47:23','Created new user account (steven.sky) and added it to GYM members'),(17,1400001,'2014-07-17 06:31:19','Entered (steven.sky) payment for member (&#8369; 50)'),(18,1400001,'2014-07-17 15:16:21','Updated Gym class (Boxing), (about) field'),(19,1400001,'2014-07-20 09:47:10','Added new gym class (Sdasda)'),(20,1400001,'2014-07-20 09:48:12','Removed (Sdasda) from Gym class'),(21,1400001,'2014-07-20 17:22:10','Entered (steven.sky) payment for member (&#8369; 100)'),(22,1400001,'2014-07-20 17:27:30','Activated user acount (steven.sky)'),(23,1400001,'2014-07-21 09:07:13','Updated Gym class (Gym Fitnesss), (about) field'),(24,1400001,'2014-08-31 04:30:08','Added (steven.sky) to GYM members'),(25,1400001,'2014-08-31 04:30:31','Entered (steven.sky) payment for member (&#8369; 5)'),(26,1400001,'2014-09-05 18:08:16','Entered (aeone.rivera) payment for pt (&#8369; 50)');
 /*!40000 ALTER TABLE `mas_tracer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -798,18 +764,22 @@ DROP TABLE IF EXISTS `mas_trainer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mas_trainer` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `quote` text NOT NULL,
-  `about` text NOT NULL,
-  `skills` text NOT NULL,
+  `quote` text,
+  `about` text,
+  `skills` text,
   `experience` int(11) DEFAULT NULL,
-  `achievement` text NOT NULL,
+  `achievement` text,
   `img` varchar(255) DEFAULT NULL,
   `img_thumb` varchar(255) DEFAULT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_user_id` int(11) NOT NULL,
+  `update_datetime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -818,7 +788,7 @@ CREATE TABLE `mas_trainer` (
 
 LOCK TABLES `mas_trainer` WRITE;
 /*!40000 ALTER TABLE `mas_trainer` DISABLE KEYS */;
-INSERT INTO `mas_trainer` VALUES (1,'Mark','Ventura','Even if you can\'t physically see the results in front of you, every single effort is chaning your body from the inside.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat rutrum eros sit amet sollicitudin. Suspendisse pulvinar, velit nec pharetra interdum, ante tellus ornare mi, et mollis tellus neque vitae elit.','[\"Lorem ipsum pheretra\",\"Suspendise venis\",\"Saunas personicale\",\"Union terminale\"] ',NULL,'[\"Lorem ipsum pheretra interdurum\",\"Suspendise venis\"]','upload/trainer/trainer1.jpg','upload/trainer/thumb/thumb_trainer1.jpg'),(2,'Kevin','Valencia','Even if you can\'t physically see the results in front of you, every single effort is chaning your body from the inside.','','[\"fhadasd\",\"asdasdasdasd\",\"adsa\"]',8,'[\"fhadasd\",\"asdasdasdasd\",\"adsa\",\"fhadasd\",\"asdasdasdasd\",\"adsa\"]','','');
+INSERT INTO `mas_trainer` VALUES (1,'Mark','Ventura','Even if you can\'t physically see the results in front of you, every single effort is chaning your body from the inside.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat rutrum eros sit amet sollicitudin. Suspendisse pulvinar, velit nec pharetra interdum, ante tellus ornare mi, et mollis tellus neque vitae elit.','[\"Lorem ipsum pheretra\",\"Suspendise venis\",\"Saunas personicale\",\"Union terminale\"] ',NULL,'[\"Lorem ipsum pheretra interdurum\",\"Suspendise venis\"]','upload/trainer/trainer1.jpg','upload/trainer/thumb/thumb_trainer1.jpg',0,'0000-00-00 00:00:00',0,NULL),(2,'Kevin','Valencia','Even if you can\'t physically see the results in front of you, every single effort is chaning your body from the inside.','','[\"fhadasd\",\"asdasdasdasd\",\"adsa\"]',8,'[\"fhadasd\",\"asdasdasdasd\",\"adsa\",\"fhadasd\",\"asdasdasdasd\",\"adsa\"]','','',0,'0000-00-00 00:00:00',0,NULL);
 /*!40000 ALTER TABLE `mas_trainer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -838,11 +808,11 @@ CREATE TABLE `mas_users` (
   `firstname` varchar(255) NOT NULL,
   `status` int(1) NOT NULL,
   `gender` varchar(2) NOT NULL,
-  `birthday` date NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `occupation` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `img` int(11) DEFAULT NULL,
   PRIMARY KEY (`_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -866,10 +836,10 @@ DROP TABLE IF EXISTS `mas_users_login`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mas_users_login` (
-  `loginID` int(11) NOT NULL AUTO_INCREMENT,
-  `_id` int(11) NOT NULL,
-  `login_date` datetime NOT NULL,
-  PRIMARY KEY (`loginID`)
+  `login_id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_user_id` int(11) NOT NULL,
+  `create_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`login_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -891,4 +861,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02  9:11:51
+-- Dump completed on 2015-09-02 13:38:49

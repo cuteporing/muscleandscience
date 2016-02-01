@@ -25,6 +25,7 @@
 	.top-bar-section ul li > a {
 		text-transform: uppercase;
 		color: #C5C5C5;
+		padding-right: 15px;
 	}
 .top-bar-section ul li.active {
 	border-bottom: 2px solid #91b034;
@@ -34,3 +35,20 @@
 	color: #7d972d;
 }
 
+.top-bar .toggle-topbar.menu-icon a::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	display: block;
+	width: 16px;
+	top: 0;
+	height: 0;
+	box-shadow: 0 10px 0 1px #7d972d, 0 16px 0 1px #7d972d, 0 22px 0 1px #7d972d;
+}
+
+.top-bar .toggle-topbar.menu-icon {
+	right: 15px;
+	top: 50%;
+	margin-top: -16px;
+	padding-left: 40px;
+}

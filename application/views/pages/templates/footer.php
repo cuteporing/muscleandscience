@@ -16,25 +16,6 @@
 
 <script>
 	$(document).foundation();
-
-	$(document).ready(function(){
-		$('.slideshow-wrapper').slick({
-			arrows: false,
-			vertical: true,
-			responsive: [
-				{
-					breakpoint: 768,
-					settings: {
-						arrows: false,
-						centerMode: true,
-						centerPadding: '40px',
-						slidesToShow: 3,
-						variableWidth: true
-					}
-				}
-			]
-		});
-	});
 </script>
 </body>
 </html>

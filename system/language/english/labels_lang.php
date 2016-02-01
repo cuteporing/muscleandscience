@@ -1,6 +1,6 @@
 <?php
 $lang ['LBL_00001'] = "News";
-$lang ['LBL_00002'] = "Classes";
+$lang ['LBL_00002'] = "Gym Class";
 $lang ['LBL_00003'] = "Blog";
 $lang ['LBL_00004'] = "Comment";
 $lang ['LBL_00005'] = "Comments";
@@ -17,7 +17,7 @@ $lang ['LBL_00015'] = "upcoming classes";
 $lang ['LBL_00016'] = "we delivers enough to blog about";
 $lang ['LBL_00017'] = "WHAT'S NEW";
 $lang ['LBL_00018'] = "What's Next";
-$lang ['LBL_00019'] = "";
+$lang ['LBL_00019'] = "New Sign Ups";
 $lang ['LBL_00020'] = "our training classes";
 $lang ['LBL_00021'] = "Categories";
 $lang ['LBL_00022'] = "About";
@@ -39,6 +39,16 @@ $lang ['LBL_00037'] = "no subtitle";
 $lang ['LBL_00038'] = "More";
 $lang ['LBL_00039'] = "Recent Posts";
 $lang ['LBL_00040'] = "our facilities and training rooms";
+$lang ['LBL_00041'] = "get in touch with us";
+$lang ['LBL_00042'] = "Action";
+$lang ['LBL_00043'] = "Gym Members";
+$lang ['LBL_00044'] = "Personal Training";
+$lang ['LBL_00045'] = "Unpaid Members";
+$lang ['LBL_00046'] = "Total number of gym members";
+$lang ['LBL_00047'] = "PT members w/ available session";
+$lang ['LBL_00048'] = "Total number of unpaid members";
+$lang ['LBL_00049'] = "There are accounts that needs activation";
+$lang ['LBL_00050'] = "PT Members";
 
 /* End of file labels.php */
 /* Location: ./system/language/english/labels.php */

@@ -25,7 +25,7 @@
 }
 
 .blog {
-	margin-left: 0px;
+	margin-left: 0;
 	margin-bottom: 0;
 	clear: both;
 }
@@ -167,8 +167,7 @@
 }
 
 #comments-list .comment-details .posted-by {
-	background: url('../img/icons/icon_post_author.png') no-repeat left
-		center;
+	background: url('../img/icons/icon_post_author.png') no-repeat left center;
 	font-size: 11px;
 	color: #999;
 	padding-left: 15px;

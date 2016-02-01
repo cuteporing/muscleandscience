@@ -1,9 +1,9 @@
-<ul class="blog clearfix animated fadeIn">
+<ul class="blog clearfix ">
 	<?php if ( !is_null( $news_result ) ): ?>
 		<?php
 		foreach ( $news_result as $row ):
-			$day = format::format_date ( $row ['update_datetime'], 'd' );
-			$month = format::format_date ( $row ['update_datetime'], 'M' );
+			$day = format_date( $row ['update_datetime'], 'd' );
+			$month = format_date( $row ['update_datetime'], 'M' );
 		?>
 			<li class="post">
 				<div class="comment-box">

@@ -16,7 +16,7 @@ if (! defined ( 'BASEPATH' ))
  * @filesource
  *
  */
-	
+
 // ------------------------------------------------------------------------
 
 /**
@@ -28,7 +28,7 @@ if (! defined ( 'BASEPATH' ))
  * @author ExpressionEngine Dev Team
  * @link http://codeigniter.com/user_guide/helpers/array_helper.html
  */
-	
+
 // ------------------------------------------------------------------------
 
 /**
@@ -38,12 +38,9 @@ if (! defined ( 'BASEPATH' ))
  * If the element is empty it returns FALSE (or whatever you specify as the default value.)
  *
  * @access public
- * @param
- *        	string
- * @param
- *        	array
- * @param
- *        	mixed
+ * @param string
+ * @param array
+ * @param mixed
  * @return mixed on what the array contains
  */
 if (! function_exists ( 'element' )) {
@@ -51,7 +48,7 @@ if (! function_exists ( 'element' )) {
 		if (! isset ( $array [$item] ) or $array [$item] == "") {
 			return $default;
 		}
-		
+
 		return $array [$item];
 	}
 }
@@ -62,8 +59,7 @@ if (! function_exists ( 'element' )) {
  * Random Element - Takes an array as input and returns a random element
  *
  * @access public
- * @param
- *        	array
+ * @param array
  * @return mixed on what the array contains
  */
 if (! function_exists ( 'random_element' )) {
@@ -71,7 +67,7 @@ if (! function_exists ( 'random_element' )) {
 		if (! is_array ( $array )) {
 			return $array;
 		}
-		
+
 		return $array [array_rand ( $array )];
 	}
 }
@@ -85,24 +81,21 @@ if (! function_exists ( 'random_element' )) {
  * it is not set.
  *
  * @access public
- * @param
- *        	array
- * @param
- *        	array
- * @param
- *        	mixed
+ * @param array
+ * @param array
+ * @param mixed
  * @return mixed on what the array contains
  */
 if (! function_exists ( 'elements' )) {
 	function elements($items, $array, $default = FALSE) {
 		$return = array ();
-		
+
 		if (! is_array ( $items )) {
 			$items = array (
-					$items 
+					$items
 			);
 		}
-		
+
 		foreach ( $items as $item ) {
 			if (isset ( $array [$item] )) {
 				$return [$item] = $array [$item];
@@ -110,7 +103,7 @@ if (! function_exists ( 'elements' )) {
 				$return [$item] = $default;
 			}
 		}
-		
+
 		return $return;
 	}
 }

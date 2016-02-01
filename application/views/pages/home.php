@@ -1,13 +1,10 @@
 <div class="content">
-
-	<div class="slideshow-wrapper">
-	<?php foreach ($banner as $banner_item): ?>
-		<div><?=img(array( 'alt' => $banner_item['title'], 'src' => $banner_item['img'] ), TRUE) ?></div>
-	<?php endforeach ?>
-	</div>
+	<?php if( isset( $banner )): ?>
+	<?=$banner?>
+	<?php endif; ?>
 
 	<div class="row homebox-top">
-		<div class="top-hint">Give us a call: +123 356 123 124</div>
+		<div class="top-hint animated flipInX">Give us a call: +123 356 123 124</div>
 		<ul class="home-box-container clearfix">
 			<li id="upcoming" class="home-box white">
 				<div class="clearfix">
@@ -43,23 +40,35 @@
 					</div>
 				</div>
 			</li>
+			<?php if( isset( $homebox )): ?>
 			<?=$homebox?>
+			<?php endif; ?>
 		</ul>
 
 		<div class="page-layout clearfix">
 			<div id="latest-news" class="page-left clearfix">
 				<div class="preloader" style="position: absolute; margin-top: 6rem;"></div>
+				<?php if( isset( $latest_news )): ?>
 				<?=$latest_news?>
+				<?php endif; ?>
 			</div>
 			<div class="page-right clearfix">
+				<?php if( isset( $gym_class )): ?>
 				<?=$gym_class?>
+				<?php endif; ?>
 				<div class="sidebar-box">
-					<ul class="home-box-container login-box">
+					<ul id="login-box" class="home-box-container login-box">
+						<?php if( isset( $login )): ?>
 						<?=$login?>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
+<?php if( isset( $footer_scripts ) && !empty( $footer_scripts ) ): ?>
+		<?php foreach ( $footer_scripts as $src ):?>
+			<script src="<?=base_url().PATH_JS.$src?>"></script>
+		<?php endforeach; ?>
+	<?php endif; ?>

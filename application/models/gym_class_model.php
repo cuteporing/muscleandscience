@@ -12,85 +12,51 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
+
 class Gym_Class_model extends Common_model {
+	private $id;
+	private $title;
+	private $subtitle;
+	private $about;
+	private $features;
+	private $img;
+	private $img_thumb;
+	private $slug;
+	private $create_user_id   = "";
+	private $create_datetime  = "";
+	private $update_user_id   = null;
+	private $update_datetime  = "";
 
 	public function __construct() {
-	}
-
-
-	/**
-	 * GET GYM CLASS THUMBNAIL
-	 *
-	 * --------------------------------------------
-	 * @return
-	 */
-	public function get_gym_class_thumb() {
-		$this->db->select ( 'title, subtitle, about, img_thumb, slug' );
-		$query = $this->db->get ( TBL_CLASS );
-
-		return $query->result_array ();
+		parent::__construct();
 	}
 
 	/**
-	 * GET GYM CLASS
-	 *
-	 * --------------------------------------------
-	 * @param $params
+	 * Get gym class
 	 * @return
 	 */
-	public function get_class($params) {
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
-		$this->get_select ( $params, TBL_CLASS );
-
-		// limit | offset
-		if (isset ( $params ['limiter'] ) && count ( $params ['limiter'] ) > 0) {
-			if (! isset ( $params ['limiter'] ['offset'] )) {
-				$params ['limiter'] ['offset'] = 0;
-			}
-
-			$query = $this->db->get (
-					TBL_CLASS,
-					$params ['limiter'] ['limit'],
-					$params ['limiter'] ['offset']
-				);
-		} else {
-			$this->db->from ( TBL_CLASS );
-			$query = $this->db->get ();
+	public function get_class($is_list = FALSE) {
+		if( $is_list ) {
+			$this->db->select ( 'title, slug' );
 		}
-
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
+		return $this->get_result( 'mas_class' );
 	}
 
 	/**
-	 * GET GYM CLASS TRAINER
-	 *
-	 * --------------------------------------------
-	 * @param $params
-	 * @return
+	 * Get gym class trainer
+	 * @param integer $class_id
+	 * @return associative array of query result
 	 */
-	public function get_class_trainer($params) {
-		$sql = TBL_TRAINER . ".*, ";
-		$sql .= "CONCAT(" . TBL_TRAINER . ".firstname, ";
-		$sql .= "Char(32), " . TBL_TRAINER . ".lastname ) AS name ";
+	public function get_class_trainer( $class_id ) {
+		$sql = 'mas_trainer.*, ';
+		$sql.= 'CONCAT(mas_trainer.firstname, ';
+		$sql.= 'Char(32), mas_trainer.lastname ) AS name ';
 
-		$this->get_where ( $params );
-		$this->get_orderby ( $params );
+		$this->db->select( $sql );
+		$this->db->where( 'mas_class_trainer.class_id', $class_id );
+		$this->db->join ( 'mas_trainer', 'mas_class_trainer.class_id = mas_trainer.id' );
+		return $this->get_result( 'mas_class_trainer' );
 
-		$this->db->select ( $sql );
-		$this->db->from ( TBL_CLASS_TRAINER );
-		$this->db->join ( TBL_TRAINER, TBL_CLASS_TRAINER . ".class_id = " . TBL_TRAINER . ".id" );
-
-		$query = $this->db->get ();
-		if ($query->num_rows () > 0) {
-			return $query->result_array ();
-		} else {
-			return null;
-		}
 	}
 }
 ?>

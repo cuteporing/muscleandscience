@@ -1148,7 +1148,8 @@ button, .button {
 	transition: background-color 300ms ease-out;
 }
 
-button:hover, button:focus, .button:hover, .button:focus {
+button:not(.slick-next):not(.slick-prev):hover, button:not(.slick-next):not(.slick-prev):focus,
+.button:not(.slick-next):not(.slick-prev):hover, .button:not(.slick-next):not(.slick-prev):focus {
 	background-color: #748d2a;
 }
 
